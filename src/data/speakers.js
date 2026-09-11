@@ -1,0 +1,73 @@
+// Real speakers from .NET Conf Amravati & Microsoft Student Club PRPCEM Speaker Series
+export const keynoteSpeaker = {
+  id: 'keynote-1',
+  name: 'Anuraj P.',
+  designation: 'Microsoft MVP & Senior Architect',
+  organization: 'Microsoft MVP Community',
+  topic: 'Building Next-Gen Intelligent Applications with .NET & Modern C#',
+  bio: 'Microsoft Most Valuable Professional (MVP) and renowned community speaker with decades of experience architecting cloud-scale enterprise .NET systems and developer tools.',
+  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+  isKeynote: true,
+  socials: {
+    linkedin: 'https://www.linkedin.com',
+    x: 'https://x.com',
+    github: 'https://github.com',
+  },
+};
+
+export const speakersData = [
+  {
+    id: 'spk-1',
+    name: 'Madhava Ganesh',
+    designation: 'Software Engineer',
+    organization: 'Microsoft',
+    topic: 'Modern Cloud Native Architectures with ASP.NET Core & Azure',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com', github: 'https://github.com' },
+  },
+  {
+    id: 'spk-2',
+    name: 'Kshitiz Kalra',
+    designation: 'Software Engineer',
+    organization: 'Microsoft',
+    topic: 'Building AI Agents & Copilots with Semantic Kernel in .NET',
+    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com', github: 'https://github.com' },
+  },
+  {
+    id: 'spk-3',
+    name: 'Lakshit Pant',
+    designation: 'Software Engineer',
+    organization: 'Microsoft',
+    topic: 'Deep Dive: C# High-Performance Computing and Memory Profiling',
+    avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+  },
+  {
+    id: 'spk-4',
+    name: 'Adithya Saladi',
+    designation: 'Software Engineer & Tech Speaker',
+    organization: 'Microsoft',
+    topic: 'Serverless Event-Driven Microservices with Azure Functions & .NET',
+    avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com' },
+  },
+  {
+    id: 'spk-5',
+    name: 'Tushar Sakhare',
+    designation: 'Senior Cloud Specialist',
+    organization: 'Accenture',
+    topic: 'Enterprise DevOps & CI/CD Pipelines for Azure Kubernetes Service',
+    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
+  },
+  {
+    id: 'spk-6',
+    name: 'Praffull Wankhade',
+    designation: 'Founder & Tech Lead',
+    organization: 'SohamGlobal',
+    topic: 'Full-Stack Development with Blazor WebAssembly and .NET Minimal APIs',
+    avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
+    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com' },
+  },
+];

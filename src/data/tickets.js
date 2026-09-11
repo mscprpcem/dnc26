@@ -1,0 +1,52 @@
+// Ticket tiers for .NET Conf Amravati on KonfHub
+export const ticketsData = [
+  {
+    id: 'pass-community',
+    name: 'COMMUNITY PASS',
+    price: 'Free',
+    priceNote: 'Open to all developers & enthusiasts',
+    description: 'General community admission for passionate developers and local tech enthusiasts.',
+    features: [
+      'Full in-person conference access',
+      'All technical sessions & keynote tracks',
+      'Community networking & expo area',
+      'Digital Certificate of Participation',
+    ],
+    ctaText: 'Register Free Pass',
+    ctaUrl: 'https://konfhub.com',
+  },
+  {
+    id: 'pass-student',
+    name: 'STUDENT PASS',
+    badge: 'Recommended for Students',
+    price: '₹149',
+    priceNote: 'Valid student ID card required at PRPCEM desk',
+    isRecommended: true,
+    description: 'Subsidized pass exclusively for university and polytechnic students across Central India.',
+    features: [
+      'All Community Pass benefits included',
+      '.NET Conf official badge & sticker kit',
+      'Networking with Microsoft MVPs & mentors',
+      'Access to student hackathon / live quiz track',
+      'Complimentary lunch & refreshments',
+    ],
+    ctaText: 'Claim Student Pass',
+    ctaUrl: 'https://konfhub.com',
+  },
+  {
+    id: 'pass-pro',
+    name: 'PROFESSIONAL PASS',
+    price: '₹499',
+    priceNote: 'For software engineers & corporate delegates',
+    description: 'Complete VIP experience for industry professionals, team leads, and consultants.',
+    features: [
+      'All Student & Community benefits',
+      'Reserved front-row seating in main auditorium',
+      'Exclusive Speaker & Organizer VIP mixer access',
+      'Premium .NET Conf conference swag bag',
+      'Official verified physical certificate of attendance',
+    ],
+    ctaText: 'Get Professional Pass',
+    ctaUrl: 'https://konfhub.com',
+  },
+];
