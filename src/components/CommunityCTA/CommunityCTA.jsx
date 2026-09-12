@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Award } from 'lucide-react';
 import { Container } from '../ui/Container.jsx';
 import { Button } from '../ui/Button.jsx';
 import { eventData } from '../../data/event.js';
@@ -13,7 +13,7 @@ export const CommunityCTA = () => {
       <Container className="relative z-10 text-center">
         <div className="max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#DDD4FA] text-xs font-semibold text-[#512BD4] mb-6 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#512BD4]" />
+            <Award className="w-3.5 h-3.5 text-[#512BD4]" />
             <span>JOIN CENTRAL INDIA'S LARGEST DEVELOPER GATHERING</span>
           </div>
 
@@ -31,11 +31,10 @@ export const CommunityCTA = () => {
             <Button
               variant="primary"
               size="lg"
-              href={eventData.registrationUrl}
-              target="_blank"
+              href="#cfp"
               icon={<ArrowRight className="w-4 h-4" />}
             >
-              Register Now
+              Coming Soon
             </Button>
             <Button
               variant="secondary"

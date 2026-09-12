@@ -1,101 +1,107 @@
 import React from 'react';
-import { MapPin, Calendar, Navigation, Building2, CheckCircle2 } from 'lucide-react';
-import { Container } from '../ui/Container.jsx';
-import { SectionHeader } from '../ui/SectionHeader.jsx';
-import { Button } from '../ui/Button.jsx';
+import { MapPin, Navigation, Compass, Building, ExternalLink } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
 export const Venue = () => {
   return (
-    <section id="venue" className="py-20 lg:py-28 bg-white border-b border-[#E5E7EB]">
-      <Container>
-        <SectionHeader
-          label="VENUE"
-          title="Meet us in Amravati."
-          description="Join us at the flagship campus of P. R. Pote Patil College of Engineering and Management for Central India’s premier Microsoft developer gathering."
-        />
+    <section id="venue" className="w-full py-10 sm:py-14 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EEEAFB] text-[#512BD4] text-[11px] font-bold uppercase tracking-wider mb-2.5 border border-[#DCD5F6]">
+            <MapPin className="w-3 h-3" />
+            <span>Campus Venue</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display tracking-tight text-[#14053A] mb-3">
+            Swami Vivekananda <span className="text-gradient-magenta">Auditorium</span>
+          </h2>
+          <p className="text-sm sm:text-base text-[#190649]/75 leading-relaxed">
+            Hosted at the premier technological campus of P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati, Maharashtra.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          {/* LEFT: Venue Details */}
-          <div className="lg:col-span-6 conf-card p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFF6FC] border border-[#C7E0F4] text-xs font-semibold text-[#0078D4] mb-4">
-                <Building2 className="w-3.5 h-3.5" />
-                <span>OFFICIAL VENUE</span>
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+          
+          {/* Left Details Card */}
+          <div className="lg:col-span-5 dotnet-content-region p-5 sm:p-7 flex flex-col justify-between">
+            <div className="space-y-4 sm:space-y-5">
+              <div>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512BD4]">
+                  Official Campus Hall
+                </span>
+                <h3 className="text-lg sm:text-xl font-bold font-display text-[#14053A] mt-0.5">
+                  {eventData.location.venueName}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#190649]/80 mt-1.5 leading-relaxed">
+                  {eventData.location.address}
+                </p>
               </div>
 
-              <h3 className="text-2xl font-bold text-[#171717] tracking-tight">
-                {eventData.location.venueName}
-              </h3>
-
-              <div className="mt-4 space-y-3 text-sm text-[#5F6368]">
-                <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                  <span>{eventData.location.address}</span>
+              <div className="space-y-3 pt-3 border-t border-[#DCD5F6]/60">
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#190649]/80">
+                  <Building className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#14053A] block">Host Institution</span>
+                    <span className="text-xs text-[#5F6368]">{eventData.organizer.institution}</span>
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-2.5">
-                  <Calendar className="w-4 h-4 text-[#0078D4] shrink-0" />
-                  <span>{eventData.date.formattedDate} · {eventData.date.duration}</span>
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#190649]/80">
+                  <Compass className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#14053A] block">Transit</span>
+                    <span className="text-xs text-[#5F6368]">15 mins from Amravati Station · 30 mins from Badnera Jn (BD)</span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="mt-6 pt-6 border-t border-[#E5E7EB]">
-                <div className="text-xs font-semibold text-[#171717] uppercase tracking-wider mb-3">
-                  Campus Facilities & Info
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#190649]/80">
+                  <Navigation className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-[#14053A] block">Facilities</span>
+                    <span className="text-xs text-[#5F6368]">AC auditorium, high-speed Wi-Fi, lab workstations, & live stream setup.</span>
+                  </div>
                 </div>
-                <ul className="space-y-2 text-xs text-[#5F6368]">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Air-conditioned auditorium with dual high-resolution displays</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>High-speed dedicated Wi-Fi network for attendees</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Ample on-campus parking and easy transit from Amravati Railway Station</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Lunch, snacks & networking lounges included with eligible passes</span>
-                  </li>
-                </ul>
               </div>
             </div>
 
-            <div className="mt-8 pt-4">
-              <Button
-                variant="primary"
-                size="md"
+            <div className="mt-6 pt-4 border-t border-[#DCD5F6]/60 flex flex-wrap items-center gap-3">
+              <a
                 href={eventData.location.mapUrl}
                 target="_blank"
-                icon={<Navigation className="w-4 h-4" />}
+                rel="noopener noreferrer"
+                className="dotnet-solid-btn-accent text-xs sm:text-sm py-2 px-4"
               >
-                Get Directions on Google Maps
-              </Button>
+                <span>Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="https://prpcem.ac.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-[#512BD4] hover:underline"
+              >
+                PRPCEM Campus Portal
+              </a>
             </div>
           </div>
 
-          {/* RIGHT: Map Container */}
-          <div className="lg:col-span-6 conf-card overflow-hidden bg-[#F7F7F8] min-h-[350px] relative flex flex-col">
+          {/* Right Map Embed Card */}
+          <div className="lg:col-span-7 bg-white/85 backdrop-blur-md rounded-2xl border border-[#DCD5F6] overflow-hidden shadow-xs p-1.5 flex flex-col min-h-[260px] sm:min-h-[300px]">
             <iframe
               title="PRPCEM Amravati Campus Map"
               src={eventData.location.embedMapUrl}
-              className="w-full h-full min-h-[380px] border-0"
+              className="w-full h-full min-h-[260px] sm:min-h-[300px] rounded-xl border-0"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-            <div className="p-3 bg-white border-t border-[#E5E7EB] text-center text-xs text-[#5F6368]">
-              Swami Vivekananda Auditorium, PRPCEM Campus · Amravati, Maharashtra 444604
-            </div>
           </div>
+
         </div>
-      </Container>
+
+      </div>
     </section>
   );
 };
-
-export default Venue;

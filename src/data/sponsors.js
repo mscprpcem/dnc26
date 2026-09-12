@@ -32,7 +32,7 @@ export const sponsorsData = [
     id: 'sp-konfhub',
     name: 'KonfHub',
     tier: 'Technology Partner',
-    role: 'Official Ticketing & Platform Partner',
+    role: 'Community Platform Partner',
     websiteUrl: 'https://konfhub.com',
   },
   {

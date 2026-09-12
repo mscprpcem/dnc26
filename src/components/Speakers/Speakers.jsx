@@ -1,134 +1,106 @@
 import React from 'react';
-import { Tag } from 'lucide-react';
-import { Container } from '../ui/Container.jsx';
-import { SectionHeader } from '../ui/SectionHeader.jsx';
-import { Badge } from '../ui/Badge.jsx';
-import { LinkedInIcon, XIcon, GitHubIcon } from '../ui/SocialIcons.jsx';
-import { speakersData } from '../../data/speakers.js';
+import { Award, ArrowRight, Clock, MapPin, UserCheck } from 'lucide-react';
+
+const sessionBlocks = [
+  {
+    id: 'block-1',
+    label: 'Morning Technical Block A',
+    description: 'Deep-dive developer sessions exploring modern platform architecture and tooling.',
+    status: 'Track & Speaker TBA',
+  },
+  {
+    id: 'block-2',
+    label: 'Morning Technical Block B',
+    description: 'Enterprise cloud services, performance optimizations, and intelligent applications.',
+    status: 'Track & Speaker TBA',
+  },
+  {
+    id: 'block-3',
+    label: 'Afternoon Technical Block A',
+    description: 'Hands-on developer workshops, distributed systems, and real-world code demos.',
+    status: 'Track & Speaker TBA',
+  },
+  {
+    id: 'block-4',
+    label: 'Afternoon Technical Block B',
+    description: 'Practical deployment labs, interactive developer panel, and audience Q&A.',
+    status: 'Track & Speaker TBA',
+  },
+];
 
 export const Speakers = () => {
-  const getTrackBadge = (index) => {
-    const tracks = [
-      { name: 'Cloud Native', variant: 'blue' },
-      { name: 'AI & Copilots', variant: 'purple' },
-      { name: 'Performance', variant: 'neutral' },
-      { name: 'Serverless', variant: 'blue' },
-      { name: 'DevOps & SRE', variant: 'neutral' },
-      { name: 'Full-Stack .NET', variant: 'purple' },
-    ];
-    return tracks[index % tracks.length];
-  };
-
   return (
-    <section id="speakers" className="py-20 lg:py-28 bg-white border-b border-[#E5E7EB]">
-      <Container>
-        <SectionHeader
-          label="SPEAKERS"
-          title="Meet the people shaping the conversation."
-          description="Software engineers from Microsoft, enterprise architects, and Microsoft MVPs delivering deep technical sessions at PRPCEM Amravati."
-        />
+    <section id="speakers" className="w-full py-10 sm:py-14 md:py-16 scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#EEEAFB] text-[#512BD4] text-[11px] font-bold uppercase tracking-wider mb-2.5 border border-[#DCD5F6]">
+            <Award className="w-3 h-3" />
+            <span>Speaker Lineup & Tracks · Coming Soon</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display tracking-tight text-[#14053A] mb-2.5">
+            Speakers & Tracks <span className="text-gradient-magenta">To Be Announced (TBA)</span>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#190649]/75 leading-relaxed">
+            Speaker selection is currently underway via Call for Speakers. All confirmed speakers, session titles, and technical tracks will be officially announced soon.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
-          {speakersData.map((speaker, index) => {
-            const track = getTrackBadge(index);
-            return (
-              <div
-                key={speaker.id}
-                className="conf-card group overflow-hidden flex flex-col bg-white border border-[#E5E7EB] hover:border-[#512BD4]/40 transition-all duration-200 hover:-translate-y-1 h-full"
-              >
-                {/* Speaker Photo */}
-                <div className="relative aspect-4/3 w-full overflow-hidden bg-[#F7F7F8]">
-                  <img
-                    src={speaker.avatarUrl}
-                    alt={speaker.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                  {/* Company Badge Overlay */}
-                  <div className="absolute bottom-2.5 left-2.5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-md border border-[#E5E7EB] text-xs font-semibold text-[#171717] shadow-xs flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#512BD4]" />
-                    <span>{speaker.organization}</span>
+        {/* Announced Soon Session Blocks Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {sessionBlocks.map((item) => (
+            <div
+              key={item.id}
+              className="bg-white/90 backdrop-blur-xs rounded-xl p-5 border border-[#DCD5F6] shadow-xs flex flex-col justify-between hover:border-[#9780E5] hover:shadow-md transition-all duration-200"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <div className="w-9 h-9 rounded-lg bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-[#512BD4]" />
                   </div>
-
-                  {/* Topic Track Tag Overlay */}
-                  <div className="absolute top-2.5 right-2.5">
-                    <Badge variant={track.variant} size="sm">
-                      {track.name}
-                    </Badge>
-                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded-full">
+                    Coming Soon
+                  </span>
                 </div>
 
-                {/* Speaker Body - strict uniform flex layout */}
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-[#171717] group-hover:text-[#512BD4] transition-colors leading-snug">
-                      {speaker.name}
-                    </h3>
-                    <p className="text-xs font-semibold text-[#512BD4] mt-0.5">
-                      {speaker.designation}
-                    </p>
+                <h3 className="text-sm font-bold font-display text-[#14053A] mb-2 leading-snug">
+                  {item.label}
+                </h3>
 
-                    <div className="mt-3 pt-3 border-t border-[#E5E7EB]">
-                      <div className="text-[10px] font-mono font-bold text-[#8A8F98] uppercase tracking-wider flex items-center gap-1">
-                        <Tag className="w-3 h-3 text-[#512BD4]" />
-                        <span>SESSION TOPIC</span>
-                      </div>
-                      <p className="text-xs font-medium text-[#171717] mt-1 leading-snug min-h-[32px]">
-                        {speaker.topic}
-                      </p>
-                    </div>
-                  </div>
+                <p className="text-xs text-[#190649]/70 leading-relaxed mb-4">
+                  {item.description}
+                </p>
+              </div>
 
-                  {/* Social Links - aligned at bottom */}
-                  {speaker.socials && (
-                    <div className="mt-5 pt-3.5 border-t border-[#E5E7EB]/80 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        {speaker.socials.linkedin && (
-                          <a
-                            href={speaker.socials.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded text-[#5F6368] hover:text-[#512BD4] hover:bg-[#F7F7F8] transition-colors"
-                            aria-label={`${speaker.name} LinkedIn`}
-                          >
-                            <LinkedInIcon className="w-4 h-4" />
-                          </a>
-                        )}
-                        {speaker.socials.x && (
-                          <a
-                            href={speaker.socials.x}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded text-[#5F6368] hover:text-[#512BD4] hover:bg-[#F7F7F8] transition-colors"
-                            aria-label={`${speaker.name} X Profile`}
-                          >
-                            <XIcon className="w-4 h-4" />
-                          </a>
-                        )}
-                        {speaker.socials.github && (
-                          <a
-                            href={speaker.socials.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-1.5 rounded text-[#5F6368] hover:text-[#512BD4] hover:bg-[#F7F7F8] transition-colors"
-                            aria-label={`${speaker.name} GitHub`}
-                          >
-                            <GitHubIcon className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-
-                      <span className="text-[10px] font-mono font-semibold text-[#8A8F98] bg-[#F7F7F8] px-2 py-0.5 rounded border border-[#E5E7EB]">
-                        Amravati
-                      </span>
-                    </div>
-                  )}
+              <div className="pt-3 border-t border-[#DCD5F6]/60">
+                <div className="flex items-center justify-between text-[11px] font-semibold text-[#190649]/80">
+                  <span className="inline-flex items-center gap-1.5 text-[#512BD4]">
+                    <span className="w-2 h-2 rounded-full bg-[#D600AA] animate-pulse" />
+                    {item.status}
+                  </span>
+                  <span className="text-gray-400 text-[10px]">PRPCEM</span>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
-      </Container>
+
+        {/* Bottom Notice banner */}
+        <div className="mt-10 text-center">
+          <p className="text-xs text-[#190649]/75 mb-3">
+            Official speaker reveals and track announcements will be published across our community channels.
+          </p>
+          <a
+            href="#stay-connected"
+            className="dotnet-solid-btn-accent text-xs py-2 px-5 inline-flex items-center gap-1.5 shadow-xs"
+          >
+            <span>Follow Community For Speaker Announcements</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+      </div>
     </section>
   );
 };

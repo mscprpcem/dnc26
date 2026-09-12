@@ -5,9 +5,26 @@ export const keynoteSpeaker = {
   designation: 'Microsoft MVP & Senior Architect',
   organization: 'Microsoft MVP Community',
   topic: 'Building Next-Gen Intelligent Applications with .NET & Modern C#',
-  bio: 'Microsoft Most Valuable Professional (MVP) and renowned community speaker with decades of experience architecting cloud-scale enterprise .NET systems and developer tools.',
-  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+  time: '10:15 AM – 11:15 AM IST',
+  hall: 'Swami Vivekananda Auditorium, PRPCEM Campus',
+  bio: 'Microsoft Most Valuable Professional (MVP) and globally recognized speaker with over two decades of enterprise expertise architecting scalable cloud applications, distributed microservices, and modern developer tooling across the Microsoft platform ecosystem.',
+  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
   isKeynote: true,
+  tags: ['.NET 11', 'C# 14', 'Semantic Kernel', 'Azure OpenAI', '.NET Aspire', 'Native AOT', 'Enterprise Architecture'],
+  pillars: [
+    {
+      title: '.NET 11 & C# 14 Architectural Roadmap',
+      desc: 'Deep dive into next-gen runtime performance, JIT profiling breakthroughs, and high-throughput zero-allocation memory design.',
+    },
+    {
+      title: 'Autonomous AI Agents with Semantic Kernel',
+      desc: 'Orchestrating multi-agent workflows, vector memory stores, tool-calling, and Azure OpenAI integration within enterprise C# applications.',
+    },
+    {
+      title: 'Cloud-Native Resilience with .NET Aspire',
+      desc: 'Production-ready microservices telemetry, service discovery, container orchestration, and seamless Azure Container Apps deployment.',
+    },
+  ],
   socials: {
     linkedin: 'https://www.linkedin.com',
     x: 'https://x.com',

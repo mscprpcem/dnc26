@@ -1,57 +1,89 @@
 import React from 'react';
 import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Hero } from './components/Hero/Hero.jsx';
-import { EventStats } from './components/EventStats/EventStats.jsx';
-import { About } from './components/About/About.jsx';
+import { CallForSpeakers } from './components/CallForSpeakers/CallForSpeakers.jsx';
+import { EditorialSwimlanes } from './components/EditorialSwimlanes/EditorialSwimlanes.jsx';
+import { PastHighlights } from './components/PastHighlights/PastHighlights.jsx';
 import { Keynote } from './components/Keynote/Keynote.jsx';
 import { Speakers } from './components/Speakers/Speakers.jsx';
 import { Agenda } from './components/Agenda/Agenda.jsx';
 import { Venue } from './components/Venue/Venue.jsx';
-import { Tickets } from './components/Tickets/Tickets.jsx';
 import { Sponsors } from './components/Sponsors/Sponsors.jsx';
-import { CommunityCTA } from './components/CommunityCTA/CommunityCTA.jsx';
+import { StayConnected } from './components/StayConnected/StayConnected.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
 
 export const App = () => {
   return (
-    <div className="min-h-screen bg-white text-[#171717] flex flex-col font-sans selection:bg-[#512BD4]/15 selection:text-[#512BD4]">
+    <div className="overflow-container selection:bg-[#512BD4]/20 selection:text-[#512BD4]">
+      {/* Authentic DotNetConf Gradient Background Ellipses */}
+      <img
+        role="presentation"
+        className="bg-gradient-ellipse"
+        src="/bg-gradient-ellipse-01.svg"
+        alt="Background gradient ellipse 1"
+      />
+      <img
+        role="presentation"
+        className="bg-gradient-ellipse"
+        src="/bg-gradient-ellipse-02.svg"
+        alt="Background gradient ellipse 2"
+      />
+      <img
+        role="presentation"
+        className="bg-gradient-ellipse"
+        src="/bg-gradient-ellipse-03.svg"
+        alt="Background gradient ellipse 3"
+      />
+      <img
+        role="presentation"
+        className="bg-gradient-ellipse"
+        src="/bg-gradient-ellipse-04.svg"
+        alt="Background gradient ellipse 4"
+      />
+      <img
+        role="presentation"
+        className="bg-gradient-ellipse"
+        src="/bg-gradient-ellipse-05.svg"
+        alt="Background gradient ellipse 5"
+      />
+
       {/* Sticky Header Navigation */}
       <Navbar />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
-        {/* Section 1: Hero */}
+      <main className="w-full flex-1 z-10">
+        {/* Section 1: Hero (DotNetConf 2026 Amravati, 3D Rocket mascot, Coming Soon) */}
         <Hero />
 
-        {/* Section 2: Event Stats Strip */}
-        <EventStats />
+        {/* Section 2: Call For Speakers (Frosted region card - Coming Soon) */}
+        <CallForSpeakers />
 
-        {/* Section 3: About Conference */}
-        <About />
+        {/* Section 3: Technical Editorial Swimlanes (Launch overview & conference highlights) */}
+        <EditorialSwimlanes />
 
-        {/* Section 4: Keynote Feature */}
+        {/* Section 4: Highlights of Last Year (.NET Conf 2024 Amravati Retrospective) */}
+        <PastHighlights />
+
+        {/* Section 5: Keynote Speaker Spotlight (Headline Keynote - Announced Soon TBA) */}
         <Keynote />
 
-        {/* Section 5: Speakers Grid */}
+        {/* Section 5: Featured Technical Speakers */}
         <Speakers />
 
-        {/* Section 6: Interactive Agenda Timeline */}
+        {/* Section 5: 1-Day Conference Schedule & Tracks */}
         <Agenda />
 
-        {/* Section 7: Venue & Campus Map */}
+        {/* Section 6: Campus Venue & Google Maps (Swami Vivekananda Auditorium, PRPCEM) */}
         <Venue />
 
-        {/* Section 8: Passes & Registration */}
-        <Tickets />
-
-        {/* Section 9: Sponsors & Partners */}
+        {/* Section 7: Official Partners & Sponsors with Vector Logos */}
         <Sponsors />
 
-        {/* Section 10: Community CTA */}
-        <CommunityCTA />
+        {/* Section 9: Follow the event #dotnetconfamt */}
+        <StayConnected />
       </main>
 
-      {/* Section 11: Footer */}
+      {/* Footer: Powered by .NET 10.0.11 & Microsoft Student Club PRPCEM */}
       <Footer />
     </div>
   );
