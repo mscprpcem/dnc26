@@ -25,18 +25,27 @@ export const Venue = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch">
           
           {/* Left Details Card */}
-          <div className="lg:col-span-5 dotnet-content-region p-5 sm:p-7 flex flex-col justify-between">
+          <div className="lg:col-span-5 dotnet-content-region p-5 sm:p-7 flex flex-col justify-between relative overflow-hidden">
             <div className="space-y-4 sm:space-y-5">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512BD4]">
-                  Official Campus Hall
-                </span>
-                <h3 className="text-lg sm:text-xl font-bold font-display text-[#14053A] mt-0.5">
-                  {eventData.location.venueName}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#190649]/80 mt-1.5 leading-relaxed">
-                  {eventData.location.address}
-                </p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#512BD4]">
+                    Official Campus Hall
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold font-display text-[#14053A] mt-0.5">
+                    {eventData.location.venueName}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#190649]/80 mt-1.5 leading-relaxed">
+                    {eventData.location.address}
+                  </p>
+                </div>
+                <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 select-none">
+                  <img
+                    src="/dotnet-bot.svg"
+                    alt=".NET Bot Campus Guide"
+                    className="w-full h-full object-contain drop-shadow-sm select-none"
+                  />
+                </div>
               </div>
 
               <div className="space-y-3 pt-3 border-t border-[#DCD5F6]/60">
@@ -60,7 +69,7 @@ export const Venue = () => {
                   <Navigation className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-[#14053A] block">Facilities</span>
-                    <span className="text-xs text-[#5F6368]">AC auditorium, high-speed Wi-Fi, lab workstations, & live stream setup.</span>
+                    <span className="text-xs text-[#5F6368]">AC auditorium, high-speed Wi-Fi, lab workstations, & audio-visual stage setup.</span>
                   </div>
                 </div>
               </div>

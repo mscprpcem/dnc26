@@ -47,10 +47,6 @@ export const Keynote = () => {
             <div className="lg:col-span-5 flex flex-col">
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#14053A] via-[#2A1065] to-[#14053A] border border-[#DCD5F6] shadow-md flex-1 min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] flex flex-col items-center justify-center p-6 text-center group">
                 
-                {/* Background Ambient Glows */}
-                <div className="absolute top-1/4 -left-10 w-48 h-48 bg-[#512BD4]/40 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-1/4 -right-10 w-48 h-48 bg-[#D600AA]/30 rounded-full blur-3xl pointer-events-none" />
-
                 {/* Top Badges */}
                 <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
                   <div className="px-3 py-1 rounded-full bg-[#512BD4] text-white text-[11px] font-extrabold tracking-wider uppercase shadow-md flex items-center gap-1.5">
@@ -63,14 +59,16 @@ export const Keynote = () => {
                   </div>
                 </div>
 
-                {/* Center Mysterious Silhouette & Icon */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#512BD4] to-[#D600AA] p-1 shadow-2xl mb-4">
-                    <div className="w-full h-full rounded-full bg-[#14053A] flex items-center justify-center border-2 border-white/20">
-                      <UserCheck className="w-14 h-14 text-white/80" />
-                    </div>
+                {/* Center Keynote Ambassador Mascot (Natural, prominent sizing) */}
+                <div className="relative z-10 flex flex-col items-center my-auto py-6">
+                  <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center mb-4">
+                    <img
+                      src="/mascot/dotnetbot-outer-space.svg"
+                      alt=".NET Bot Space Explorer — Keynote Ambassador"
+                      className="w-full h-full object-contain drop-shadow-xl select-none"
+                    />
                   </div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold border border-white/15">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold border border-white/20 shadow-sm">
                     <span className="w-2 h-2 rounded-full bg-[#D600AA] animate-pulse" />
                     <span>Distinguished Keynote Speaker TBA</span>
                   </div>
@@ -173,10 +171,6 @@ export const Keynote = () => {
                   <span>Follow For Keynote Announcement</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
-
-                <div className="text-xs text-[#5F6368] font-medium">
-                  Official reveal will be posted across MSC PRPCEM channels.
-                </div>
               </div>
 
             </div>

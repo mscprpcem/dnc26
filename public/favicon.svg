@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <rect width="48" height="48" rx="12" fill="#512BD4"/>
-  <circle cx="14" cy="28" r="3" fill="#FFFFFF"/>
-  <text x="18" y="32" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Inter, sans-serif" font-weight="800" font-size="16" letter-spacing="-0.5">NET</text>
-  <path d="M38 12L42 16L38 20" stroke="#0078D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-  <path d="M10 16L6 20L10 24" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-</svg>

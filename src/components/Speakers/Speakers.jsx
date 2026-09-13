@@ -56,8 +56,8 @@ export const Speakers = () => {
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center">
-                    <Clock className="w-4 h-4 text-[#512BD4]" />
+                  <div className="w-9 h-9 rounded-lg bg-[#EEEAFB] flex items-center justify-center p-1 border border-[#DCD5F6]/70">
+                    <img src="/mascot/bot_head.png" alt=".NET Bot" className="w-6 h-6 object-contain select-none" />
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded-full">
                     Coming Soon

@@ -7,9 +7,8 @@ export const navigationItems = [
 ];
 
 export const eventData = {
-  name: '.NET Conf 2026',
+  name: '.NET Conf',
   edition: 'Amravati Community Edition',
-  subname: 'Central India’s Largest .NET Conference',
   year: '2026',
   dateFormatted: 'Annual 2026 Edition · Date TBA',
   duration: '1-Day Flagship Conference (TBA)',
@@ -25,7 +24,7 @@ export const eventData = {
     institution: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
     location: 'Amravati, Maharashtra, India',
     badge: "Central India's Premier Microsoft Student Community",
-    website: 'https://mscprpcem.tech',
+    website: 'https://www.mscprpcem.tech',
   },
 
   location: {
@@ -43,7 +42,7 @@ export const eventData = {
   hashtag: '#dotnetconfamt',
 
   socialLinks: {
-    website: 'https://mscprpcem.tech',
+    website: 'https://www.mscprpcem.tech',
     linkedin: 'https://www.linkedin.com/company/mscprpcem',
     linktree: 'https://linktr.ee/mscprpcem',
     github: 'https://github.com/mscprpcem',
@@ -61,43 +60,67 @@ export const eventData = {
     description:
       'Passionate developers, students, and Microsoft tech leaders gathered at PRPCEM Amravati for an unforgettable day of deep dives into .NET, modern C#, Cloud Native Azure, and AI.',
     stats: [],
-    showcaseImage: '/past-edition/dnc24-showcase.jpg',
+    showcaseImage: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P7.jpg',
     gallery: [
       {
-        url: '/past-edition/dnc24-showcase.jpg',
-        title: 'Swami Vivekananda Auditorium Full House',
-        caption: 'Full-house audience packing the main campus auditorium at PRPCEM Amravati.',
-        tag: 'Auditorium & Keynote',
+        url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg',
+        title: 'Auditorium Keynote & Full House Audience',
+        caption: 'Passionate student developers, engineers, and tech enthusiasts gathered at Swami Vivekananda Auditorium.',
+        tag: 'Auditorium Keynote',
       },
       {
-        url: '/past-edition/dnc24-hero-card.png',
-        title: 'Keynote Stage & Mascot Celebration',
-        caption: 'Celebrating .NET launch with official bot mascot and distinguished speakers.',
+        url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P7.jpg',
+        title: 'Headline Keynote Stage & Speakers',
+        caption: 'Distinguished speakers delivering foundational talks on the .NET ecosystem and cloud innovation.',
         tag: 'Main Stage',
       },
       {
-        url: '/past-edition/campus-mascot.png',
-        title: 'Community Student Delegation',
-        caption: 'Students, faculty delegates, and community developers gathered together.',
-        tag: 'Community',
-      },
-      {
-        url: '/past-edition/hero-composite.png',
-        title: 'Interactive Labs & Workshops',
-        caption: 'Hands-on practical code sessions covering modern C# and cloud microservices.',
-        tag: 'Hands-on Labs',
-      },
-      {
-        url: '/past-edition/hero-right-card.png',
-        title: 'Architecture Walkthroughs',
-        caption: 'Deep technical presentations by Microsoft MVPs and industry leaders.',
+        url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG_20250109_121040577_HDR.jpg',
+        title: 'Interactive Workshops & Hands-on Labs',
+        caption: 'Practical code walkthroughs, live demonstrations, and mentor-guided development tracks.',
         tag: 'Technical Tracks',
       },
       {
-        url: '/past-edition/hero-card-clean.png',
-        title: '2024 Stage Overview',
-        caption: 'Memorable milestones from Central India’s flagship developer conference.',
-        tag: 'Retrospective',
+        url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P4.jpg',
+        title: 'Session Deliberations & Technical Discussions',
+        caption: 'Attendees engaging in deep-dive architectural discussions and real-world implementation techniques.',
+        tag: 'Conference Sessions',
+      },
+      {
+        url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG_20250111_143135.jpg',
+        title: 'Campus Experience & Community Networking',
+        caption: 'Delegates connecting and collaborating between technical sessions across the PRPCEM campus.',
+        tag: 'Campus Life',
+      },
+      {
+        url: 'https://mscprpcem.blob.core.windows.net/general/event2.jpg',
+        title: 'Student Delegation & Community Innovators',
+        caption: 'Youth developers and student club delegations celebrating technology leadership and innovation.',
+        tag: 'Community Pride',
+      },
+      {
+        url: 'https://mscprpcem.blob.core.windows.net/general/event10.jpg',
+        title: 'Valedictory & Awards Distribution',
+        caption: 'Honoring hackathon champions, technical quiz winners, and community contributors with trophies.',
+        tag: 'Valedictory & Awards',
+      },
+      {
+        url: 'https://mscprpcem.blob.core.windows.net/general/event7.jpg',
+        title: 'Speaker Interactions & Technical Q&A',
+        caption: 'Direct in-person Q&A exchanges between Microsoft community leaders and delegates.',
+        tag: 'Speaker Q&A',
+      },
+      {
+        url: 'https://mscprpcem.blob.core.windows.net/general/event3.jpg',
+        title: 'Collaborative Learning & Mentorship',
+        caption: 'Peer learning and industry mentorship fostering the next generation of .NET software engineers.',
+        tag: 'Mentorship',
+      },
+      {
+        url: 'https://mscprpcem.blob.core.windows.net/general/event5.jpg',
+        title: 'Organizing Team & Volunteer Milestone',
+        caption: 'Microsoft Student Club PRPCEM leadership and volunteer team celebrating an unforgettable edition.',
+        tag: 'Team Milestone',
       },
     ],
   },
@@ -105,12 +128,14 @@ export const eventData = {
   editorialSections: [
     {
       id: 'official-launch',
+      tag: '01 · Flagship Gathering',
       title: 'Central India’s Flagship 1-Day .NET Conference',
       description:
         "Organized by the Microsoft Student Club at PRPCEM Amravati, .NET Conf Amravati 2026 is an action-packed 1-day gathering of passionate student developers, software engineers, and cloud enthusiasts. Celebrate the launch of .NET 11, master modern C# 14, dive into distributed microservices on Azure, and build autonomous AI agents with Microsoft engineers and community MVPs.",
     },
     {
       id: 'what-to-expect',
+      tag: '02 · Technical Immersion',
       title: 'Full Day of Keynotes, Parallel Tracks & Hands-on Learning',
       description:
         "From the opening keynote to dual parallel tracks covering Cloud Architecture and Generative AI, hands-on lab workshops, student lightning talks, and the grand closing ceremony, .NET Conf Amravati delivers high-impact technical immersion and verified industry credentials.",

@@ -266,17 +266,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Floating rocket animation */
-@keyframes floatRocket {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(1.2deg);
-  }
-}
-
+/* Keep images steady without up/down movement */
 .animate-float-rocket {
-  animation: floatRocket 6s ease-in-out infinite;
+  transform: none !important;
+  animation: none !important;
 }
 
 /* Custom modern scrollbar */
@@ -294,3 +287,193 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: #9780E5;
 }
+
+/* ==========================================================================
+   Hero Section Fluid Scaling & Multi-Breakpoint Media Queries
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: clamp(2.15rem, 5.5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.hero-description {
+  font-size: clamp(0.9rem, 1.2vw + 0.5rem, 1.15rem);
+}
+
+/* ==========================================================================
+   Comprehensive Responsive Media Queries for All Screen Sizes
+   Breakpoints:
+   - xs: < 480px (Extra Small Mobile)
+   - sm: 480px - 639px (Mobile / Phablet)
+   - md: 640px - 767px (Tablet Portrait)
+   - lg: 768px - 1023px (Tablet Landscape / Small Laptops)
+   - xl: 1024px - 1279px (Laptops & Desktops)
+   - 2xl: 1280px - 1535px (Large Desktops)
+   - 3xl: 1536px+ (Ultra-Wide / 4K Monitors)
+   ========================================================================== */
+
+/* Universal Responsive Image & Container Safety */
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 1. Extra Small Phones (xs: < 480px) */
+@media (max-width: 479px) {
+  .hero-section {
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+  }
+  .hero-title {
+    font-size: 2.1rem;
+    line-height: 1.1;
+  }
+  .hero-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .hero-action-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.625rem;
+  }
+  .hero-action-buttons a {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .hero-mascot-container {
+    margin-top: 1.25rem;
+  }
+  /* Ensure container horizontal padding stays safe on narrow screens */
+  .overflow-container {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+/* 2. Mobile & Phablets (sm: 480px to 639px) */
+@media (min-width: 480px) and (max-width: 639px) {
+  .hero-section {
+    padding-top: 0.75rem;
+    padding-bottom: 2.25rem;
+  }
+  .hero-title {
+    font-size: 2.4rem;
+    line-height: 1.12;
+  }
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .hero-action-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .hero-action-buttons a {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .hero-mascot-container {
+    margin-top: 1.5rem;
+  }
+}
+
+/* 3. Tablet Portrait (md: 640px to 767px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .hero-section {
+    padding-top: 1.25rem;
+    padding-bottom: 2.75rem;
+  }
+  .hero-title {
+    font-size: 2.85rem;
+  }
+  .hero-action-buttons {
+    flex-direction: row;
+    width: auto;
+  }
+  .hero-mascot-container {
+    margin-top: 1.75rem;
+  }
+}
+
+/* 4. Tablet Landscape & Small Laptops (lg: 768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-section {
+    padding-top: 1.5rem;
+    padding-bottom: 3.25rem;
+  }
+  .hero-title {
+    font-size: 3.2rem;
+  }
+  .hero-action-buttons {
+    flex-direction: row;
+    width: auto;
+  }
+  .hero-mascot-container {
+    margin-top: 0;
+  }
+}
+
+/* 5. Standard Laptops & Desktops (xl: 1024px to 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hero-section {
+    padding-top: 2rem;
+    padding-bottom: 3.75rem;
+  }
+  .hero-title {
+    font-size: 3.65rem;
+  }
+}
+
+/* 6. Large Desktop Displays (2xl: 1280px to 1535px) */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .hero-section {
+    padding-top: 2.5rem;
+    padding-bottom: 4.5rem;
+  }
+  .hero-title {
+    font-size: 4.25rem;
+  }
+}
+
+/* 7. Ultra-Wide & 4K Monitors (3xl: 1536px and up) */
+@media (min-width: 1536px) {
+  .hero-section {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+  .hero-title {
+    font-size: 4.5rem;
+  }
+  .hero-description {
+    font-size: 1.175rem;
+    max-width: 38rem;
+  }
+}
+
+/* Accessibility: respect user prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-rocket {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+

@@ -8,11 +8,11 @@ export const sponsorsData = [
     websiteUrl: 'https://microsoft.com',
   },
   {
-    id: 'sp-github',
-    name: 'GitHub',
+    id: 'sp-jetbrains',
+    name: 'JetBrains',
     tier: 'Gold',
-    role: 'Developer Platform Partner',
-    websiteUrl: 'https://github.com',
+    role: 'Developer Tools Partner',
+    websiteUrl: 'https://jetbrains.com',
   },
   {
     id: 'sp-prpcem',
@@ -26,20 +26,6 @@ export const sponsorsData = [
     name: 'Microsoft Student Club PRPCEM',
     tier: 'Community Partner',
     role: 'Organizing Chapter',
-    websiteUrl: 'https://mscprpcem.tech',
-  },
-  {
-    id: 'sp-konfhub',
-    name: 'KonfHub',
-    tier: 'Technology Partner',
-    role: 'Community Platform Partner',
-    websiteUrl: 'https://konfhub.com',
-  },
-  {
-    id: 'sp-soham',
-    name: 'SohamGlobal',
-    tier: 'Silver',
-    role: 'Industry Ecosystem Partner',
-    websiteUrl: 'https://sohamglobal.com',
+    websiteUrl: 'https://www.mscprpcem.tech',
   },
 ];

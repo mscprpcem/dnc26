@@ -39,7 +39,7 @@ export const CommunityCTA = () => {
             <Button
               variant="secondary"
               size="lg"
-              href="mailto:contact@mscprpcem.tech?subject=Sponsorship%20Inquiry%20.NET%20Conf%202026"
+              href={`mailto:${eventData.contactEmail}?subject=Sponsorship%20Inquiry%20.NET%20Conf%202026`}
             >
               Become a Sponsor
             </Button>

@@ -7,7 +7,6 @@ const primaryNavItems = [
   { label: 'About', href: '#overview' },
   { label: 'Highlights', href: '#highlights' },
   { label: 'Keynote', href: '#keynote' },
-  { label: 'Speakers', href: '#speakers' },
   { label: 'Schedule', href: '#schedule' },
   { label: 'Venue', href: '#venue' },
 ];
@@ -53,8 +52,12 @@ export const Navbar = () => {
             className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#512BD4] rounded-lg"
             aria-label=".NET Conf 2026 Amravati"
           >
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#512BD4] to-[#D600AA] flex items-center justify-center text-white shadow-xs">
-              <span className="font-mono text-[11px] sm:text-xs font-bold tracking-tighter">.NET</span>
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+              <img
+                src="/mascot/bot_head.png"
+                alt=".NET Bot Mascot"
+                className="w-full h-full object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-115 group-hover:rotate-6 select-none"
+              />
             </div>
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg sm:text-xl font-bold font-display tracking-tight text-gradient-magenta">

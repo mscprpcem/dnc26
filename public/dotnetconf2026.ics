@@ -6,7 +6,7 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 SUMMARY:.NET Conf 2026 Amravati Community Edition
 DESCRIPTION:Central India's premier 1-day developer conference at PRPCEM Amravati celebrating the launch of .NET 11, modern C#, Azure Cloud, and Generative AI. Date Coming Soon!
-URL:https://mscprpcem.tech
+URL:https://www.mscprpcem.tech
 LOCATION:Swami Vivekananda Auditorium, PRPCEM Campus, Amravati, Maharashtra
 STATUS:TENTATIVE
 END:VEVENT

@@ -1,11 +1,9 @@
 import React from 'react';
 import { Navbar } from './components/Navbar/Navbar.jsx';
 import { Hero } from './components/Hero/Hero.jsx';
-import { CallForSpeakers } from './components/CallForSpeakers/CallForSpeakers.jsx';
 import { EditorialSwimlanes } from './components/EditorialSwimlanes/EditorialSwimlanes.jsx';
 import { PastHighlights } from './components/PastHighlights/PastHighlights.jsx';
 import { Keynote } from './components/Keynote/Keynote.jsx';
-import { Speakers } from './components/Speakers/Speakers.jsx';
 import { Agenda } from './components/Agenda/Agenda.jsx';
 import { Venue } from './components/Venue/Venue.jsx';
 import { Sponsors } from './components/Sponsors/Sponsors.jsx';
@@ -55,10 +53,7 @@ export const App = () => {
         {/* Section 1: Hero (DotNetConf 2026 Amravati, 3D Rocket mascot, Coming Soon) */}
         <Hero />
 
-        {/* Section 2: Call For Speakers (Frosted region card - Coming Soon) */}
-        <CallForSpeakers />
-
-        {/* Section 3: Technical Editorial Swimlanes (Launch overview & conference highlights) */}
+        {/* Section 2: Technical Editorial Swimlanes (Launch overview & conference highlights) */}
         <EditorialSwimlanes />
 
         {/* Section 4: Highlights of Last Year (.NET Conf 2024 Amravati Retrospective) */}
@@ -67,10 +62,7 @@ export const App = () => {
         {/* Section 5: Keynote Speaker Spotlight (Headline Keynote - Announced Soon TBA) */}
         <Keynote />
 
-        {/* Section 5: Featured Technical Speakers */}
-        <Speakers />
-
-        {/* Section 5: 1-Day Conference Schedule & Tracks */}
+        {/* Section 6: 1-Day Conference Schedule & Tracks */}
         <Agenda />
 
         {/* Section 6: Campus Venue & Google Maps (Swami Vivekananda Auditorium, PRPCEM) */}
@@ -83,7 +75,7 @@ export const App = () => {
         <StayConnected />
       </main>
 
-      {/* Footer: Powered by .NET 10.0.11 & Microsoft Student Club PRPCEM */}
+      {/* Footer */}
       <Footer />
     </div>
   );

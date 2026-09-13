@@ -44,7 +44,7 @@ export const StayConnected = () => {
       href: eventData.socialLinks.youtube,
       icon: YouTubeIcon,
       hoverClass: 'hover:bg-[#DC2626] hover:text-white',
-      badge: 'Livestream & Keynotes',
+      badge: 'Sessions & Recaps',
     },
     {
       name: 'Instagram',
@@ -60,10 +60,21 @@ export const StayConnected = () => {
     <section id="stay-connected" className="w-full py-12 sm:py-16 text-center scroll-mt-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Mascot Greeting (Steady, clean, natural size) */}
+        <div className="flex justify-center mb-5">
+          <div className="relative w-36 sm:w-44 select-none">
+            <img
+              src="/mascot/dotnet-bot-surfing.png"
+              alt=".NET Bot Surfing the Community"
+              className="w-full h-auto drop-shadow-md select-none"
+            />
+          </div>
+        </div>
+
         {/* Organizer Header Badge */}
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEEAFB] text-[#512BD4] text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-3 border border-[#DCD5F6]">
           <Globe className="w-3.5 h-3.5 text-[#512BD4]" />
-          <span>Microsoft Student Club @ PRPCEM</span>
+          <span>Microsoft Student Club PRPCEM</span>
         </div>
 
         {/* Official Headline */}

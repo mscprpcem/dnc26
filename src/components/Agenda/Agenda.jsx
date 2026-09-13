@@ -63,12 +63,18 @@ export const Agenda = () => {
         {/* 1-Day Outline Flow Card */}
         <div className="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#DCD5F6] shadow-lg p-5 sm:p-8 md:p-10 mb-8">
           <div className="flex items-center justify-between gap-3 pb-4 mb-6 border-b border-[#DCD5F6]/70">
-            <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-bold text-[#14053A] uppercase tracking-wider">
-                1-Day Flagship Conference Flow
-              </span>
-              <span className="text-gray-300">·</span>
-              <span className="text-xs text-[#512BD4] font-semibold">PRPCEM Campus, Amravati</span>
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/mascot/dotnet-bot-pot.svg"
+                alt=".NET Bot Schedule Guide"
+                className="w-7 h-7 sm:w-8 sm:h-8 object-contain select-none"
+              />
+              <div>
+                <span className="text-xs sm:text-sm font-bold text-[#14053A] uppercase tracking-wider block leading-tight">
+                  1-Day Flagship Conference Flow
+                </span>
+                <span className="text-[11px] text-[#512BD4] font-semibold">PRPCEM Campus, Amravati</span>
+              </div>
             </div>
             <span className="px-2.5 py-0.5 rounded-full bg-[#EEEAFB] text-[#512BD4] text-[11px] font-bold">
               Tracks TBA
