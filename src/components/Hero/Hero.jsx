@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowRight, Calendar, MapPin } from 'lucide-react';
-import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
+import { ArrowRight, Calendar, MapPin, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
 export const Hero = () => {
@@ -45,25 +44,20 @@ export const Hero = () => {
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
 
-              <a
-                href={eventData.socialLinks.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="dotnet-outline-btn-accent text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5 font-semibold flex items-center justify-center gap-2 bg-white/90 shadow-2xs transition-all hover:scale-102 active:scale-98 cursor-pointer text-[#128C7E] hover:text-[#075E54]"
-              >
-                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
-                <span className="text-[#14053A]">Join WhatsApp</span>
-              </a>
+              <div className="dotnet-outline-btn-accent text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5 font-bold flex items-center justify-center gap-2 bg-white/90 shadow-2xs select-none text-[#512BD4] border border-[#DCD5F6]">
+                <Sparkles className="w-4 h-4 text-[#512BD4]" />
+                <span>Coming Soon</span>
+              </div>
             </div>
 
-            {/* Pre-Registration Notice Card */}
+            {/* Announcement Notice Card */}
             <div className="w-full max-w-md bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl border border-[#DCD5F6] p-3.5 sm:p-4 shadow-xs">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#512BD4] mb-1">
                 <Calendar className="w-4 h-4 text-[#512BD4] shrink-0" />
-                <span>Annual 2026 Edition · Pre-Registration Open</span>
+                <span>Annual 2026 Edition · Coming Soon</span>
               </div>
               <p className="text-xs text-[#190649]/75 leading-relaxed">
-                Submit your expression of interest below to secure priority delegate seating and early speaker updates!
+                Official dates, session tracks, and speaker lineups will be announced soon. Register your interest below for priority delegate updates!
               </p>
             </div>
 

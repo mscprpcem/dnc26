@@ -96,7 +96,7 @@ export const InterestForm = () => {
                   Interest Recorded Successfully!
                 </h3>
                 <p className="text-sm sm:text-base text-[#190649]/80 max-w-md mx-auto leading-relaxed">
-                  Thank you, <strong className="text-[#512BD4]">{formData.fullName}</strong>! Your response has been logged into our delegate sheets. Priority pass updates will be sent to your email and WhatsApp.
+                  Thank you, <strong className="text-[#512BD4]">{formData.fullName}</strong>! Your expression of interest has been registered. Priority delegate updates will be sent to your registered email and WhatsApp.
                 </p>
               </div>
 
@@ -282,7 +282,7 @@ export const InterestForm = () => {
                   {isSubmitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Syncing to Sheets...</span>
+                      <span>Submitting...</span>
                     </>
                   ) : (
                     <>
@@ -291,9 +291,6 @@ export const InterestForm = () => {
                     </>
                   )}
                 </button>
-                <p className="text-[11px] text-[#190649]/60 mt-2.5 text-center">
-                  🔒 Your details will be recorded directly into the official Microsoft Student Club PRPCEM Google Sheet.
-                </p>
               </div>
 
             </form>
