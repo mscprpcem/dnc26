@@ -78,7 +78,7 @@ export const PastHighlights = () => {
             Highlights of <span className="community-event-gradient-text">Last Year's Edition</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-[#190649]/75 leading-relaxed">
-            A visual retrospective of .NET Conf 2024 Amravati — keynote sessions, hands-on workshops, and community celebrations at Swami Vivekananda Auditorium.
+            A visual retrospective of .NET Conf 2024 Amravati — keynote sessions, hands-on workshops, and community celebrations at PRPCEM Campus.
           </p>
         </div>
 
@@ -97,13 +97,37 @@ export const PastHighlights = () => {
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
             {gallery.map((item, idx) => (
-              <div key={idx} className="w-full h-full shrink-0 relative bg-black">
+              <div
+                key={idx}
+                className="w-full h-full shrink-0 relative flex items-center justify-center overflow-hidden bg-slate-950"
+              >
+                {/* Ambient Blurred Background to seamlessly fill different aspect ratios */}
+                <img
+                  src={item.url}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover blur-2xl scale-125 opacity-40 select-none pointer-events-none"
+                />
+
+                {/* Full, Uncropped High-Definition Photo */}
                 <img
                   src={item.url}
                   alt={item.title || `Slide ${idx + 1}`}
-                  className="w-full h-full object-cover"
+                  className="relative z-1 max-w-full max-h-full w-auto h-auto object-contain rounded-md drop-shadow-2xl"
                   loading={idx === 0 ? 'eager' : 'lazy'}
                 />
+
+                {/* Caption Bar */}
+                {item.title && (
+                  <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pt-8 pb-3 sm:pb-4 px-4 sm:px-6 z-2 text-left pointer-events-none">
+                    <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#9780E5] block mb-0.5">
+                      {item.tag || '2024 Highlight'}
+                    </span>
+                    <h3 className="text-white text-xs sm:text-sm md:text-base font-bold drop-shadow-sm truncate">
+                      {item.title}
+                    </h3>
+                  </div>
+                )}
               </div>
             ))}
           </div>

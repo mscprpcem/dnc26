@@ -9,6 +9,7 @@ const primaryNavItems = [
   { label: 'Keynote', href: '#keynote' },
   { label: 'Schedule', href: '#schedule' },
   { label: 'Venue', href: '#venue' },
+  { label: 'Interest', href: '#register-interest' },
 ];
 
 export const Navbar = () => {
@@ -37,11 +38,7 @@ export const Navbar = () => {
   return (
     <header
       id="top"
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-[#DCD5F6]/80 shadow-xs'
-          : 'bg-white/80 backdrop-blur-xs border-b border-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#DCD5F6]/80 shadow-xs transition-colors"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
@@ -81,6 +78,16 @@ export const Navbar = () => {
               </a>
             ))}
           </nav>
+
+          {/* Action CTA Button */}
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="#register-interest"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold font-display text-white bg-gradient-to-r from-[#512BD4] to-[#7B2BF9] hover:from-[#4323B0] hover:to-[#6820D8] shadow-xs hover:shadow-md transition-all active:scale-95"
+            >
+              <span>Register Interest</span>
+            </a>
+          </div>
 
           {/* Mobile Menu Button */}
           <button

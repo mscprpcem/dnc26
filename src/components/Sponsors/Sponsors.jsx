@@ -46,7 +46,7 @@ export const Sponsors = () => {
       roleBadge: 'Campus Host',
       badgeClass: 'text-[#002B49] bg-blue-50 border-blue-200',
       hoverBorder: 'hover:border-[#002B49]',
-      url: 'https://prpcem.ac.in',
+      url: 'https://prpotepatilengg.ac.in/',
       logo: (
         <img
           src="/logos/prpcem-logo.jpeg"

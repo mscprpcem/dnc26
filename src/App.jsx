@@ -6,6 +6,7 @@ import { PastHighlights } from './components/PastHighlights/PastHighlights.jsx';
 import { Keynote } from './components/Keynote/Keynote.jsx';
 import { Agenda } from './components/Agenda/Agenda.jsx';
 import { Venue } from './components/Venue/Venue.jsx';
+import { InterestForm } from './components/InterestForm/InterestForm.jsx';
 import { Sponsors } from './components/Sponsors/Sponsors.jsx';
 import { StayConnected } from './components/StayConnected/StayConnected.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
@@ -49,7 +50,7 @@ export const App = () => {
       <Navbar />
 
       {/* Main Content Sections */}
-      <main className="w-full flex-1 z-10">
+      <main className="w-full flex-1 z-10 pt-16 sm:pt-18">
         {/* Section 1: Hero (DotNetConf 2026 Amravati, 3D Rocket mascot, Coming Soon) */}
         <Hero />
 
@@ -65,13 +66,16 @@ export const App = () => {
         {/* Section 6: 1-Day Conference Schedule & Tracks */}
         <Agenda />
 
-        {/* Section 6: Campus Venue & Google Maps (Swami Vivekananda Auditorium, PRPCEM) */}
+        {/* Section 6: Campus Venue & Google Maps (PRPCEM Campus, Amravati) */}
         <Venue />
 
-        {/* Section 7: Official Partners & Sponsors with Vector Logos */}
+        {/* Section 7: Register Your Interest (Google Sheets via Code.gs) */}
+        <InterestForm />
+
+        {/* Section 8: Official Partners & Sponsors with Vector Logos */}
         <Sponsors />
 
-        {/* Section 9: Follow the event #dotnetconfamt */}
+        {/* Section 8: Connect with MSC PRPCEM & WhatsApp Community */}
         <StayConnected />
       </main>
 

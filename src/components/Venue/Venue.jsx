@@ -14,7 +14,7 @@ export const Venue = () => {
             <span>Campus Venue</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display tracking-tight text-[#14053A] mb-3">
-            Swami Vivekananda <span className="text-gradient-magenta">Auditorium</span>
+            PRPCEM Campus, <span className="text-gradient-magenta">Amravati</span>
           </h2>
           <p className="text-sm sm:text-base text-[#190649]/75 leading-relaxed">
             Hosted at the premier technological campus of P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati, Maharashtra.
@@ -30,7 +30,7 @@ export const Venue = () => {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#512BD4]">
-                    Official Campus Hall
+                    Official Host Campus
                   </span>
                   <h3 className="text-lg sm:text-xl font-bold font-display text-[#14053A] mt-0.5">
                     {eventData.location.venueName}
@@ -86,7 +86,7 @@ export const Venue = () => {
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
               <a
-                href="https://prpcem.ac.in"
+                href="https://prpotepatilengg.ac.in/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-bold text-[#512BD4] hover:underline"
@@ -96,16 +96,47 @@ export const Venue = () => {
             </div>
           </div>
 
-          {/* Right Map Embed Card */}
-          <div className="lg:col-span-7 bg-white/85 backdrop-blur-md rounded-2xl border border-[#DCD5F6] overflow-hidden shadow-xs p-1.5 flex flex-col min-h-[260px] sm:min-h-[300px]">
-            <iframe
-              title="PRPCEM Amravati Campus Map"
-              src={eventData.location.embedMapUrl}
-              className="w-full h-full min-h-[260px] sm:min-h-[300px] rounded-xl border-0"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          {/* Right Map Embed Card: Retro Mode Terminal GPS */}
+          <div className="lg:col-span-7 bg-[#100926] rounded-2xl border-2 border-[#512BD4]/40 overflow-hidden shadow-xl flex flex-col min-h-[340px] sm:min-h-[380px] relative">
+            {/* Retro Terminal Top Bar */}
+            <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#180D38] border-b border-[#512BD4]/30">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] shadow-xs inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] shadow-xs inline-block" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] shadow-xs inline-block" />
+                <span className="font-mono text-[11px] sm:text-xs font-bold text-[#E2DCF8] tracking-wider ml-1.5 hidden xs:inline">
+                  SYS_NAV // PRPCEM_AMRAVATI
+                </span>
+              </div>
+              <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-500/40">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>20.9167° N, 77.7289° E</span>
+              </div>
+            </div>
+
+            {/* Retro Map Viewport */}
+            <div className="relative flex-1 w-full h-full min-h-[280px] sm:min-h-[320px] bg-black">
+              <iframe
+                title="PRPCEM Amravati Campus Map"
+                src={eventData.location.embedMapUrl}
+                className="w-full h-full min-h-[280px] sm:min-h-[320px] border-0"
+                style={{ filter: 'contrast(1.06) saturate(1.12)' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+            {/* Retro Terminal Footer Info */}
+            <div className="px-3.5 py-1.5 bg-[#180D38] border-t border-[#512BD4]/30 flex items-center justify-between text-[10px] font-mono text-[#A89FD6]">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#512BD4]" />
+                RADAR: PRPCEM CAMPUS LOCK
+              </span>
+              <span className="hidden sm:inline text-emerald-400/90 font-semibold">
+                ALT: 343M · ZONE: IN-MH
+              </span>
+            </div>
           </div>
 
         </div>

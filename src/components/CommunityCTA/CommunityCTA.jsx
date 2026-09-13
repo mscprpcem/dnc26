@@ -46,7 +46,7 @@ export const CommunityCTA = () => {
           </div>
 
           <div className="mt-6 text-xs text-[#8A8F98]">
-            Amravati, Maharashtra · Swami Vivekananda Auditorium, PRPCEM Campus
+            Amravati, Maharashtra · PRPCEM Campus
           </div>
         </div>
       </Container>

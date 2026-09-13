@@ -8,7 +8,7 @@ export const navigationItems = [
 
 export const eventData = {
   name: '.NET Conf',
-  edition: 'Amravati Community Edition',
+  edition: 'Amravati',
   year: '2026',
   dateFormatted: 'Annual 2026 Edition · Date TBA',
   duration: '1-Day Flagship Conference (TBA)',
@@ -17,7 +17,7 @@ export const eventData = {
   poweredByVersion: '.NET 10.0.11',
   tagline: 'Connect. Learn. Build.',
   heroSubtitle:
-    "Central India's premier 1-day developer conference at PRPCEM Amravati celebrating the launch of .NET 11, modern C#, Azure Cloud, and Generative AI. Date, speakers, and schedule TBA!",
+    'P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati',
   
   organizer: {
     name: 'Microsoft Student Club (MSC)',
@@ -31,18 +31,18 @@ export const eventData = {
     city: 'Amravati',
     state: 'Maharashtra',
     country: 'India',
-    venueName: 'Swami Vivekananda Auditorium, PRPCEM Campus',
-    address: 'Pote Patil Educational Hub, Kathora Road, Amravati, Maharashtra 444604',
-    mapUrl: 'https://maps.google.com/?q=PRPCEM+Amravati+Maharashtra',
+    venueName: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
+    address: 'Pote Estate, Kathora Road, Amravati, Maharashtra 444602',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=P.+R.+Pote+Patil+College+of+Engineering+and+Management+Amravati',
     embedMapUrl:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.8906911677353!2d77.72892907584145!3d20.916666991617306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6a4c28c89f539%3A0x6a0f1b203c9ebf74!2sP.%20R.%20Pote%20Patil%20College%20of%20Engineering%20and%20Management!5e0!3m2!1sen!2sin!4v1710000000000',
+      'https://maps.google.com/maps?q=P.+R.+Pote+Patil+College+of+Engineering+and+Management,+Amravati&t=&z=16&ie=UTF8&iwloc=&output=embed',
   },
 
   contactEmail: 'dotnetconfamt@prpotepatilengg.ac.in',
-  hashtag: '#dotnetconfamt',
 
   socialLinks: {
     website: 'https://www.mscprpcem.tech',
+    whatsapp: 'https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67',
     linkedin: 'https://www.linkedin.com/company/mscprpcem',
     linktree: 'https://linktr.ee/mscprpcem',
     github: 'https://github.com/mscprpcem',
@@ -56,7 +56,7 @@ export const eventData = {
     title: '.NET Conf 2024 Amravati',
     tagline: 'Build · Learn · Connect · Grow',
     date: '20 April 2024',
-    venue: 'Swami Vivekananda Auditorium, PRPCEM Campus',
+    venue: 'PRPCEM Campus, Amravati',
     description:
       'Passionate developers, students, and Microsoft tech leaders gathered at PRPCEM Amravati for an unforgettable day of deep dives into .NET, modern C#, Cloud Native Azure, and AI.',
     stats: [],
@@ -65,7 +65,7 @@ export const eventData = {
       {
         url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg',
         title: 'Auditorium Keynote & Full House Audience',
-        caption: 'Passionate student developers, engineers, and tech enthusiasts gathered at Swami Vivekananda Auditorium.',
+        caption: 'Passionate student developers, engineers, and tech enthusiasts gathered at PRPCEM Campus.',
         tag: 'Auditorium Keynote',
       },
       {

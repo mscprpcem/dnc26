@@ -28,28 +28,6 @@ export const Footer = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-[#190649]/80">
             <a
-              href="https://www.mscprpcem.tech"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#512BD4] transition-colors"
-            >
-              MSC PRPCEM Website
-            </a>
-            <a
-              href="#keynote"
-              className="hover:text-[#512BD4] transition-colors"
-            >
-              Keynote Speaker
-            </a>
-            <a
-              href="https://prpcem.ac.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#512BD4] transition-colors"
-            >
-              PRPCEM Campus
-            </a>
-            <a
               href="https://dotnetfoundation.org/about/code-of-conduct"
               target="_blank"
               rel="noopener noreferrer"

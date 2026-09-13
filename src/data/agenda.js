@@ -21,7 +21,7 @@ export const agendaSchedule = [
     session: {
       title: 'Opening Ceremony & Welcome Address by MSC PRPCEM',
       speaker: 'MSC Leads & PRPCEM Dignitaries',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       category: 'Community',
       description: 'Official welcome remarks and opening addresses for Central India’s flagship developer conference.',
     },
@@ -35,7 +35,7 @@ export const agendaSchedule = [
       title: 'Keynote: Building Next-Gen Intelligent Applications with .NET & AI',
       speaker: 'Headline Keynote Speaker (TBA)',
       speakerRole: 'Announced Soon',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       category: 'Keynote',
       description: 'The inaugural technical roadmap exploring modern .NET 11, intelligent cloud copilot architectures, and production developer tools.',
     },
@@ -47,7 +47,7 @@ export const agendaSchedule = [
     slotLabel: 'Morning Deep Dive Track Sessions (TBA)',
     track1: {
       trackName: 'Track 1: Cloud & .NET Architecture',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       title: 'Modern Cloud-Native Development with ASP.NET Core & Azure',
       speaker: 'Speaker TBA',
       speakerRole: 'Announced Soon',
@@ -71,7 +71,7 @@ export const agendaSchedule = [
     slotLabel: 'Midday Technical Tracks (TBA)',
     track1: {
       trackName: 'Track 1: Cloud & .NET Architecture',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       title: 'Deep Dive: Modern C# 14 High Performance & Memory Profiling',
       speaker: 'Speaker TBA',
       speakerRole: 'Announced Soon',
@@ -108,7 +108,7 @@ export const agendaSchedule = [
     slotLabel: 'Afternoon Cloud & DevOps Tracks (TBA)',
     track1: {
       trackName: 'Track 1: Cloud & .NET Architecture',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       title: 'Serverless Event-Driven Architectures with Azure Functions & .NET',
       speaker: 'Speaker TBA',
       speakerRole: 'Announced Soon',
@@ -132,7 +132,7 @@ export const agendaSchedule = [
     slotLabel: 'Advanced Hands-on Tracks (TBA)',
     track1: {
       trackName: 'Track 1: Data & Enterprise .NET',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       title: 'Entity Framework Core: Advanced Interceptors & Performance Tuning',
       speaker: 'Speaker TBA',
       speakerRole: 'Announced Soon',
@@ -158,7 +158,7 @@ export const agendaSchedule = [
       title: 'Community Panel: Tech Careers, Open Source & Microsoft Certifications',
       speaker: 'Industry Panel (TBA)',
       speakerRole: 'Announced Soon',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       category: 'Community',
       description: 'Interactive discussion and audience Q&A on building software careers and contributing to open source from Tier-2 cities.',
     },
@@ -171,7 +171,7 @@ export const agendaSchedule = [
     session: {
       title: 'Closing Ceremony, Live Quiz Awards & Group Photo',
       speaker: 'Conference Organizers',
-      room: 'Swami Vivekananda Auditorium',
+      room: 'PRPCEM Main Hall',
       category: 'General',
       description: 'Live technical quiz awards distribution, prize giveaways, community acknowledgments, and official conference group photo.',
     },

@@ -6,7 +6,7 @@ export const keynoteSpeaker = {
   organization: 'Microsoft MVP Community',
   topic: 'Building Next-Gen Intelligent Applications with .NET & Modern C#',
   time: '10:15 AM – 11:15 AM IST',
-  hall: 'Swami Vivekananda Auditorium, PRPCEM Campus',
+  hall: 'PRPCEM Campus, Amravati',
   bio: 'Microsoft Most Valuable Professional (MVP) and globally recognized speaker with over two decades of enterprise expertise architecting scalable cloud applications, distributed microservices, and modern developer tooling across the Microsoft platform ecosystem.',
   avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
   isKeynote: true,

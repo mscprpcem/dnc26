@@ -19,7 +19,7 @@ export const sponsorsData = [
     name: 'PRPCEM Amravati',
     tier: 'Institution Host',
     role: 'Campus & Academic Partner',
-    websiteUrl: 'https://prpcem.ac.in',
+    websiteUrl: 'https://prpotepatilengg.ac.in/',
   },
   {
     id: 'sp-msc',
