@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-// Streamlined, high-priority navigation links
+// Streamlined, high-priority navigation links with clean path routing
 const primaryNavItems = [
-  { label: 'About', href: '#overview' },
-  { label: 'Highlights', href: '#highlights' },
-  { label: 'Keynote', href: '#keynote' },
-  { label: 'Schedule', href: '#schedule' },
-  { label: 'Venue', href: '#venue' },
-  { label: 'Interest', href: '#register-interest' },
+  { label: 'About', path: '/about', targetId: 'overview' },
+  { label: 'Highlights', path: '/highlights', targetId: 'highlights' },
+  { label: 'Keynote', path: '/keynote', targetId: 'keynote' },
+  { label: 'Schedule', path: '/schedule', targetId: 'schedule' },
+  { label: 'Venue', path: '/venue', targetId: 'venue' },
 ];
 
 export const Navbar = () => {
@@ -35,6 +34,44 @@ export const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Handle URL path changes on initial load and browser back/forward
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+      const matchedItem = primaryNavItems.find(
+        (item) => item.path === currentPath || (item.path === '/interest' && currentPath === '/register')
+      );
+      if (matchedItem) {
+        setTimeout(() => {
+          const el = document.getElementById(matchedItem.targetId);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    };
+
+    handleLocationChange();
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  const navigateToSection = (path, targetId) => {
+    if (path === '/' || !targetId) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState(null, '', '/');
+      return;
+    }
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', path);
+    }
+  };
+
+  const handleNavClick = (e, path, targetId) => {
+    e.preventDefault();
+    navigateToSection(path, targetId);
+  };
+
   return (
     <header
       id="top"
@@ -45,7 +82,8 @@ export const Navbar = () => {
           
           {/* Brand Logo & Clean Title */}
           <a
-            href="#"
+            href="/"
+            onClick={(e) => handleNavClick(e, '/', null)}
             className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#512BD4] rounded-lg"
             aria-label=".NET Conf 2026 Amravati"
           >
@@ -70,8 +108,9 @@ export const Navbar = () => {
           <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             {primaryNavItems.map((item) => (
               <a
-                key={item.href}
-                href={item.href}
+                key={item.path}
+                href={item.path}
+                onClick={(e) => handleNavClick(e, item.path, item.targetId)}
                 className="text-xs sm:text-sm font-semibold text-[#14053A]/80 hover:text-[#512BD4] hover:bg-[#EEEAFB]/80 px-3 py-1.5 rounded-md transition-colors"
               >
                 {item.label}
@@ -79,13 +118,16 @@ export const Navbar = () => {
             ))}
           </nav>
 
-          {/* Action CTA Button */}
+          {/* Upgraded Action CTA Button */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#register-interest"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold font-display text-white bg-gradient-to-r from-[#512BD4] to-[#7B2BF9] hover:from-[#4323B0] hover:to-[#6820D8] shadow-xs hover:shadow-md transition-all active:scale-95"
+              href="/interest"
+              onClick={(e) => handleNavClick(e, '/interest', 'register-interest')}
+              className="relative group inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold font-display text-white bg-gradient-to-r from-[#512BD4] via-[#7B2BF9] to-[#D600AA] hover:from-[#4323B0] hover:via-[#681FD8] hover:to-[#B50090] shadow-md shadow-[#512BD4]/25 hover:shadow-lg hover:shadow-[#512BD4]/40 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer overflow-hidden border border-white/20"
             >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span>Register Interest</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 shrink-0" />
             </a>
           </div>
 
@@ -103,17 +145,36 @@ export const Navbar = () => {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-[#DCD5F6] px-4 pt-3 pb-5 space-y-1 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
-          {primaryNavItems.map((item) => (
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-[#DCD5F6] px-4 pt-3 pb-5 space-y-3 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
+          <div className="space-y-1">
+            {primaryNavItems.map((item) => (
+              <a
+                key={item.path}
+                href={item.path}
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  handleNavClick(e, item.path, item.targetId);
+                }}
+                className="block px-3 py-2 rounded-lg text-sm font-semibold text-[#14053A] hover:bg-[#EEEAFB] hover:text-[#512BD4] transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <div className="pt-2 border-t border-[#DCD5F6]/60">
             <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-lg text-sm font-semibold text-[#14053A] hover:bg-[#EEEAFB] hover:text-[#512BD4] transition-colors"
+              href="/interest"
+              onClick={(e) => {
+                setIsMobileMenuOpen(false);
+                handleNavClick(e, '/interest', 'register-interest');
+              }}
+              className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-center text-white bg-gradient-to-r from-[#512BD4] via-[#7B2BF9] to-[#D600AA] flex items-center justify-center gap-2 shadow-md shadow-[#512BD4]/20 border border-white/20"
             >
-              {item.label}
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Register Interest</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </a>
-          ))}
+          </div>
         </div>
       )}
     </header>

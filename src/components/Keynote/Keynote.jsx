@@ -44,48 +44,44 @@ export const Keynote = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-stretch">
             
             {/* LEFT: Full-Dive Tall Spotlight Frame (Announced Soon) */}
-            <div className="lg:col-span-5 flex flex-col">
-              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#14053A] via-[#2A1065] to-[#14053A] border border-[#DCD5F6] shadow-md flex-1 min-h-[420px] sm:min-h-[480px] lg:min-h-[540px] flex flex-col items-center justify-center p-6 text-center group">
+            <div className="lg:col-span-5 flex flex-col min-w-0">
+              <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#14053A] via-[#2A1065] to-[#14053A] border border-[#DCD5F6] shadow-md flex-1 min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex flex-col items-center justify-start pt-14 pb-36 sm:pb-38 px-4 sm:px-6 text-center group">
                 
                 {/* Top Badges */}
                 <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
-                  <div className="px-3 py-1 rounded-full bg-[#512BD4] text-white text-[11px] font-extrabold tracking-wider uppercase shadow-md flex items-center gap-1.5">
+                  <div className="px-2.5 sm:px-3 py-1 rounded-full bg-[#512BD4] text-white text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase shadow-md flex items-center gap-1.5">
                     <Award className="w-3.5 h-3.5 text-amber-300" />
                     <span>Inaugural Keynote</span>
                   </div>
 
-                  <div className="px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/20">
+                  <div className="px-2 sm:px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/20">
                     Speaker TBA
                   </div>
                 </div>
 
-                {/* Center Keynote Ambassador Mascot (Natural, prominent sizing) */}
-                <div className="relative z-10 flex flex-col items-center my-auto py-6">
-                  <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center mb-4">
+                {/* Center Keynote Ambassador Mascot (Natural, prominent sizing with clean breathing room) */}
+                <div className="relative z-10 flex flex-col items-center my-auto py-2">
+                  <div className="w-32 h-32 xs:w-36 xs:h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center">
                     <img
                       src="/mascot/dotnetbot-outer-space.svg"
                       alt=".NET Bot Space Explorer — Keynote Ambassador"
                       className="w-full h-full object-contain drop-shadow-xl select-none"
                     />
                   </div>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-bold border border-white/20 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-[#D600AA] animate-pulse" />
-                    <span>Distinguished Keynote Speaker TBA</span>
-                  </div>
                 </div>
 
                 {/* Bottom Overlay Glass Banner */}
-                <div className="absolute bottom-3.5 left-3.5 right-3.5 p-4 rounded-xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-lg text-[#14053A]">
-                  <div className="flex items-center justify-between mb-1">
-                    <h4 className="text-base sm:text-lg font-black font-display tracking-tight text-[#14053A]">
+                <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-lg text-[#14053A]">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <h4 className="text-sm sm:text-base font-black font-display tracking-tight text-[#14053A] truncate">
                       Headline Speaker TBA
                     </h4>
-                    <span className="text-[10px] font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded shrink-0">
                       Announced Soon
                     </span>
                   </div>
 
-                  <p className="text-xs font-semibold text-[#512BD4] mb-2">
+                  <p className="text-xs font-semibold text-[#512BD4] mb-2 text-left">
                     Industry Leader / Microsoft MVP
                   </p>
 
@@ -96,7 +92,7 @@ export const Keynote = () => {
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5 text-[#D600AA]" />
-                      Main Auditorium
+                      PRPCEM Campus
                     </span>
                   </div>
                 </div>
