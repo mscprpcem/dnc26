@@ -9,6 +9,7 @@ const primaryNavItems = [
   { label: 'Keynote', path: '/keynote', targetId: 'keynote' },
   { label: 'Schedule', path: '/schedule', targetId: 'schedule' },
   { label: 'Venue', path: '/venue', targetId: 'venue' },
+  { label: 'Badge', path: '/badge', targetId: 'attendee-badge' },
 ];
 
 export const Navbar = () => {

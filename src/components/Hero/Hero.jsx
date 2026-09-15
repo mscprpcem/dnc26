@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Calendar, MapPin, Sparkles } from 'lucide-react';
+import { ArrowRight, Calendar, MapPin, Sparkles, Award } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
 export const Hero = () => {
@@ -22,9 +22,9 @@ export const Hero = () => {
               </span>
             </h1>
 
-            {/* Description: Annual Dev Event for Amravati focusing on the Microsoft Ecosystem */}
+            {/* Description: Flagship Dev Event for Amravati focusing on the Microsoft Ecosystem */}
             <p className="hero-description text-[#190649]/85 font-medium leading-relaxed max-w-xl mb-4 text-sm sm:text-base">
-              Central India's premier annual developer event for Amravati, celebrating the broader Microsoft ecosystem — from modern .NET and Azure cloud to Generative AI and developer tooling.
+              Central India's premier developer event for Amravati, celebrating the broader Microsoft ecosystem — from modern .NET and Azure cloud to Generative AI and developer tooling.
             </p>
 
             {/* College Name & Location */}
@@ -50,17 +50,25 @@ export const Hero = () => {
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 shrink-0" />
               </a>
 
-              <div className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5 font-bold rounded-lg bg-gradient-to-r from-[#EEEAFB] to-[#FCE7F8] text-[#512BD4] border-2 border-[#D8CEF7] shadow-xs select-none">
-                <Sparkles className="w-4 h-4 text-[#512BD4]" />
-                <span>Coming Soon</span>
-              </div>
+              <a
+                href="/badge"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('attendee-badge')?.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '/badge');
+                }}
+                className="inline-flex items-center justify-center gap-2 text-xs sm:text-sm py-2.5 sm:py-3 px-4 sm:px-5 font-bold rounded-xl bg-white/90 hover:bg-[#EEEAFB] text-[#512BD4] border-2 border-[#D8CEF7] shadow-xs transition-all hover:-translate-y-0.5 cursor-pointer"
+              >
+                <Award className="w-4 h-4 text-[#512BD4]" />
+                <span>Get Attendee Badge</span>
+              </a>
             </div>
 
             {/* Announcement Notice Card */}
             <div className="w-full max-w-md bg-gradient-to-r from-white via-[#FCFAFF] to-[#F7F2FE] backdrop-blur-md rounded-xl sm:rounded-2xl border-2 border-[#D8CEF7] p-3.5 sm:p-4 shadow-sm">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#512BD4] mb-1">
                 <Calendar className="w-4 h-4 text-[#512BD4] shrink-0" />
-                <span>Annual 2026 Edition · Coming Soon</span>
+                <span>.NET Conf 2026 · Coming Soon</span>
               </div>
               <p className="text-xs text-[#190649]/80 leading-relaxed font-medium">
                 Official dates, session tracks, and speaker lineups will be announced soon. Register your interest below for priority delegate updates!

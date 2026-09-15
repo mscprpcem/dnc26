@@ -487,4 +487,250 @@ img, svg, video {
   }
 }
 
+/* =========================================================================
+   Attendee Badge Generator - Custom Media Queries & Responsive Styling
+   ========================================================================= */
+.badge-canvas-wrapper {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-canvas-wrapper:hover {
+  box-shadow: 0 20px 40px -15px rgba(81, 43, 212, 0.18);
+}
+
+/* Custom styling for range input sliders in Badge Studio */
+input[type='range'] {
+  height: 6px;
+  border-radius: 9999px;
+  background: #E2DCF7;
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #512BD4;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #4122AA;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #512BD4;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================================================
+   Attendee Badge Generator - Comprehensive Multi-Breakpoint Media Queries
+   ========================================================================= */
+
+.badge-canvas-wrapper {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-canvas-wrapper:hover {
+  box-shadow: 0 20px 45px -12px rgba(81, 43, 212, 0.18);
+}
+
+/* Custom styling for range input sliders in Badge Studio */
+input[type='range'] {
+  height: 6px;
+  border-radius: 9999px;
+  background: #E2DCF7;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #512BD4;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 5px rgba(81, 43, 212, 0.35);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #4122AA;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #512BD4;
+  cursor: pointer;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 5px rgba(81, 43, 212, 0.35);
+}
+
+/* 1. iPhone SE & Small Mobile Phones (<= 390px) */
+@media (max-width: 390px) {
+  #attendee-badge {
+    padding-top: 1.75rem !important;
+    padding-bottom: 2.25rem !important;
+    overflow-x: hidden !important;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0.625rem !important;
+    border-radius: 1rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 310px !important;
+    width: 100% !important;
+    object-fit: contain !important;
+  }
+
+  /* Compact padding for buttons on iPhone SE */
+  .badge-canvas-wrapper button {
+    font-size: 11px !important;
+    padding-left: 0.35rem !important;
+    padding-right: 0.35rem !important;
+  }
+
+  input[type='range'] {
+    height: 7px;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  input[type='range']::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* 2. Standard Mobile Phones (391px to 639px) */
+@media (min-width: 391px) and (max-width: 639px) {
+  #attendee-badge {
+    padding-top: 2.25rem;
+    padding-bottom: 3.25rem;
+    overflow-x: hidden;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 100% !important;
+    padding: 0.875rem !important;
+    border-radius: 1.25rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 380px !important;
+  }
+
+  input[type='range'] {
+    height: 8px;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+  input[type='range']::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* 3. Tablets & Small Laptops (640px to 1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  #attendee-badge {
+    padding-top: 3.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 480px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.25rem !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 440px !important;
+  }
+}
+
+/* 4. Desktop Displays (1024px to 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  #attendee-badge {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 460px;
+  }
+}
+
+/* 5. Ultra-Wide Displays (1440px and up) */
+@media (min-width: 1440px) {
+  #attendee-badge {
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 490px;
+  }
+}
+
+/* 6. Landscape Viewport on Mobile Devices (Short screen heights) */
+@media (max-height: 640px) and (orientation: landscape) {
+  .badge-canvas-wrapper {
+    position: static !important;
+    max-width: 360px !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 280px !important;
+  }
+}
+
+/* 7. Print Optimization */
+@media print {
+  #attendee-badge {
+    padding: 0 !important;
+  }
+  .badge-canvas-wrapper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .badge-canvas-wrapper button,
+  .badge-canvas-wrapper .grid,
+  .badge-canvas-wrapper > div:last-child,
+  #attendee-badge .lg\:col-span-6:last-child {
+    display: none !important;
+  }
+}
+
+
+
 

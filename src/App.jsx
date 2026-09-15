@@ -6,6 +6,7 @@ import { PastHighlights } from './components/PastHighlights/PastHighlights.jsx';
 import { Keynote } from './components/Keynote/Keynote.jsx';
 import { Agenda } from './components/Agenda/Agenda.jsx';
 import { Venue } from './components/Venue/Venue.jsx';
+import { AttendeeBadge } from './components/AttendeeBadge/AttendeeBadge.jsx';
 import { InterestForm } from './components/InterestForm/InterestForm.jsx';
 import { Sponsors } from './components/Sponsors/Sponsors.jsx';
 import { StayConnected } from './components/StayConnected/StayConnected.jsx';
@@ -69,7 +70,10 @@ export const App = () => {
         {/* Section 6: Campus Venue & Google Maps (PRPCEM Campus, Amravati) */}
         <Venue />
 
-        {/* Section 7: Register Your Interest (Google Sheets via Code.gs) */}
+        {/* Section 7: I am Attending Badge Generator & Social Sharing */}
+        <AttendeeBadge />
+
+        {/* Section 8: Register Your Interest (Google Sheets via Code.gs) */}
         <InterestForm />
 
         {/* Section 8: Official Partners & Sponsors with Vector Logos */}
