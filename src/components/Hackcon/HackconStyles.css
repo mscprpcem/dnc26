@@ -1,0 +1,103 @@
+/* MLH Hackcon Camp Aesthetics & Neo-Brutalist Design Tokens */
+
+/* Grass meadow pattern with pixel flower accents */
+.hackcon-grass-bg {
+  background-color: #4d8b63;
+  background-image: 
+    radial-gradient(circle at 15% 25%, #5da276 2px, transparent 2px),
+    radial-gradient(circle at 75% 15%, #5da276 2px, transparent 2px),
+    radial-gradient(circle at 45% 65%, #5da276 2px, transparent 2px),
+    radial-gradient(circle at 85% 80%, #5da276 2px, transparent 2px),
+    radial-gradient(circle at 25% 85%, #5da276 2px, transparent 2px),
+    radial-gradient(circle at 60% 40%, #ffffff 1.5px, transparent 1.5px),
+    radial-gradient(circle at 30% 50%, #ffdb43 1.5px, transparent 1.5px),
+    radial-gradient(circle at 90% 45%, #ff9e79 1.5px, transparent 1.5px);
+  background-size: 80px 80px;
+}
+
+/* Neo-brutalist hard offset shadows */
+.shadow-brutal-sm {
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+.shadow-brutal {
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.shadow-brutal-lg {
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.shadow-brutal-xl {
+  box-shadow: 8px 8px 0px 0px #000000;
+}
+
+/* Interactive button press effect */
+.btn-brutal {
+  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-brutal:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.btn-brutal:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px #000000;
+}
+
+/* Campfire flame flicker animation */
+@keyframes flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.95;
+  }
+  25% {
+    transform: scale(1.08, 0.92) rotate(2deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.95, 1.05) rotate(-2deg);
+    opacity: 0.88;
+  }
+  75% {
+    transform: scale(1.04, 0.97) rotate(1deg);
+    opacity: 0.96;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 1.8s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+/* Floating bounce for retro stickers */
+@keyframes retroFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-6px) rotate(var(--rot, 0deg));
+  }
+}
+
+.animate-retro-float {
+  animation: retroFloat 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar for retro feel */
+.hackcon-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.hackcon-scrollbar::-webkit-scrollbar-track {
+  background: #3e7351;
+}
+
+.hackcon-scrollbar::-webkit-scrollbar-thumb {
+  background: #ffdb43;
+  border: 2px solid #000000;
+  border-radius: 4px;
+}
