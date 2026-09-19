@@ -321,26 +321,12 @@ export const InterestForm = () => {
 
                 {/* College / Organization */}
                 <div className="space-y-1.5 text-left min-w-0">
-                  <div className="flex flex-wrap items-center justify-between gap-1.5">
-                    <label htmlFor="college" className="text-xs sm:text-sm font-bold text-[#14053A] flex items-center gap-2">
-                      <span className="w-5 h-5 rounded-md bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
-                        <Building2 className="w-3 h-3" />
-                      </span>
-                      <span>College / Institution / Organization *</span>
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setFormData({
-                          ...formData,
-                          college: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
-                        })
-                      }
-                      className="text-xs font-bold text-[#512BD4] hover:text-[#D600AA] bg-[#EEEAFB] hover:bg-[#E2DAFB] px-2.5 py-0.5 rounded-md transition-colors cursor-pointer"
-                    >
-                      Set PRPCEM
-                    </button>
-                  </div>
+                  <label htmlFor="college" className="text-xs sm:text-sm font-bold text-[#14053A] flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
+                      <Building2 className="w-3 h-3" />
+                    </span>
+                    <span>College / Institution / Organization *</span>
+                  </label>
                   <input
                     id="college"
                     type="text"

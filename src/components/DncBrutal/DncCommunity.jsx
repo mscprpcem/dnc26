@@ -1,97 +1,168 @@
-import React from 'react';
-import { ArrowUpRight, Globe, Sparkles } from 'lucide-react';
-import { LinkedInIcon, GitHubIcon, WhatsAppIcon } from '../ui/SocialIcons.jsx';
+import React, { useState } from 'react';
+import { Mail, ArrowUpRight, Copy, Check } from 'lucide-react';
+import {
+  LinkedInIcon,
+  LinktreeIcon,
+  GitHubIcon,
+  YouTubeIcon,
+  InstagramIcon,
+  WhatsAppIcon,
+  XIcon,
+} from '../ui/SocialIcons.jsx';
 import { eventData } from '../../data/event.js';
 import DncSignpost from './DncSignpost.jsx';
+import DncSectionFlanks from './DncSectionFlanks.jsx';
 
 export const DncCommunity = () => {
+  const [copied, setCopied] = useState(false);
+
+  const channels = [
+    {
+      name: 'WhatsApp',
+      href: eventData.socialLinks.whatsapp,
+      icon: WhatsAppIcon,
+      iconBg: 'bg-[#25D366] text-black',
+    },
+    {
+      name: 'LinkedIn',
+      href: eventData.socialLinks.linkedin,
+      icon: LinkedInIcon,
+      iconBg: 'bg-[#0A66C2] text-white',
+    },
+    {
+      name: 'Instagram',
+      href: eventData.socialLinks.instagram,
+      icon: InstagramIcon,
+      iconBg: 'bg-[#E1306C] text-white',
+    },
+    {
+      name: 'YouTube',
+      href: eventData.socialLinks.youtube,
+      icon: YouTubeIcon,
+      iconBg: 'bg-[#FF0000] text-white',
+    },
+    {
+      name: 'GitHub',
+      href: eventData.socialLinks.github,
+      icon: GitHubIcon,
+      iconBg: 'bg-black text-white',
+    },
+    {
+      name: 'Linktree',
+      href: eventData.socialLinks.linktree,
+      icon: LinktreeIcon,
+      iconBg: 'bg-[#20D048] text-black',
+    },
+    {
+      name: 'X (Twitter)',
+      href: 'https://x.com/mscprpcem',
+      icon: XIcon,
+      iconBg: 'bg-black text-white',
+    },
+    {
+      name: 'Email',
+      href: `mailto:${eventData.contactEmail}`,
+      icon: Mail,
+      iconBg: 'bg-[#512BD4] text-white',
+      isEmail: true,
+    },
+  ];
+
+  const handleCopyHashtags = () => {
+    navigator.clipboard.writeText('#DotNetConfAmravati #DNC26 #MSCPRPCEM');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <section id="dnc-community" className="py-6 sm:py-10 px-3 sm:px-6 max-w-6xl mx-auto">
-      {/* Signpost */}
+    <section id="stay-connected" className="py-6 sm:py-8 px-3 sm:px-6 max-w-6xl mx-auto scroll-mt-20 relative">
+      <DncSectionFlanks
+        leftIndex="10"
+        leftTag="CONNECT"
+        leftBadgeText="💬 1,500+ DEVS"
+        leftBadgeColor="bg-[#D600AA] text-white"
+        leftSub="ACTIVE HUBS"
+        rightIndex="#DNC26"
+        rightTag="HASHTAG"
+        rightBadgeText="MSC PRPCEM"
+        rightBadgeColor="bg-[#512BD4] text-white"
+        rightSub="OFFICIAL DESK"
+      />
       <DncSignpost 
-        title="JOIN THE COMMUNITY" 
+        title="COMMUNITY CHANNELS" 
         badge="MSC PRPCEM"
         theme="purple"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-        {/* WhatsApp Card */}
-        <div className="bg-[#E8F5E9] border-[2.5px] sm:border-[3px] border-black rounded-3xl p-5 sm:p-8 shadow-[4px_4px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
-          <div>
-            <div className="inline-flex items-center gap-1.5 bg-[#25D366] text-black font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full uppercase mb-3 sm:mb-4 shadow-[1.5px_1.5px_0px_0px_#000]">
-              <WhatsAppIcon className="w-3.5 h-3.5" />
-              <span>OFFICIAL WHATSAPP GROUP</span>
+      <div className="bg-white border-[2.5px] border-black rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0px_0px_#000]">
+        
+        {/* Compact Header */}
+        <div className="flex items-center justify-between gap-3 mb-4 pb-3 border-b border-black/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#FAF8FF] border-[1.5px] border-black p-1 flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_#000] shrink-0">
+              <img
+                src="/mascot/dotnet-bot-surfing.png"
+                alt=".NET Bot"
+                className="w-full h-full object-contain select-none"
+              />
             </div>
-
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-black font-sans uppercase tracking-tight mb-2">
-              Connect on WhatsApp
-            </h3>
-
-            <p className="text-stone-800 font-sans text-xs sm:text-sm md:text-base leading-relaxed mb-5 sm:mb-6">
-              Join 1,000+ student developers, alumni, and tech enthusiasts across Amravati and Vidarbha. Get instant announcements, workshop reminders, and job opportunities.
-            </p>
+            <div>
+              <h3 className="text-lg sm:text-xl font-black text-black font-sans uppercase leading-none">
+                Follow & Connect
+              </h3>
+              <span className="text-xs font-mono font-bold text-[#512BD4]">
+                @mscprpcem
+              </span>
+            </div>
           </div>
 
-          <a
-            href={eventData.socialLinks.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono font-bold text-xs sm:text-sm uppercase py-3 sm:py-3.5 px-5 rounded-2xl border-[2px] sm:border-[2.5px] border-black shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2"
+          <button
+            onClick={handleCopyHashtags}
+            className="bg-[#FAF8FF] hover:bg-white text-black font-mono font-bold text-[11px] px-3 py-1.5 rounded-lg border border-black shadow-[1.5px_1.5px_0px_0px_#000] hover:translate-x-[0.5px] hover:translate-y-[0.5px] transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
           >
-            <span>JOIN WHATSAPP COMMUNITY</span>
-            <ArrowUpRight className="w-4 h-4 stroke-[3]" />
-          </a>
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[2.5]" />
+                <span className="text-emerald-700 font-bold">COPIED</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5 text-[#512BD4]" />
+                <span>#DNC26</span>
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Chapter Channels Card */}
-        <div className="bg-[#EEEAFB] border-[2.5px] sm:border-[3px] border-black rounded-3xl p-5 sm:p-8 shadow-[4px_4px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] flex flex-col justify-between">
-          <div>
-            <div className="inline-flex items-center gap-1.5 bg-[#512BD4] text-white font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full uppercase mb-3 sm:mb-4 shadow-[1.5px_1.5px_0px_0px_#000]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>CHAPTER SOCIALS</span>
-            </div>
+        {/* 8 Clean Branded Buttons Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+          {channels.map((ch, idx) => {
+            const IconComp = ch.icon;
+            return (
+              <a
+                key={idx}
+                href={ch.href}
+                target={ch.isEmail ? '_self' : '_blank'}
+                rel="noopener noreferrer"
+                className="bg-[#FAF8FF] hover:bg-white border-[2px] border-black rounded-xl p-2.5 shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <div
+                    className={`w-7 h-7 rounded-lg border border-black flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000] ${ch.iconBg}`}
+                  >
+                    <IconComp className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="text-xs font-bold font-sans text-black group-hover:text-[#512BD4] transition-colors truncate">
+                    {ch.name}
+                  </span>
+                </div>
 
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-black font-sans uppercase tracking-tight mb-2">
-              Follow MSC PRPCEM
-            </h3>
-
-            <p className="text-stone-800 font-sans text-xs sm:text-sm md:text-base leading-relaxed mb-5 sm:mb-6">
-              Stay in the loop with open source codebases, technical write-ups, speaker spotlight releases, and event photo drops across all our active platforms.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
-            <a
-              href={eventData.socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-stone-50 text-black font-mono font-bold text-xs py-2.5 sm:py-3 px-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] flex flex-col items-center justify-center gap-1 text-center"
-            >
-              <LinkedInIcon className="w-4 h-4 text-[#0077B5]" />
-              <span className="text-[11px] sm:text-xs">LinkedIn</span>
-            </a>
-
-            <a
-              href={eventData.socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-stone-50 text-black font-mono font-bold text-xs py-2.5 sm:py-3 px-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] flex flex-col items-center justify-center gap-1 text-center"
-            >
-              <GitHubIcon className="w-4 h-4 text-black" />
-              <span className="text-[11px] sm:text-xs">GitHub</span>
-            </a>
-
-            <a
-              href={eventData.socialLinks.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-stone-50 text-black font-mono font-bold text-xs py-2.5 sm:py-3 px-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] flex flex-col items-center justify-center gap-1 text-center"
-            >
-              <Globe className="w-4 h-4 text-[#512BD4]" />
-              <span className="text-[11px] sm:text-xs">Website</span>
-            </a>
-          </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-black shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            );
+          })}
         </div>
+
       </div>
     </section>
   );

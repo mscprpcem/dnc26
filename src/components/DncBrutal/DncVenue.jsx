@@ -1,192 +1,344 @@
 import React, { useState } from 'react';
-import { MapPin, Navigation, ExternalLink } from 'lucide-react';
+import { 
+  MapPin, 
+  Navigation, 
+  Compass, 
+  Building, 
+  ExternalLink, 
+  Copy, 
+  Check, 
+  Car,
+  Maximize2
+} from 'lucide-react';
 import { eventData } from '../../data/event.js';
 import DncSignpost from './DncSignpost.jsx';
+import DncSectionFlanks from './DncSectionFlanks.jsx';
 
 export const DncVenue = () => {
-  const [activeTab, setActiveTab] = useState('auditorium');
+  const [copiedCoords, setCopiedCoords] = useState(false);
+  const [selectedPoiIndex, setSelectedPoiIndex] = useState(0);
 
-  const venues = {
-    auditorium: {
-      title: 'PRPCEM Main Auditorium',
-      desc: 'A modern, fully air-conditioned auditorium with 600+ tiered seating, stage acoustics, twin laser projectors, and live-streaming infrastructure.',
-      icon: '🏛️',
-      tag: 'KEYNOTE & MAIN STAGE',
-      detail: 'Capacity: 600+ Attendees'
+  const coordinatesText = '20.9167° N, 77.7289° E';
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
+
+  const campusPOIs = [
+    {
+      id: 'auditorium',
+      name: 'Swami Vivekananda Hall',
+      label: 'Main Stage',
+      badge: 'HALL A',
+      note: '500+ seat AC Auditorium with dual LED presentation walls & media stage.'
     },
-    labs: {
-      title: 'Advanced Computing & AI Labs',
-      desc: 'High-speed gigabit fiber workstations equipped with modern dev runtimes, VS Code, and cloud access for interactive workshops and live coding tutorials.',
-      icon: '💻',
-      tag: 'HANDS-ON WORKSHOPS',
-      detail: 'High-Speed Cloud Workstations'
+    {
+      id: 'labs',
+      name: 'CSE & AI Workstation Labs',
+      label: 'Tech Labs',
+      badge: 'DEV LABS',
+      note: 'High-speed gigabit Wi-Fi, dual display workstations & power hubs.'
     },
-    courtyard: {
-      title: 'Open-Air Networking Courtyard',
-      desc: 'A lush green campus courtyard where attendees connect with Microsoft MVPs, speaker mentors, community leaders, and sponsor booths over refreshments.',
-      icon: '☕',
-      tag: 'COMMUNITY & TEA BREAKS',
-      detail: 'Free Refreshments & Swag Desks'
+    {
+      id: 'gate',
+      name: 'Main Campus Gate 1',
+      label: 'Kathora Rd Entry',
+      badge: 'GATE 1',
+      note: 'Visitor parking, security desk, and delegate badge verification point.'
     },
-    travel: {
-      title: 'Travel & Campus Connectivity',
-      desc: 'Conveniently situated on Kathora Road, Amravati. Direct access from Badnera Railway Junction (12 km) and Dr. Babasaheb Ambedkar Nagpur Airport (150 km).',
-      icon: '🚆',
-      tag: 'TRANSPORT & DIRECTIONS',
-      detail: 'Free On-Campus Delegate Parking'
+    {
+      id: 'networking',
+      name: 'Open Networking Courtyard',
+      label: 'Social Yard',
+      badge: 'CANTEEN',
+      note: 'Lunch pavilion, sponsor swag kiosks, coffee bar & community photo booths.'
+    }
+  ];
+
+  const handleCopyCoords = async () => {
+    try {
+      await navigator.clipboard.writeText(coordinatesText);
+      setCopiedCoords(true);
+      setTimeout(() => setCopiedCoords(false), 2200);
+    } catch {
+      setCopiedCoords(true);
+      setTimeout(() => setCopiedCoords(false), 2200);
     }
   };
 
-  const current = venues[activeTab];
+  const activePoi = campusPOIs[selectedPoiIndex];
 
   return (
-    <section id="dnc-venue" className="py-6 sm:py-10 px-3 sm:px-6 max-w-6xl mx-auto">
+    <section id="venue" className="py-6 sm:py-10 md:py-14 px-3 sm:px-6 max-w-6xl mx-auto scroll-mt-20 relative">
+      <DncSectionFlanks
+        leftIndex="06"
+        leftTag="VENUE"
+        leftBadgeText="📍 PRPCEM CAMPUS"
+        leftBadgeColor="bg-[#E8F5E9] text-[#1B5E20]"
+        leftSub="POTE ESTATE, AMRAVATI"
+        rightIndex="20.93°"
+        rightTag="77.75°"
+        rightBadgeText="AUDITORIUM & LABS"
+        rightBadgeColor="bg-[#FFF9C4] text-[#F57F17]"
+        rightSub="MAIN CAMPUS"
+      />
       {/* Signpost */}
       <DncSignpost 
-        title="WHERE IS .NET CONF?" 
+        title="CAMPUS VENUE & LOCATION" 
         badge="PRPCEM AMRAVATI"
         theme="cyan"
       />
 
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-5 sm:p-8 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
-        {/* Venue Header */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 sm:pb-8 border-b-[2px] sm:border-b-[2.5px] border-black/10">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5 sm:mb-3">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>AMRAVATI, MAHARASHTRA</span>
-            </div>
-
-            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-[#14053A] font-sans uppercase tracking-tight">
-              P. R. Pote Patil College of Engg. & Management
-            </h3>
-
-            <p className="text-stone-700 font-sans text-xs sm:text-sm md:text-base mt-1.5 max-w-2xl">
-              {eventData.location.address}
-            </p>
+      <div className="venue-main-card bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-9">
+          <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5 sm:mb-3">
+            <MapPin className="w-3.5 h-3.5 text-[#512BD4]" />
+            <span>Campus Venue</span>
           </div>
 
-          {/* Action Links */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-            <a
-              href={eventData.location.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#00BDD6] hover:bg-[#00A3B8] text-black font-mono font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border-[2px] border-black shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5"
-            >
-              <Navigation className="w-4 h-4" />
-              <span>DIRECTIONS ↗</span>
-            </a>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2 sm:mb-3">
+            PRPCEM Campus, Amravati
+          </h3>
 
-            <a
-              href="https://prpotepatilengg.ac.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white hover:bg-stone-100 text-black font-mono font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl border-[2px] border-black shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5"
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>COLLEGE SITE ↗</span>
-            </a>
-          </div>
+          <p className="text-stone-700 font-sans text-xs sm:text-sm md:text-base leading-relaxed">
+            Hosted at the premier technological campus of P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati, Maharashtra.
+          </p>
         </div>
 
-        {/* Interactive Campus Facilities Tabs */}
-        <div className="mt-6 sm:mt-8">
-          <div className="flex items-center justify-between mb-3.5">
-            <span className="text-[11px] sm:text-xs font-mono font-black text-stone-500 uppercase tracking-wider">
-              CAMPUS HIGHLIGHTS & SPACES
-            </span>
-            <span className="text-[10px] sm:text-xs font-mono font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded border border-[#512BD4]/40">
-              PRPCEM Kathora Road
-            </span>
-          </div>
-
-          {/* Tab buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 mb-5 sm:mb-6">
-            <button
-              onClick={() => setActiveTab('auditorium')}
-              className={`p-2.5 sm:p-3 rounded-2xl border-[2px] border-black font-sans font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-                activeTab === 'auditorium'
-                  ? 'bg-[#512BD4] text-white shadow-[3px_3px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black shadow-[1px_1px_0px_0px_#000]'
-              }`}
-            >
-              <span>🏛️</span>
-              <span>Auditorium</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('labs')}
-              className={`p-2.5 sm:p-3 rounded-2xl border-[2px] border-black font-sans font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-                activeTab === 'labs'
-                  ? 'bg-[#00BDD6] text-black shadow-[3px_3px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black shadow-[1px_1px_0px_0px_#000]'
-              }`}
-            >
-              <span>💻</span>
-              <span>Tech Labs</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('courtyard')}
-              className={`p-2.5 sm:p-3 rounded-2xl border-[2px] border-black font-sans font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-                activeTab === 'courtyard'
-                  ? 'bg-[#D600AA] text-white shadow-[3px_3px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black shadow-[1px_1px_0px_0px_#000]'
-              }`}
-            >
-              <span>☕</span>
-              <span>Courtyard</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('travel')}
-              className={`p-2.5 sm:p-3 rounded-2xl border-[2px] border-black font-sans font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
-                activeTab === 'travel'
-                  ? 'bg-[#FFD13B] text-black shadow-[3px_3px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black shadow-[1px_1px_0px_0px_#000]'
-              }`}
-            >
-              <span>🚆</span>
-              <span>Travel & Parking</span>
-            </button>
-          </div>
-
-          {/* Active Tab Showcase Box */}
-          <div className="bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 md:p-8 shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6">
-            <div className="flex items-start gap-3 sm:gap-4">
-              <div className="text-3xl sm:text-4xl p-2.5 sm:p-3 bg-white border-[2px] border-black rounded-2xl shadow-[2px_2px_0px_0px_#000] shrink-0">
-                {current.icon}
-              </div>
-              <div>
-                <div className="inline-block bg-[#14053A] text-white text-[9px] sm:text-[10px] font-mono font-bold px-2 py-0.5 rounded mb-1 uppercase">
-                  {current.tag}
+        {/* 2-Column Responsive Layout */}
+        <div className="venue-grid-layout grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
+          
+          {/* Left Column: Campus Details Card */}
+          <div className="venue-left-col lg:col-span-5 bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 shadow-[3px_3px_0px_0px_#000] flex flex-col justify-between text-left">
+            <div className="space-y-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#512BD4]">
+                    Official Host Campus
+                  </span>
+                  <h4 className="text-base sm:text-lg font-black font-sans text-[#14053A] mt-0.5 leading-snug">
+                    {eventData.location.venueName}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-stone-700 font-sans mt-1 leading-relaxed">
+                    {eventData.location.address}
+                  </p>
                 </div>
-                <h4 className="text-lg sm:text-xl md:text-2xl font-black font-sans text-[#14053A] uppercase">
-                  {current.title}
-                </h4>
-                <p className="text-stone-700 text-xs sm:text-sm md:text-base mt-1 max-w-xl leading-relaxed">
-                  {current.desc}
+                <div className="w-14 h-14 sm:w-20 sm:h-20 shrink-0 select-none">
+                  <img
+                    src="/dotnet-bot.svg"
+                    alt=".NET Bot Campus Guide"
+                    className="w-full h-full object-contain filter drop-shadow-sm select-none"
+                  />
+                </div>
+              </div>
+
+              {/* Campus Details List */}
+              <div className="space-y-2.5 pt-3 border-t-[1.5px] border-black/15">
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-800">
+                  <Building className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-black block font-sans text-xs sm:text-sm">Host Institution</span>
+                    <span className="text-[11px] sm:text-xs text-stone-600 font-sans">{eventData.organizer.institution}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-800">
+                  <Compass className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-black block font-sans text-xs sm:text-sm">Transit & Proximity</span>
+                    <span className="text-[11px] sm:text-xs text-stone-600 font-sans">15 mins from Amravati Station · 30 mins from Badnera Jn (BD)</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5 text-xs sm:text-sm text-stone-800">
+                  <Navigation className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-black block font-sans text-xs sm:text-sm">Auditorium & Facilities</span>
+                    <span className="text-[11px] sm:text-xs text-stone-600 font-sans">Central AC amphitheater, gigabit Wi-Fi, lab workstations, & live stream stage.</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Active POI Highlight Note */}
+              <div className="bg-[#EEEAFB] border-[1.5px] border-[#512BD4]/40 rounded-xl p-3 text-left">
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="text-[10px] font-mono font-black text-[#512BD4] tracking-wide uppercase">
+                    📍 {activePoi.badge} · {activePoi.name}
+                  </span>
+                  <span className="text-[9px] font-mono font-bold bg-[#512BD4] text-white px-1.5 py-0.5 rounded">
+                    CAMPUS POI
+                  </span>
+                </div>
+                <p className="text-[11px] sm:text-xs font-sans text-stone-800 leading-snug">
+                  {activePoi.note}
                 </p>
               </div>
             </div>
 
-            <div className="bg-white border-[2px] border-black rounded-xl px-3 py-2 text-[11px] sm:text-xs font-mono font-bold text-[#512BD4] shadow-[2px_2px_0px_0px_#000] whitespace-nowrap self-stretch md:self-auto text-center">
-              📍 {current.detail}
+            {/* Left Card Action Bar */}
+            <div className="mt-4 pt-3.5 border-t-[1.5px] border-black/15 space-y-2">
+              <div className="venue-action-group flex flex-wrap items-center gap-2">
+                <a
+                  href={directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-[#00BDD6] hover:bg-[#00A3B8] text-black font-mono font-bold text-xs px-3.5 py-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5"
+                >
+                  <Car className="w-3.5 h-3.5" />
+                  <span>DIRECTIONS</span>
+                  <ExternalLink className="w-3 h-3 ml-0.5 opacity-70" />
+                </a>
+
+                <a
+                  href={eventData.location.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white hover:bg-stone-100 text-black font-mono font-bold text-xs px-3.5 py-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5"
+                >
+                  <span>MAPS ↗</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyCoords}
+                  className="bg-[#FFDB43] hover:bg-[#F2CE38] text-black font-mono font-bold text-xs px-3 py-2 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-1.5"
+                  title="Copy GPS coordinates"
+                >
+                  {copiedCoords ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-800" />
+                      <span>COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>COPY GPS</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] font-mono text-stone-600 pt-1">
+                <span>{coordinatesText}</span>
+                <a
+                  href="https://prpotepatilengg.ac.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#512BD4] hover:underline font-bold"
+                >
+                  prpotepatilengg.ac.in ↗
+                </a>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Embedded Map Container */}
-        <div className="mt-6 sm:mt-8 rounded-2xl overflow-hidden border-[2px] sm:border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] h-56 sm:h-72 md:h-80 w-full relative">
-          <iframe
-            title="PRPCEM Campus Location Map"
-            src={eventData.location.embedMapUrl}
-            className="w-full h-full border-0"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          {/* Right Column: Pure Neo-Brutalist Map Card */}
+          <div className="venue-right-col lg:col-span-7 brutal-map-card">
+            
+            {/* Neo-Brutalist Map Top Header */}
+            <div className="brutal-map-header">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg bg-white border-[2px] border-black flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_#000] shrink-0">
+                  <MapPin className="w-4 h-4 text-[#512BD4]" />
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] font-black uppercase tracking-wider text-black/70 block leading-none">
+                    LOCATION NAVIGATOR
+                  </span>
+                  <h4 className="font-sans font-black text-xs sm:text-sm text-black uppercase tracking-tight mt-0.5 leading-none">
+                    PRPCEM Campus Map
+                  </h4>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[11px] font-bold bg-white text-black px-2.5 py-1 rounded-lg border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] hidden xs:inline-block">
+                  📍 {coordinatesText}
+                </span>
+                <a
+                  href={eventData.location.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutal-map-btn bg-[#00BDD6] hover:bg-[#00A3B8] text-black"
+                >
+                  <span>FULL MAP</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Campus POI Selector Strip (Neo-Brutalist Buttons) */}
+            <div className="brutal-poi-strip bg-[#FAF8FF] border-b-[2px] border-black px-3.5 py-2 flex items-center gap-2 overflow-x-auto scrollbar-none">
+              <span className="font-mono text-[10px] font-black text-[#512BD4] uppercase tracking-wider shrink-0 mr-1 hidden sm:inline">
+                LANDMARKS:
+              </span>
+              {campusPOIs.map((poi, idx) => (
+                <button
+                  key={poi.id}
+                  type="button"
+                  onClick={() => setSelectedPoiIndex(idx)}
+                  className={`brutal-poi-chip ${
+                    selectedPoiIndex === idx
+                      ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000]'
+                      : 'bg-white text-black hover:bg-stone-100 shadow-[1px_1px_0px_0px_#000]'
+                  }`}
+                >
+                  {poi.badge}: {poi.name}
+                </button>
+              ))}
+            </div>
+
+            {/* Map Viewport - Clean, Proper, Unaltered Google Maps Clarity */}
+            <div className="brutal-map-viewport relative flex-1 w-full min-h-[300px] sm:min-h-[360px] md:min-h-[400px] bg-stone-100 overflow-hidden">
+              <iframe
+                title="PRPCEM Amravati Campus Map"
+                src={eventData.location.embedMapUrl}
+                className="w-full h-full min-h-[300px] sm:min-h-[360px] md:min-h-[400px] border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+            {/* Neo-Brutalist Map Bottom Footer */}
+            <div className="brutal-map-footer">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-stone-800">
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 border border-black" />
+                <span>Selected: {activePoi.name}</span>
+              </div>
+
+              <div className="brutal-map-footer-actions flex items-center gap-2 flex-wrap">
+                <a
+                  href={directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutal-map-btn bg-[#00BDD6] hover:bg-[#00A3B8]"
+                >
+                  <Car className="w-3.5 h-3.5" />
+                  <span>DIRECTIONS</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyCoords}
+                  className="brutal-map-btn bg-[#FFDB43] hover:bg-[#F2CE38]"
+                >
+                  {copiedCoords ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-800" />
+                      <span>COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>COPY GPS</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </section>
@@ -194,3 +346,5 @@ export const DncVenue = () => {
 };
 
 export default DncVenue;
+
+

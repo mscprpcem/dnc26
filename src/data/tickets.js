@@ -3,7 +3,7 @@ export const ticketsData = [
   {
     id: 'pass-community',
     name: 'COMMUNITY PASS',
-    price: 'Free',
+    price: 'Delegate',
     priceNote: 'Open to all developers & enthusiasts',
     description: 'General community admission for passionate developers and local tech enthusiasts.',
     features: [
@@ -12,7 +12,7 @@ export const ticketsData = [
       'Community networking & expo area',
       'Digital Certificate of Participation',
     ],
-    ctaText: 'Register Free Pass',
+    ctaText: 'Register Pass',
     ctaUrl: 'https://konfhub.com',
   },
   {

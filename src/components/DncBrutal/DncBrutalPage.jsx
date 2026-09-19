@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import './DncBrutalStyles.css';
 import DncNavbar from './DncNavbar.jsx';
 import DncHero from './DncHero.jsx';
-import DncTracks from './DncTracks.jsx';
+import DncEditorialSwimlanes from './DncEditorialSwimlanes.jsx';
 import DncPastHighlights from './DncPastHighlights.jsx';
 import DncKeynote from './DncKeynote.jsx';
 import DncAgenda from './DncAgenda.jsx';
 import DncVenue from './DncVenue.jsx';
+import DncAttendeeBadge from './DncAttendeeBadge.jsx';
 import DncInterestForm from './DncInterestForm.jsx';
 import DncSponsors from './DncSponsors.jsx';
 import DncCommunity from './DncCommunity.jsx';
 import DncFooter from './DncFooter.jsx';
-import { ArrowUp, Sparkles, Tent } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { scrollToSection } from '../../utils/sectionRouter.js';
 
 export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
   useEffect(() => {
@@ -19,7 +21,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToSection('/');
   };
 
   return (
@@ -27,33 +29,36 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
       {/* Sticky Header Navigation */}
       <DncNavbar onSwitchToClassic={onSwitchToClassic} />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections - Exact 1:1 Parity with Normal Mode */}
       <main className="relative z-10 w-full">
-        {/* Section 1: Hero with 3D Rocket Mascot */}
+        {/* Section 1: Hero (.NET Conf 2026 Amravati, 3D Rocket Mascot, Date Pill) */}
         <DncHero />
 
-        {/* Section 2: Conference Tracks (AI, Cloud, .NET 10, C# 14) */}
-        <DncTracks />
+        {/* Section 2: Editorial Swimlanes (Flagship Gathering & Technical Immersion) */}
+        <DncEditorialSwimlanes />
 
-        {/* Section 3: 2024 Retrospective & Photo Highlights */}
+        {/* Section 3: Highlights of Last Year (2024 Retrospective Slideshow & Gallery) */}
         <DncPastHighlights />
 
-        {/* Section 4: Headline Keynote Spotlight */}
+        {/* Section 4: Headline Opening Keynote Spotlight (Keynote Ambassador Mascot & Pillars) */}
         <DncKeynote />
 
-        {/* Section 5: 1-Day Schedule & Agenda */}
+        {/* Section 5: 1-Day Conference Schedule & Flow */}
         <DncAgenda />
 
         {/* Section 6: PRPCEM Campus Venue & Interactive Map */}
         <DncVenue />
 
-        {/* Section 7: Register Your Interest (Google Sheets Integration) */}
+        {/* Section 7: I am Attending Badge Generator Studio */}
+        <DncAttendeeBadge />
+
+        {/* Section 8: Register Your Interest (Priority Delegate Access) */}
         <DncInterestForm />
 
-        {/* Section 8: Partners & Sponsors */}
+        {/* Section 9: Partners & Collaborators */}
         <DncSponsors />
 
-        {/* Section 9: WhatsApp & Community Connections */}
+        {/* Section 10: Follow & Connect With MSC PRPCEM (7 Channels & Surfing Mascot) */}
         <DncCommunity />
       </main>
 
@@ -62,18 +67,6 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
 
       {/* Floating Action Controls (Bottom Right) */}
       <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50 flex flex-col gap-2.5 items-end">
-        {/* Switch to Original / Classic DNC Mode */}
-        {onSwitchToClassic && (
-          <button
-            onClick={onSwitchToClassic}
-            className="group bg-white hover:bg-stone-50 text-[#14053A] font-mono font-black text-[11px] sm:text-xs px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-2xl border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-[1.5px_1.5px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center gap-2 cursor-pointer"
-            title="Switch back to original DotNetConf website mode"
-          >
-            <span className="text-sm sm:text-base group-hover:rotate-12 transition-transform">⚡</span>
-            <span>SWITCH TO ORIGINAL MODE</span>
-          </button>
-        )}
-
         <button
           onClick={scrollToTop}
           className="p-2.5 sm:p-3 bg-[#512BD4] hover:bg-[#4322B0] text-white rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"

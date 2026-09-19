@@ -38,7 +38,7 @@ export async function sendInterestSubmission(formData) {
     fullName: formData.fullName || "",
     email: formData.email || "",
     phone: formData.phone || "",
-    college: formData.college || "P. R. Pote Patil College of Engineering and Management (PRPCEM)",
+    college: formData.college || "",
     branch: formData.branch || "",
     yearOfStudy: formData.yearOfStudy || formData.role || "",
     rollNo: formData.rollNo || "",

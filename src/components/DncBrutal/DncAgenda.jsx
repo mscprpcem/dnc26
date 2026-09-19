@@ -1,172 +1,163 @@
-import React, { useState } from 'react';
-import { Clock } from 'lucide-react';
-import { agendaSchedule } from '../../data/agenda.js';
+import React from 'react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import DncSignpost from './DncSignpost.jsx';
+import { scrollToSection } from '../../utils/sectionRouter.js';
+import DncSectionFlanks from './DncSectionFlanks.jsx';
 
 export const DncAgenda = () => {
-  const [filter, setFilter] = useState('all');
-
-  const filteredSchedule = agendaSchedule.filter((slot) => {
-    if (filter === 'all') return true;
-    if (filter === 'keynote') return slot.type === 'keynote' || slot.type === 'community' || slot.type === 'closing';
-    if (filter === 'cloud') return slot.track1 || slot.session?.category === 'Cloud';
-    if (filter === 'ai') return slot.track2 || slot.session?.category === 'AI';
-    return true;
-  });
+  const generalFlow = [
+    {
+      time: '09:00 AM',
+      title: 'Attendee Check-In & Welcome Coffee',
+      desc: 'Credential pickup, conference kits, and morning networking at PRPCEM Main Atrium.',
+      status: 'Confirmed Flow',
+    },
+    {
+      time: '10:00 AM',
+      title: 'Inaugural Ceremony & Opening Keynote',
+      desc: 'Official welcome remarks by MSC PRPCEM dignitaries and headline keynote address.',
+      status: 'Speaker & Topic TBA',
+    },
+    {
+      time: '11:30 AM',
+      title: 'Technical Deep-Dive Track Sessions',
+      desc: 'Parallel breakout sessions covering modern .NET, cloud architectures, and AI engineering.',
+      status: 'Tracks Coming Soon',
+    },
+    {
+      time: '01:00 PM',
+      title: 'Networking Luncheon & Project Expo',
+      desc: 'Complimentary lunch buffet, student project showcase, and mentor networking.',
+      status: 'Confirmed Flow',
+    },
+    {
+      time: '02:00 PM',
+      title: 'Afternoon Technical Sessions & Hands-on Labs',
+      desc: 'Specialized developer workshops, code walkthroughs, and practical labs.',
+      status: 'Tracks Coming Soon',
+    },
+    {
+      time: '04:00 PM',
+      title: 'Community Panel, Awards & Valedictory',
+      desc: 'Industry panel discussion, live quiz prizes, recognition, and official group photo.',
+      status: 'Confirmed Flow',
+    },
+  ];
 
   return (
-    <section id="dnc-agenda" className="py-6 sm:py-10 px-3 sm:px-6 max-w-6xl mx-auto">
+    <section id="schedule" className="py-6 sm:py-10 px-3 sm:px-6 max-w-6xl mx-auto scroll-mt-20 relative">
+      <DncSectionFlanks
+        leftIndex="05"
+        leftTag="TRACKS"
+        leftBadgeText="⏰ 1-DAY FLOW"
+        leftBadgeColor="bg-[#00BDD6] text-black"
+        leftSub="TIMINGS CONFIRMED"
+        rightIndex="6+"
+        rightTag="SESSIONS"
+        rightBadgeText="HANDS-ON & LABS"
+        rightBadgeColor="bg-[#EEEAFB] text-[#512BD4]"
+        rightSub="FULL PROGRAM"
+      />
       {/* Signpost */}
       <DncSignpost 
-        title="1-DAY SCHEDULE OUTLINE" 
-        badge="TIMELINE"
+        title="SCHEDULE & TRACKS (TBA)" 
+        badge="1-DAY OUTLINE FLOW"
         theme="purple"
       />
 
       <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-5 sm:p-8 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
-        {/* Header & Filter Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 sm:pb-6 border-b-[2px] sm:border-b-[2.5px] border-black/10">
-          <div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#14053A] font-sans uppercase tracking-tight">
-              Conference Day Schedule
-            </h3>
-            <p className="text-stone-600 font-sans text-xs sm:text-sm mt-0.5 sm:mt-1">
-              P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati
-            </p>
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3.5 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5 sm:mb-3">
+            <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
+            <span>Schedule & Tracks · Coming Soon</span>
           </div>
 
-          {/* Filter Pills with clean mobile scrolling */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full no-scrollbar">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-xl border-[2px] border-black text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap shrink-0 ${
-                filter === 'all'
-                  ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black'
-              }`}
-            >
-              ALL SESSIONS
-            </button>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2 sm:mb-3 leading-tight">
+            Agenda & Tracks To Be Announced (TBA)
+          </h3>
 
-            <button
-              onClick={() => setFilter('keynote')}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-xl border-[2px] border-black text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap shrink-0 ${
-                filter === 'keynote'
-                  ? 'bg-[#D600AA] text-white shadow-[2px_2px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black'
-              }`}
-            >
-              KEYNOTE
-            </button>
-
-            <button
-              onClick={() => setFilter('cloud')}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-xl border-[2px] border-black text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap shrink-0 ${
-                filter === 'cloud'
-                  ? 'bg-[#00BDD6] text-black shadow-[2px_2px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black'
-              }`}
-            >
-              CLOUD TRACK
-            </button>
-
-            <button
-              onClick={() => setFilter('ai')}
-              className={`px-3 sm:px-3.5 py-1.5 rounded-xl border-[2px] border-black text-[11px] sm:text-xs font-mono font-bold transition-all whitespace-nowrap shrink-0 ${
-                filter === 'ai'
-                  ? 'bg-[#FFD13B] text-black shadow-[2px_2px_0px_0px_#000] -translate-y-0.5'
-                  : 'bg-stone-50 hover:bg-stone-100 text-black'
-              }`}
-            >
-              AI TRACK
-            </button>
-          </div>
+          <p className="text-stone-700 font-sans text-xs sm:text-sm md:text-base leading-relaxed">
+            Specific technical tracks, speaker slots, and session schedules are currently being curated. The high-level 1-day event flow is outlined below.
+          </p>
         </div>
 
-        {/* Timeline Slots */}
-        <div className="mt-6 sm:mt-8 flex flex-col gap-3.5 sm:gap-4">
-          {filteredSchedule.map((slot) => {
-            // Check if slot has parallel tracks
-            if (slot.isParallel) {
-              return (
-                <div
-                  key={slot.id}
-                  className="bg-[#FAF9FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000]"
-                >
-                  <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-mono font-bold text-[#512BD4] mb-3">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{slot.time}</span>
-                    <span className="bg-[#EEEAFB] text-[#512BD4] px-2 py-0.5 rounded border border-[#512BD4]/30 uppercase text-[10px]">
-                      PARALLEL SESSIONS
-                    </span>
-                  </div>
+        {/* 1-Day Outline Flow Card with Pot Mascot */}
+        <div className="bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-[3px_3px_0px_0px_#000]">
+          
+          <div className="flex flex-wrap items-center justify-between gap-2.5 pb-4 mb-4 border-b-[1.5px] border-black/15">
+            <div className="flex items-center gap-2.5">
+              <img
+                src="/mascot/dotnet-bot-pot.svg"
+                alt=".NET Bot Schedule Guide"
+                className="w-8 h-8 sm:w-9 sm:h-9 object-contain select-none"
+              />
+              <div>
+                <span className="text-xs sm:text-sm font-black font-sans uppercase text-[#14053A] block leading-tight">
+                  1-Day Flagship Conference Flow
+                </span>
+                <span className="text-[10px] sm:text-[11px] text-[#512BD4] font-mono font-bold block">
+                  PRPCEM Campus, Amravati
+                </span>
+              </div>
+            </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4">
-                    {/* Track 1 */}
-                    <div className="bg-white border-[2px] border-black rounded-xl p-3.5 sm:p-4 shadow-[2px_2px_0px_0px_#000]">
-                      <div className="text-[10px] font-mono font-bold text-stone-500 uppercase">
-                        {slot.track1.trackName} • {slot.track1.room}
-                      </div>
-                      <h4 className="font-black font-sans text-sm sm:text-base text-black mt-1">
-                        {slot.track1.title}
-                      </h4>
-                      <p className="text-xs text-stone-600 mt-1 font-sans">
-                        {slot.track1.description}
-                      </p>
-                    </div>
+            <span className="px-3 py-1 rounded-full bg-[#EEEAFB] text-[#512BD4] border-[1.5px] border-black text-[10px] sm:text-[11px] font-mono font-bold shadow-[1px_1px_0px_0px_#000]">
+              Tracks TBA
+            </span>
+          </div>
 
-                    {/* Track 2 */}
-                    <div className="bg-white border-[2px] border-black rounded-xl p-3.5 sm:p-4 shadow-[2px_2px_0px_0px_#000]">
-                      <div className="text-[10px] font-mono font-bold text-stone-500 uppercase">
-                        {slot.track2.trackName} • {slot.track2.room}
-                      </div>
-                      <h4 className="font-black font-sans text-sm sm:text-base text-black mt-1">
-                        {slot.track2.title}
-                      </h4>
-                      <p className="text-xs text-stone-600 mt-1 font-sans">
-                        {slot.track2.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-
-            // Standard Single Session Slot
-            const sess = slot.session;
-            return (
+          {/* Timeline Slots */}
+          <div className="space-y-3">
+            {generalFlow.map((item, idx) => (
               <div
-                key={slot.id}
-                className="bg-white hover:bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-3.5 sm:p-5 shadow-[2.5px_2.5px_0px_0px_#000] sm:shadow-[3px_3px_0px_0px_#000] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 transition-colors"
+                key={idx}
+                className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 p-3 sm:p-3.5 rounded-xl bg-white border-[1.5px] sm:border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
               >
-                <div className="flex items-start gap-3 sm:gap-4">
-                  {/* Time badge */}
-                  <div className="bg-[#EEEAFB] border-[1.5px] sm:border-[2px] border-black rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 text-center min-w-[85px] sm:min-w-[105px] shadow-[1.5px_1.5px_0px_0px_#000] shrink-0">
-                    <div className="text-[11px] sm:text-xs font-mono font-black text-[#512BD4]">
-                      {slot.time}
-                    </div>
-                    <div className="text-[9px] sm:text-[10px] font-mono text-stone-600 uppercase">
-                      {sess?.category || 'General'}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="font-black font-sans text-sm sm:text-base md:text-lg text-[#14053A]">
-                      {sess?.title}
+                <div className="flex items-start sm:items-center gap-2.5 sm:gap-3 min-w-0">
+                  <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-mono font-bold text-[#512BD4] bg-[#EEEAFB] border border-black/30 px-2.5 py-1 rounded-lg shrink-0">
+                    <Clock className="w-3 h-3" />
+                    {item.time}
+                  </span>
+                  <div className="min-w-0 text-left">
+                    <h4 className="text-xs sm:text-sm font-bold font-sans text-[#14053A] leading-snug">
+                      {item.title}
                     </h4>
-                    <p className="text-xs text-stone-600 mt-1 font-sans max-w-2xl">
-                      {sess?.description}
+                    <p className="text-[11px] sm:text-xs text-stone-600 font-sans leading-snug mt-0.5">
+                      {item.desc}
                     </p>
                   </div>
                 </div>
 
-                <div className="text-[10px] sm:text-xs font-mono font-bold text-stone-600 bg-stone-100 border border-black/20 px-2.5 sm:px-3 py-1 rounded-lg shrink-0 self-start sm:self-center">
-                  📍 {sess?.room}
+                <div className="shrink-0 self-start sm:self-center">
+                  <span className="inline-block text-[10px] sm:text-[11px] font-mono font-bold text-[#512BD4] bg-[#FAF8FF] px-2.5 py-1 rounded-lg border border-black/30 shadow-[1px_1px_0px_0px_#000] whitespace-nowrap">
+                    {item.status}
+                  </span>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
+
+        {/* Notification CTA */}
+        <div className="text-center px-2">
+          <p className="text-xs sm:text-sm text-stone-700 font-sans mb-3">
+            Want to receive the full track breakdown and speaker schedule as soon as it launches?
+          </p>
+          <a
+            href="/community"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('/community');
+            }}
+            className="inline-flex items-center justify-center gap-2 bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-bold text-xs uppercase px-5 py-3 rounded-xl border-[2px] border-black shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer"
+          >
+            <span>FOLLOW COMMUNITY FOR TRACK ANNOUNCEMENTS</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
       </div>
     </section>
   );

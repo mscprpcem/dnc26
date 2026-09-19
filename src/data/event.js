@@ -11,7 +11,7 @@ export const eventData = {
   edition: 'Amravati',
   year: '2026',
   dateFormatted: 'Annual 2026 Edition · Date TBA',
-  duration: '1-Day Flagship Conference (TBA)',
+  duration: '1-Day Flagship Conference',
   timeFormatted: 'Schedule & Timings TBA',
   launchVersion: '.NET 11',
   poweredByVersion: '.NET 10.0.11',
@@ -148,7 +148,7 @@ export const eventData = {
     {
       id: 'community',
       name: 'Community Pass',
-      price: 'Free',
+      price: 'Delegate',
       badge: 'Coming Soon',
       description: 'Standard in-person seat admission for local developers and students.',
       features: [

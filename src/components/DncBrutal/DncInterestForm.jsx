@@ -1,7 +1,21 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Sparkles } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Sparkles,
+  User,
+  Mail,
+  Phone,
+  Building2,
+  Briefcase,
+  CheckCircle2,
+  Check,
+  Send,
+  ChevronDown,
+} from 'lucide-react';
+import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
+import { eventData } from '../../data/event.js';
 import DncSignpost from './DncSignpost.jsx';
+import DncSectionFlanks from './DncSectionFlanks.jsx';
 
 export const DncInterestForm = () => {
   const [formData, setFormData] = useState({
@@ -9,38 +23,109 @@ export const DncInterestForm = () => {
     email: '',
     phone: '',
     college: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
-    branch: 'Computer Science & Engineering',
-    yearOfStudy: '3rd Year',
-    interests: 'Generative AI, .NET 10, Azure Cloud',
+    role: 'Student (PRPCEM)',
+    interests: ['.NET 11 & C# 14', 'Azure Cloud & Serverless'],
   });
 
-  const [status, setStatus] = useState({
-    submitting: false,
-    submitted: false,
-    error: null,
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
+  const roleDropdownRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const roleOptions = [
+    {
+      value: 'Student (PRPCEM)',
+      label: 'Student @ PRPCEM Amravati',
+    },
+    {
+      value: 'Student (Other Institution)',
+      label: 'Student (Other College / University)',
+    },
+    {
+      value: 'Working Professional / Developer',
+      label: 'Working Software Developer / Engineer',
+    },
+    {
+      value: 'Open Source Contributor',
+      label: 'Open Source Contributor / Community Lead',
+    },
+    {
+      value: 'Faculty / Educator',
+      label: 'Faculty / Educator',
+    },
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (roleDropdownRef.current && !roleDropdownRef.current.contains(e.target)) {
+        setIsRoleDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const techPills = [
+    '.NET 11 & C# 14',
+    'Azure Cloud & Serverless',
+    'Generative AI & Copilot',
+    'Full-Stack Web & Blazor',
+    'Hands-on Code Labs',
+    'Community Swag & Certificates',
+  ];
+
+  const handleToggleInterest = (tech) => {
+    setFormData((prev) => {
+      const exists = prev.interests.includes(tech);
+      return {
+        ...prev,
+        interests: exists
+          ? prev.interests.filter((item) => item !== tech)
+          : [...prev.interests, tech],
+      };
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus({ submitting: true, submitted: false, error: null });
+    setErrorMessage('');
 
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim()) {
+      setErrorMessage('Please fill in your name, email, and WhatsApp contact number.');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
-      await sendInterestSubmission(formData);
-      setStatus({ submitting: false, submitted: true, error: null });
+      await sendInterestSubmission({
+        ...formData,
+        interests: formData.interests.join(', '),
+      });
+      setIsSubmitted(true);
     } catch (err) {
-      console.error("Submission error:", err);
-      // Still show success since local storage backed it up
-      setStatus({ submitting: false, submitted: true, error: null });
+      console.error('Submission failed:', err);
+      // Even if network glitches, confirm to user since local cache saved it
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="dnc-interest" className="py-6 sm:py-10 px-3 sm:px-6 max-w-4xl mx-auto">
+    <section id="register-interest" className="py-6 sm:py-10 px-3 sm:px-6 max-w-4xl mx-auto scroll-mt-20 relative">
+      <DncSectionFlanks
+        leftIndex="08"
+        leftTag="ACCESS"
+        leftBadgeText="🟢 PRIORITY ENTRY"
+        leftBadgeColor="bg-[#25D366] text-black"
+        leftSub="LIMITED DELEGATES"
+        rightIndex="FREE"
+        rightTag="DELEGATE"
+        rightBadgeText="✦ 100% COMMUNITY"
+        rightBadgeColor="bg-[#FFE600] text-black"
+        rightSub="PASS REGISTRATION"
+      />
       {/* Signpost */}
       <DncSignpost 
         title="REGISTER YOUR INTEREST" 
@@ -49,204 +134,241 @@ export const DncInterestForm = () => {
       />
 
       <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-5 sm:p-8 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
-        {/* Intro */}
-        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5 sm:mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>FREE DELEGATE PASSES</span>
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3.5 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5 sm:mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-[#512BD4]" />
+            <span>Priority Delegate Access</span>
           </div>
 
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2">
-            Secure Your Seat for Amravati 2026
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2 sm:mb-3 leading-tight">
+            Register Your Interest
           </h3>
-          <p className="text-stone-700 font-sans text-xs sm:text-sm">
-            Fill out this quick form to receive priority invitations, workshop registration links, and conference agenda alerts.
+
+          <p className="text-stone-700 font-sans text-xs sm:text-sm md:text-base leading-relaxed font-medium">
+            Be the first to receive seat confirmations, speaker announcements, and official entry passes for .NET Conf 2026 Amravati.
           </p>
         </div>
 
-        {/* Success State */}
-        {status.submitted ? (
-          <div className="bg-[#E8F5E9] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-5 sm:p-8 text-center shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] animate-fadeIn">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#4CAF50] text-white border-[2px] border-black flex items-center justify-center text-2xl sm:text-3xl mx-auto mb-3 sm:mb-4 shadow-[2.5px_2.5px_0px_0px_#000]">
-              🎉
+        {isSubmitted ? (
+          /* Success State */
+          <div className="bg-[#E8F5E9] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-6 sm:p-10 text-center shadow-[4px_4px_0px_0px_#000] space-y-4 animate-in fade-in zoom-in duration-200">
+            <div className="w-16 h-16 rounded-full bg-[#4CAF50] text-white border-[2px] border-black flex items-center justify-center text-3xl mx-auto shadow-[2px_2px_0px_0px_#000]">
+              <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h4 className="text-xl sm:text-2xl font-black font-sans text-black uppercase mb-2">
-              Registration Recorded!
+
+            <h4 className="text-2xl sm:text-3xl font-black font-sans text-[#14053A] uppercase">
+              Interest Recorded Successfully!
             </h4>
-            <p className="text-stone-800 font-sans text-xs sm:text-sm max-w-md mx-auto mb-5 sm:mb-6">
-              Thank you, <span className="font-bold text-black">{formData.fullName}</span>! We’ve added you to the priority delegate list for .NET Conf 2026 Amravati.
+
+            <p className="text-sm sm:text-base text-stone-800 font-sans max-w-md mx-auto leading-relaxed">
+              Thank you, <strong className="text-[#512BD4]">{formData.fullName}</strong>! Your expression of interest has been registered. Priority delegate updates will be sent to your registered email and WhatsApp.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+
+            <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67"
+                href={eventData.socialLinks.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono font-bold text-xs px-4 py-2.5 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] flex items-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono font-bold text-xs sm:text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_#000] flex items-center justify-center gap-2 transition-all hover:translate-x-[1px] hover:translate-y-[1px] cursor-pointer"
               >
-                <span>JOIN WHATSAPP GROUP</span>
-                <span>↗</span>
+                <WhatsAppIcon className="w-4 h-4 text-black" />
+                <span>Join Official WhatsApp Community ↗</span>
               </a>
+
               <button
-                onClick={() => setStatus({ submitting: false, submitted: false, error: null })}
-                className="bg-white hover:bg-stone-50 text-black font-mono font-bold text-xs px-4 py-2.5 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000]"
+                type="button"
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setFormData({
+                    fullName: '',
+                    email: '',
+                    phone: '',
+                    college: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
+                    role: 'Student (PRPCEM)',
+                    interests: ['.NET 11 & C# 14', 'Azure Cloud & Serverless'],
+                  });
+                }}
+                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white hover:bg-stone-100 text-black font-mono font-bold text-xs sm:text-sm border-[2px] border-black shadow-[2px_2px_0px_0px_#000] transition-all cursor-pointer"
               >
-                Register Another Attendee
+                Submit Another Response
               </button>
             </div>
           </div>
         ) : (
-          /* Main Form */
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4.5">
+          /* Active Form */
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 text-left">
+            {errorMessage && (
+              <div className="p-3 rounded-xl bg-red-50 border-[2px] border-red-600 text-red-800 text-xs sm:text-sm font-mono font-bold">
+                {errorMessage}
+              </div>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               {/* Full Name */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  Full Name *
+              <div className="space-y-1">
+                <label htmlFor="dnc-fullName" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Full Name *</span>
                 </label>
                 <input
+                  id="dnc-fullName"
                   type="text"
-                  name="fullName"
                   required
-                  placeholder="e.g. Atharva Deshmukh"
                   value={formData.fullName}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-medium text-black bg-[#FAF8FF] focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] focus:outline-none transition-all"
                 />
               </div>
 
               {/* Email Address */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  Email Address *
+              <div className="space-y-1">
+                <label htmlFor="dnc-email" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#0078D4]" />
+                  <span>Email Address *</span>
                 </label>
                 <input
+                  id="dnc-email"
                   type="email"
-                  name="email"
                   required
-                  placeholder="e.g. atharva@prpotepatilengg.ac.in"
                   value={formData.email}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-medium text-black bg-[#FAF8FF] focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] focus:outline-none transition-all"
                 />
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-              {/* Phone / WhatsApp */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  WhatsApp Number *
+              {/* WhatsApp / Phone Number */}
+              <div className="space-y-1">
+                <label htmlFor="dnc-phone" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[#25D366]" />
+                  <span>WhatsApp / Mobile Number *</span>
                 </label>
                 <input
+                  id="dnc-phone"
                   type="tel"
-                  name="phone"
                   required
-                  placeholder="e.g. +91 9876543210"
                   value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-medium text-black bg-[#FAF8FF] focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] focus:outline-none transition-all"
                 />
               </div>
 
-              {/* College / Institution */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  College / Institution *
+              {/* Role / Category Custom Dropdown */}
+              <div className="space-y-1" ref={roleDropdownRef}>
+                <label htmlFor="dnc-role-btn" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
+                  <Briefcase className="w-3.5 h-3.5 text-[#D600AA]" />
+                  <span>Role / Category *</span>
                 </label>
-                <input
-                  type="text"
-                  name="college"
-                  required
-                  value={formData.college}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
-                />
+                <div className="relative w-full">
+                  <button
+                    type="button"
+                    id="dnc-role-btn"
+                    onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
+                    className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-left text-sm font-sans font-medium text-black bg-[#FAF8FF] flex items-center justify-between cursor-pointer focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] focus:outline-none"
+                  >
+                    <span className="truncate">
+                      {roleOptions.find((r) => r.value === formData.role)?.label || 'Select your role'}
+                    </span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-[#512BD4] shrink-0 transition-transform ${
+                        isRoleDropdownOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {isRoleDropdownOpen && (
+                    <div className="absolute z-40 left-0 right-0 top-full mt-1 bg-white rounded-xl border-[2px] border-black shadow-[4px_4px_0px_0px_#000] overflow-hidden py-1 animate-in fade-in duration-150">
+                      {roleOptions.map((opt) => {
+                        const isSelected = formData.role === opt.value;
+                        return (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => {
+                              setFormData({ ...formData, role: opt.value });
+                              setIsRoleDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-3.5 py-2 text-xs sm:text-sm font-sans font-medium flex items-center justify-between transition-colors cursor-pointer ${
+                              isSelected
+                                ? 'bg-[#EEEAFB] text-[#512BD4] font-bold'
+                                : 'text-black hover:bg-stone-50'
+                            }`}
+                          >
+                            <span className="truncate">{opt.label}</span>
+                            {isSelected && <Check className="w-4 h-4 text-[#512BD4] shrink-0" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-              {/* Branch / Dept */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  Branch / Department
-                </label>
-                <select
-                  name="branch"
-                  value={formData.branch}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
-                >
-                  <option value="Computer Science & Engineering">Computer Science & Engineering</option>
-                  <option value="Information Technology">Information Technology</option>
-                  <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
-                  <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
-                  <option value="Mechanical / Civil / Electrical">Mechanical / Civil / Electrical</option>
-                  <option value="MCA / BCA / Polytechnic">MCA / BCA / Polytechnic</option>
-                  <option value="Faculty / Working Professional">Faculty / Working Professional</option>
-                </select>
-              </div>
-
-              {/* Year of Study */}
-              <div>
-                <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                  Year of Study / Status
-                </label>
-                <select
-                  name="yearOfStudy"
-                  value={formData.yearOfStudy}
-                  onChange={handleChange}
-                  className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
-                >
-                  <option value="1st Year">1st Year (Freshman)</option>
-                  <option value="2nd Year">2nd Year (Sophomore)</option>
-                  <option value="3rd Year">3rd Year (Junior)</option>
-                  <option value="4th Year">4th Year (Final Year)</option>
-                  <option value="Post-Graduate">Post-Graduate (PG / PhD)</option>
-                  <option value="Faculty">Faculty Member</option>
-                  <option value="Industry Professional">Industry Professional</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Interests */}
-            <div>
-              <label className="block text-xs font-mono font-bold text-black uppercase mb-1">
-                Topics You're Most Excited About
+            {/* College / Organization */}
+            <div className="space-y-1">
+              <label htmlFor="dnc-college" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
+                <Building2 className="w-3.5 h-3.5 text-[#512BD4]" />
+                <span>College / Institution / Organization *</span>
               </label>
               <input
+                id="dnc-college"
                 type="text"
-                name="interests"
-                placeholder="e.g. AI Copilots, C# 14, Cloud Native, Web Development"
-                value={formData.interests}
-                onChange={handleChange}
-                className="w-full bg-[#FAF8FF] border-[2px] border-black rounded-xl px-3 sm:px-3.5 py-2.5 text-sm font-sans font-medium text-black focus:outline-none focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] transition-all"
+                required
+                value={formData.college}
+                onChange={(e) => setFormData({ ...formData, college: e.target.value })}
+                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-medium text-black bg-[#FAF8FF] focus:bg-white focus:shadow-[2.5px_2.5px_0px_0px_#512BD4] focus:outline-none transition-all"
               />
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={status.submitting}
-              className="mt-2 w-full bg-[#512BD4] hover:bg-[#4322B0] text-white font-black text-xs sm:text-sm md:text-base font-sans uppercase py-3.5 px-6 rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
-            >
-              {status.submitting ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>RECORDING YOUR INTEREST...</span>
-                </>
-              ) : (
-                <>
-                  <span>SUBMIT REGISTRATION</span>
-                  <Send className="w-4 h-4" />
-                </>
-              )}
-            </button>
+            {/* Topics You're Most Excited About */}
+            <div className="space-y-2 pt-2 border-t-[1.5px] border-black/15">
+              <span className="text-xs font-mono font-bold text-black uppercase block">
+                Topics You're Most Excited About:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {techPills.map((tech) => {
+                  const isSelected = formData.interests.includes(tech);
+                  return (
+                    <button
+                      key={tech}
+                      type="button"
+                      onClick={() => handleToggleInterest(tech)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold border-[2px] border-black transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] -translate-y-0.5'
+                          : 'bg-white text-black hover:bg-stone-50 shadow-[1px_1px_0px_0px_#000]'
+                      }`}
+                    >
+                      {isSelected ? '✓ ' : '+ '}
+                      {tech}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-            <div className="text-center text-[10px] sm:text-[11px] font-mono text-stone-500">
-              * 100% Free Community Event. Direct registration sync via Google Sheets.
+            {/* Submit Button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-6 rounded-2xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm sm:text-base uppercase border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-[1.5px_1.5px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+              >
+                {isSubmitting ? (
+                  <span>SUBMITTING RESPONSE...</span>
+                ) : (
+                  <>
+                    <span>SUBMIT EXPRESSION OF INTEREST</span>
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
+              </button>
             </div>
           </form>
         )}
+
       </div>
     </section>
   );

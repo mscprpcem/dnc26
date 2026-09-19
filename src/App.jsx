@@ -18,12 +18,11 @@ import { Tent, LayoutTemplate } from 'lucide-react';
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
     if (typeof window !== 'undefined') {
-      const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      if (hash.includes('hackcon') || search.includes('hackcon')) {
+      if (search.includes('view=hackcon')) {
         return 'hackcon';
       }
-      if (hash.includes('classic') || search.includes('classic')) {
+      if (search.includes('view=classic')) {
         return 'classic';
       }
     }
@@ -32,19 +31,11 @@ export const App = () => {
   });
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      if (hash.includes('hackcon') || search.includes('hackcon')) {
-        setCurrentView('hackcon');
-      } else if (hash.includes('classic') || search.includes('classic')) {
-        setCurrentView('classic');
-      } else {
-        setCurrentView('dnc-brutal');
+    if (typeof window !== 'undefined') {
+      if (window.location.hash.toLowerCase().includes('classic')) {
+        window.history.replaceState(null, '', window.location.pathname);
       }
-    };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    }
   }, []);
 
   const switchToHackcon = () => {
@@ -140,7 +131,7 @@ export const App = () => {
         {/* Section 7: I am Attending Badge Generator & Social Sharing */}
         <AttendeeBadge />
 
-        {/* Section 8: Register Your Interest (Google Sheets via Code.gs) */}
+        {/* Section 8: Register Your Interest */}
         <InterestForm />
 
         {/* Section 8: Official Partners & Sponsors with Vector Logos */}

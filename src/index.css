@@ -731,6 +731,46 @@ input[type='range']::-moz-range-thumb {
   }
 }
 
+/* ==========================================================================
+   GLOBAL VENUE MAP SYSTEM & RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+/* Clean, natural high-clarity map viewport */
+.brutal-map-viewport iframe {
+  filter: none;
+}
+
+@media (max-width: 480px) {
+  .brutal-map-viewport {
+    min-height: 280px !important;
+    height: 290px !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .brutal-map-viewport {
+    min-height: 340px !important;
+    height: 360px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .brutal-map-viewport {
+    min-height: 380px !important;
+    height: 400px !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .brutal-map-viewport {
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    min-height: 380px !important;
+  }
+}
+
+
+
 
 
 
