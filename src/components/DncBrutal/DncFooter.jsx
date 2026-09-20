@@ -3,7 +3,7 @@ import { Heart, Sparkles, MapPin, ArrowUpRight } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 import { scrollToSection } from '../../utils/sectionRouter.js';
 
-export const DncFooter = () => {
+export const DncFooter = ({ onSwitchToClassic }) => {
   return (
     <footer className="mt-12 sm:mt-16 bg-[#10092A] border-t-[3px] border-black text-stone-300 font-sans">
       {/* Top Banner */}
@@ -38,97 +38,43 @@ export const DncFooter = () => {
             </div>
           </div>
 
-          {/* Col 2: Navigation Links */}
-          <div className="md:col-span-3 text-left">
-            <div className="text-white font-mono font-bold text-xs uppercase tracking-widest mb-3">
-              CONFERENCE
+          {/* Col 2: Theme / Mode Switcher */}
+          <div className="md:col-span-3 text-left flex flex-col gap-3">
+            <div className="text-white font-mono font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+              <span>DESIGN THEME</span>
             </div>
-            <ul className="flex flex-col gap-2 text-xs font-mono">
-              <li>
-                <a
-                  href="/about"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/about');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  About Overview
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/highlights"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/highlights');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  2024 Retrospective
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/keynote"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/keynote');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  Keynote Spotlight
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/schedule"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/schedule');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  Schedule Outline
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/venue"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/venue');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  PRPCEM Venue
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/badge"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/badge');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  Badge Studio
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/partners"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('/partners');
-                  }}
-                  className="hover:text-[#00BDD6] transition-colors cursor-pointer"
-                >
-                  Partners & Sponsors
-                </a>
-              </li>
-            </ul>
+            <p className="text-stone-400 text-[11px] font-mono leading-relaxed">
+              Switch between official presentation modes:
+            </p>
+            <div className="flex flex-col gap-2">
+              {/* Normal Mode Button */}
+              <button
+                type="button"
+                onClick={() => onSwitchToClassic && onSwitchToClassic()}
+                className="w-full py-2 px-3 rounded-xl border-[1.5px] border-stone-700 bg-[#190649]/80 hover:bg-[#512BD4]/40 hover:border-[#512BD4] text-stone-300 hover:text-white font-mono text-xs font-bold transition-all flex items-center justify-between group cursor-pointer"
+                title="Switch to Normal (.NET Official) Mode"
+              >
+                <span className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-stone-500 group-hover:bg-[#00BDD6] transition-colors"></span>
+                  <span>NORMAL MODE</span>
+                </span>
+                <span className="text-[10px] text-stone-400 font-normal">Official</span>
+              </button>
+
+              {/* Neo-Brutalism Button (Active) */}
+              <div
+                className="w-full py-2 px-3 rounded-xl border-[2px] border-black bg-[#00BDD6] text-black font-mono text-xs font-black shadow-[2px_2px_0px_0px_#000] flex items-center justify-between"
+                title="Currently in Neo-Brutalism Mode"
+              >
+                <span className="flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 fill-black" />
+                  <span>NEO-BRUTALISM</span>
+                </span>
+                <span className="text-[9px] bg-black text-white px-1.5 py-0.5 rounded font-mono font-bold">
+                  ACTIVE
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Col 3: Community & Host */}

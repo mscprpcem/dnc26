@@ -142,7 +142,7 @@ export const App = () => {
       </main>
 
       {/* Footer */}
-      <Footer />
+      <Footer onSwitchToNeoBrutal={switchToDncBrutal} />
 
       {/* Floating Mode Switcher to Neo-Brutalist DNC Page */}
       <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50">

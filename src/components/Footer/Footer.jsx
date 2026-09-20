@@ -1,13 +1,13 @@
 import React from 'react';
-import { Heart, MapPin } from 'lucide-react';
+import { Heart, MapPin, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-export const Footer = () => {
+export const Footer = ({ onSwitchToNeoBrutal }) => {
   return (
     <footer className="w-full mt-auto border-t border-[#DCD5F6]/80 bg-white/70 backdrop-blur-md">
       {/* Upper Footer Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <div className="flex items-center gap-2">
               <img
@@ -24,6 +24,23 @@ export const Footer = () => {
               <MapPin className="w-3 h-3 text-[#512BD4]" />
               {eventData.organizer.institution}
             </span>
+          </div>
+
+          {/* Theme Mode Switcher in Footer */}
+          <div className="flex items-center gap-1.5 bg-[#F4F0FF] p-1 rounded-full border border-[#DCD5F6]/80 shadow-inner">
+            <div className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#512BD4] shadow-sm flex items-center gap-1.5 cursor-default select-none">
+              <span className="w-2 h-2 rounded-full bg-[#512BD4]"></span>
+              <span>Normal</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => onSwitchToNeoBrutal && onSwitchToNeoBrutal()}
+              className="px-3 py-1 rounded-full text-xs font-bold text-[#190649]/75 hover:text-[#512BD4] hover:bg-white/80 transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Switch to Neo-Brutalist Mode"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#E1306C]" />
+              <span>Neo-Brutalism</span>
+            </button>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-[#190649]/80">

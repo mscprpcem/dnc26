@@ -63,7 +63,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
       </main>
 
       {/* Footer */}
-      <DncFooter />
+      <DncFooter onSwitchToClassic={onSwitchToClassic} />
 
       {/* Floating Action Controls (Bottom Right) */}
       <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50 flex flex-col gap-2.5 items-end">
