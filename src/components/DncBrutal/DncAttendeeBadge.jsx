@@ -238,15 +238,6 @@ Get your official attendee badge here:
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    // Top Lanyard Hole / Grommet
-    ctx.beginPath();
-    ctx.arc(centerX, centerY - outerRadius + 36, 16, 0, Math.PI * 2);
-    ctx.fillStyle = '#14053A';
-    ctx.fill();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = '#FFFFFF';
-    ctx.stroke();
-
     // Delegate Pass Pill
     const passText = 'OFFICIAL DELEGATE';
     ctx.font = 'bold 17px "JetBrains Mono", monospace';
@@ -945,9 +936,6 @@ Get your official attendee badge here:
                       </textPath>
                     </text>
                   </svg>
-
-                  {/* Top Lanyard Grommet Hole */}
-                  <div className="absolute top-2 sm:top-2.5 z-20 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-black border-2 border-white/80 shadow-[0px_1px_2px_rgba(0,0,0,0.4)]" />
 
                   {/* Inner Badge Disc */}
                   <div className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10">
