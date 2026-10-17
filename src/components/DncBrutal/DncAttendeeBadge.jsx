@@ -904,7 +904,7 @@ Get your official attendee badge here:
               <div className="relative select-none">
 
                 {/* Outer Circular Container */}
-                <div className="w-[320px] h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center">
+                <div className="w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center">
 
                   {/* SVG Circular Text Ring */}
                   <svg viewBox="0 0 400 400" className="w-full h-full absolute inset-0 pointer-events-none">
@@ -938,7 +938,7 @@ Get your official attendee badge here:
                   </svg>
 
                   {/* Inner Badge Disc */}
-                  <div className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10">
+                  <div className="w-[205px] h-[205px] xs:w-[235px] xs:h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10">
 
                     {/* Delegate Chip */}
                     <div className="bg-[#00BDD6] text-black font-mono font-black text-[8px] sm:text-[9.5px] px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1.5">
@@ -1016,7 +1016,7 @@ Get your official attendee badge here:
               <div className="relative select-none">
 
                 {/* Outer Square Container - Social Media Graphic Post */}
-                <div className="w-[310px] h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between">
+                <div className="w-[280px] h-[350px] xs:w-[310px] xs:h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between">
 
                   {/* Header Banner - Social Media Post Style */}
                   <div className="bg-[#512BD4] text-white border-b-[3px] border-black py-2.5 px-3 text-center">

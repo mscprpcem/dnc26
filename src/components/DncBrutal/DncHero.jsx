@@ -78,7 +78,7 @@ export const DncHero = () => {
             {/* College Name & Location Pill - Single Clean Line */}
             <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] md:text-xs font-bold text-[#512BD4] font-mono mb-6 bg-white border-[2px] border-black px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-[2px_2px_0px_0px_#000] max-w-full">
               <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#512BD4] shrink-0" />
-              <span className="whitespace-nowrap">{eventData.organizer.institution}</span>
+              <span className="truncate max-w-[230px] xs:max-w-xs sm:max-w-none">{eventData.organizer.institution}</span>
             </div>
 
             {/* Action Buttons */}

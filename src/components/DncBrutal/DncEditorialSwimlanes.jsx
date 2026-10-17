@@ -14,7 +14,7 @@ export const DncEditorialSwimlanes = () => {
       {/* Side spaces gutter badges (Desktop) */}
       <div 
         aria-hidden="true"
-        className="hidden xl:flex absolute -left-16 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
+        className="hidden 2xl:flex absolute -left-16 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
       >
         <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
           <span className="text-[#512BD4]">02</span>
@@ -35,7 +35,7 @@ export const DncEditorialSwimlanes = () => {
 
       <div 
         aria-hidden="true"
-        className="hidden xl:flex absolute -right-16 2xl:-right-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
+        className="hidden 2xl:flex absolute -right-16 2xl:-right-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
       >
         <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
           <span className="text-black uppercase tracking-wider">.NET CONF 2026</span>

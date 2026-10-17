@@ -351,66 +351,429 @@
 }
 
 /* ==========================================================================
-   GLOBAL RESPONSIVE MEDIA QUERIES FOR ALL SCREEN BREAKPOINTS
+   EXHAUSTIVE RESPONSIVE MEDIA QUERIES: A TO Z (ALL PAGES & COMPONENTS)
    ========================================================================== */
 
-/* A. Ultra-Compact Mobile Screens (<= 380px) */
+/* --------------------------------------------------------------------------
+   1. ULTRA-COMPACT MOBILE BREAKPOINT (<= 380px)
+   iPhone SE 1st gen, Galaxy Fold closed, narrow Android viewports
+   -------------------------------------------------------------------------- */
 @media (max-width: 380px) {
+  /* Global Canvas & Typography */
   .dnc-brutal-canvas {
-    background-size: 20px 20px;
+    background-size: 18px 18px;
   }
 
-  /* Compact button paddings and fonts */
-  .btn-brutal {
-    padding-left: 0.65rem !important;
-    padding-right: 0.65rem !important;
-    font-size: 10.5px !important;
-  }
-
-  /* Adjust headings on very small phones */
   h1 {
-    font-size: 1.75rem !important;
-    line-height: 1.1 !important;
+    font-size: 1.65rem !important;
+    line-height: 1.12 !important;
   }
 
   h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.18 !important;
+  }
+
+  h3 {
+    font-size: 1.05rem !important;
+  }
+
+  /* Universal Card Padding & Radius Compression */
+  [class*="rounded-[32px]"],
+  [class*="rounded-[28px]"],
+  .rounded-3xl {
+    border-radius: 1.15rem !important;
+    padding: 0.85rem !important;
+  }
+
+  /* Reduce deep drop shadows so they never push viewport width */
+  [class*="shadow-[6px"],
+  [class*="shadow-[7px"],
+  [class*="shadow-[8px"],
+  .shadow-brutal-lg,
+  .shadow-brutal-xl {
+    box-shadow: 3px 3px 0px 0px #000000 !important;
+  }
+
+  /* Buttons & CTAs */
+  .btn-brutal,
+  button[type="submit"],
+  a[href="/register"],
+  a[href="/badge"] {
+    font-size: 11px !important;
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.65rem !important;
+  }
+
+  /* A - Agenda / Schedule */
+  #agenda .rounded-2xl {
+    padding: 0.75rem !important;
+  }
+
+  /* B - Attendee Badge */
+  #badge [class*="w-[280px]"] {
+    width: 250px !important;
+    height: 250px !important;
+  }
+
+  #badge [class*="w-[205px]"] {
+    width: 175px !important;
+    height: 175px !important;
+  }
+
+  #badge h4 {
+    font-size: 0.875rem !important;
+    max-width: 140px !important;
+  }
+
+  /* H - Hero Component */
+  #top h1 span.block:last-child {
     font-size: 1.35rem !important;
-    line-height: 1.15 !important;
-  }
-}
-
-/* B. Standard Mobile Screens (381px - 640px) */
-@media (max-width: 640px) {
-  /* Prevent horizontal card blowout */
-  .rounded-\[32px\] {
-    border-radius: 1.25rem !important;
   }
 
-  /* Prevent code terminal from stretching viewport */
-  pre, code {
+  #top .inline-flex {
     max-width: 100% !important;
   }
+
+  /* I - Interest Form */
+  #register form {
+    gap: 0.65rem !important;
+  }
+
+  #register input,
+  #register button#dnc-role-dropdown-btn {
+    padding: 0.5rem 0.65rem !important;
+    font-size: 12px !important;
+  }
+
+  /* V - Venue Component */
+  #venue .aspect-16\/10 {
+    aspect-ratio: 4 / 3 !important;
+    min-height: 230px !important;
+  }
 }
 
-/* C. Tablet Portrait & Landscape (641px - 1024px) */
-@media (min-width: 641px) and (max-width: 1024px) {
-  /* Comfortable section spacing on tablets */
-  .tablet-gap-fix {
+/* --------------------------------------------------------------------------
+   2. STANDARD MOBILE SCREENS (381px - 640px)
+   Standard modern mobile phones (iPhone 12-16, Galaxy S21-S24, Pixel 6-9)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* Section Spacing Tightening */
+  section {
+    padding-top: 0.85rem !important;
+    padding-bottom: 1.15rem !important;
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+  }
+
+  /* Card Radius Scaling */
+  [class*="rounded-[32px]"],
+  [class*="rounded-[28px]"] {
+    border-radius: 1.35rem !important;
+  }
+
+  /* A - Agenda Component */
+  #agenda .time-slot-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* B - Badge Component */
+  #badge .grid-cols-2 {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  #badge .action-buttons-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+
+  /* C - Community Component */
+  #community .community-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* E - Editorial Swimlanes Component */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  /* F - Footer Component */
+  footer .footer-container {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+  }
+
+  footer .footer-links-group {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* H - Hero Section */
+  #top .order-1 {
+    order: 1 !important;
+  }
+
+  #top .order-2 {
+    order: 2 !important;
+  }
+
+  #top pre,
+  #top code {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* I - Interest Form Component */
+  #register .grid-cols-1.sm\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  #register .topics-flex-wrap {
+    gap: 0.35rem !important;
+  }
+
+  /* K - Keynote Spotlight Component */
+  #keynote .keynote-speaker-card {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #keynote .keynote-pillars-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  /* N - Navbar Header */
+  header .dnc-nav-container {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  /* P - Past Highlights Component */
+  #highlights .slideshow-viewport {
+    height: 240px !important;
+  }
+
+  #highlights .stats-counter-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+
+  /* S - Sponsors Component */
+  #partners .sponsors-logo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* V - Venue Component */
+  #venue .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  #venue .aspect-16\/10 {
+    min-height: 260px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLET PORTRAIT & PHABLETS (641px - 768px)
+   iPads, Android Tablets in portrait, large phablets
+   -------------------------------------------------------------------------- */
+@media (min-width: 641px) and (max-width: 768px) {
+  section {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Hero: Proportional 2-column or stacked */
+  #top .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Editorial Swimlanes: 2x2 Grid */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  /* Schedule / Agenda: 2-column or clean stacked */
+  #agenda .agenda-tabs-bar {
+    overflow-x: auto !important;
+  }
+
+  /* Venue: Side-by-side or stacked cleanly */
+  #venue .aspect-16\/10 {
+    min-height: 320px !important;
+  }
+
+  /* Sponsors: 3-column grid */
+  #partners .sponsors-logo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. TABLET LANDSCAPE & SMALL LAPTOPS (769px - 1024px)
+   iPad Pro portrait/landscape, Surface Pro, 13-inch small laptop viewports
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Hero: 7 / 5 column split */
+  #top .grid-cols-1.lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  #top .lg\:col-span-7 {
+    grid-column: span 7 / span 7 !important;
+  }
+
+  #top .lg\:col-span-5 {
+    grid-column: span 5 / span 5 !important;
+  }
+
+  /* Swimlanes: 2x2 Clean Balanced Grid */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 1.25rem !important;
   }
+
+  /* Keynote: 2-column */
+  #keynote .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  /* Venue: 2-column with 50/50 proportion */
+  #venue .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  #venue .aspect-16\/10 {
+    min-height: 340px !important;
+  }
 }
 
-/* D. Desktop Displays (1025px - 1535px) */
-@media (min-width: 1025px) and (max-width: 1535px) {
-  /* Clean proportional gutters */
+/* --------------------------------------------------------------------------
+   5. STANDARD DESKTOP DISPLAYS (1025px - 1439px)
+   Mainstream laptops (MacBook Pro/Air, Dell XPS, ThinkPad) & FHD Monitors
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) and (max-width: 1439px) {
   .max-w-7xl {
-    max-width: 76rem !important;
+    max-width: 74rem !important;
+  }
+
+  /* Full 4-Column Pillars */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  /* Venue 2-Column Balanced Height */
+  #venue .grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  #venue .lg\:col-span-6 {
+    grid-column: span 6 / span 6 !important;
+  }
+
+  #venue .aspect-16\/10 {
+    min-height: 380px !important;
   }
 }
 
-/* E. Ultra-Wide & High-DPI Displays (>= 1536px) */
-@media (min-width: 1536px) {
-  .max-w-5xl {
-    max-width: 68rem !important;
+/* --------------------------------------------------------------------------
+   6. ULTRA-WIDE & 4K SCREENS (>= 1440px / >= 1536px)
+   High-resolution monitors, 1440p, 4K displays
+   -------------------------------------------------------------------------- */
+@media (min-width: 1440px) {
+  .max-w-7xl {
+    max-width: 80rem !important;
+  }
+
+  /* Generous breathing room on large screens */
+  .dnc-brutal-canvas {
+    background-size: 32px 32px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   7. LANDSCAPE MOBILE COMPACT HEIGHT (max-height: 520px)
+   Mobile phones held horizontally
+   -------------------------------------------------------------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+  header.sticky {
+    position: static !important;
+  }
+
+  #badge [class*="w-[280px]"],
+  #badge [class*="w-[320px]"] {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  #highlights .slideshow-viewport {
+    height: 180px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. ACCESSIBILITY & MOTION PREFERENCES
+   Users requesting reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. PRINT MEDIA STYLING
+   High-contrast, zero ink-waste print layout
+   -------------------------------------------------------------------------- */
+@media print {
+  body,
+  .dnc-brutal-canvas {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  header,
+  footer,
+  .fixed,
+  button,
+  .btn-brutal,
+  a[href="/register"] {
+    display: none !important;
+  }
+
+  .shadow-brutal,
+  .shadow-brutal-lg,
+  .shadow-brutal-xl,
+  [class*="shadow-"] {
+    box-shadow: none !important;
+    border: 1px solid #000000 !important;
+  }
+}
+
