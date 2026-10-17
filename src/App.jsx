@@ -122,7 +122,7 @@ export const App = () => {
         {/* Section 5: Keynote Speaker Spotlight (Headline Keynote - Announced Soon TBA) */}
         <Keynote />
 
-        {/* Section 6: 1-Day Conference Schedule & Tracks */}
+        {/* Section 6: Conference Schedule & Tracks */}
         <Agenda />
 
         {/* Section 6: Campus Venue & Google Maps (PRPCEM Campus, Amravati) */}

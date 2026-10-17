@@ -23,7 +23,7 @@ export const agendaSchedule = [
       speaker: 'MSC Leads & PRPCEM Dignitaries',
       room: 'PRPCEM Main Hall',
       category: 'Community',
-      description: 'Official welcome remarks and opening addresses for Central India’s flagship developer conference.',
+      description: 'Official welcome remarks and opening addresses for Central India’s premier annual developer conference.',
     },
   },
   {

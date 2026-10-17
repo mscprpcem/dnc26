@@ -22,7 +22,7 @@ export const Hero = () => {
               </span>
             </h1>
 
-            {/* Description: Flagship Dev Event for Amravati focusing on the Microsoft Ecosystem */}
+            {/* Description: Annual Dev Event for Amravati focusing on the Microsoft Ecosystem */}
             <p className="hero-description text-[#190649]/85 font-medium leading-relaxed max-w-xl mb-4 text-sm sm:text-base">
               Central India's premier developer event for Amravati, celebrating the broader Microsoft ecosystem — from modern .NET and Azure cloud to Generative AI and developer tooling.
             </p>
@@ -77,16 +77,36 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: Hero Mascot */}
-          <div className="md:col-span-5 flex items-center justify-center relative hero-mascot-container">
-            {/* Mascot Image Frame (Steady, crisp, natural sizing across all breakpoints) */}
-            <div className="relative w-full max-w-[220px] xs:max-w-[270px] sm:max-w-[330px] md:max-w-[400px] lg:max-w-[480px] xl:max-w-[520px] select-none">
-              <img
-                role="presentation"
-                src="/conf-hero.svg"
-                alt=".NET Launch Mascot — .NET Conf Amravati"
-                className="w-full h-auto drop-shadow-xl select-none"
-              />
+          {/* Right Column: Sleek Developer Console */}
+          <div className="md:col-span-5 flex items-center justify-center relative w-full">
+            <div className="w-full max-w-[420px] rounded-2xl bg-[#14053A] border-2 border-[#512BD4]/40 shadow-2xl shadow-[#512BD4]/20 overflow-hidden text-left">
+              <div className="bg-[#1E0B4E] px-4 py-2.5 flex items-center justify-between border-b border-white/10">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-[#FF5F56] inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-[#FFBD2E] inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-[#27C93F] inline-block" />
+                </div>
+                <div className="text-xs font-mono font-bold text-stone-300">
+                  Program.cs · <span className="text-[#00BDD6]">.NET 11</span>
+                </div>
+                <div className="text-[10px] font-mono font-bold bg-[#512BD4] text-white px-2 py-0.5 rounded">
+                  C# 14
+                </div>
+              </div>
+              <div className="p-4 sm:p-5 font-mono text-xs leading-relaxed text-stone-200">
+                <p className="text-stone-500">// Central India · Annual Conference</p>
+                <p><span className="text-[#D600AA] font-bold">var</span> builder = WebApplication.<span className="text-[#00BDD6]">CreateBuilder</span>(args);</p>
+                <p className="mt-2 text-stone-400">builder.Services.<span className="text-[#00BDD6]">AddDotNetConf</span>(cfg =&gt; &#123;</p>
+                <p className="pl-4 text-stone-300">cfg.Campus = <span className="text-[#FFD13B]">"PRPCEM Amravati"</span>;</p>
+                <p className="pl-4 text-stone-300">cfg.Tracks = [<span className="text-[#00BDD6]">"Cloud"</span>, <span className="text-[#00BDD6]">"Azure AI"</span>];</p>
+                <p className="text-stone-400">&#125;);</p>
+                <p className="mt-2"><span className="text-[#D600AA] font-bold">var</span> app = builder.<span className="text-[#00BDD6]">Build</span>();</p>
+                <p><span className="text-[#D600AA] font-bold">await</span> app.<span className="text-[#00BDD6]">RunAsync</span>();</p>
+              </div>
+              <div className="bg-[#0B0220] p-3 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-emerald-400">
+                <span>$ dotnet run --project dnc26</span>
+                <span className="text-stone-400">Ready</span>
+              </div>
             </div>
           </div>
 

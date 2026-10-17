@@ -6,8 +6,8 @@ export const DncTracks = () => {
   return (
     <section id="dnc-tracks" className="py-6 sm:py-10 px-3 sm:px-6 max-w-6xl mx-auto">
       {/* Signpost */}
-      <DncSignpost 
-        title="CONFERENCE TRACKS" 
+      <DncSignpost
+        title="CONFERENCE TRACKS"
         badge="CURATED SESSIONS"
         theme="purple"
       />

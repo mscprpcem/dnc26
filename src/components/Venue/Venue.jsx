@@ -4,6 +4,7 @@ import {
   Navigation, 
   Compass, 
   Building, 
+  Building2,
   ExternalLink, 
   Copy, 
   Check, 
@@ -64,12 +65,8 @@ export const Venue = () => {
                     {eventData.location.address}
                   </p>
                 </div>
-                <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 select-none">
-                  <img
-                    src="/dotnet-bot.svg"
-                    alt=".NET Bot Campus Guide"
-                    className="w-full h-full object-contain drop-shadow-sm select-none"
-                  />
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#512BD4] text-white flex items-center justify-center shrink-0 select-none shadow-md">
+                  <Building2 className="w-7 h-7 sm:w-8 sm:h-8" />
                 </div>
               </div>
 

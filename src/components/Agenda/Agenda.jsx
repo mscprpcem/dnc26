@@ -56,22 +56,20 @@ export const Agenda = () => {
             Agenda & Tracks <span className="community-event-gradient-text">To Be Announced (TBA)</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-[#190649]/75 leading-relaxed">
-            Specific technical tracks, speaker slots, and session schedules are currently being curated. The high-level 1-day event flow is outlined below.
+            Specific technical tracks, speaker slots, and session schedules are currently being curated. The high-level conference session flow and milestone timeline are outlined below.
           </p>
         </div>
 
-        {/* 1-Day Outline Flow Card */}
+        {/* Conference Outline Flow Card */}
         <div className="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#DCD5F6] shadow-lg p-3.5 xs:p-5 sm:p-8 md:p-10 mb-8 overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-2.5 pb-4 mb-6 border-b border-[#DCD5F6]/70 min-w-0">
             <div className="flex items-center gap-2.5 min-w-0">
-              <img
-                src="/mascot/dotnet-bot-pot.svg"
-                alt=".NET Bot Schedule Guide"
-                className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0 select-none"
-              />
+              <div className="w-8 h-8 rounded-xl bg-[#512BD4] text-white flex items-center justify-center shrink-0">
+                <Clock className="w-4 h-4" />
+              </div>
               <div className="min-w-0">
                 <span className="text-xs sm:text-sm font-bold text-[#14053A] uppercase tracking-wider block leading-tight truncate">
-                  1-Day Flagship Conference Flow
+                  Conference Session Flow & Milestones
                 </span>
                 <span className="text-[11px] text-[#512BD4] font-semibold block truncate">PRPCEM Campus, Amravati</span>
               </div>

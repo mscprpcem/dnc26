@@ -1,5 +1,5 @@
 import React from 'react';
-import { Globe, Mail, ArrowUpRight } from 'lucide-react';
+import { Globe, Mail, ArrowUpRight, Users } from 'lucide-react';
 import { LinkedInIcon, LinktreeIcon, GitHubIcon, YouTubeIcon, InstagramIcon, WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { eventData } from '../../data/event.js';
 
@@ -61,14 +61,10 @@ export const StayConnected = () => {
     <section id="stay-connected" className="w-full py-12 sm:py-16 text-center scroll-mt-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Mascot Greeting (Steady, clean, natural size) */}
+        {/* Community Header Emblem */}
         <div className="flex justify-center mb-5">
-          <div className="relative w-36 sm:w-44 select-none">
-            <img
-              src="/mascot/dotnet-bot-surfing.png"
-              alt=".NET Bot Surfing the Community"
-              className="w-full h-auto drop-shadow-md select-none"
-            />
+          <div className="w-14 h-14 rounded-2xl bg-[#512BD4] text-white flex items-center justify-center shadow-lg shadow-[#512BD4]/25">
+            <Users className="w-7 h-7" />
           </div>
         </div>
 

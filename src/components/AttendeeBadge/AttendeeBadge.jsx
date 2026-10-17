@@ -14,7 +14,7 @@ import {
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, XIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon } from '../ui/SocialIcons.jsx';
 
 const ROLE_PRESETS = [
   'Student Developer',
@@ -82,7 +82,7 @@ export const AttendeeBadge = () => {
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
     return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
-Join me for the premier flagship Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
+Join me for the premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
 
 Get your official attendee badge here:
 👉 https://dotnetconf.mscprpcem.tech
@@ -102,10 +102,23 @@ Get your official attendee badge here:
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleShareX = () => {
-    const tweet = `🚀 I'm attending .NET Conf 2026 Amravati on 20 April 2026! Get your official attendee badge here:`;
+  const handleShareInstagram = async () => {
+    const text = getSharePostText();
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
+    }
+    window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareTelegram = () => {
+    const text = getSharePostText();
     const confUrl = 'https://dotnetconf.mscprpcem.tech';
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}&url=${encodeURIComponent(confUrl)}&hashtags=DotNetConf2026,DotNetConfAmravati,MSCPRPCEM`;
+    const url = `https://t.me/share/url?url=${encodeURIComponent(confUrl)}&text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 

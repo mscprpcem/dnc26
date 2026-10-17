@@ -9,29 +9,36 @@ export const SECTION_ROUTES = [
   { path: '/venue', id: 'venue', label: 'VENUE' },
   { path: '/badge', id: 'attendee-badge', label: 'BADGE' },
   { path: '/partners', id: 'partners', label: 'PARTNERS' },
-  { path: '/register', id: 'register-interest', label: 'REGISTER' },
-  { path: '/community', id: 'stay-connected', label: 'COMMUNITY' },
+  { path: '/register', id: 'register', label: 'REGISTER' },
+  { path: '/community', id: 'community', label: 'COMMUNITY' },
 ];
 
 export const PATH_TO_ID = {
   '/': 'top',
   '/home': 'top',
+  '/top': 'top',
   '/about': 'overview',
   '/overview': 'overview',
   '/highlights': 'highlights',
+  '/recap': 'highlights',
+  '/gallery': 'highlights',
   '/keynote': 'keynote',
   '/schedule': 'schedule',
   '/agenda': 'schedule',
+  '/tracks': 'schedule',
   '/venue': 'venue',
   '/location': 'venue',
+  '/map': 'venue',
   '/badge': 'attendee-badge',
   '/attendee-badge': 'attendee-badge',
   '/partners': 'partners',
   '/sponsors': 'partners',
-  '/register': 'register-interest',
-  '/register-interest': 'register-interest',
-  '/community': 'stay-connected',
-  '/connect': 'stay-connected',
+  '/collaborators': 'partners',
+  '/register': 'register',
+  '/register-interest': 'register',
+  '/community': 'community',
+  '/stay-connected': 'community',
+  '/connect': 'community',
 };
 
 export const ID_TO_PATH = {
@@ -42,8 +49,11 @@ export const ID_TO_PATH = {
   'schedule': '/schedule',
   'venue': '/venue',
   'attendee-badge': '/badge',
+  'badge': '/badge',
   'partners': '/partners',
+  'register': '/register',
   'register-interest': '/register',
+  'community': '/community',
   'stay-connected': '/community',
 };
 
@@ -62,7 +72,7 @@ export const scrollToSection = (target, updateHistory = true) => {
   if (typeof target === 'string') {
     if (target.startsWith('/')) {
       path = normalizePath(target);
-      targetId = PATH_TO_ID[path] || 'top';
+      targetId = PATH_TO_ID[path] || path.replace(/^\//, '');
     } else {
       targetId = target.replace(/^#/, '');
       path = ID_TO_PATH[targetId] || `/${targetId}`;
@@ -73,9 +83,43 @@ export const scrollToSection = (target, updateHistory = true) => {
   if (targetId === 'top' || path === '/') {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else {
-    const el = document.getElementById(targetId);
+    // Multi-candidate search to guarantee finding the target section in both Brutal and Classic modes
+    const candidateIds = [
+      targetId,
+      path.replace(/^\//, ''),
+      targetId.replace(/-/g, ''),
+    ];
+    if (targetId === 'register' || targetId === 'register-interest') {
+      candidateIds.push('register', 'register-interest');
+    }
+    if (targetId === 'community' || targetId === 'stay-connected') {
+      candidateIds.push('community', 'stay-connected');
+    }
+    if (targetId === 'attendee-badge' || targetId === 'badge') {
+      candidateIds.push('attendee-badge', 'badge');
+    }
+    if (targetId === 'overview' || targetId === 'about') {
+      candidateIds.push('overview', 'about');
+    }
+    if (targetId === 'schedule' || targetId === 'agenda') {
+      candidateIds.push('schedule', 'agenda');
+    }
+
+    let el = null;
+    for (const cid of candidateIds) {
+      el = document.getElementById(cid);
+      if (el) break;
+    }
+
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const navOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = Math.max(0, elementPosition - navOffset);
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
   }
 
@@ -150,18 +194,15 @@ export const useSectionRouter = () => {
     // Initial page load deep linking (e.g. /about, /schedule, /badge)
     const initialPath = normalizePath(window.location.pathname);
     if (initialPath && initialPath !== '/') {
-      const targetId = PATH_TO_ID[initialPath];
-      if (targetId) {
-        setActivePath(initialPath);
-        const timer = setTimeout(() => {
-          scrollToSection(initialPath, false);
-        }, 200);
-        return () => {
-          clearTimeout(timer);
-          window.removeEventListener('popstate', handlePopState);
-          window.removeEventListener('sectionnav', handleCustomNav);
-        };
-      }
+      setActivePath(initialPath);
+      const timer = setTimeout(() => {
+        scrollToSection(initialPath, false);
+      }, 300);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener('popstate', handlePopState);
+        window.removeEventListener('sectionnav', handleCustomNav);
+      };
     }
 
     return () => {
@@ -172,10 +213,14 @@ export const useSectionRouter = () => {
 
   // Scroll spy to update active section in navbar and address bar as user scrolls
   useEffect(() => {
-    const sectionElements = SECTION_ROUTES.map((route) => ({
-      ...route,
-      el: document.getElementById(route.id),
-    })).filter((item) => item.el !== null);
+    const sectionElements = SECTION_ROUTES.map((route) => {
+      const targetId = PATH_TO_ID[route.path] || route.id;
+      const el = document.getElementById(targetId) || document.getElementById(route.id);
+      return {
+        ...route,
+        el,
+      };
+    }).filter((item) => item.el !== null);
 
     if (sectionElements.length === 0) return;
 

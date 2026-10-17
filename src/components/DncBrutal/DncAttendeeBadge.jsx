@@ -1,20 +1,20 @@
 import React, { useState, useRef } from 'react';
-import { 
-  Download, 
-  Share2, 
-  Check, 
-  User, 
-  Briefcase, 
-  Building2, 
-  Upload, 
-  Camera, 
-  X, 
-  Sparkles, 
+import {
+  Download,
+  Share2,
+  Check,
+  User,
+  Briefcase,
+  Building2,
+  Upload,
+  Camera,
+  X,
+  Sparkles,
   Ticket,
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, XIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon } from '../ui/SocialIcons.jsx';
 import DncSignpost from './DncSignpost.jsx';
 import DncSectionFlanks from './DncSectionFlanks.jsx';
 
@@ -84,7 +84,7 @@ export const DncAttendeeBadge = () => {
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
     return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
-Join me for the premier flagship Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
+Join me for the premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
 
 Get your official attendee badge here:
 👉 https://dotnetconf.mscprpcem.tech
@@ -104,10 +104,23 @@ Get your official attendee badge here:
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleShareX = () => {
-    const tweet = `🚀 I'm attending .NET Conf 2026 Amravati on 20 April 2026! Get your official attendee badge:`;
+  const handleShareInstagram = async () => {
+    const text = getSharePostText();
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2600);
+    }
+    window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareTelegram = () => {
+    const text = getSharePostText();
     const confUrl = 'https://dotnetconf.mscprpcem.tech';
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}&url=${encodeURIComponent(confUrl)}&hashtags=DotNetConf2026,DotNetConfAmravati,MSCPRPCEM`;
+    const url = `https://t.me/share/url?url=${encodeURIComponent(confUrl)}&text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -123,62 +136,72 @@ Get your official attendee badge here:
     }
   };
 
-  // Canvas helper for text along an arc (for Circular Badge)
-  const drawArcText = (ctx, text, centerX, centerY, radius, centerAngle, letterSpacingAngle, inward = true) => {
+  // Canvas helpers for curved text along an arc (for Circular Badge)
+  const drawTopArcText = (ctx, text, centerX, centerY, radius, letterSpacingAngle = 0.046) => {
     const chars = text.split('');
     const totalAngle = (chars.length - 1) * letterSpacingAngle;
-    let currentAngle = centerAngle - totalAngle / 2;
-
-    ctx.save();
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    chars.forEach((char) => {
+    chars.forEach((char, i) => {
+      const theta = -totalAngle / 2 + i * letterSpacingAngle;
       ctx.save();
       ctx.translate(centerX, centerY);
-      ctx.rotate(currentAngle);
-      ctx.translate(0, inward ? -radius : radius);
-      if (!inward) {
-        ctx.rotate(Math.PI);
-      }
+      ctx.rotate(theta);
+      ctx.translate(0, -radius);
       ctx.fillText(char, 0, 0);
       ctx.restore();
-      currentAngle += letterSpacingAngle;
     });
-
-    ctx.restore();
   };
 
-  // Helper to load image
+  const drawBottomArcText = (ctx, text, centerX, centerY, radius, letterSpacingAngle = 0.042) => {
+    const chars = text.split('');
+    const totalAngle = (chars.length - 1) * letterSpacingAngle;
+    chars.forEach((char, i) => {
+      const phi = -totalAngle / 2 + i * letterSpacingAngle;
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(-phi);
+      ctx.translate(0, radius);
+      ctx.fillText(char, 0, 0);
+      ctx.restore();
+    });
+  };
+
+  // Safe helper to load image (never enforces crossOrigin on data URIs)
   const loadImage = (src) =>
     new Promise((resolve) => {
       if (!src) return resolve(null);
       const img = new Image();
-      img.crossOrigin = 'anonymous';
+      if (!src.startsWith('data:')) {
+        img.crossOrigin = 'anonymous';
+      }
       img.onload = () => resolve(img);
       img.onerror = () => resolve(null);
       img.src = src;
     });
 
-  // 1. Download Circular Badge Canvas (900x900)
+  // 1. Download Circular Badge Canvas (1080x1080 High-DPI Crisp Social Format)
   const handleDownloadCircularBadge = async () => {
     setIsDownloading(true);
+
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+
     const canvas = document.createElement('canvas');
-    canvas.width = 900;
-    canvas.height = 900;
+    canvas.width = 1080;
+    canvas.height = 1080;
     const ctx = canvas.getContext('2d');
 
-    const centerX = 450;
-    const centerY = 450;
-    const outerRadius = 410;
-    const innerRadius = 320;
+    const centerX = 540;
+    const centerY = 540;
+    const outerRadius = 460;
+    const innerRadius = 360;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Outer drop shadow
+    // Outer drop shadow (Neo-Brutalist offset)
     ctx.save();
     ctx.beginPath();
-    ctx.arc(centerX + 8, centerY + 8, outerRadius, 0, Math.PI * 2);
+    ctx.arc(centerX + 10, centerY + 10, outerRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#000000';
     ctx.fill();
     ctx.restore();
@@ -188,32 +211,36 @@ Get your official attendee badge here:
     ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#512BD4';
     ctx.fill();
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 12;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
     // Top Arc Text: ★ .NET CONF 2026 · AMRAVATI ★
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 23px "JetBrains Mono", monospace';
-    drawArcText(ctx, '★  .NET CONF 2026 · AMRAVATI  ★', centerX, centerY, 365, 0, 0.048, true);
+    ctx.font = 'bold 27px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    drawTopArcText(ctx, '★  .NET CONF 2026 · AMRAVATI  ★', centerX, centerY, 410, 0.048);
 
-    // Bottom Arc Text: ★ 20 APRIL 2026 · PRPCEM CAMPUS ★
+    // Bottom Arc Text: ★ 20 APRIL 2026 · PRPCEM CAMPUS ★ (Upright left-to-right)
     ctx.fillStyle = '#FFDB43';
-    ctx.font = 'bold 20px "JetBrains Mono", monospace';
-    drawArcText(ctx, '★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, centerY, 365, 0, 0.044, false);
+    ctx.font = 'bold 24px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    drawBottomArcText(ctx, '★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, centerY, 410, 0.044);
 
-    // Inner Circle Background
+    // Inner Circle Background & Border
     ctx.beginPath();
     ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#FAF8FF';
     ctx.fill();
-    ctx.lineWidth = 8;
+    ctx.lineWidth = 9;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
     // Top Lanyard Hole / Grommet
     ctx.beginPath();
-    ctx.arc(centerX, centerY - outerRadius + 32, 14, 0, Math.PI * 2);
+    ctx.arc(centerX, centerY - outerRadius + 36, 16, 0, Math.PI * 2);
     ctx.fillStyle = '#14053A';
     ctx.fill();
     ctx.lineWidth = 4;
@@ -221,13 +248,13 @@ Get your official attendee badge here:
     ctx.stroke();
 
     // Delegate Pass Pill
-    const passText = 'OFFICIAL DELEGATE PASS';
-    ctx.font = 'bold 15px "JetBrains Mono", monospace';
+    const passText = 'OFFICIAL DELEGATE';
+    ctx.font = 'bold 17px "JetBrains Mono", monospace';
     const passWidth = ctx.measureText(passText).width + 36;
-    const passY = 205;
+    const passY = 230;
     ctx.fillStyle = '#00BDD6';
     ctx.beginPath();
-    ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 28, 14);
+    ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 32, 16);
     ctx.fill();
     ctx.lineWidth = 3;
     ctx.strokeStyle = '#000000';
@@ -235,141 +262,156 @@ Get your official attendee badge here:
     ctx.fillStyle = '#000000';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(passText, centerX, passY + 14);
+    ctx.fillText(passText, centerX, passY + 16);
 
-    // Load user portrait and mascot
-    const [userImg, mascotImg] = await Promise.all([
-      loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png')
-    ]);
+    // Load user portrait
+    const userImg = await loadImage(customPhotoUrl);
 
     // Center Portrait Frame
-    const portraitRadius = 100;
-    const portraitCenterY = 365;
+    const portraitRadius = 125;
+    const portraitCenterY = 425;
 
+    // Portrait Drop Shadow
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX + 6, portraitCenterY + 6, portraitRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#000000';
+    ctx.fill();
+    ctx.restore();
+
+    // Portrait Background & Image Clip
     ctx.save();
     ctx.beginPath();
     ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#FFFFFF';
     ctx.fill();
-    ctx.lineWidth = 7;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
     ctx.clip();
 
     if (userImg) {
-      const aspect = userImg.width / userImg.height;
-      let drawW = portraitRadius * 2;
-      let drawH = portraitRadius * 2;
-      let drawX = centerX - portraitRadius;
-      let drawY = portraitCenterY - portraitRadius;
-      if (aspect > 1) {
-        drawW = drawH * aspect;
-        drawX = centerX - drawW / 2;
-      } else {
-        drawH = drawW / aspect;
-        drawY = portraitCenterY - drawH / 2;
-      }
+      const scale = Math.max((portraitRadius * 2) / userImg.width, (portraitRadius * 2) / userImg.height);
+      const drawW = userImg.width * scale;
+      const drawH = userImg.height * scale;
+      const drawX = centerX - drawW / 2;
+      const drawY = portraitCenterY - drawH / 2;
       ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
     } else {
       ctx.fillStyle = '#EEEAFB';
       ctx.fillRect(centerX - portraitRadius, portraitCenterY - portraitRadius, portraitRadius * 2, portraitRadius * 2);
       ctx.fillStyle = '#512BD4';
       ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY - 18, 38, 0, Math.PI * 2);
+      ctx.arc(centerX, portraitCenterY - 22, 45, 0, Math.PI * 2);
       ctx.fill();
       ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY + 90, 75, Math.PI, Math.PI * 2);
+      ctx.arc(centerX, portraitCenterY + 105, 90, Math.PI, Math.PI * 2);
       ctx.fill();
     }
     ctx.restore();
 
+    // Crisp black border on top of clipped image
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = '#000000';
+    ctx.stroke();
+    ctx.restore();
+
     // Attendee Name
     ctx.fillStyle = '#14053A';
-    ctx.font = '900 38px "Space Grotesk", sans-serif';
+    ctx.font = '900 44px "Space Grotesk", sans-serif';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'alphabetic';
-    const displayName = (name.trim() || 'DELEGATE').toUpperCase();
-    ctx.fillText(displayName, centerX, 510);
+    ctx.textBaseline = 'middle';
+    const displayName = (name.trim() || 'YOUR NAME').toUpperCase();
+    ctx.fillText(displayName, centerX, 600);
 
     // Role Pill
     const roleText = (role.trim() || 'DELEGATE').toUpperCase();
-    ctx.font = 'bold 18px "JetBrains Mono", monospace';
-    const roleWidth = ctx.measureText(roleText).width + 36;
-    const roleY = 530;
+    ctx.font = 'bold 21px "JetBrains Mono", monospace';
+    const roleWidth = ctx.measureText(roleText).width + 38;
+    const roleY = 645;
     ctx.fillStyle = '#FFDB43';
     ctx.beginPath();
-    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 34, 17);
+    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 38, 19);
     ctx.fill();
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 3.5;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
     ctx.fillStyle = '#000000';
     ctx.textBaseline = 'middle';
-    ctx.fillText(roleText, centerX, roleY + 17);
+    ctx.fillText(roleText, centerX, roleY + 19);
 
     // College / Organization (only if provided)
     if (college.trim()) {
       ctx.fillStyle = '#444444';
-      ctx.font = 'bold 20px "Open Sans", sans-serif';
+      ctx.font = 'bold 23px "Open Sans", sans-serif';
       ctx.textBaseline = 'middle';
-      ctx.fillText(college.trim(), centerX, 595);
+      ctx.fillText(college.trim(), centerX, 725);
 
       ctx.fillStyle = '#512BD4';
-      ctx.font = 'bold 16px "JetBrains Mono", monospace';
-      ctx.fillText('★  ★  ★', centerX, 630);
+      ctx.font = 'bold 20px "JetBrains Mono", monospace';
+      ctx.fillText('★  ★  ★', centerX, 770);
     } else {
       ctx.fillStyle = '#512BD4';
-      ctx.font = 'bold 18px "JetBrains Mono", monospace';
+      ctx.font = 'bold 22px "JetBrains Mono", monospace';
       ctx.textBaseline = 'middle';
-      ctx.fillText('★  ★  ★', centerX, 600);
+      ctx.fillText('★  ★  ★', centerX, 730);
     }
 
-    // Companion Mascot Badge
-    const mascotCenterX = 660;
-    const mascotCenterY = 600;
-    const mascotRadius = 75;
+    // Official Delegate Verified Seal (Positioned on Bottom-Right Rim)
+    const sealCenterX = 870;
+    const sealCenterY = 870;
+    const sealRadius = 115;
 
     ctx.save();
+    ctx.translate(sealCenterX, sealCenterY);
+    ctx.rotate(-6 * (Math.PI / 180));
+
+    // Drop shadow
     ctx.beginPath();
-    ctx.arc(mascotCenterX + 5, mascotCenterY + 5, mascotRadius, 0, Math.PI * 2);
+    ctx.arc(8, 8, sealRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#000000';
     ctx.fill();
 
+    // Purple circle base
     ctx.beginPath();
-    ctx.arc(mascotCenterX, mascotCenterY, mascotRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
+    ctx.arc(0, 0, sealRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#512BD4';
     ctx.fill();
     ctx.lineWidth = 6;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    if (mascotImg) {
-      const pad = 12;
-      ctx.drawImage(
-        mascotImg,
-        mascotCenterX - mascotRadius + pad,
-        mascotCenterY - mascotRadius + pad,
-        (mascotRadius - pad) * 2,
-        (mascotRadius - pad) * 2
-      );
-    }
+    // Text ".NET 11" and "VERIFIED"
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 36px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('.NET 11', 0, -20);
 
-    const mascotLabel = '.NET BOT';
-    ctx.font = 'bold 13px "JetBrains Mono", monospace';
-    const mLabelW = ctx.measureText(mascotLabel).width + 20;
-    const mLabelY = mascotCenterY + mascotRadius - 14;
     ctx.fillStyle = '#00BDD6';
+    ctx.font = 'bold 18px "JetBrains Mono", monospace';
+    ctx.fillText('VERIFIED', 0, 18);
+
+    // Yellow label chip "2026 PASS"
+    const passLabel = '2026 PASS';
+    ctx.font = 'bold 15px "JetBrains Mono", monospace';
+    const pLabelW = ctx.measureText(passLabel).width + 24;
+    const pLabelH = 26;
+    const pLabelY = sealRadius - 14;
+
+    ctx.fillStyle = '#FFDB43';
     ctx.beginPath();
-    ctx.roundRect(mascotCenterX - mLabelW / 2, mLabelY, mLabelW, 22, 6);
+    ctx.roundRect(-pLabelW / 2, pLabelY - pLabelH / 2, pLabelW, pLabelH, 8);
     ctx.fill();
     ctx.lineWidth = 2.5;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
+
     ctx.fillStyle = '#000000';
-    ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.fillText(mascotLabel, mascotCenterX, mLabelY + 11);
+    ctx.textBaseline = 'middle';
+    ctx.fillText(passLabel, 0, pLabelY);
+
     ctx.restore();
 
     const link = document.createElement('a');
@@ -382,6 +424,11 @@ Get your official attendee badge here:
   // 2. Download Square Social Badge Canvas (1080x1080 - Social Media Post Format)
   const handleDownloadSquareBadge = async () => {
     setIsDownloading(true);
+
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+
     const canvas = document.createElement('canvas');
     canvas.width = 1080;
     canvas.height = 1080;
@@ -465,11 +512,8 @@ Get your official attendee badge here:
     ctx.font = 'bold 19px "JetBrains Mono", monospace';
     ctx.fillText('★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, headerY + 158);
 
-    // Load Images
-    const [userImg, mascotImg] = await Promise.all([
-      loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png')
-    ]);
+    // Load user portrait
+    const userImg = await loadImage(customPhotoUrl);
 
     // Center Portrait Frame - Square with Rounded Corners
     const photoW = 340;
@@ -564,50 +608,47 @@ Get your official attendee badge here:
     ctx.font = 'bold 14px "JetBrains Mono", monospace';
     ctx.fillText('Join me at: dotnetconf.mscprpcem.tech', cardX + 50, footerInfoY + 24);
 
-    // Companion Mascot badge in bottom right corner
-    const mascotCenterX = cardX + cardW - 120;
-    const mascotCenterY = cardY + cardH - 85;
-    const mascotRadius = 50;
+    // Official .NET Delegate Badge in bottom right corner
+    const sealCenterX = cardX + cardW - 120;
+    const sealCenterY = cardY + cardH - 85;
 
     ctx.save();
-    ctx.beginPath();
-    ctx.arc(mascotCenterX + 4, mascotCenterY + 4, mascotRadius, 0, Math.PI * 2);
+    // Drop shadow
     ctx.fillStyle = '#000000';
+    ctx.beginPath();
+    ctx.roundRect(sealCenterX - 36, sealCenterY - 36, 76, 76, 16);
     ctx.fill();
 
+    // Purple square
+    ctx.fillStyle = '#512BD4';
     ctx.beginPath();
-    ctx.arc(mascotCenterX, mascotCenterY, mascotRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
+    ctx.roundRect(sealCenterX - 40, sealCenterY - 40, 76, 76, 16);
     ctx.fill();
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 3.5;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    if (mascotImg) {
-      const pad = 8;
-      ctx.drawImage(
-        mascotImg,
-        mascotCenterX - mascotRadius + pad,
-        mascotCenterY - mascotRadius + pad,
-        (mascotRadius - pad) * 2,
-        (mascotRadius - pad) * 2
-      );
-    }
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 24px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('.NET', sealCenterX - 2, sealCenterY - 6);
 
-    const mascotLabel = '.NET BOT';
-    ctx.font = 'bold 11px "JetBrains Mono", monospace';
-    const mLabelW = ctx.measureText(mascotLabel).width + 16;
-    const mLabelY = mascotCenterY + mascotRadius - 10;
+    // Cyan pill "DELEGATE"
+    const badgeLabel = 'DELEGATE';
+    ctx.font = 'bold 10px "JetBrains Mono", monospace';
+    const bLabelW = ctx.measureText(badgeLabel).width + 14;
+    const bLabelY = sealCenterY + 22;
     ctx.fillStyle = '#00BDD6';
     ctx.beginPath();
-    ctx.roundRect(mascotCenterX - mLabelW / 2, mLabelY, mLabelW, 18, 5);
+    ctx.roundRect(sealCenterX - bLabelW / 2 - 2, bLabelY - 8, bLabelW, 16, 5);
     ctx.fill();
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
     ctx.fillStyle = '#000000';
-    ctx.textAlign = 'center';
-    ctx.fillText(mascotLabel, mascotCenterX, mLabelY + 9);
+    ctx.fillText(badgeLabel, sealCenterX - 2, bLabelY);
+
     ctx.restore();
 
     // Bottom Rim Bar
@@ -639,7 +680,7 @@ Get your official attendee badge here:
   };
 
   return (
-    <section id="attendee-badge" className="py-8 sm:py-12 md:py-16 px-3 sm:px-6 max-w-5xl mx-auto scroll-mt-20 relative">
+    <section id="attendee-badge" className="py-3 sm:py-5 px-3 sm:px-6 max-w-5xl mx-auto scroll-mt-20 relative">
       <DncSectionFlanks
         leftIndex="07"
         leftTag="BADGE"
@@ -653,14 +694,14 @@ Get your official attendee badge here:
         rightSub="INSTANT DOWNLOAD"
       />
       {/* Signpost Header */}
-      <DncSignpost 
-        title="ATTENDEE BADGE STUDIO" 
+      <DncSignpost
+        title="ATTENDEE BADGE STUDIO"
         badge="GET YOUR BADGE"
         theme="purple"
       />
 
       <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
-        
+
         {/* Intro */}
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-9">
           <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5">
@@ -679,10 +720,10 @@ Get your official attendee badge here:
 
         {/* 2-Column Responsive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
+
           {/* Left Column: Form Controls */}
           <div className="lg:col-span-6 bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 shadow-[3px_3px_0px_0px_#000] space-y-4 text-left">
-            
+
             {/* Badge Format Selector: Circular vs Square Social */}
             <div className="space-y-1.5">
               <label className="text-xs font-mono font-bold text-black uppercase flex items-center justify-between">
@@ -697,11 +738,10 @@ Get your official attendee badge here:
                 <button
                   type="button"
                   onClick={() => setBadgeShape('circular')}
-                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    badgeShape === 'circular'
+                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${badgeShape === 'circular'
                       ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] translate-x-[1px] translate-y-[1px]'
                       : 'bg-white text-black hover:bg-stone-100 shadow-[2px_2px_0px_0px_#000]'
-                  }`}
+                    }`}
                 >
                   <Circle className="w-4 h-4" />
                   <span>CIRCULAR</span>
@@ -710,11 +750,10 @@ Get your official attendee badge here:
                 <button
                   type="button"
                   onClick={() => setBadgeShape('square')}
-                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                    badgeShape === 'square'
+                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${badgeShape === 'square'
                       ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] translate-x-[1px] translate-y-[1px]'
                       : 'bg-white text-black hover:bg-stone-100 shadow-[2px_2px_0px_0px_#000]'
-                  }`}
+                    }`}
                 >
                   <Square className="w-4 h-4" />
                   <span>SQUARE (POST)</span>
@@ -769,11 +808,10 @@ Get your official attendee badge here:
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`border-[2px] border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
-                    isDragging
+                  className={`border-[2px] border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${isDragging
                       ? 'border-[#512BD4] bg-[#EEEAFB]'
                       : 'border-black/40 bg-white hover:border-black hover:bg-stone-50'
-                  }`}
+                    }`}
                 >
                   <div className="w-10 h-10 rounded-full bg-[#EEEAFB] border-[1.5px] border-black flex items-center justify-center mx-auto mb-2 text-[#512BD4] shadow-[1.5px_1.5px_0px_0px_#000]">
                     <Upload className="w-5 h-5" />
@@ -832,11 +870,10 @@ Get your official attendee badge here:
                     key={preset}
                     type="button"
                     onClick={() => setRole(preset)}
-                    className={`text-[10.5px] font-mono px-2 py-0.5 rounded-md border border-black transition-all cursor-pointer ${
-                      role === preset
+                    className={`text-[10.5px] font-mono px-2 py-0.5 rounded-md border border-black transition-all cursor-pointer ${role === preset
                         ? 'bg-[#512BD4] text-white font-bold shadow-[1px_1px_0px_0px_#000]'
                         : 'bg-white text-stone-700 hover:bg-stone-100'
-                    }`}
+                      }`}
                   >
                     {preset}
                   </button>
@@ -870,38 +907,39 @@ Get your official attendee badge here:
 
           {/* Right Column: Badge Preview & Action Buttons */}
           <div className="lg:col-span-6 flex flex-col items-center">
-            
+
             {/* 1. Circular Badge Preview */}
             {badgeShape === 'circular' && (
               <div className="relative select-none">
-                
+
                 {/* Outer Circular Container */}
                 <div className="w-[320px] h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center">
-                  
+
                   {/* SVG Circular Text Ring */}
                   <svg viewBox="0 0 400 400" className="w-full h-full absolute inset-0 pointer-events-none">
                     <defs>
                       <path
                         id="badge-top-path"
-                        d="M 40,200 A 160,160 0 1,1 360,200"
+                        d="M 40,200 A 162,162 0 1,1 360,200"
                         fill="none"
                       />
+                      {/* Counter-clockwise path from left to right along bottom so text is upright */}
                       <path
                         id="badge-bottom-path"
-                        d="M 360,200 A 160,160 0 0,1 40,200"
+                        d="M 40,200 A 168,168 0 0,0 360,200"
                         fill="none"
                       />
                     </defs>
 
                     {/* Top Curved Text */}
-                    <text className="font-mono font-black text-[12.5px] fill-white uppercase tracking-[0.22em]">
+                    <text className="font-mono font-black text-[12px] sm:text-[12.5px] fill-white uppercase tracking-[0.22em]">
                       <textPath href="#badge-top-path" startOffset="50%" textAnchor="middle">
                         ★ .NET CONF 2026 · AMRAVATI ★
                       </textPath>
                     </text>
 
-                    {/* Bottom Curved Text */}
-                    <text className="font-mono font-black text-[11px] fill-[#FFDB43] uppercase tracking-[0.2em]">
+                    {/* Bottom Curved Text (Upright Left-to-Right) */}
+                    <text className="font-mono font-black text-[10.5px] sm:text-[11px] fill-[#FFDB43] uppercase tracking-[0.2em]">
                       <textPath href="#badge-bottom-path" startOffset="50%" textAnchor="middle">
                         ★ 20 APRIL 2026 · PRPCEM CAMPUS ★
                       </textPath>
@@ -913,14 +951,14 @@ Get your official attendee badge here:
 
                   {/* Inner Badge Disc */}
                   <div className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10">
-                    
+
                     {/* Delegate Chip */}
                     <div className="bg-[#00BDD6] text-black font-mono font-black text-[8px] sm:text-[9.5px] px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1.5">
                       OFFICIAL DELEGATE
                     </div>
 
                     {/* User Photo Frame */}
-                    <div 
+                    <div
                       onClick={() => fileInputRef.current?.click()}
                       title="Click to upload your photo"
                       className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[2.5px] sm:border-[3px] border-black bg-white shadow-[2.5px_2.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-105"
@@ -966,18 +1004,19 @@ Get your official attendee badge here:
 
                 </div>
 
-                {/* Mascot Companion Sticker (Overlapping Bottom-Right Rim) */}
-                <div 
-                  className="absolute -bottom-2 -right-2 sm:bottom-0 sm:right-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] p-1.5 flex flex-col items-center justify-center -rotate-6 hover:rotate-0 transition-transform z-30 cursor-pointer"
-                  title=".NET Bot Official Mascot"
+                {/* Official Delegate Verified Seal (Overlapping Bottom-Right Rim) */}
+                <div
+                  className="absolute -bottom-2 -right-2 sm:bottom-0 sm:right-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#512BD4] text-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] p-1.5 flex flex-col items-center justify-center -rotate-6 hover:rotate-0 transition-transform z-30 select-none"
+                  title="Official .NET Conf Delegate Seal"
                 >
-                  <img
-                    src="/mascot/bot_frontal.png"
-                    alt=".NET Mascot"
-                    className="w-full h-full object-contain"
-                  />
-                  <span className="bg-[#00BDD6] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] px-1.5 py-0.2 rounded border border-black uppercase tracking-wider absolute -bottom-1 shadow-[1px_1px_0px_0px_#000]">
-                    .NET BOT
+                  <div className="font-mono font-black text-xs sm:text-sm tracking-tight text-white leading-tight">
+                    .NET 11
+                  </div>
+                  <div className="text-[7.5px] font-mono font-bold text-[#00BDD6] tracking-wider uppercase leading-none mt-0.5">
+                    VERIFIED
+                  </div>
+                  <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] px-1.5 py-0.5 rounded border border-black uppercase tracking-wider absolute -bottom-1 shadow-[1px_1px_0px_0px_#000]">
+                    2026 PASS
                   </span>
                 </div>
 
@@ -987,10 +1026,10 @@ Get your official attendee badge here:
             {/* 2. Square Social Badge Preview (Social Media Post Format) */}
             {badgeShape === 'square' && (
               <div className="relative select-none">
-                
+
                 {/* Outer Square Container - Social Media Graphic Post */}
                 <div className="w-[310px] h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between">
-                  
+
                   {/* Header Banner - Social Media Post Style */}
                   <div className="bg-[#512BD4] text-white border-b-[3px] border-black py-2.5 px-3 text-center">
                     <div className="inline-block bg-[#FFDB43] text-black font-mono font-black text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1">
@@ -1006,9 +1045,9 @@ Get your official attendee badge here:
 
                   {/* Main Delegate Body */}
                   <div className="flex-1 flex flex-col items-center justify-center p-3 text-center">
-                    
+
                     {/* User Photo Frame: Social Media Rounded-Square Frame */}
-                    <div 
+                    <div
                       onClick={() => fileInputRef.current?.click()}
                       title="Click to upload your photo"
                       className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl border-[3px] border-black bg-white shadow-[3.5px_3.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-102"
@@ -1069,15 +1108,11 @@ Get your official attendee badge here:
                     </div>
 
                     <div className="flex items-center gap-1.5">
-                      <div className="w-8 h-8 rounded-full bg-white border-[1.5px] border-black p-0.5 shadow-[1px_1px_0px_0px_#000]">
-                        <img
-                          src="/mascot/bot_frontal.png"
-                          alt=".NET Bot"
-                          className="w-full h-full object-contain"
-                        />
+                      <div className="w-7 h-7 rounded-lg bg-[#512BD4] text-white border-[1.5px] border-black flex items-center justify-center font-mono font-black text-[9px] shadow-[1px_1px_0px_0px_#000] select-none">
+                        .NET
                       </div>
                       <span className="bg-[#00BDD6] text-black font-mono font-black text-[7.5px] sm:text-[8px] px-1.5 py-0.5 rounded border border-black uppercase">
-                        .NET BOT
+                        DELEGATE
                       </span>
                     </div>
                   </div>
@@ -1094,7 +1129,7 @@ Get your official attendee badge here:
 
             {/* Action Buttons: Download & Direct Social Sharing */}
             <div className="w-full max-w-[320px] sm:max-w-[370px] space-y-3 mt-5">
-              
+
               {/* Primary Download Button */}
               <button
                 type="button"
@@ -1104,8 +1139,8 @@ Get your official attendee badge here:
               >
                 <Download className="w-4 h-4" />
                 <span>
-                  {isDownloading 
-                    ? `SAVING ${badgeShape.toUpperCase()} BADGE...` 
+                  {isDownloading
+                    ? `SAVING ${badgeShape.toUpperCase()} BADGE...`
                     : `DOWNLOAD ${badgeShape === 'circular' ? 'CIRCULAR' : 'SQUARE'} BADGE (PNG)`}
                 </span>
               </button>
@@ -1121,7 +1156,7 @@ Get your official attendee badge here:
                 </div>
 
                 {/* Social Share Buttons */}
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {/* WhatsApp */}
                   <button
                     type="button"
@@ -1144,15 +1179,26 @@ Get your official attendee badge here:
                     <span>LinkedIn</span>
                   </button>
 
-                  {/* X (Twitter) */}
+                  {/* Instagram */}
                   <button
                     type="button"
-                    onClick={handleShareX}
-                    className="py-2 px-1.5 bg-black hover:bg-stone-800 text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Post on X (Twitter)"
+                    onClick={handleShareInstagram}
+                    className="py-2 px-1.5 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-90 text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Share on Instagram (Copies caption & opens Instagram)"
                   >
-                    <XIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
-                    <span>X</span>
+                    <InstagramIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                    <span>Instagram</span>
+                  </button>
+
+                  {/* Telegram */}
+                  <button
+                    type="button"
+                    onClick={handleShareTelegram}
+                    className="py-2 px-1.5 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Share on Telegram"
+                  >
+                    <TelegramIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                    <span>Telegram</span>
                   </button>
                 </div>
 

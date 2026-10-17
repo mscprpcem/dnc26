@@ -11,7 +11,7 @@ export const eventData = {
   edition: 'Amravati',
   year: '2026',
   dateFormatted: 'Annual 2026 Edition · Date TBA',
-  duration: '1-Day Flagship Conference',
+  duration: 'Annual Developer Conference',
   timeFormatted: 'Schedule & Timings TBA',
   launchVersion: '.NET 11',
   poweredByVersion: '.NET 10.0.11',
@@ -127,16 +127,16 @@ export const eventData = {
 
   editorialSections: [
     {
-      id: 'official-launch',
-      tag: '01 · Flagship Gathering',
-      title: 'Central India’s Flagship 1-Day .NET Conference',
+      id: 'cloud-architecture',
+      tag: '01 · Runtime & Cloud Architecture',
+      title: 'Modern .NET 11 & High-Performance Cloud Native',
       description:
-        "Organized by the Microsoft Student Club at PRPCEM Amravati, .NET Conf Amravati 2026 is an action-packed 1-day gathering of passionate student developers, software engineers, and cloud enthusiasts. Celebrate the launch of .NET 11, master modern C# 14, dive into distributed microservices on Azure, and build autonomous AI agents with Microsoft engineers and community MVPs.",
+        "Organized by the Microsoft Student Club at PRPCEM Amravati, .NET Conf Amravati 2026 brings together student developers, software engineers, and cloud enthusiasts. Celebrate the launch of .NET 11, master modern C# 14, dive into distributed microservices on Azure, and build autonomous AI agents with Microsoft engineers and community MVPs.",
     },
     {
-      id: 'what-to-expect',
-      tag: '02 · Technical Immersion',
-      title: 'Full Day of Keynotes, Parallel Tracks & Hands-on Learning',
+      id: 'ai-immersion',
+      tag: '02 · Autonomous AI & Copilots',
+      title: 'Keynotes, Parallel Technical Tracks & Hands-on Learning',
       description:
         "From the opening keynote to dual parallel tracks covering Cloud Architecture and Generative AI, hands-on lab workshops, student lightning talks, and the grand closing ceremony, .NET Conf Amravati delivers high-impact technical immersion and verified industry credentials.",
     },

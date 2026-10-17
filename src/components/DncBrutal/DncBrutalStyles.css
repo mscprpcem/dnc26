@@ -349,3 +349,68 @@
     background-color: #ffffff !important;
   }
 }
+
+/* ==========================================================================
+   GLOBAL RESPONSIVE MEDIA QUERIES FOR ALL SCREEN BREAKPOINTS
+   ========================================================================== */
+
+/* A. Ultra-Compact Mobile Screens (<= 380px) */
+@media (max-width: 380px) {
+  .dnc-brutal-canvas {
+    background-size: 20px 20px;
+  }
+
+  /* Compact button paddings and fonts */
+  .btn-brutal {
+    padding-left: 0.65rem !important;
+    padding-right: 0.65rem !important;
+    font-size: 10.5px !important;
+  }
+
+  /* Adjust headings on very small phones */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+  }
+}
+
+/* B. Standard Mobile Screens (381px - 640px) */
+@media (max-width: 640px) {
+  /* Prevent horizontal card blowout */
+  .rounded-\[32px\] {
+    border-radius: 1.25rem !important;
+  }
+
+  /* Prevent code terminal from stretching viewport */
+  pre, code {
+    max-width: 100% !important;
+  }
+}
+
+/* C. Tablet Portrait & Landscape (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Comfortable section spacing on tablets */
+  .tablet-gap-fix {
+    gap: 1.25rem !important;
+  }
+}
+
+/* D. Desktop Displays (1025px - 1535px) */
+@media (min-width: 1025px) and (max-width: 1535px) {
+  /* Clean proportional gutters */
+  .max-w-7xl {
+    max-width: 76rem !important;
+  }
+}
+
+/* E. Ultra-Wide & High-DPI Displays (>= 1536px) */
+@media (min-width: 1536px) {
+  .max-w-5xl {
+    max-width: 68rem !important;
+  }
+}

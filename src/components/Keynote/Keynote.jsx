@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, ArrowRight, Clock, MapPin, Layers, Cpu, UserCheck } from 'lucide-react';
+import { Award, ArrowRight, Clock, MapPin, Layers, Cpu, UserCheck, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
 export const Keynote = () => {
@@ -59,14 +59,21 @@ export const Keynote = () => {
                   </div>
                 </div>
 
-                {/* Center Keynote Ambassador Mascot (Natural, prominent sizing with clean breathing room) */}
-                <div className="relative z-10 flex flex-col items-center my-auto py-2">
-                  <div className="w-32 h-32 xs:w-36 xs:h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 flex items-center justify-center">
-                    <img
-                      src="/mascot/dotnetbot-outer-space.svg"
-                      alt=".NET Bot Space Explorer — Keynote Ambassador"
-                      className="w-full h-full object-contain drop-shadow-xl select-none"
-                    />
+                {/* Center Keynote Visual */}
+                <div className="relative z-10 flex flex-col items-center my-auto py-6">
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-gradient-to-tr from-[#512BD4] via-[#D600AA] to-[#00BDD6] p-1 shadow-xl flex items-center justify-center mb-3">
+                    <div className="w-full h-full rounded-full bg-[#14053A] flex flex-col items-center justify-center">
+                      <Sparkles className="w-10 h-10 sm:w-12 sm:h-12 text-amber-300 animate-pulse" />
+                      <div className="flex items-center gap-1 mt-2">
+                        <span className="w-1 h-2 bg-[#00BDD6] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <span className="w-1 h-4 bg-[#D600AA] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <span className="w-1 h-5 bg-[#512BD4] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                        <span className="w-1 h-3 bg-[#FFD13B] rounded-full animate-bounce" style={{ animationDelay: '450ms' }} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-white/10 text-[11px] font-mono text-stone-300">
+                    AUDITORIUM MAINSTAGE
                   </div>
                 </div>
 

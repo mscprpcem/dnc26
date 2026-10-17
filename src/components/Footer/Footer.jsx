@@ -10,13 +10,11 @@ export const Footer = ({ onSwitchToNeoBrutal }) => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
             <div className="flex items-center gap-2">
-              <img
-                src="/mascot/bot_head.png"
-                alt=".NET Bot Mascot"
-                className="w-6 h-6 object-contain select-none"
-              />
+              <div className="w-6 h-6 rounded-lg bg-[#512BD4] text-white flex items-center justify-center font-mono font-black text-[10px] select-none shadow-xs">
+                .NET
+              </div>
               <span className="text-xl font-bold font-display text-gradient-magenta whitespace-nowrap">
-                {eventData.name}
+                {eventData.name} 2026
               </span>
             </div>
             <span className="hidden sm:inline text-xs text-[#190649]/60">·</span>
@@ -67,7 +65,6 @@ export const Footer = ({ onSwitchToNeoBrutal }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#190649]/70">
           <span>&copy; {eventData.year} .NET Conf Amravati · PRPCEM. All rights reserved.</span>
           <span className="flex items-center gap-1.5 text-[11px] text-[#5F6368]">
-            <img src="/mascot/bot_head.png" alt=".NET Bot" className="w-4 h-4 object-contain inline select-none" />
             Organized with <Heart className="w-3 h-3 text-[#E1306C] fill-[#E1306C]" /> by Microsoft Student Club PRPCEM
           </span>
         </div>

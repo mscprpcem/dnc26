@@ -13,7 +13,7 @@ export const BADGE_SHAPES = {
 export const BADGE_THEMES = {
   dotnet: {
     id: 'dotnet',
-    name: '.NET Flagship',
+    name: '.NET Conf Official',
     primary: '#512BD4',
     secondary: '#7B2BF9',
     accent: '#D600AA',
@@ -645,7 +645,7 @@ function renderPassBadge(ctx, width, height, theme, options) {
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
   ctx.font = '600 20px "Open Sans", sans-serif';
-  ctx.fillText('Central India · Flagship Edition', width / 2, headerY + 175);
+  ctx.fillText('Central India · Annual Edition', width / 2, headerY + 175);
 
   // Ribbon banner: "★ OFFICIAL ATTENDEE BADGE ★"
   const ribW = cardW;
