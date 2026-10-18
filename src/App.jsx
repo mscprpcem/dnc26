@@ -13,20 +13,25 @@ import { StayConnected } from './components/StayConnected/StayConnected.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
 import { HackconPage } from './components/Hackcon/HackconPage.jsx';
 import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
+import { WarliThemePage } from './components/WarliTheme/DncBrutalPage.jsx';
 import { Tent, LayoutTemplate } from 'lucide-react';
 
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
     if (typeof window !== 'undefined') {
       const search = window.location.search.toLowerCase();
-      if (search.includes('view=hackcon')) {
+      const hash = window.location.hash.toLowerCase();
+      if (search.includes('view=hackcon') || hash.includes('hackcon')) {
         return 'hackcon';
       }
-      if (search.includes('view=classic')) {
+      if (search.includes('view=warli') || hash.includes('warli')) {
+        return 'warli';
+      }
+      if (search.includes('view=classic') || hash.includes('classic')) {
         return 'classic';
       }
     }
-    // Default view is the new converted Hackcon-style DotNetConf landing page
+    // Default view is the neo-brutalist DotNetConf landing page with Warli references
     return 'dnc-brutal';
   });
 
@@ -45,9 +50,14 @@ export const App = () => {
 
   const switchToDncBrutal = () => {
     setCurrentView('dnc-brutal');
-    if (window.location.hash.includes('hackcon') || window.location.hash.includes('classic')) {
+    if (window.location.hash.includes('hackcon') || window.location.hash.includes('classic') || window.location.hash.includes('warli')) {
       history.replaceState(null, '', window.location.pathname);
     }
+  };
+
+  const switchToWarli = () => {
+    setCurrentView('warli');
+    window.location.hash = '#warli';
   };
 
   const switchToClassic = () => {
@@ -60,12 +70,23 @@ export const App = () => {
     return <HackconPage onSwitchToDotNetConf={switchToDncBrutal} />;
   }
 
-  // 2. Primary experience: Converted DotNetConf in Hackcon neo-brutal styling with .NET color combo
+  // 2. Full Warli Painting Theme Edition (Accessible via footer switcher & #warli)
+  if (currentView === 'warli') {
+    return (
+      <WarliThemePage
+        onSwitchToDncBrutal={switchToDncBrutal}
+        onSwitchToClassic={switchToClassic}
+      />
+    );
+  }
+
+  // 3. Primary experience: DotNetConf neo-brutal styling with subtle Warli cultural touches
   if (currentView === 'dnc-brutal') {
     return (
       <DncBrutalPage 
         onSwitchToHackcon={switchToHackcon}
         onSwitchToClassic={switchToClassic}
+        onSwitchToWarli={switchToWarli}
       />
     );
   }
@@ -142,7 +163,7 @@ export const App = () => {
       </main>
 
       {/* Footer */}
-      <Footer onSwitchToNeoBrutal={switchToDncBrutal} />
+      <Footer onSwitchToNeoBrutal={switchToDncBrutal} onSwitchToWarli={switchToWarli} />
 
       {/* Floating Mode Switcher to Neo-Brutalist DNC Page */}
       <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50">

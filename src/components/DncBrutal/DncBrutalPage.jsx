@@ -15,7 +15,7 @@ import DncFooter from './DncFooter.jsx';
 import { ArrowUp } from 'lucide-react';
 import { scrollToSection } from '../../utils/sectionRouter.js';
 
-export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
+export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic, onSwitchToWarli }) => {
   const [showScrollTop, setShowScrollTop] = React.useState(false);
   const [scrollY, setScrollY] = React.useState(0);
 
@@ -119,7 +119,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
       </main>
 
       {/* Footer */}
-      <DncFooter onSwitchToClassic={onSwitchToClassic} />
+      <DncFooter onSwitchToClassic={onSwitchToClassic} onSwitchToWarli={onSwitchToWarli} />
 
       {/* Floating Action Controls (Bottom Right - only shown when scrolled) */}
       {showScrollTop && (

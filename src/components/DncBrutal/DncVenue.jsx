@@ -47,59 +47,36 @@ export const DncVenue = () => {
               P. R. Pote Patil College of Engineering &amp; Management
             </h3>
 
-            {/* Full Campus Isometric Vector Illustration */}
-            <div className="relative w-full h-32 sm:h-36 bg-[#F4F0FF] rounded-2xl border-[1.5px] border-black mb-4 overflow-hidden flex items-center justify-center shadow-inner">
-              <svg viewBox="0 0 360 140" className="w-full h-full object-cover">
-                {/* Gradient Sky */}
-                <rect width="360" height="140" fill="#E8F4FD" />
-                {/* Ground */}
-                <path d="M0,85 Q180,75 360,85 L360,140 L0,140 Z" fill="#E2E8F0" />
-                
-                {/* Left Academic Block */}
-                <polygon points="30,55 90,40 120,65 60,80" fill="#CBD5E1" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="60,80 120,65 120,110 60,125" fill="#94A3B8" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="30,55 60,80 60,125 30,100" fill="#64748B" stroke="#1E293B" strokeWidth="1.5" />
-                
-                {/* Windows on left block */}
-                <rect x="68" y="75" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
-                <rect x="82" y="72" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
-                <rect x="96" y="69" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
+            {/* Campus Facilities Overview (Clean, No Cartoon SVGs or Animation Icons) */}
+            <div className="bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 mb-4 shadow-[2px_2px_0px_0px_#000]">
+              <div className="space-y-3">
+                <div className="flex items-start gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-[#512BD4] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Building2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-mono font-bold text-black uppercase">
+                      Central Main Auditorium
+                    </h4>
+                    <p className="text-xs text-stone-600 font-sans mt-0.5">
+                      Air-conditioned 800+ tiered seating arena with 4K projection &amp; surround acoustics for keynote sessions.
+                    </p>
+                  </div>
+                </div>
 
-                {/* Main Central Auditorium Dome & Pillars */}
-                <rect x="135" y="45" width="110" height="70" fill="#FFFFFF" stroke="#1E293B" strokeWidth="2" rx="4" />
-                <polygon points="125,45 255,45 240,25 140,25" fill="#512BD4" stroke="#1E293B" strokeWidth="1.5" />
-                <text x="190" y="38" fill="#FFFFFF" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="monospace">PRPCEM AUDITORIUM</text>
-                
-                {/* Front portico columns */}
-                <rect x="155" y="65" width="70" height="50" fill="#F8FAFC" stroke="#1E293B" strokeWidth="1.5" />
-                <line x1="170" y1="65" x2="170" y2="115" stroke="#1E293B" strokeWidth="2" />
-                <line x1="190" y1="65" x2="190" y2="115" stroke="#1E293B" strokeWidth="2" />
-                <line x1="210" y1="65" x2="210" y2="115" stroke="#1E293B" strokeWidth="2" />
-                
-                {/* Central Entry Arch */}
-                <path d="M180,115 L180,95 Q190,88 200,95 L200,115 Z" fill="#1E293B" />
-
-                {/* Right Innovation & AI Lab Block */}
-                <polygon points="260,65 290,40 350,55 320,80" fill="#CBD5E1" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="260,65 260,110 320,125 320,80" fill="#94A3B8" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="320,80 320,125 350,100 350,55" fill="#64748B" stroke="#1E293B" strokeWidth="1.5" />
-                
-                {/* Windows on right block */}
-                <rect x="270" y="70" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-                <rect x="284" y="73" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-                <rect x="298" y="76" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-
-                {/* Trees / Greenery */}
-                <circle cx="125" cy="105" r="12" fill="#16A34A" stroke="#14532D" strokeWidth="1.5" />
-                <circle cx="255" cy="105" r="12" fill="#16A34A" stroke="#14532D" strokeWidth="1.5" />
-                <circle cx="45" cy="115" r="10" fill="#22C55E" />
-                <circle cx="340" cy="115" r="10" fill="#22C55E" />
-              </svg>
-
-              {/* Verified Host Badge overlay */}
-              <div className="absolute bottom-2 left-2 bg-white/95 border-[1.5px] border-black px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-[#512BD4] shadow-xs flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#16A34A]"></span>
-                <span>MAIN AUDITORIUM • CENTRAL CAMPUS</span>
+                <div className="flex items-start gap-2.5 pt-2 border-t border-black/10">
+                  <div className="w-7 h-7 rounded-lg bg-[#00BDD6] text-black flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <Cpu className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-mono font-bold text-black uppercase">
+                      Advanced CSE &amp; AI Labs
+                    </h4>
+                    <p className="text-xs text-stone-600 font-sans mt-0.5">
+                      Dedicated high-speed development rigs and break-out workshop bays for live coding sessions.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -204,9 +181,8 @@ export const DncVenue = () => {
             <div className="grid grid-cols-2 divide-x divide-stone-200 pt-1">
               {/* Landmark 1 */}
               <div className="flex items-center gap-2.5 pr-2">
-                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 relative">
+                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
                   <Building2 className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#16A34A] border-2 border-white animate-pulse" />
                 </div>
                 <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
                   Main Auditorium
@@ -215,9 +191,8 @@ export const DncVenue = () => {
 
               {/* Landmark 2 */}
               <div className="flex items-center gap-2.5 pl-3">
-                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 relative">
+                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
                   <Cpu className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#00BDD6] border-2 border-white animate-pulse" />
                 </div>
                 <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
                   CSE &amp; AI Labs

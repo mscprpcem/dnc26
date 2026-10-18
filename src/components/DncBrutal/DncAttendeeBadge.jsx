@@ -238,14 +238,50 @@ Get your official attendee badge here:
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    // Delegate Pass Pill
-    const passText = 'OFFICIAL DELEGATE';
-    ctx.font = 'bold 17px "JetBrains Mono", monospace';
-    const passWidth = ctx.measureText(passText).width + 36;
-    const passY = 230;
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+    ctx.clip();
+
+    // Load user portrait & .NET Mascot
+    const [userImg, mascotImg] = await Promise.all([
+      loadImage(customPhotoUrl),
+      loadImage('/mascot/bot_frontal.png'),
+    ]);
+
+    // Draw user portrait to fill the inner disc space
+    if (userImg) {
+      const scale = Math.max((innerRadius * 2) / userImg.width, (innerRadius * 2) / userImg.height);
+      const drawW = userImg.width * scale;
+      const drawH = userImg.height * scale;
+      const drawX = centerX - drawW / 2;
+      const drawY = centerY - drawH / 2;
+      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
+
+      // Gradient scrim over lower half for text legibility
+      const scrimGrad = ctx.createLinearGradient(centerX, centerY + 30, centerX, centerY + innerRadius);
+      scrimGrad.addColorStop(0, 'rgba(20, 5, 58, 0)');
+      scrimGrad.addColorStop(0.5, 'rgba(20, 5, 58, 0.75)');
+      scrimGrad.addColorStop(1, 'rgba(20, 5, 58, 0.95)');
+      ctx.fillStyle = scrimGrad;
+      ctx.fillRect(centerX - innerRadius, centerY + 30, innerRadius * 2, innerRadius - 30);
+    } else {
+      ctx.fillStyle = '#EEEAFB';
+      ctx.fillRect(centerX - innerRadius, centerY - innerRadius, innerRadius * 2, innerRadius * 2);
+      if (mascotImg) {
+        const mSize = 360;
+        ctx.drawImage(mascotImg, centerX - mSize / 2, centerY - mSize / 2 - 40, mSize, mSize);
+      }
+    }
+
+    // Top Delegate Chip
+    const delChip = 'OFFICIAL DELEGATE';
+    ctx.font = 'bold 20px "JetBrains Mono", monospace';
+    const delW = ctx.measureText(delChip).width + 30;
+    const delY = centerY - innerRadius + 45;
     ctx.fillStyle = '#00BDD6';
     ctx.beginPath();
-    ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 32, 16);
+    ctx.roundRect(centerX - delW / 2, delY, delW, 36, 18);
     ctx.fill();
     ctx.lineWidth = 3;
     ctx.strokeStyle = '#000000';
@@ -253,62 +289,10 @@ Get your official attendee badge here:
     ctx.fillStyle = '#000000';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(passText, centerX, passY + 16);
-
-    // Load user portrait
-    const userImg = await loadImage(customPhotoUrl);
-
-    // Center Portrait Frame
-    const portraitRadius = 125;
-    const portraitCenterY = 425;
-
-    // Portrait Drop Shadow
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX + 6, portraitCenterY + 6, portraitRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000';
-    ctx.fill();
-    ctx.restore();
-
-    // Portrait Background & Image Clip
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fill();
-    ctx.clip();
-
-    if (userImg) {
-      const scale = Math.max((portraitRadius * 2) / userImg.width, (portraitRadius * 2) / userImg.height);
-      const drawW = userImg.width * scale;
-      const drawH = userImg.height * scale;
-      const drawX = centerX - drawW / 2;
-      const drawY = portraitCenterY - drawH / 2;
-      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
-    } else {
-      ctx.fillStyle = '#EEEAFB';
-      ctx.fillRect(centerX - portraitRadius, portraitCenterY - portraitRadius, portraitRadius * 2, portraitRadius * 2);
-      ctx.fillStyle = '#512BD4';
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY - 22, 45, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY + 105, 90, Math.PI, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
-    // Crisp black border on top of clipped image
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.restore();
+    ctx.fillText(delChip, centerX, delY + 18);
 
     // Attendee Name
-    ctx.fillStyle = '#14053A';
+    ctx.fillStyle = userImg ? '#FFFFFF' : '#14053A';
     ctx.font = '900 44px "Space Grotesk", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -333,22 +317,33 @@ Get your official attendee badge here:
 
     // College / Organization (only if provided)
     if (college.trim()) {
-      ctx.fillStyle = '#444444';
+      ctx.fillStyle = userImg ? '#E0E7FF' : '#444444';
       ctx.font = 'bold 23px "Open Sans", sans-serif';
       ctx.textBaseline = 'middle';
       ctx.fillText(college.trim(), centerX, 725);
 
-      ctx.fillStyle = '#512BD4';
+      ctx.fillStyle = '#00BDD6';
       ctx.font = 'bold 20px "JetBrains Mono", monospace';
       ctx.fillText('★  ★  ★', centerX, 770);
     } else {
-      ctx.fillStyle = '#512BD4';
+      ctx.fillStyle = '#00BDD6';
       ctx.font = 'bold 22px "JetBrains Mono", monospace';
       ctx.textBaseline = 'middle';
       ctx.fillText('★  ★  ★', centerX, 730);
     }
 
-    // Official Delegate Verified Seal (Positioned on Bottom-Right Rim)
+    ctx.restore();
+
+    // Crisp black border on top of clipped disc
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+    ctx.lineWidth = 8;
+    ctx.strokeStyle = '#000000';
+    ctx.stroke();
+    ctx.restore();
+
+    // Official .NET Mascot Seal (Replacing .NET Verified)
     const sealCenterX = 870;
     const sealCenterY = 870;
     const sealRadius = 115;
@@ -372,23 +367,25 @@ Get your official attendee badge here:
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    // Text ".NET 11" and "VERIFIED"
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '900 36px "Space Grotesk", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('.NET 11', 0, -20);
+    // Draw .NET Mascot
+    if (mascotImg) {
+      const botW = 145;
+      const botH = 145;
+      ctx.drawImage(mascotImg, -botW / 2, -botH / 2 - 14, botW, botH);
+    } else {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '900 36px "Space Grotesk", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('.NET BOT', 0, -10);
+    }
 
-    ctx.fillStyle = '#00BDD6';
-    ctx.font = 'bold 18px "JetBrains Mono", monospace';
-    ctx.fillText('VERIFIED', 0, 18);
-
-    // Yellow label chip "2026 PASS"
-    const passLabel = '2026 PASS';
-    ctx.font = 'bold 15px "JetBrains Mono", monospace';
+    // Yellow label chip ".NET BOT"
+    const passLabel = '.NET BOT';
+    ctx.font = 'bold 16px "JetBrains Mono", monospace';
     const pLabelW = ctx.measureText(passLabel).width + 24;
-    const pLabelH = 26;
-    const pLabelY = sealRadius - 14;
+    const pLabelH = 28;
+    const pLabelY = sealRadius - 16;
 
     ctx.fillStyle = '#FFDB43';
     ctx.beginPath();
@@ -937,74 +934,96 @@ Get your official attendee badge here:
                     </text>
                   </svg>
 
-                  {/* Inner Badge Disc */}
-                  <div className="w-[205px] h-[205px] xs:w-[235px] xs:h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10">
+                  {/* Inner Badge Disc - Full Photo Bleed */}
+                  <div className="w-[205px] h-[205px] xs:w-[235px] xs:h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] flex flex-col items-center justify-center text-center relative z-10 overflow-hidden">
 
-                    {/* Delegate Chip */}
-                    <div className="bg-[#00BDD6] text-black font-mono font-black text-[8px] sm:text-[9.5px] px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1.5">
-                      OFFICIAL DELEGATE
-                    </div>
-
-                    {/* User Photo Frame */}
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      title="Click to upload your photo"
-                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[2.5px] sm:border-[3px] border-black bg-white shadow-[2.5px_2.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-105"
-                    >
-                      {customPhotoUrl ? (
-                        <>
-                          <img
-                            src={customPhotoUrl}
-                            alt={name || 'Attendee'}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <Camera className="w-4 h-4" />
-                          </div>
-                        </>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-[#512BD4] p-1">
-                          <Camera className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
-                          <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-black">
-                            Add Photo
-                          </span>
+                    {customPhotoUrl ? (
+                      <div
+                        onClick={() => fileInputRef.current?.click()}
+                        title="Click to change your photo"
+                        className="absolute inset-0 w-full h-full cursor-pointer group overflow-hidden"
+                      >
+                        <img
+                          src={customPhotoUrl}
+                          alt={name || 'Attendee'}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-[#00BDD6] text-black font-mono font-black text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase z-10">
+                          OFFICIAL DELEGATE
                         </div>
-                      )}
-                    </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end pb-3 sm:pb-4 px-2 sm:px-3 text-center">
+                          <h4 className="font-sans font-black text-base sm:text-lg text-white uppercase tracking-tight leading-tight max-w-[200px] truncate mx-auto drop-shadow-sm">
+                            {name.trim() || 'YOUR NAME'}
+                          </h4>
+                          <div className="mt-1 inline-block bg-[#FFDB43] text-black border border-black px-2.5 py-0.5 rounded-full font-mono font-bold text-[9px] sm:text-[10px] shadow-[1px_1px_0px_0px_#000] max-w-[190px] truncate uppercase mx-auto">
+                            {role.trim() || 'DELEGATE'}
+                          </div>
+                          {college.trim() && (
+                            <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-stone-200 mt-1 max-w-[190px] truncate mx-auto">
+                              {college.trim()}
+                            </p>
+                          )}
+                        </div>
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                          <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-3 sm:p-4 flex flex-col items-center justify-center">
+                        {/* Delegate Chip */}
+                        <div className="bg-[#00BDD6] text-black font-mono font-black text-[8px] sm:text-[9.5px] px-2 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1.5">
+                          OFFICIAL DELEGATE
+                        </div>
 
-                    {/* Attendee Name */}
-                    <h4 className="font-sans font-black text-base sm:text-lg text-[#14053A] uppercase tracking-tight leading-tight max-w-[200px] truncate">
-                      {name.trim() || 'YOUR NAME'}
-                    </h4>
+                        {/* User Photo Frame */}
+                        <div
+                          onClick={() => fileInputRef.current?.click()}
+                          title="Click to upload your portrait picture"
+                          className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-[2.5px] sm:border-[3px] border-black bg-white shadow-[2.5px_2.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-105"
+                        >
+                          <div className="flex flex-col items-center justify-center text-[#512BD4] p-1">
+                            <Camera className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
+                            <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-black">
+                              Add Photo
+                            </span>
+                          </div>
+                        </div>
 
-                    {/* Role Pill */}
-                    <div className="mt-1 inline-block bg-[#FFDB43] text-black border border-black px-2.5 py-0.5 rounded-full font-mono font-bold text-[9.5px] sm:text-[10.5px] shadow-[1px_1px_0px_0px_#000] max-w-[190px] truncate uppercase">
-                      {role.trim() || 'DELEGATE'}
-                    </div>
+                        {/* Attendee Name */}
+                        <h4 className="font-sans font-black text-base sm:text-lg text-[#14053A] uppercase tracking-tight leading-tight max-w-[200px] truncate">
+                          {name.trim() || 'YOUR NAME'}
+                        </h4>
 
-                    {/* College / Organization (Only if typed) */}
-                    {college.trim() && (
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-stone-600 mt-1 max-w-[190px] truncate">
-                        {college.trim()}
-                      </p>
+                        {/* Role Pill */}
+                        <div className="mt-1 inline-block bg-[#FFDB43] text-black border border-black px-2.5 py-0.5 rounded-full font-mono font-bold text-[9.5px] sm:text-[10.5px] shadow-[1px_1px_0px_0px_#000] max-w-[190px] truncate uppercase">
+                          {role.trim() || 'DELEGATE'}
+                        </div>
+
+                        {/* College / Organization */}
+                        {college.trim() && (
+                          <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-stone-600 mt-1 max-w-[190px] truncate">
+                            {college.trim()}
+                          </p>
+                        )}
+                      </div>
                     )}
+
                   </div>
 
                 </div>
 
-                {/* Official Delegate Verified Seal (Overlapping Bottom-Right Rim) */}
+                {/* Official .NET Mascot Seal (Replacing .NET Verified) */}
                 <div
-                  className="absolute -bottom-2 -right-2 sm:bottom-0 sm:right-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#512BD4] text-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] p-1.5 flex flex-col items-center justify-center -rotate-6 hover:rotate-0 transition-transform z-30 select-none"
-                  title="Official .NET Conf Delegate Seal"
+                  className="absolute -bottom-2 -right-2 sm:bottom-0 sm:right-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#512BD4] text-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] p-1 flex flex-col items-center justify-center -rotate-6 hover:rotate-0 transition-transform z-30 select-none overflow-visible"
+                  title="Official .NET Mascot Seal"
                 >
-                  <div className="font-mono font-black text-xs sm:text-sm tracking-tight text-white leading-tight">
-                    .NET 11
-                  </div>
-                  <div className="text-[7.5px] font-mono font-bold text-[#00BDD6] tracking-wider uppercase leading-none mt-0.5">
-                    VERIFIED
-                  </div>
-                  <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] px-1.5 py-0.5 rounded border border-black uppercase tracking-wider absolute -bottom-1 shadow-[1px_1px_0px_0px_#000]">
-                    2026 PASS
+                  <img
+                    src="/mascot/bot_frontal.png"
+                    alt=".NET Mascot"
+                    className="w-13 h-13 sm:w-16 sm:h-16 object-contain filter drop-shadow select-none -mt-2"
+                  />
+                  <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] px-2 py-0.5 rounded border border-black uppercase tracking-wider absolute -bottom-1 shadow-[1px_1px_0px_0px_#000]">
+                    .NET BOT
                   </span>
                 </div>
 
@@ -1037,8 +1056,8 @@ Get your official attendee badge here:
                     {/* User Photo Frame: Social Media Rounded-Square Frame */}
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      title="Click to upload your photo"
-                      className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl border-[3px] border-black bg-white shadow-[3.5px_3.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-102"
+                      title="Click to upload your portrait picture"
+                      className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl border-[3px] border-black bg-white shadow-[3.5px_3.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-2 transition-transform hover:scale-102"
                     >
                       {customPhotoUrl ? (
                         <>
@@ -1096,11 +1115,15 @@ Get your official attendee badge here:
                     </div>
 
                     <div className="flex items-center gap-1.5">
-                      <div className="w-7 h-7 rounded-lg bg-[#512BD4] text-white border-[1.5px] border-black flex items-center justify-center font-mono font-black text-[9px] shadow-[1px_1px_0px_0px_#000] select-none">
-                        .NET
+                      <div className="w-8 h-8 rounded-lg bg-[#512BD4] border-[1.5px] border-black flex items-center justify-center shadow-[1px_1px_0px_0px_#000] select-none p-0.5">
+                        <img
+                          src="/mascot/bot_frontal.png"
+                          alt=".NET Mascot"
+                          className="w-full h-full object-contain select-none"
+                        />
                       </div>
-                      <span className="bg-[#00BDD6] text-black font-mono font-black text-[7.5px] sm:text-[8px] px-1.5 py-0.5 rounded border border-black uppercase">
-                        DELEGATE
+                      <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8px] px-1.5 py-0.5 rounded border border-black uppercase">
+                        .NET BOT
                       </span>
                     </div>
                   </div>

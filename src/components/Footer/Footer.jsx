@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart, MapPin, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-export const Footer = ({ onSwitchToNeoBrutal }) => {
+export const Footer = ({ onSwitchToNeoBrutal, onSwitchToWarli }) => {
   return (
     <footer className="w-full mt-auto border-t border-[#DCD5F6]/80 bg-white/70 backdrop-blur-md">
       {/* Upper Footer Links */}
@@ -38,6 +38,15 @@ export const Footer = ({ onSwitchToNeoBrutal }) => {
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E1306C]" />
               <span>Neo-Brutalism</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onSwitchToWarli && onSwitchToWarli()}
+              className="px-3 py-1 rounded-full text-xs font-bold text-[#38130D] hover:bg-[#38130D] hover:text-[#FAF7F2] transition-all flex items-center gap-1.5 cursor-pointer"
+              title="Switch to Warli Folk Art Theme"
+            >
+              <span>🎨</span>
+              <span>Warli</span>
             </button>
           </div>
 

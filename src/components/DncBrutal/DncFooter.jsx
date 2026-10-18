@@ -5,6 +5,7 @@ import {
   ArrowUpRight,
   Settings,
   Sun,
+  Sparkles,
   Users,
   FileText,
   Mail,
@@ -12,7 +13,7 @@ import {
 } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-export const DncFooter = ({ onSwitchToClassic }) => {
+export const DncFooter = ({ onSwitchToClassic, onSwitchToWarli }) => {
   return (
     <footer className="mt-4 sm:mt-6 font-sans select-none relative overflow-hidden bg-[#0C0227]">
       {/* Top Stepped Cyber Ribbon Banner */}
@@ -110,24 +111,6 @@ export const DncFooter = ({ onSwitchToClassic }) => {
             </p>
 
             <div className="flex flex-col gap-3 mt-2">
-              {/* Normal Mode Button */}
-              <button
-                type="button"
-                onClick={() => onSwitchToClassic && onSwitchToClassic()}
-                className="w-full py-3 px-4 rounded-2xl border border-purple-900/60 bg-[#120531] hover:border-purple-600/80 hover:bg-[#190649] transition-all flex items-center justify-between group cursor-pointer text-left"
-                title="Switch to Normal (.NET Official) Mode"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="w-4 h-4 rounded-full border-2 border-[#7C3AED] group-hover:border-[#A855F7] transition-colors flex items-center justify-center" />
-                  <span className="text-white font-mono font-bold text-xs sm:text-sm tracking-wider">
-                    NORMAL MODE
-                  </span>
-                </span>
-                <span className="bg-[#2A1463] text-[#A78BFA] px-2.5 py-1 rounded-lg text-xs font-mono font-medium">
-                  Official
-                </span>
-              </button>
-
               {/* Neo-Brutalism Button (Active) */}
               <div className="relative">
                 <div
@@ -154,6 +137,42 @@ export const DncFooter = ({ onSwitchToClassic }) => {
                   </svg>
                 </div>
               </div>
+
+              {/* Warli Painting Theme Edition Button */}
+              <button
+                type="button"
+                onClick={() => onSwitchToWarli && onSwitchToWarli()}
+                className="w-full py-3 px-4 rounded-2xl border-2 border-[#E5A93C]/60 bg-[#280D07] hover:border-[#E5A93C] hover:bg-[#38130D] transition-all flex items-center justify-between group cursor-pointer text-left shadow-[2px_2px_0px_#000]"
+                title="Switch to Warli Folk Art Painting Theme Edition"
+              >
+                <span className="flex items-center gap-2.5">
+                  <Sparkles className="w-4 h-4 text-[#E5A93C] group-hover:rotate-12 transition-transform shrink-0" />
+                  <span className="text-[#FAF7F2] font-mono font-bold text-xs sm:text-sm tracking-wider">
+                    WARLI EDITION
+                  </span>
+                </span>
+                <span className="bg-[#E5A93C] text-[#180805] px-2 py-0.5 rounded-lg text-xs font-mono font-black tracking-wide">
+                  Folk Art
+                </span>
+              </button>
+
+              {/* Normal / Classic Mode Button */}
+              <button
+                type="button"
+                onClick={() => onSwitchToClassic && onSwitchToClassic()}
+                className="w-full py-3 px-4 rounded-2xl border border-purple-900/60 bg-[#120531] hover:border-purple-600/80 hover:bg-[#190649] transition-all flex items-center justify-between group cursor-pointer text-left"
+                title="Switch to Normal (.NET Official) Mode"
+              >
+                <span className="flex items-center gap-3">
+                  <span className="w-4 h-4 rounded-full border-2 border-[#7C3AED] group-hover:border-[#A855F7] transition-colors flex items-center justify-center" />
+                  <span className="text-white font-mono font-bold text-xs sm:text-sm tracking-wider">
+                    NORMAL MODE
+                  </span>
+                </span>
+                <span className="bg-[#2A1463] text-[#A78BFA] px-2.5 py-1 rounded-lg text-xs font-mono font-medium">
+                  Official
+                </span>
+              </button>
             </div>
           </div>
 
