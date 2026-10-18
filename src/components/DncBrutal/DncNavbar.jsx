@@ -24,30 +24,30 @@ export const DncNavbar = () => {
 
   return (
     <header className="sticky top-2 sm:top-3 z-50 px-3 sm:px-6 max-w-7xl mx-auto w-full">
-      {/* Main Neo-Brutalist Navbar Card */}
-      <div className="bg-white border-[2.5px] border-black rounded-full px-4 sm:px-6 py-2 sm:py-2.5 shadow-[4px_4px_0px_0px_#000] flex items-center justify-between">
+      {/* Warli Earthen Navbar Card */}
+      <div className="bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-full px-4 sm:px-6 py-2 sm:py-2.5 shadow-[4px_4px_0px_0px_#120402] flex items-center justify-between">
         {/* Brand / Logo */}
         <a 
           href="/" 
           onClick={(e) => handleNavClick(e, '/')}
           className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer"
-          title=".NET Conf 2026 Amravati"
+          title=".NET Conf 2026 Amravati | Warli Edition"
         >
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#512BD4] border-[2px] border-black flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_#000] group-hover:rotate-6 transition-transform text-white font-mono font-black text-xs sm:text-sm tracking-tighter select-none">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E5A93C] border-[2px] border-[#FAF7F2] flex items-center justify-center shadow-[1.5px_1.5px_0px_0px_#120402] group-hover:rotate-6 transition-transform text-[#180805] font-mono font-black text-xs sm:text-sm tracking-tighter select-none">
             .NET
           </div>
           <div className="flex flex-col">
-            <span className="font-black text-sm sm:text-lg tracking-wider text-black font-sans leading-none">
+            <span className="font-black text-sm sm:text-lg tracking-wider text-[#FAF7F2] font-sans leading-none">
               .NET CONF 2026
             </span>
-            <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-[#512BD4] leading-none mt-0.5">
-              AMRAVATI • PRPCEM
+            <span className="text-[8.5px] sm:text-[9.5px] font-mono font-bold tracking-widest text-[#E5A93C] leading-none mt-0.5">
+              WARLI EDITION • AMRAVATI
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3 font-mono text-xs font-bold text-black">
+        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 font-mono text-xs font-bold">
           {navLinks.map((link) => {
             const isActive = activePath === link.path;
             return (
@@ -57,8 +57,8 @@ export const DncNavbar = () => {
                 onClick={(e) => handleNavClick(e, link.path)}
                 className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#512BD4] text-white border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]'
-                    : 'text-black hover:text-[#512BD4] hover:bg-[#EEEAFB]/70'
+                    ? 'bg-[#E5A93C] text-[#180805] border-[1.5px] border-[#FAF7F2] shadow-[1.5px_1.5px_0px_0px_#120402]'
+                    : 'text-[#FAF7F2]/80 hover:text-[#E5A93C] hover:bg-[#FAF7F2]/10'
                 }`}
               >
                 {link.label}
@@ -72,10 +72,10 @@ export const DncNavbar = () => {
           <a
             href="/register"
             onClick={(e) => handleNavClick(e, '/register')}
-            className={`text-[11px] sm:text-xs font-bold font-sans uppercase px-4 sm:px-6 py-2 sm:py-2.5 rounded-full border-[2px] border-black shadow-[2.5px_2.5px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
+            className={`text-[11px] sm:text-xs font-bold font-sans uppercase px-4 sm:px-6 py-2 sm:py-2.5 rounded-full border-[2px] border-[#FAF7F2] shadow-[2.5px_2.5px_0px_0px_#120402] hover:shadow-[1px_1px_0px_0px_#120402] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 whitespace-nowrap cursor-pointer ${
               activePath === '/register'
-                ? 'bg-[#00BDD6] text-black'
-                : 'bg-[#512BD4] hover:bg-[#4322B0] text-white'
+                ? 'bg-[#C84832] text-[#FAF7F2]'
+                : 'bg-[#E5A93C] hover:bg-[#F5B82A] text-[#180805]'
             }`}
           >
             <span>REGISTER INTEREST</span>
@@ -85,7 +85,7 @@ export const DncNavbar = () => {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 sm:p-2 rounded-xl border-[2px] border-black bg-stone-100 hover:bg-stone-200 text-black shadow-[2px_2px_0px_0px_#000] cursor-pointer"
+            className="lg:hidden p-1.5 sm:p-2 rounded-xl border-[2px] border-[#FAF7F2] bg-[#36130D] hover:bg-[#461911] text-[#FAF7F2] shadow-[2px_2px_0px_0px_#120402] cursor-pointer"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -95,7 +95,7 @@ export const DncNavbar = () => {
 
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden mt-2 bg-white border-[2.5px] border-black rounded-2xl p-4 shadow-[4px_4px_0px_0px_#000] flex flex-col gap-1.5 font-mono text-sm font-bold animate-in fade-in slide-in-from-top-2 duration-150">
+        <div className="lg:hidden mt-2 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-4 shadow-[4px_4px_0px_0px_#120402] flex flex-col gap-1.5 font-mono text-sm font-bold animate-in fade-in slide-in-from-top-2 duration-150">
           {navLinks.map((link) => {
             const isActive = activePath === link.path;
             return (
@@ -105,8 +105,8 @@ export const DncNavbar = () => {
                 onClick={(e) => handleNavClick(e, link.path)}
                 className={`py-2 px-3 rounded-xl transition-all cursor-pointer border ${
                   isActive
-                    ? 'bg-[#512BD4] text-white border-black shadow-[2px_2px_0px_0px_#000]'
-                    : 'text-black border-transparent hover:bg-[#EEEAFB] hover:border-black/20'
+                    ? 'bg-[#E5A93C] text-[#180805] border-[#FAF7F2] shadow-[2px_2px_0px_0px_#120402]'
+                    : 'text-[#FAF7F2] border-transparent hover:bg-[#FAF7F2]/10 hover:border-[#FAF7F2]/30'
                 }`}
               >
                 {link.label}
@@ -116,10 +116,10 @@ export const DncNavbar = () => {
           <a
             href="/register"
             onClick={(e) => handleNavClick(e, '/register')}
-            className={`mt-2 w-full py-2.5 rounded-xl border-[2px] border-black font-bold flex items-center justify-center gap-2 shadow-[2px_2px_0px_0px_#000] cursor-pointer ${
+            className={`mt-2 w-full py-2.5 rounded-xl border-[2px] border-[#FAF7F2] font-bold flex items-center justify-center gap-2 shadow-[2px_2px_0px_0px_#120402] cursor-pointer ${
               activePath === '/register'
-                ? 'bg-[#00BDD6] text-black'
-                : 'bg-[#512BD4] text-white'
+                ? 'bg-[#C84832] text-[#FAF7F2]'
+                : 'bg-[#E5A93C] text-[#180805]'
             }`}
           >
             <span>REGISTER INTEREST</span>

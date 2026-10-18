@@ -217,23 +217,48 @@ Get your official attendee badge here:
     drawArcText(ctx, '★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, centerY, 365, 0, 0.044, false);
 
     // Inner Circle Card
+    // Inner Circle Card - Clip to FULL white space for image
     ctx.save();
     ctx.beginPath();
     ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#FAF8FF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
-    ctx.shadowBlur = 20;
     ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#DCD5F6';
-    ctx.stroke();
-    ctx.restore();
+    ctx.clip();
 
-    // Delegate Tag
+    const [userImg, mascotImg] = await Promise.all([
+      loadImage(customPhotoUrl),
+      loadImage('/mascot/bot_frontal.png')
+    ]);
+
+    if (userImg) {
+      const scale = Math.max((innerRadius * 2) / userImg.width, (innerRadius * 2) / userImg.height);
+      const drawW = userImg.width * scale;
+      const drawH = userImg.height * scale;
+      const drawX = centerX - drawW / 2;
+      const drawY = centerY - drawH / 2;
+      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
+    } else {
+      ctx.fillStyle = '#EEEAFB';
+      ctx.fillRect(centerX - innerRadius, centerY - innerRadius, innerRadius * 2, innerRadius * 2);
+      if (mascotImg) {
+        const mSize = 340;
+        ctx.drawImage(mascotImg, centerX - mSize / 2, centerY - mSize / 2 - 30, mSize, mSize);
+      }
+    }
+
+    // Bottom gradient overlay on photo
+    const scrimGrad = ctx.createLinearGradient(centerX, centerY + 40, centerX, centerY + innerRadius);
+    scrimGrad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    scrimGrad.addColorStop(0.35, 'rgba(15, 5, 35, 0.72)');
+    scrimGrad.addColorStop(1, 'rgba(15, 5, 35, 0.95)');
+    ctx.fillStyle = scrimGrad;
+    ctx.fillRect(centerX - innerRadius, centerY + 40, innerRadius * 2, innerRadius - 40);
+
+    // Delegate Tag at Top of Inner Circle
     const passText = 'OFFICIAL DELEGATE PASS';
     ctx.font = 'bold 15px "Space Grotesk", sans-serif';
     const passWidth = ctx.measureText(passText).width + 36;
-    const passY = 205;
+    const passY = centerY - innerRadius + 22;
     ctx.fillStyle = '#512BD4';
     ctx.beginPath();
     ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 28, 14);
@@ -243,92 +268,47 @@ Get your official attendee badge here:
     ctx.textBaseline = 'middle';
     ctx.fillText(passText, centerX, passY + 14);
 
-    const [userImg, mascotImg] = await Promise.all([
-      loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png')
-    ]);
-
-    // Center Portrait Frame
-    const portraitRadius = 100;
-    const portraitCenterY = 365;
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#512BD4';
-    ctx.stroke();
-    ctx.clip();
-
-    if (userImg) {
-      const aspect = userImg.width / userImg.height;
-      let drawW = portraitRadius * 2;
-      let drawH = portraitRadius * 2;
-      let drawX = centerX - portraitRadius;
-      let drawY = portraitCenterY - portraitRadius;
-      if (aspect > 1) {
-        drawW = drawH * aspect;
-        drawX = centerX - drawW / 2;
-      } else {
-        drawH = drawW / aspect;
-        drawY = portraitCenterY - drawH / 2;
-      }
-      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
-    } else {
-      ctx.fillStyle = '#EEEAFB';
-      ctx.fillRect(centerX - portraitRadius, portraitCenterY - portraitRadius, portraitRadius * 2, portraitRadius * 2);
-      ctx.fillStyle = '#512BD4';
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY - 18, 38, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY + 90, 75, Math.PI, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
-
     // Attendee Name
-    ctx.fillStyle = '#14053A';
+    ctx.fillStyle = '#FFFFFF';
     ctx.font = '900 38px "Space Grotesk", sans-serif';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'alphabetic';
+    ctx.textBaseline = 'middle';
     const displayName = (name.trim() || 'DELEGATE').toUpperCase();
-    ctx.fillText(displayName, centerX, 510);
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetY = 2;
+    ctx.fillText(displayName, centerX, centerY + innerRadius - 105);
+    ctx.shadowColor = 'transparent';
 
     // Role Pill
     const roleText = (role.trim() || 'DELEGATE').toUpperCase();
     ctx.font = 'bold 18px "Space Grotesk", sans-serif';
     const roleWidth = ctx.measureText(roleText).width + 36;
-    const roleY = 530;
-    ctx.fillStyle = '#EEEAFB';
+    const roleY = centerY + innerRadius - 70;
+    ctx.fillStyle = '#FFDB43';
     ctx.beginPath();
-    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 34, 17);
+    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 32, 16);
     ctx.fill();
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = '#512BD4';
-    ctx.stroke();
-    ctx.fillStyle = '#512BD4';
+    ctx.fillStyle = '#000000';
     ctx.textBaseline = 'middle';
-    ctx.fillText(roleText, centerX, roleY + 17);
+    ctx.fillText(roleText, centerX, roleY + 16);
 
     // College / Organization (only if entered)
     if (college.trim()) {
-      ctx.fillStyle = '#444444';
-      ctx.font = 'bold 20px "Open Sans", sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(college.trim(), centerX, 595);
-
-      ctx.fillStyle = '#7B2BF9';
+      ctx.fillStyle = '#00BDD6';
       ctx.font = 'bold 16px "Space Grotesk", sans-serif';
-      ctx.fillText('★  ★  ★', centerX, 630);
-    } else {
-      ctx.fillStyle = '#7B2BF9';
-      ctx.font = 'bold 18px "Space Grotesk", sans-serif';
       ctx.textBaseline = 'middle';
-      ctx.fillText('★  ★  ★', centerX, 600);
+      ctx.fillText(college.trim().toUpperCase(), centerX, centerY + innerRadius - 25);
     }
+
+    ctx.restore();
+
+    // Inner Circle Border
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = '#DCD5F6';
+    ctx.stroke();
 
     // Mascot badge in bottom right corner
     const mascotCenterX = 660;
@@ -850,56 +830,63 @@ Get your official attendee badge here:
                     </text>
                   </svg>
 
-                  {/* Inner Badge Disc */}
-                  <div className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full bg-white shadow-inner flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10 border border-[#DCD5F6]">
-                    
-                    <div className="bg-[#512BD4] text-white font-sans font-bold text-[8.5px] sm:text-[9.5px] px-2.5 py-0.5 rounded-full uppercase mb-1.5 shadow-xs">
-                      OFFICIAL DELEGATE
-                    </div>
-
-                    {/* User Photo Frame */}
-                    <div 
-                      onClick={() => fileInputRef.current?.click()}
-                      title="Click to upload your photo"
-                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#512BD4] bg-[#EEEAFB] shadow-md overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-105"
-                    >
-                      {customPhotoUrl ? (
-                        <>
-                          <img
-                            src={customPhotoUrl}
-                            alt={name || 'Attendee'}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <Camera className="w-4 h-4" />
+                  {/* Inner Badge Disc - Full Bleed Photo Area */}
+                  <div
+                    onClick={() => fileInputRef.current?.click()}
+                    title="Click to upload your photo"
+                    className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full bg-white shadow-inner relative z-10 border border-[#DCD5F6] overflow-hidden cursor-pointer group flex items-center justify-center"
+                  >
+                    {customPhotoUrl ? (
+                      <>
+                        <img
+                          src={customPhotoUrl}
+                          alt={name || 'Attendee'}
+                          className="w-full h-full object-cover absolute inset-0 select-none group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white z-25">
+                          <div className="bg-black/80 px-3 py-1.5 rounded-full border border-white/60 font-mono text-[9px] sm:text-[10px] font-bold flex items-center gap-1.5 shadow-md">
+                            <Camera className="w-3.5 h-3.5" />
+                            <span>Change Photo</span>
                           </div>
-                        </>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-[#512BD4] p-1">
-                          <Camera className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
-                          <span className="text-[8px] font-bold uppercase tracking-wider text-[#512BD4]">
+                        </div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full absolute inset-0 bg-gradient-to-b from-[#FAF8FF] to-[#EEEAFB] flex flex-col items-center justify-center p-4 text-center group-hover:bg-[#EAE4FB] transition-colors">
+                        <div className="w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-white/95 border-2 border-dashed border-[#512BD4]/50 flex flex-col items-center justify-center mb-1 group-hover:scale-110 group-hover:border-[#512BD4] transition-all shadow-xs">
+                          <Camera className="w-7 h-7 sm:w-8 sm:h-8 text-[#512BD4] mb-1" />
+                          <span className="text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-wider text-[#512BD4]">
                             Add Photo
                           </span>
                         </div>
+                        <span className="text-[7.5px] sm:text-[8.5px] font-mono text-[#512BD4] font-bold uppercase tracking-wide">
+                          Upload Portrait
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Delegate Pill at Top */}
+                    <div className="absolute top-2.5 sm:top-3.5 inset-x-0 flex justify-center z-20 pointer-events-none">
+                      <span className="bg-[#512BD4] text-white font-sans font-bold text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full uppercase shadow-xs">
+                        OFFICIAL DELEGATE
+                      </span>
+                    </div>
+
+                    {/* Bottom Info Banner */}
+                    <div className="absolute bottom-0 inset-x-0 pt-8 pb-3 px-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent flex flex-col items-center justify-end text-center z-20 pointer-events-none">
+                      <h4 className="font-display font-bold text-sm sm:text-base md:text-[17px] text-white uppercase tracking-tight leading-tight max-w-[200px] truncate drop-shadow-md">
+                        {name.trim() || 'YOUR NAME'}
+                      </h4>
+
+                      <div className="mt-1 inline-block bg-[#FFDB43] text-black border border-black px-2.5 py-0.5 rounded-full font-mono font-bold text-[8.5px] sm:text-[9.5px] shadow-[1px_1px_0px_0px_#000] max-w-[190px] truncate uppercase">
+                        {role.trim() || 'DELEGATE'}
+                      </div>
+
+                      {college.trim() && (
+                        <p className="font-mono text-[8px] sm:text-[9px] font-bold text-[#00BDD6] mt-0.5 max-w-[190px] truncate drop-shadow">
+                          {college.trim()}
+                        </p>
                       )}
                     </div>
-
-                    {/* Name */}
-                    <h4 className="font-display font-bold text-base sm:text-lg text-[#14053A] uppercase tracking-tight leading-tight max-w-[200px] truncate">
-                      {name.trim() || 'YOUR NAME'}
-                    </h4>
-
-                    {/* Role Pill */}
-                    <div className="mt-1 inline-block bg-[#EEEAFB] text-[#512BD4] border border-[#DCD5F6] px-2.5 py-0.5 rounded-full font-sans font-bold text-[9.5px] sm:text-[10px] max-w-[190px] truncate uppercase">
-                      {role.trim() || 'DELEGATE'}
-                    </div>
-
-                    {/* College */}
-                    {college.trim() && (
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-[#14053A]/75 mt-1 max-w-[190px] truncate">
-                        {college.trim()}
-                      </p>
-                    )}
                   </div>
 
                 </div>

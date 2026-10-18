@@ -1,20 +1,34 @@
 import React from 'react';
-import { MapPin, Building2, Building, Users, Info, Map, Star, Cpu, Megaphone, Navigation } from 'lucide-react';
+import { 
+  MapPin, 
+  Building2, 
+  Building, 
+  Users, 
+  Info, 
+  Map, 
+  Star, 
+  Cpu, 
+  Megaphone, 
+  Navigation,
+  Compass,
+  ExternalLink
+} from 'lucide-react';
 import { eventData } from '../../data/event.js';
+import { WarliCornerOrnament } from '../Warli/WarliMotifs.jsx';
 
 export const DncVenue = () => {
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
 
   return (
-    <section id="venue" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
+    <section id="venue" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative text-[#FAF7F2]">
       {/* Hanging Signpost Header */}
       <div className="flex flex-col items-center mb-6 relative z-10">
-        <div className="bg-[#512BD4] text-white px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] flex items-center gap-3 z-10">
-          <span className="bg-[#FFD13B] text-black text-[10px] sm:text-xs font-mono font-bold px-3.5 py-1 rounded-full border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000] uppercase flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>VENUE & LOCATION</span>
+        <div className="bg-[#260C07] text-[#FAF7F2] px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-[#FAF7F2] shadow-[4px_4px_0px_0px_#120402] flex items-center gap-3 z-10">
+          <span className="bg-[#E5A93C] text-[#180805] text-[10px] sm:text-xs font-mono font-bold px-3.5 py-1 rounded-full border-[1.5px] border-[#FAF7F2] shadow-[1px_1px_0px_0px_#120402] uppercase flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5 text-[#180805]" />
+            <span>VENUE &amp; LOCATION</span>
           </span>
-          <span className="text-white/60 font-mono text-xs">✦</span>
+          <span className="text-[#FAF7F2]/60 font-mono text-xs">✦</span>
           <span className="font-sans font-black text-sm sm:text-base md:text-lg tracking-wider uppercase">
             MEET US AT PRPCEM, AMRAVATI
           </span>
@@ -22,138 +36,123 @@ export const DncVenue = () => {
 
         {/* 2 Hanging Cords Connecting to Main Card */}
         <div className="flex justify-between w-64 -mt-1 -mb-1 z-0">
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
+          <div className="w-3.5 h-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#120402]">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#E5A93C]"></div>
           </div>
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
+          <div className="w-3.5 h-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#120402]">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#E5A93C]"></div>
           </div>
         </div>
       </div>
 
-      {/* Main 2-Column Neo-Brutalist Venue Grid (relative z-10) */}
+      {/* Main 2-Column Warli Venue Grid */}
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
+        
         {/* ================= LEFT CARD: HOST CAMPUS ================= */}
-        <div className="lg:col-span-6 bg-white border-[2.5px] border-black rounded-[28px] p-5 sm:p-7 shadow-[5px_5px_0px_0px_#000] flex flex-col justify-between text-left">
+        <div className="relative lg:col-span-6 bg-[#280D07] border-[2.5px] border-[#FAF7F2] rounded-[28px] p-5 sm:p-7 shadow-[6px_6px_0px_0px_#120402] flex flex-col justify-between text-left overflow-hidden">
+          <WarliCornerOrnament position="top-left" fill="#FAF7F2" className="top-2 left-2 opacity-50" />
           <div>
             {/* Tag Pill */}
-            <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-xs px-3.5 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-4">
-              <Building2 className="w-3.5 h-3.5 text-[#512BD4]" />
+            <div className="inline-flex items-center gap-1.5 bg-[#38130D] text-[#E5A93C] font-mono font-bold text-xs px-3.5 py-1.5 rounded-full border-[1.5px] border-[#FAF7F2]/40 shadow-[1.5px_1.5px_0px_0px_#120402] mb-3">
+              <Building2 className="w-3.5 h-3.5 text-[#E5A93C]" />
               <span>HOST CAMPUS</span>
             </div>
 
             {/* Institution Title */}
-            <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-black mb-3 leading-snug">
+            <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-[#FAF7F2] mb-2 leading-snug">
               P. R. Pote Patil College of Engineering &amp; Management
             </h3>
 
-            {/* Full Campus Isometric Vector Illustration */}
-            <div className="relative w-full h-32 sm:h-36 bg-[#F4F0FF] rounded-2xl border-[1.5px] border-black mb-4 overflow-hidden flex items-center justify-center shadow-inner">
-              <svg viewBox="0 0 360 140" className="w-full h-full object-cover">
-                {/* Gradient Sky */}
-                <rect width="360" height="140" fill="#E8F4FD" />
-                {/* Ground */}
-                <path d="M0,85 Q180,75 360,85 L360,140 L0,140 Z" fill="#E2E8F0" />
-                
-                {/* Left Academic Block */}
-                <polygon points="30,55 90,40 120,65 60,80" fill="#CBD5E1" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="60,80 120,65 120,110 60,125" fill="#94A3B8" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="30,55 60,80 60,125 30,100" fill="#64748B" stroke="#1E293B" strokeWidth="1.5" />
-                
-                {/* Windows on left block */}
-                <rect x="68" y="75" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
-                <rect x="82" y="72" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
-                <rect x="96" y="69" width="8" height="12" fill="#00BDD6" stroke="#1E293B" strokeWidth="1" />
+            <p className="text-xs sm:text-sm text-[#FAF7F2]/80 font-sans mb-5 leading-relaxed">
+              Autonomous engineering institution affiliated with SGBAU and accredited NAAC &lsquo;A&rsquo; grade, situated in Amravati, Maharashtra.
+            </p>
 
-                {/* Main Central Auditorium Dome & Pillars */}
-                <rect x="135" y="45" width="110" height="70" fill="#FFFFFF" stroke="#1E293B" strokeWidth="2" rx="4" />
-                <polygon points="125,45 255,45 240,25 140,25" fill="#512BD4" stroke="#1E293B" strokeWidth="1.5" />
-                <text x="190" y="38" fill="#FFFFFF" fontSize="9" fontWeight="900" textAnchor="middle" fontFamily="monospace">PRPCEM AUDITORIUM</text>
-                
-                {/* Front portico columns */}
-                <rect x="155" y="65" width="70" height="50" fill="#F8FAFC" stroke="#1E293B" strokeWidth="1.5" />
-                <line x1="170" y1="65" x2="170" y2="115" stroke="#1E293B" strokeWidth="2" />
-                <line x1="190" y1="65" x2="190" y2="115" stroke="#1E293B" strokeWidth="2" />
-                <line x1="210" y1="65" x2="210" y2="115" stroke="#1E293B" strokeWidth="2" />
-                
-                {/* Central Entry Arch */}
-                <path d="M180,115 L180,95 Q190,88 200,95 L200,115 Z" fill="#1E293B" />
-
-                {/* Right Innovation & AI Lab Block */}
-                <polygon points="260,65 290,40 350,55 320,80" fill="#CBD5E1" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="260,65 260,110 320,125 320,80" fill="#94A3B8" stroke="#1E293B" strokeWidth="1.5" />
-                <polygon points="320,80 320,125 350,100 350,55" fill="#64748B" stroke="#1E293B" strokeWidth="1.5" />
-                
-                {/* Windows on right block */}
-                <rect x="270" y="70" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-                <rect x="284" y="73" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-                <rect x="298" y="76" width="8" height="12" fill="#D600AA" stroke="#1E293B" strokeWidth="1" />
-
-                {/* Trees / Greenery */}
-                <circle cx="125" cy="105" r="12" fill="#16A34A" stroke="#14532D" strokeWidth="1.5" />
-                <circle cx="255" cy="105" r="12" fill="#16A34A" stroke="#14532D" strokeWidth="1.5" />
-                <circle cx="45" cy="115" r="10" fill="#22C55E" />
-                <circle cx="340" cy="115" r="10" fill="#22C55E" />
-              </svg>
-
-              {/* Verified Host Badge overlay */}
-              <div className="absolute bottom-2 left-2 bg-white/95 border-[1.5px] border-black px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold text-[#512BD4] shadow-xs flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-[#16A34A]"></span>
-                <span>MAIN AUDITORIUM • CENTRAL CAMPUS</span>
-              </div>
-            </div>
-
-            {/* Address Details */}
-            <div className="space-y-2.5">
-              <div className="flex items-start gap-3 text-xs sm:text-sm font-sans text-stone-800">
-                <div className="w-8 h-8 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 mt-0.5">
+            {/* Campus Details List */}
+            <div className="space-y-3.5">
+              <div className="flex items-start gap-3 text-xs sm:text-sm font-sans text-[#FAF7F2]">
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30 mt-0.5">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-black">Address : </span>
-                  <span className="text-stone-700">{eventData.location.address}</span>
+                  <span className="font-bold text-[#E5A93C] block">Campus Address</span>
+                  <span className="text-[#FAF7F2]/80">{eventData.location.address}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 text-xs sm:text-sm font-sans text-stone-800">
-                <div className="w-8 h-8 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-3 text-xs sm:text-sm font-sans text-[#FAF7F2]">
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30 mt-0.5">
+                  <Compass className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="font-bold text-[#E5A93C] block">Transit &amp; Proximity</span>
+                  <span className="text-[#FAF7F2]/80">15 mins from Amravati Station · 30 mins from Badnera Jn (BD)</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 text-xs sm:text-sm font-sans text-[#FAF7F2]">
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30 mt-0.5">
                   <Building className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-black">City : </span>
-                  <span className="text-stone-700">Amravati, Maharashtra</span>
+                  <span className="font-bold text-[#E5A93C] block">Facilities</span>
+                  <span className="text-[#FAF7F2]/80">Central AC auditorium, gigabit Wi-Fi, lab workstations, &amp; audio-visual stage</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 text-xs sm:text-sm font-sans text-stone-800">
-                <div className="w-8 h-8 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-3 text-xs sm:text-sm font-sans text-[#FAF7F2]">
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30 mt-0.5">
                   <Users className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-black">Event Format : </span>
-                  <span className="text-stone-700">In-person</span>
+                  <span className="font-bold text-[#E5A93C] block">Event Format</span>
+                  <span className="text-[#FAF7F2]/80">In-person Developer Conference (Main Auditorium &amp; AI Labs)</span>
                 </div>
               </div>
+            </div>
+
+            {/* Quick Action Links */}
+            <div className="mt-5 pt-3.5 border-t border-[#FAF7F2]/20 flex flex-wrap items-center gap-2.5">
+              <a
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#E5A93C] hover:bg-[#F5B82A] text-[#180805] font-mono font-bold text-xs py-2 px-3.5 rounded-xl border-[1.5px] border-[#FAF7F2] shadow-[2px_2px_0px_0px_#120402] hover:shadow-[1px_1px_0px_0px_#120402] hover:translate-x-[1px] hover:translate-y-[1px] transition-all inline-flex items-center gap-1.5"
+              >
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Get Directions</span>
+              </a>
+
+              <a
+                href="https://prpotepatilengg.ac.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#38130D] hover:bg-[#481910] text-[#FAF7F2] font-mono font-bold text-xs py-2 px-3.5 rounded-xl border-[1.5px] border-[#FAF7F2]/40 shadow-[2px_2px_0px_0px_#120402] hover:shadow-[1px_1px_0px_0px_#120402] hover:translate-x-[1px] hover:translate-y-[1px] transition-all inline-flex items-center gap-1.5"
+              >
+                <span>Campus Portal</span>
+                <ExternalLink className="w-3.5 h-3.5 text-[#E5A93C]" />
+              </a>
             </div>
           </div>
 
           {/* Access Details Footer */}
-          <div className="mt-5 pt-4 border-t border-stone-200 flex items-start gap-3">
-            <div className="w-7 h-7 rounded-full bg-[#512BD4] text-white flex items-center justify-center shrink-0 mt-0.5">
-              <Info className="w-4 h-4" />
+          <div className="mt-4 pt-3.5 border-t border-[#FAF7F2]/20 flex items-start gap-2.5">
+            <div className="w-6 h-6 rounded-lg bg-[#E5A93C] text-[#180805] flex items-center justify-center shrink-0 mt-0.5">
+              <Info className="w-3.5 h-3.5" />
             </div>
-            <div className="text-xs text-stone-700 font-sans leading-relaxed">
-              <span className="font-bold text-black">Access Details : </span>
-              <span>Full venue and entry instructions will be shared with registered attendees.</span>
-            </div>
+            <p className="text-xs text-[#FAF7F2]/80 font-sans leading-relaxed">
+              <span className="font-bold text-[#FAF7F2]">Access Details : </span>
+              <span>Full venue entry pass and parking guidance will be shared with registered delegates.</span>
+            </p>
           </div>
         </div>
 
         {/* ================= RIGHT CARD: CAMPUS LOCATION ================= */}
-        <div className="lg:col-span-6 bg-white border-[2.5px] border-black rounded-[28px] p-4 sm:p-5 shadow-[5px_5px_0px_0px_#000] flex flex-col justify-between relative overflow-hidden">
+        <div className="relative lg:col-span-6 bg-[#280D07] border-[2.5px] border-[#FAF7F2] rounded-[28px] p-4 sm:p-5 shadow-[6px_6px_0px_0px_#120402] flex flex-col justify-between overflow-hidden">
+          <WarliCornerOrnament position="top-right" fill="#FAF7F2" className="top-2 right-2 opacity-50" />
+          
           {/* Header Bar */}
           <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-            <div className="inline-flex items-center gap-1.5 bg-[#FFD13B] text-black font-mono font-bold text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
+            <div className="inline-flex items-center gap-1.5 bg-[#E5A93C] text-[#180805] font-mono font-bold text-xs px-4 py-1.5 rounded-full border-[1.5px] border-[#FAF7F2] shadow-[1.5px_1.5px_0px_0px_#120402]">
               <Map className="w-4 h-4" />
               <span>CAMPUS LOCATION</span>
             </div>
@@ -162,7 +161,7 @@ export const DncVenue = () => {
               href={directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-mono font-bold text-[#512BD4] hover:underline flex items-center gap-1"
+              className="text-xs font-mono font-bold text-[#E5A93C] hover:underline flex items-center gap-1"
             >
               <span>Get Directions</span>
               <Navigation className="w-3.5 h-3.5" />
@@ -170,7 +169,7 @@ export const DncVenue = () => {
           </div>
 
           {/* Map Viewport Container */}
-          <div className="relative rounded-2xl overflow-hidden border-[2px] border-black aspect-16/10 bg-[#EDF8F2] flex items-center justify-center group shadow-sm">
+          <div className="relative rounded-2xl overflow-hidden border-[2px] border-[#FAF7F2] aspect-16/10 bg-[#1E0905] flex items-center justify-center group shadow-sm">
             {/* Live Interactive Google Map */}
             <iframe
               src={eventData.location.embedMapUrl}
@@ -186,7 +185,7 @@ export const DncVenue = () => {
                 href={directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-xs sm:text-sm uppercase px-5 py-2.5 rounded-full border-[2px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 cursor-pointer"
+                className="bg-[#E5A93C] hover:bg-[#F5B82A] text-[#180805] font-mono font-black text-xs sm:text-sm uppercase px-5 py-2.5 rounded-full border-[2px] border-[#FAF7F2] shadow-[3px_3px_0px_0px_#120402] hover:shadow-[1px_1px_0px_0px_#120402] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <Map className="w-4 h-4" />
                 <span>OPEN IN MAPS &gt;</span>
@@ -195,31 +194,29 @@ export const DncVenue = () => {
           </div>
 
           {/* Campus Landmarks Box */}
-          <div className="bg-[#FAF9FF] border border-black/15 rounded-2xl p-3.5 mt-4">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#512BD4] uppercase mb-2">
+          <div className="bg-[#1E0905] border border-[#FAF7F2]/20 rounded-2xl p-3.5 mt-4">
+            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#E5A93C] uppercase mb-2">
               <Star className="w-3.5 h-3.5" />
               <span>CAMPUS LANDMARKS</span>
             </div>
 
-            <div className="grid grid-cols-2 divide-x divide-stone-200 pt-1">
+            <div className="grid grid-cols-2 divide-x divide-[#FAF7F2]/15 pt-1">
               {/* Landmark 1 */}
               <div className="flex items-center gap-2.5 pr-2">
-                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 relative">
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30">
                   <Building2 className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#16A34A] border-2 border-white animate-pulse" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
+                <span className="text-xs sm:text-[13px] font-bold font-sans text-[#FAF7F2]">
                   Main Auditorium
                 </span>
               </div>
 
               {/* Landmark 2 */}
               <div className="flex items-center gap-2.5 pl-3">
-                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 relative">
-                  <Cpu className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#00BDD6] border-2 border-white animate-pulse" />
+                <div className="w-8 h-8 rounded-xl bg-[#38130D] text-[#FAF7F2] flex items-center justify-center shrink-0 border border-[#FAF7F2]/30">
+                  <Cpu className="w-4 h-4 text-[#E5A93C]" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
+                <span className="text-xs sm:text-[13px] font-bold font-sans text-[#FAF7F2]">
                   CSE &amp; AI Labs
                 </span>
               </div>
@@ -229,12 +226,12 @@ export const DncVenue = () => {
       </div>
 
       {/* Bottom Announcement Bar */}
-      <div className="relative z-10 mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[3px_3px_0px_0px_#000] text-center max-w-5xl mx-auto">
-        <div className="w-8 h-8 rounded-xl bg-[#512BD4] text-white flex items-center justify-center shrink-0 shadow-sm">
+      <div className="relative z-10 mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[4px_4px_0px_0px_#120402] text-center max-w-5xl mx-auto">
+        <div className="w-8 h-8 rounded-xl bg-[#E5A93C] text-[#180805] flex items-center justify-center shrink-0 shadow-sm">
           <Megaphone className="w-4 h-4" />
         </div>
-        <p className="text-xs sm:text-sm font-sans font-medium text-stone-800">
-          <span className="font-bold text-black">Delegate Notice : </span>
+        <p className="text-xs sm:text-sm font-sans font-medium text-[#FAF7F2]">
+          <span className="font-bold text-[#E5A93C]">Delegate Notice : </span>
           <span>Campus entry passes and parking information will be issued 48 hours prior to the event.</span>
         </p>
       </div>

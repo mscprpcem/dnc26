@@ -1,94 +1,150 @@
-/* DotNetConf 2026 Neo-Brutalist Design System */
-/* Refined Color Grading & Media Query Enhancements */
+/* DotNetConf 2026 Warli Tribal Art Design System */
+/* Maharashtra Indigenous Folk Art & Modern Developer Fusion */
 
-/* Clean, unified tech coordinate canvas (No visual noise, high-contrast purple tone-on-tone) */
-.dnc-brutal-canvas {
-  background-color: #f6f3ff;
-  background-image: 
-    radial-gradient(#6d4ae8 0.85px, transparent 0.85px),
-    linear-gradient(to right, rgba(81, 43, 212, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(81, 43, 212, 0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
+:root {
+  --warli-clay-darkest: #1B0905;
+  --warli-clay-dark: #2B0E08;
+  --warli-clay-base: #38130D;
+  --warli-clay-warm: #4A1B12;
+  --warli-clay-light: #612317;
+  --warli-geru: #8A2D1B;
+  --warli-terracotta: #C84832;
+  --warli-chalk: #FAF7F2;
+  --warli-chalk-soft: #F0ECE4;
+  --warli-ochre: #E5A93C;
+  --warli-haldi: #F5B82A;
+  --warli-charcoal: #120402;
 }
 
-/* Neo-brutalist solid offset drop shadows */
+/* Authentic Warli Earthen Clay Mud-Wall Canvas (Geru / Terracotta) */
+.dnc-brutal-canvas {
+  background-color: #38130D;
+  background-image: 
+    radial-gradient(rgba(250, 247, 242, 0.08) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(229, 169, 60, 0.06) 1.6px, transparent 1.6px),
+    linear-gradient(180deg, #3C150E 0%, #30100A 35%, #240B07 70%, #1A0704 100%);
+  background-size: 24px 24px, 48px 48px, 100% 100%;
+  color: #FAF7F2;
+}
+
+/* Warli solid offset drop shadows */
 .shadow-brutal-xs {
-  box-shadow: 1.5px 1.5px 0px 0px #000000;
+  box-shadow: 1.5px 1.5px 0px 0px #120402;
 }
 
 .shadow-brutal-sm {
-  box-shadow: 2.5px 2.5px 0px 0px #000000;
+  box-shadow: 2.5px 2.5px 0px 0px #120402;
 }
 
 .shadow-brutal {
-  box-shadow: 4px 4px 0px 0px #000000;
+  box-shadow: 4px 4px 0px 0px #120402;
 }
 
 .shadow-brutal-lg {
-  box-shadow: 6px 6px 0px 0px #000000;
+  box-shadow: 6px 6px 0px 0px #120402;
 }
 
 .shadow-brutal-xl {
-  box-shadow: 8px 8px 0px 0px #000000;
+  box-shadow: 8px 8px 0px 0px #120402;
 }
 
-/* Color-tinted neo-brutalist shadows */
+/* Warli themed tinted shadows */
+.shadow-brutal-chalk {
+  box-shadow: 4px 4px 0px 0px #FAF7F2;
+}
+
+.shadow-brutal-ochre {
+  box-shadow: 4px 4px 0px 0px #E5A93C;
+}
+
+.shadow-brutal-terracotta {
+  box-shadow: 4px 4px 0px 0px #8A2D1B;
+}
+
 .shadow-brutal-purple {
-  box-shadow: 5px 5px 0px 0px #512bd4;
+  box-shadow: 4px 4px 0px 0px #E5A93C;
 }
 
 .shadow-brutal-cyan {
-  box-shadow: 5px 5px 0px 0px #00bdd6;
+  box-shadow: 4px 4px 0px 0px #E5A93C;
 }
 
 .shadow-brutal-magenta {
-  box-shadow: 5px 5px 0px 0px #d600aa;
+  box-shadow: 4px 4px 0px 0px #C84832;
 }
 
 /* Interactive button press mechanics */
-.btn-brutal {
+.btn-brutal,
+.btn-warli {
   transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, box-shadow;
 }
 
-.btn-brutal:hover {
+.btn-brutal:hover,
+.btn-warli:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px 0px #000000;
+  box-shadow: 6px 6px 0px 0px #120402;
 }
 
-.btn-brutal:active {
+.btn-brutal:active,
+.btn-warli:active {
   transform: translate(2px, 2px);
-  box-shadow: 1.5px 1.5px 0px 0px #000000;
+  box-shadow: 1.5px 1.5px 0px 0px #120402;
 }
 
-/* Floating rocket mascot float */
-@keyframes rocketGentleFloat {
+/* Warli Tarpa Dancers Continuous Marquee */
+@keyframes warliMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: warliMarquee 32s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Floating mascot float */
+@keyframes warliMascotFloat {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px) rotate(1.5deg);
+    transform: translateY(-8px) rotate(2deg);
   }
 }
 
-.animate-rocket-float {
-  animation: rocketGentleFloat 4.5s ease-in-out infinite;
+.animate-rocket-float,
+.animate-warli-float {
+  animation: warliMascotFloat 4.5s ease-in-out infinite;
 }
 
 /* Responsive custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f0ecfa;
+  background: #240B07;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #512bd4;
-  border: 2px solid #000000;
+  background: #E5A93C;
+  border: 2px solid #38130D;
   border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F5B82A;
 }
 
 /* Smooth mobile tap highlight prevention */

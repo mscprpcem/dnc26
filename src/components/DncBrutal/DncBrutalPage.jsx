@@ -20,7 +20,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
   const [scrollY, setScrollY] = React.useState(0);
 
   useEffect(() => {
-    document.title = ".NET Conf 2026 Amravati | PRPCEM Campus";
+    document.title = ".NET Conf 2026 Amravati | Warli Tribal Edition";
     
     let ticking = false;
     const handleScroll = () => {
@@ -43,39 +43,39 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
   };
 
   return (
-    <div className="dnc-brutal-canvas min-h-screen font-sans selection:bg-[#512BD4] selection:text-white overflow-x-hidden relative">
-      {/* Animated Background Decorative Hollow Rings with Scroll Parallax */}
+    <div className="dnc-brutal-canvas min-h-screen font-sans selection:bg-[#E5A93C] selection:text-[#1A0704] overflow-x-hidden relative text-[#FAF7F2]">
+      {/* Animated Background Decorative Warli Tarpa Ritual Circles & Sun Rings */}
       <div 
         aria-hidden="true" 
         className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none"
       >
-        {/* Ring 1 - Upper Left */}
+        {/* Ring 1 - Upper Left Tarpa Dance Circle */}
         <div
-          className="absolute -left-32 sm:-left-44 top-[10%] w-[320px] sm:w-[440px] h-[320px] sm:h-[440px] rounded-full border-[28px] sm:border-[38px] border-[#8B5CF6]/20 bg-transparent transition-transform duration-75 ease-out"
+          className="absolute -left-32 sm:-left-44 top-[8%] w-[340px] sm:w-[460px] h-[340px] sm:h-[460px] rounded-full border-[18px] sm:border-[26px] border-[#FAF7F2]/10 border-dashed bg-transparent transition-transform duration-75 ease-out"
           style={{
             transform: `translateY(${scrollY * 0.14}px) rotate(${scrollY * 0.04}deg)`,
           }}
         />
 
-        {/* Ring 2 - Upper Right */}
+        {/* Ring 2 - Upper Right Warli Sacred Sun Halo */}
         <div
-          className="absolute -right-32 sm:-right-48 top-[28%] w-[360px] sm:w-[480px] h-[360px] sm:h-[480px] rounded-full border-[32px] sm:border-[44px] border-[#8B5CF6]/20 bg-transparent transition-transform duration-75 ease-out"
+          className="absolute -right-32 sm:-right-48 top-[24%] w-[380px] sm:w-[500px] h-[380px] sm:h-[500px] rounded-full border-[22px] sm:border-[30px] border-[#E5A93C]/12 border-dotted bg-transparent transition-transform duration-75 ease-out"
           style={{
             transform: `translateY(-${scrollY * 0.1}px) rotate(-${scrollY * 0.03}deg)`,
           }}
         />
 
-        {/* Ring 3 - Middle Left */}
+        {/* Ring 3 - Middle Left Chaukat Orbit */}
         <div
-          className="absolute -left-28 sm:-left-40 top-[52%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] rounded-full border-[26px] sm:border-[36px] border-[#8B5CF6]/18 bg-transparent transition-transform duration-75 ease-out"
+          className="absolute -left-28 sm:-left-40 top-[50%] w-[320px] sm:w-[440px] h-[320px] sm:h-[440px] rounded-full border-[16px] sm:border-[24px] border-[#FAF7F2]/8 border-dashed bg-transparent transition-transform duration-75 ease-out"
           style={{
             transform: `translateY(${scrollY * 0.12}px) rotate(${scrollY * 0.05}deg)`,
           }}
         />
 
-        {/* Ring 4 - Lower Right */}
+        {/* Ring 4 - Lower Right Radial Tarpa Ring */}
         <div
-          className="absolute -right-28 sm:-right-44 top-[74%] w-[340px] sm:w-[460px] h-[340px] sm:h-[460px] rounded-full border-[30px] sm:border-[40px] border-[#8B5CF6]/18 bg-transparent transition-transform duration-75 ease-out"
+          className="absolute -right-28 sm:-right-44 top-[72%] w-[360px] sm:w-[480px] h-[360px] sm:h-[480px] rounded-full border-[20px] sm:border-[28px] border-[#E5A93C]/10 border-dotted bg-transparent transition-transform duration-75 ease-out"
           style={{
             transform: `translateY(-${scrollY * 0.13}px) rotate(-${scrollY * 0.04}deg)`,
           }}
@@ -126,7 +126,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic }) => {
         <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50 flex flex-col gap-2.5 items-end animate-in fade-in duration-200">
           <button
             onClick={scrollToTop}
-            className="p-2.5 sm:p-3 bg-[#512BD4] hover:bg-[#4322B0] text-white rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"
+            className="p-2.5 sm:p-3 bg-[#38130D] hover:bg-[#4D1C12] text-[#E5A93C] rounded-2xl border-2 border-[#FAF7F2] shadow-[3px_3px_0px_#FAF7F2] hover:shadow-[1px_1px_0px_#FAF7F2] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"
             aria-label="Scroll to top"
           >
             <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
