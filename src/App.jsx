@@ -13,8 +13,9 @@ import { StayConnected } from './components/StayConnected/StayConnected.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
 import { HackconPage } from './components/Hackcon/HackconPage.jsx';
 import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
-import { WarliThemePage } from './components/WarliTheme/DncBrutalPage.jsx';
 import { Tent, LayoutTemplate } from 'lucide-react';
+
+const WarliThemePage = React.lazy(() => import('./components/WarliTheme/DncBrutalPage.jsx'));
 
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
@@ -36,11 +37,22 @@ export const App = () => {
   });
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (window.location.hash.toLowerCase().includes('classic')) {
-        window.history.replaceState(null, '', window.location.pathname);
+    const handleHashChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (search.includes('view=hackcon') || hash.includes('hackcon')) {
+        setCurrentView('hackcon');
+      } else if (search.includes('view=warli') || hash.includes('warli')) {
+        setCurrentView('warli');
+      } else if (search.includes('view=classic') || hash.includes('classic')) {
+        setCurrentView('classic');
+      } else {
+        setCurrentView('dnc-brutal');
       }
-    }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   const switchToHackcon = () => {
@@ -73,10 +85,16 @@ export const App = () => {
   // 2. Full Warli Painting Theme Edition (Accessible via footer switcher & #warli)
   if (currentView === 'warli') {
     return (
-      <WarliThemePage
-        onSwitchToDncBrutal={switchToDncBrutal}
-        onSwitchToClassic={switchToClassic}
-      />
+      <React.Suspense fallback={
+        <div className="min-h-screen bg-[#38130D] text-[#FAF7F2] flex items-center justify-center font-mono text-sm">
+          Loading Warli Edition...
+        </div>
+      }>
+        <WarliThemePage
+          onSwitchToDncBrutal={switchToDncBrutal}
+          onSwitchToClassic={switchToClassic}
+        />
+      </React.Suspense>
     );
   }
 

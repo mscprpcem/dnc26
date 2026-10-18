@@ -17,7 +17,7 @@
 }
 
 /* Authentic Warli Earthen Clay Mud-Wall Canvas (Geru / Terracotta) */
-.dnc-brutal-canvas {
+.dnc-warli-canvas {
   background-color: #38130D;
   background-image: 
     radial-gradient(rgba(250, 247, 242, 0.08) 1.2px, transparent 1.2px),
@@ -27,66 +27,66 @@
   color: #FAF7F2;
 }
 
-/* Warli solid offset drop shadows */
-.shadow-brutal-xs {
+/* Warli solid offset drop shadows - strictly scoped to Warli canvas */
+.dnc-warli-canvas .shadow-brutal-xs {
   box-shadow: 1.5px 1.5px 0px 0px #120402;
 }
 
-.shadow-brutal-sm {
+.dnc-warli-canvas .shadow-brutal-sm {
   box-shadow: 2.5px 2.5px 0px 0px #120402;
 }
 
-.shadow-brutal {
+.dnc-warli-canvas .shadow-brutal {
   box-shadow: 4px 4px 0px 0px #120402;
 }
 
-.shadow-brutal-lg {
+.dnc-warli-canvas .shadow-brutal-lg {
   box-shadow: 6px 6px 0px 0px #120402;
 }
 
-.shadow-brutal-xl {
+.dnc-warli-canvas .shadow-brutal-xl {
   box-shadow: 8px 8px 0px 0px #120402;
 }
 
-/* Warli themed tinted shadows */
-.shadow-brutal-chalk {
+/* Warli themed tinted shadows - strictly scoped */
+.dnc-warli-canvas .shadow-brutal-chalk {
   box-shadow: 4px 4px 0px 0px #FAF7F2;
 }
 
-.shadow-brutal-ochre {
+.dnc-warli-canvas .shadow-brutal-ochre {
   box-shadow: 4px 4px 0px 0px #E5A93C;
 }
 
-.shadow-brutal-terracotta {
+.dnc-warli-canvas .shadow-brutal-terracotta {
   box-shadow: 4px 4px 0px 0px #8A2D1B;
 }
 
-.shadow-brutal-purple {
+.dnc-warli-canvas .shadow-brutal-purple {
   box-shadow: 4px 4px 0px 0px #E5A93C;
 }
 
-.shadow-brutal-cyan {
+.dnc-warli-canvas .shadow-brutal-cyan {
   box-shadow: 4px 4px 0px 0px #E5A93C;
 }
 
-.shadow-brutal-magenta {
+.dnc-warli-canvas .shadow-brutal-magenta {
   box-shadow: 4px 4px 0px 0px #C84832;
 }
 
 /* Interactive button press mechanics */
-.btn-brutal,
+.dnc-warli-canvas .btn-brutal,
 .btn-warli {
   transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform, box-shadow;
 }
 
-.btn-brutal:hover,
+.dnc-warli-canvas .btn-brutal:hover,
 .btn-warli:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px 0px #120402;
 }
 
-.btn-brutal:active,
+.dnc-warli-canvas .btn-brutal:active,
 .btn-warli:active {
   transform: translate(2px, 2px);
   box-shadow: 1.5px 1.5px 0px 0px #120402;
@@ -122,28 +122,27 @@
   }
 }
 
-.animate-rocket-float,
 .animate-warli-float {
   animation: warliMascotFloat 4.5s ease-in-out infinite;
 }
 
-/* Responsive custom scrollbar */
-::-webkit-scrollbar {
+/* Custom scrollbar for Warli canvas */
+.dnc-warli-canvas::-webkit-scrollbar {
   width: 9px;
   height: 9px;
 }
 
-::-webkit-scrollbar-track {
+.dnc-warli-canvas::-webkit-scrollbar-track {
   background: #240B07;
 }
 
-::-webkit-scrollbar-thumb {
+.dnc-warli-canvas::-webkit-scrollbar-thumb {
   background: #E5A93C;
   border: 2px solid #38130D;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.dnc-warli-canvas::-webkit-scrollbar-thumb:hover {
   background: #F5B82A;
 }
 

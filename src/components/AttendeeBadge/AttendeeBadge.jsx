@@ -14,7 +14,7 @@ import {
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon, XIcon } from '../ui/SocialIcons.jsx';
 
 const ROLE_PRESETS = [
   'Student Developer',
@@ -119,6 +119,12 @@ Get your official attendee badge here:
     const text = getSharePostText();
     const confUrl = 'https://dotnetconf.mscprpcem.tech';
     const url = `https://t.me/share/url?url=${encodeURIComponent(confUrl)}&text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareX = () => {
+    const text = getSharePostText();
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 

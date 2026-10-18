@@ -43,7 +43,7 @@ export const WarliThemePage = ({ onSwitchToDncBrutal, onSwitchToClassic }) => {
   };
 
   return (
-    <div className="dnc-brutal-canvas min-h-screen font-sans selection:bg-[#E5A93C] selection:text-[#1A0704] overflow-x-hidden relative text-[#FAF7F2]">
+    <div className="dnc-warli-canvas min-h-screen font-sans selection:bg-[#E5A93C] selection:text-[#1A0704] overflow-x-hidden relative text-[#FAF7F2]">
       {/* Animated Background Decorative Warli Tarpa Ritual Circles & Sun Rings */}
       <div 
         aria-hidden="true" 
