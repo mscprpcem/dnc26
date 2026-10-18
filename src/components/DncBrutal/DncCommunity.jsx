@@ -17,48 +17,56 @@ export const DncCommunity = () => {
   const channels = [
     {
       name: 'WhatsApp',
+      desc: 'Instant Alerts & Community Chat',
       href: eventData.socialLinks.whatsapp,
       icon: WhatsAppIcon,
       iconBg: 'bg-[#25D366] text-white',
     },
     {
       name: 'LinkedIn',
+      desc: 'Speaker Decks & Professional News',
       href: eventData.socialLinks.linkedin,
       icon: LinkedInIcon,
       iconBg: 'bg-[#0A66C2] text-white',
     },
     {
       name: 'Instagram',
+      desc: 'Campus Life & Live Photo Highlights',
       href: eventData.socialLinks.instagram,
       icon: InstagramIcon,
       iconBg: 'bg-[#E1306C] text-white',
     },
     {
       name: 'YouTube',
+      desc: 'Keynote Replays & Workshop Sessions',
       href: eventData.socialLinks.youtube,
       icon: YouTubeIcon,
       iconBg: 'bg-[#FF0000] text-white',
     },
     {
       name: 'GitHub',
+      desc: 'Conference Code Repos & Demos',
       href: eventData.socialLinks.github,
       icon: GitHubIcon,
       iconBg: 'bg-black text-white',
     },
     {
       name: 'Linktree',
+      desc: 'Direct Access to All Resources',
       href: eventData.socialLinks.linktree,
       icon: LinktreeIcon,
       iconBg: 'bg-[#20D048] text-black',
     },
     {
       name: 'X (Twitter)',
+      desc: 'Live Event Updates & Highlights',
       href: 'https://x.com/mscprpcem',
       icon: XIcon,
       iconBg: 'bg-black text-white',
     },
     {
-      name: 'Email',
+      name: 'Email Support',
+      desc: 'Sponsorships & Queries',
       href: `mailto:${eventData.contactEmail}`,
       icon: Mail,
       iconBg: 'bg-[#512BD4] text-white',
@@ -201,9 +209,14 @@ export const DncCommunity = () => {
                   >
                     <IconComp className="w-4 h-4" />
                   </div>
-                  <span className="text-xs sm:text-[13px] font-bold font-sans text-black group-hover:text-[#512BD4] transition-colors truncate">
-                    {ch.name}
-                  </span>
+                  <div className="min-w-0 text-left">
+                    <span className="text-xs sm:text-[13px] font-bold font-sans text-black group-hover:text-[#512BD4] transition-colors truncate block leading-snug">
+                      {ch.name}
+                    </span>
+                    <span className="text-[10px] text-stone-500 font-sans truncate block mt-0.5">
+                      {ch.desc}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="w-7 h-7 rounded-full bg-[#FAF9FF] text-stone-500 group-hover:text-[#512BD4] group-hover:bg-[#EEEAFB] flex items-center justify-center shrink-0 transition-colors">

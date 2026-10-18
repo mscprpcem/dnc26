@@ -84,12 +84,12 @@ export const DncAttendeeBadge = () => {
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
     return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
-Join me for the premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
+Join me for Central India's premier Microsoft developer gathering at PRPCEM Campus, Amravati celebrating modern .NET 11, Azure Cloud, and Generative AI.
 
-Get your official attendee badge here:
+Generate your official attendee badge here:
 👉 https://dotnetconf.mscprpcem.tech
 
-#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #community`;
+#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #developer`;
   };
 
   const handleShareWhatsApp = () => {

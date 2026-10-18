@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, Mail, Phone, Briefcase, Building2, Target, Send, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown } from 'lucide-react';
+import { User, Mail, Phone, Briefcase, Building2, Target, Send, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
 import { WarliCornerOrnament } from '../Warli/WarliMotifs.jsx';
+import { eventData } from '../../data/event.js';
 
 export const DncInterestForm = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ export const DncInterestForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isRoleOpen, setIsRoleOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
   const roleDropdownRef = useRef(null);
 
   const roleOptions = [
@@ -413,6 +415,52 @@ export const DncInterestForm = () => {
           </form>
         )}
       </div>
+
+      {/* Delegate FAQs Accordion */}
+      {eventData?.faqs && (
+        <div className="mt-8 max-w-4xl mx-auto">
+          <div className="bg-[#280D07] border-[2.5px] border-[#FAF7F2] rounded-3xl p-5 sm:p-7 shadow-[6px_6px_0px_0px_#120402]">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-8 h-8 rounded-xl bg-[#38130D] text-[#E5A93C] flex items-center justify-center border border-[#FAF7F2]/30">
+                <HelpCircle className="w-4 h-4" />
+              </span>
+              <h3 className="font-mono text-sm sm:text-base font-black uppercase text-[#E5A93C]">
+                FREQUENTLY ASKED QUESTIONS (FAQ)
+              </h3>
+            </div>
+            
+            <div className="space-y-3">
+              {eventData.faqs.map((faq) => {
+                const isOpen = openFaq === faq.id;
+                return (
+                  <div
+                    key={faq.id}
+                    className="border-2 border-[#FAF7F2]/30 rounded-2xl bg-[#1E0905] overflow-hidden transition-all"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setOpenFaq(isOpen ? null : faq.id)}
+                      className="w-full text-left p-4 flex items-center justify-between gap-3 text-xs sm:text-sm font-bold font-sans text-[#FAF7F2] hover:text-[#E5A93C] transition-colors"
+                    >
+                      <span>{faq.question}</span>
+                      {isOpen ? (
+                        <ChevronUp className="w-4 h-4 text-[#E5A93C] shrink-0" />
+                      ) : (
+                        <ChevronDown className="w-4 h-4 text-[#FAF7F2]/60 shrink-0" />
+                      )}
+                    </button>
+                    {isOpen && (
+                      <div className="px-4 pb-4 pt-1 text-xs text-[#FAF7F2]/80 font-sans border-t border-[#FAF7F2]/10 leading-relaxed">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Announcement Bar (3 Items) */}
       <div className="mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_0px_#120402] max-w-4xl mx-auto">

@@ -72,13 +72,13 @@ export const PastHighlights = () => {
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#EEEAFB] text-[#512BD4] text-xs font-bold uppercase tracking-wider mb-3 border border-[#DCD5F6]">
             <Camera className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>2024 Edition Gallery · PRPCEM Campus</span>
+            <span>Previous Edition Highlights · PRPCEM Campus</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#14053A] mb-3 leading-tight">
-            Highlights of <span className="community-event-gradient-text">Last Year's Edition</span>
+            Community Retrospective &amp; <span className="community-event-gradient-text">Past Highlights</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-[#190649]/75 leading-relaxed">
-            A visual retrospective of .NET Conf 2024 Amravati — keynote sessions, hands-on workshops, and community celebrations at PRPCEM Campus.
+            A visual archive of previous .NET Conf Amravati editions &mdash; packed auditoriums, hands-on coding labs, and passionate developer community networking across Vidarbha.
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export const PastHighlights = () => {
         </div>
 
         {/* Clean, Simple Pagination Dots */}
-        <div className="flex items-center justify-center gap-2 mt-5">
+        <div className="flex items-center justify-center gap-2 mt-5 mb-8">
           {gallery.map((_, idx) => (
             <button
               key={idx}
@@ -167,6 +167,26 @@ export const PastHighlights = () => {
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
+        </div>
+
+        {/* Retrospective Impact Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#DCD5F6] text-center shadow-xs">
+            <span className="block text-xl sm:text-2xl font-black text-[#512BD4]">500+</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-[#190649]/70 uppercase tracking-wider">Delegates Reached</span>
+          </div>
+          <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#DCD5F6] text-center shadow-xs">
+            <span className="block text-xl sm:text-2xl font-black text-[#512BD4]">8+</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-[#190649]/70 uppercase tracking-wider">Expert Speakers</span>
+          </div>
+          <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#DCD5F6] text-center shadow-xs">
+            <span className="block text-xl sm:text-2xl font-black text-[#512BD4]">10+</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-[#190649]/70 uppercase tracking-wider">Deep Dives &amp; Labs</span>
+          </div>
+          <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#DCD5F6] text-center shadow-xs">
+            <span className="block text-xl sm:text-2xl font-black text-[#512BD4]">15+</span>
+            <span className="text-[11px] sm:text-xs font-semibold text-[#190649]/70 uppercase tracking-wider">Colleges Represented</span>
+          </div>
         </div>
 
       </div>

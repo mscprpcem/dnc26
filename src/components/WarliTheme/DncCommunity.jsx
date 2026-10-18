@@ -18,48 +18,56 @@ export const DncCommunity = () => {
   const channels = [
     {
       name: 'WhatsApp',
+      desc: 'Instant Alerts & Community Chat',
       href: eventData.socialLinks.whatsapp,
       icon: WhatsAppIcon,
       iconBg: 'bg-[#25D366] text-white',
     },
     {
       name: 'LinkedIn',
+      desc: 'Professional Network & Updates',
       href: eventData.socialLinks.linkedin,
       icon: LinkedInIcon,
       iconBg: 'bg-[#0A66C2] text-white',
     },
     {
       name: 'Instagram',
+      desc: 'Behind the Scenes & Highlights',
       href: eventData.socialLinks.instagram,
       icon: InstagramIcon,
       iconBg: 'bg-[#E1306C] text-white',
     },
     {
       name: 'YouTube',
+      desc: 'Session Recordings & Live Streams',
       href: eventData.socialLinks.youtube,
       icon: YouTubeIcon,
       iconBg: 'bg-[#FF0000] text-white',
     },
     {
       name: 'GitHub',
+      desc: 'Conference Code Repos & Demos',
       href: eventData.socialLinks.github,
       icon: GitHubIcon,
       iconBg: 'bg-[#180805] text-[#FAF7F2]',
     },
     {
       name: 'Linktree',
+      desc: 'All Official Resources & Hub',
       href: eventData.socialLinks.linktree,
       icon: LinktreeIcon,
       iconBg: 'bg-[#20D048] text-black',
     },
     {
       name: 'X (Twitter)',
+      desc: 'Live Tweets & Announcements',
       href: 'https://x.com/mscprpcem',
       icon: XIcon,
       iconBg: 'bg-[#180805] text-[#FAF7F2]',
     },
     {
       name: 'Email',
+      desc: 'Direct Delegate & Speaker Queries',
       href: `mailto:${eventData.contactEmail}`,
       icon: Mail,
       iconBg: 'bg-[#C84832] text-white',
@@ -200,9 +208,14 @@ export const DncCommunity = () => {
                   >
                     <IconComp className="w-4 h-4" />
                   </div>
-                  <span className="text-xs sm:text-[13px] font-bold font-sans text-[#FAF7F2] group-hover:text-[#E5A93C] transition-colors truncate">
-                    {ch.name}
-                  </span>
+                  <div className="min-w-0">
+                    <span className="text-xs sm:text-[13px] font-bold font-sans text-[#FAF7F2] group-hover:text-[#E5A93C] transition-colors truncate block">
+                      {ch.name}
+                    </span>
+                    <span className="text-[10px] text-[#FAF7F2]/65 font-sans truncate block">
+                      {ch.desc}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="w-7 h-7 rounded-full bg-[#38130D] text-[#FAF7F2]/60 group-hover:text-[#180805] group-hover:bg-[#E5A93C] flex items-center justify-center shrink-0 transition-colors">

@@ -1,62 +1,28 @@
-import React from 'react';
-import { Calendar, Clock, Users, Mic, Code2, Utensils, Laptop, Trophy, MapPin, Layers } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, Clock, Users, Mic, Code2, Utensils, Laptop, Trophy, MapPin, Layers, Sparkles, Filter } from 'lucide-react';
 import { WarliCornerOrnament } from '../Warli/WarliMotifs.jsx';
+import { agendaSchedule } from '../../data/agenda.js';
 
 export const DncAgenda = () => {
-  const scheduleItems = [
-    {
-      time: '09:00 AM',
-      tag: '(TENTATIVE)',
-      title: 'Registration & Cultural Welcome',
-      desc: 'Check in, collect your Warli attendee badge and connect with delegates.',
-      icon: Users,
-      iconColor: 'bg-[#38130D] text-[#E5A93C]',
-    },
-    {
-      time: '10:00 AM',
-      tag: '(TENTATIVE)',
-      title: 'Opening Remarks & Keynote',
-      desc: 'Welcome to .NET Conf Amravati and a look at modern .NET 11, AI and cloud.',
-      icon: Mic,
-      iconColor: 'bg-[#C84832] text-[#FAF7F2]',
-    },
-    {
-      time: '11:00 AM',
-      tag: '(TENTATIVE)',
-      title: 'Technical Sessions & Deep Dives',
-      desc: 'Practical talks across .NET, Azure AI, Blazor and developer tooling.',
-      icon: Code2,
-      iconColor: 'bg-[#38130D] text-[#FAF7F2]',
-    },
-    {
-      time: '12:30 PM',
-      tag: '(TENTATIVE)',
-      title: 'Networking & Vidarbha Lunch',
-      desc: 'Meet fellow developers, speakers and community members over regional cuisine.',
-      icon: Utensils,
-      iconColor: 'bg-[#E5A93C] text-[#180805]',
-    },
-    {
-      time: '01:30 PM',
-      tag: '(TENTATIVE)',
-      title: 'Hands-on Workshops & Demos',
-      desc: 'Explore real-world development workflows, Semantic Kernel, and cloud labs.',
-      icon: Laptop,
-      iconColor: 'bg-[#38130D] text-[#E5A93C]',
-    },
-    {
-      time: '03:30 PM',
-      tag: '(TENTATIVE)',
-      title: 'Tarpa Community Circle & Closing',
-      desc: 'Share ideas, celebrate community projects, and wrap up the conference day.',
-      icon: Trophy,
-      iconColor: 'bg-[#C84832] text-[#FAF7F2]',
-    },
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const filterButtons = [
+    { id: 'all', label: `ALL SESSIONS (${agendaSchedule.length})` },
+    { id: 'track1', label: 'TRACK 1: CLOUD & .NET' },
+    { id: 'track2', label: 'TRACK 2: AI & COPILOTS' },
+    { id: 'general', label: 'KEYNOTE & GENERAL' },
   ];
 
-  return (
-    <section id="schedule" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative text-[#FAF7F2]">
+  const filteredSchedule = agendaSchedule.filter(item => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'track1') return item.type === 'parallel' || item.track1;
+    if (activeFilter === 'track2') return item.type === 'parallel' || item.track2;
+    if (activeFilter === 'general') return item.type !== 'parallel';
+    return true;
+  });
 
+  return (
+    <section id="schedule" className="py-6 sm:py-10 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative text-[#FAF7F2]">
       {/* Decorative Warli Glyphs */}
       <div className="absolute top-16 right-16 text-[#E5A93C] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">▲</div>
       <div className="absolute top-24 right-10 text-[#FAF7F2]/40 font-mono text-base font-bold select-none pointer-events-none hidden lg:block">◆</div>
@@ -108,10 +74,10 @@ export const DncAgenda = () => {
       <div className="flex flex-col items-center mb-6">
         <div className="bg-[#260C07] text-[#FAF7F2] px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-[#FAF7F2] shadow-[4px_4px_0px_0px_#120402] flex items-center gap-3 z-10">
           <span className="bg-[#E5A93C] text-[#180805] text-[10px] sm:text-xs font-mono font-black px-3.5 py-1 rounded-full border-[1.5px] border-[#FAF7F2] shadow-[1px_1px_0px_0px_#120402] uppercase">
-            1-DAY CONFERENCE
+            FULL DAY SCHEDULE
           </span>
           <span className="font-sans font-black text-sm sm:text-base md:text-lg tracking-wider uppercase">
-            SCHEDULE &amp; TRACKS
+            2 DUAL PARALLEL TRACKS
           </span>
         </div>
 
@@ -137,102 +103,187 @@ export const DncAgenda = () => {
         <div className="flex justify-center mb-3">
           <div className="inline-flex items-center gap-2 bg-[#3A140E] text-[#E5A93C] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-[#FAF7F2] shadow-[1.5px_1.5px_0px_0px_#120402]">
             <Calendar className="w-3.5 h-3.5 text-[#E5A93C]" />
-            <span>PROGRAM OVERVIEW • DETAILS COMING SOON</span>
+            <span>SATURDAY • 10 LIVE SESSIONS • AUDITORIUM &amp; TECH LAB</span>
           </div>
         </div>
 
         {/* Main Headline */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-black font-sans uppercase tracking-tight text-[#FAF7F2] text-center mb-2 leading-tight">
-          A DAY OF <span className="text-[#E5A93C]">LEARNING, BUILDING &amp; CONNECTION</span>
+          A DAY OF <span className="text-[#E5A93C]">LEARNING, CODE &amp; COMMUNITY</span>
         </h2>
 
         {/* Subtitle */}
-        <p className="text-[#FAF7F2]/80 font-sans text-xs sm:text-sm md:text-[14px] text-center max-w-2xl mx-auto leading-relaxed mb-8">
-          Explore the proposed outline for the conference day. Session times, speakers, and technical tracks will be confirmed in the official schedule.
+        <p className="text-[#FAF7F2]/80 font-sans text-xs sm:text-sm md:text-[14px] text-center max-w-2xl mx-auto leading-relaxed mb-6">
+          From Microsoft MVP keynotes on .NET 11 and Semantic Kernel to deep-dive workshops on .NET Aspire, Native AOT, and AI agent architectures.
         </p>
+
+        {/* Filter Navigation Bar */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+          <span className="font-mono text-xs font-bold text-[#E5A93C] uppercase flex items-center gap-1 mr-1">
+            <Filter className="w-3.5 h-3.5" /> FILTER:
+          </span>
+          {filterButtons.map(btn => (
+            <button
+              key={btn.id}
+              onClick={() => setActiveFilter(btn.id)}
+              className={`font-mono text-xs font-bold px-3 py-1.5 rounded-xl border-2 transition-all ${
+                activeFilter === btn.id
+                  ? 'bg-[#E5A93C] text-[#180805] border-[#FAF7F2] shadow-[2px_2px_0px_0px_#FAF7F2]'
+                  : 'bg-[#1E0905] text-[#FAF7F2]/80 border-[#FAF7F2]/30 hover:border-[#E5A93C] hover:text-[#E5A93C]'
+              }`}
+            >
+              {btn.label}
+            </button>
+          ))}
+        </div>
 
         {/* Timeline Schedule Container */}
         <div className="border-[2.5px] border-[#FAF7F2] rounded-[24px] bg-[#1E0905] shadow-[6px_6px_0px_0px_#120402] overflow-hidden">
           {/* Header Row */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-[#240B07] border-b border-[#FAF7F2]/20">
-            {/* Left Pill Tab Attached to Top-Left */}
-            <div className="bg-[#E5A93C] text-[#180805] font-mono font-bold text-[10px] sm:text-xs uppercase px-5 py-2.5 rounded-tl-[21px] rounded-br-2xl flex items-center gap-2 border-r-[2px] border-b-[2px] border-[#FAF7F2] shadow-[1.5px_1.5px_0px_0px_#120402]">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-[#240B07] border-b border-[#FAF7F2]/20 px-4 py-3">
+            <div className="bg-[#E5A93C] text-[#180805] font-mono font-bold text-[10px] sm:text-xs uppercase px-4 py-1.5 rounded-xl border-[1.5px] border-[#FAF7F2] shadow-[1.5px_1.5px_0px_0px_#120402] flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-[#180805]" />
-              <span>PROPOSED ONE-DAY FLOW • SUBJECT TO CONFIRMATION</span>
+              <span>CONFIRMED TIMELINE • 09:00 AM - 05:30 PM IST</span>
             </div>
 
-            {/* Right Status Badges */}
-            <div className="flex items-center gap-2 px-4 py-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38130D] text-[#E5A93C] text-[10px] sm:text-[11px] font-mono font-bold border border-[#FAF7F2]/30">
                 <Clock className="w-3.5 h-3.5" />
-                <span>TIMINGS TBA</span>
+                <span>8.5 HOURS</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38130D] text-[#FAF7F2] text-[10px] sm:text-[11px] font-mono font-bold border border-[#FAF7F2]/30">
                 <Users className="w-3.5 h-3.5" />
-                <span>SPEAKERS TBA</span>
+                <span>12+ EXPERTS</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38130D] text-[#C84832] text-[10px] sm:text-[11px] font-mono font-bold border border-[#FAF7F2]/30">
                 <Layers className="w-3.5 h-3.5" />
-                <span>TRACKS TBA</span>
+                <span>2 TRACKS</span>
               </span>
             </div>
           </div>
 
           {/* Timeline Rows List */}
-          <div className="px-4 sm:px-6 py-2 relative">
-            {/* Connected Vertical Timeline Line */}
-            <div className="absolute left-[23px] sm:left-[31px] top-6 bottom-8 w-[2px] bg-[#E5A93C]/40 hidden xs:block" />
-
-            <div className="divide-y divide-[#FAF7F2]/10">
-              {scheduleItems.map((item, idx) => {
-                const IconComponent = item.icon;
+          <div className="p-3 sm:p-5 space-y-4">
+            {filteredSchedule.map((item) => {
+              if (item.type === 'parallel') {
                 return (
-                  <div
-                    key={idx}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-3.5 sm:py-4 transition-colors hover:bg-[#280D07]/60"
-                  >
-                    {/* Left: Timeline Dot + Time Pill + Icon + Title/Desc */}
-                    <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0">
-                      {/* Node on vertical line */}
-                      <div className="w-3.5 h-3.5 rounded-full bg-[#E5A93C] ring-4 ring-[#1E0905] shrink-0 mt-2 sm:mt-0 relative z-10 hidden xs:block" />
+                  <div key={item.id} className="bg-[#280D07] border-[2px] border-[#FAF7F2]/60 rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_0px_#120402]">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#FAF7F2]/20 pb-3 mb-4">
+                      <div className="flex items-center gap-2">
+                        <span className="bg-[#E5A93C] text-[#180805] font-mono font-black text-xs px-3 py-1 rounded-lg border border-[#FAF7F2]">
+                          {item.time}
+                        </span>
+                        <span className="font-mono text-xs text-[#FAF7F2]/80 uppercase">
+                          PARALLEL BREAKOUT SESSIONS
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-mono font-bold text-[#E5A93C] bg-[#38130D] px-2.5 py-0.5 rounded border border-[#FAF7F2]/30">
+                        CHOOSE YOUR TRACK
+                      </span>
+                    </div>
 
-                      {/* Time Pill */}
-                      <div className="bg-[#280D07] border border-[#FAF7F2]/30 rounded-xl px-3 py-1.5 flex flex-col items-center justify-center shrink-0 min-w-[95px] sm:min-w-[105px]">
-                        <div className="flex items-center gap-1 text-[11px] sm:text-xs font-mono font-bold text-[#E5A93C]">
-                          <Clock className="w-3.5 h-3.5 text-[#E5A93C]" />
-                          <span>{item.time}</span>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {/* Track 1 */}
+                      <div className="bg-[#1A0603] border-2 border-[#E5A93C]/50 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="font-mono text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#E5A93C] text-[#180805]">
+                              {item.track1.trackName}
+                            </span>
+                            <span className="font-mono text-[10px] text-[#FAF7F2]/70 flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-[#E5A93C]" /> {item.track1.room}
+                            </span>
+                          </div>
+                          <h4 className="font-sans font-bold text-sm sm:text-base text-[#FAF7F2] mb-1">
+                            {item.track1.title}
+                          </h4>
+                          <p className="font-mono text-xs text-[#E5A93C] font-semibold mb-2">
+                            Speaker: {item.track1.speaker}
+                          </p>
+                          <p className="font-sans text-xs text-[#FAF7F2]/80 leading-relaxed mb-3">
+                            {item.track1.desc}
+                          </p>
                         </div>
-                        <span className="text-[9px] text-[#FAF7F2]/60 font-mono uppercase tracking-tight mt-0.5">
-                          {item.tag}
+                        <span className="inline-block self-start font-mono text-[10px] px-2 py-0.5 rounded bg-[#38130D] text-[#E5A93C] border border-[#FAF7F2]/20">
+                          {item.track1.category}
                         </span>
                       </div>
 
-                      {/* Colored Square Icon */}
-                      <div className={`w-11 h-11 rounded-2xl ${item.iconColor} border border-[#FAF7F2]/20 flex items-center justify-center shrink-0 shadow-sm`}>
-                        <IconComponent className="w-5 h-5 stroke-[2.2]" />
+                      {/* Track 2 */}
+                      <div className="bg-[#1A0603] border-2 border-[#C84832]/60 rounded-xl p-4 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="font-mono text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#C84832] text-[#FAF7F2]">
+                              {item.track2.trackName}
+                            </span>
+                            <span className="font-mono text-[10px] text-[#FAF7F2]/70 flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-[#E5A93C]" /> {item.track2.room}
+                            </span>
+                          </div>
+                          <h4 className="font-sans font-bold text-sm sm:text-base text-[#FAF7F2] mb-1">
+                            {item.track2.title}
+                          </h4>
+                          <p className="font-mono text-xs text-[#E5A93C] font-semibold mb-2">
+                            Speaker: {item.track2.speaker}
+                          </p>
+                          <p className="font-sans text-xs text-[#FAF7F2]/80 leading-relaxed mb-3">
+                            {item.track2.desc}
+                          </p>
+                        </div>
+                        <span className="inline-block self-start font-mono text-[10px] px-2 py-0.5 rounded bg-[#38130D] text-[#E5A93C] border border-[#FAF7F2]/20">
+                          {item.track2.category}
+                        </span>
                       </div>
-
-                      {/* Title & Description */}
-                      <div className="min-w-0 text-left">
-                        <h4 className="text-xs sm:text-sm font-bold font-sans text-[#FAF7F2] leading-snug">
-                          {item.title}
-                        </h4>
-                        <p className="text-[11px] sm:text-xs text-[#FAF7F2]/75 font-sans leading-snug mt-0.5">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right: Warli Status Pill */}
-                    <div className="shrink-0 self-start sm:self-center pl-14 sm:pl-0">
-                      <span className="inline-block text-[11px] font-mono font-bold text-[#E5A93C] bg-[#38130D] px-5 py-1.5 rounded-full border-[1.5px] border-[#FAF7F2]/40 uppercase tracking-wider shadow-sm cursor-default">
-                        DRAFT
-                      </span>
                     </div>
                   </div>
                 );
-              })}
-            </div>
+              }
+
+              // General/Keynote Slot
+              return (
+                <div
+                  key={item.id}
+                  className="bg-[#240B07] border-2 border-[#FAF7F2]/40 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:border-[#E5A93C]"
+                >
+                  <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0">
+                    <div className="bg-[#1E0905] border border-[#FAF7F2]/30 rounded-xl px-3 py-2 flex flex-col items-center justify-center shrink-0 min-w-[95px]">
+                      <div className="flex items-center gap-1 text-xs font-mono font-bold text-[#E5A93C]">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{item.time}</span>
+                      </div>
+                      <span className="text-[9px] text-[#FAF7F2]/60 font-mono uppercase tracking-tight mt-0.5">
+                        {item.room}
+                      </span>
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="font-mono text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#38130D] text-[#E5A93C] border border-[#FAF7F2]/20">
+                          {item.category}
+                        </span>
+                        {item.speaker && (
+                          <span className="font-mono text-xs text-[#E5A93C] font-bold">
+                            By {item.speaker}
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="font-sans font-bold text-sm sm:text-base text-[#FAF7F2] leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="font-sans text-xs text-[#FAF7F2]/75 leading-relaxed mt-1">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="shrink-0 self-start sm:self-center pl-12 sm:pl-0">
+                    <span className="inline-block text-[10px] sm:text-[11px] font-mono font-bold text-[#180805] bg-[#E5A93C] px-3 py-1 rounded-full border border-[#FAF7F2] uppercase shadow-sm">
+                      AUDITORIUM
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

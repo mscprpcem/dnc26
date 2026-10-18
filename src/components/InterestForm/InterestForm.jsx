@@ -11,6 +11,8 @@ import {
   Send,
   ArrowRight,
   ChevronDown,
+  ChevronUp,
+  HelpCircle,
 } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
@@ -30,6 +32,7 @@ export const InterestForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isRoleDropdownOpen, setIsRoleDropdownOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState(null);
   const roleDropdownRef = useRef(null);
 
   const roleOptions = [
@@ -390,6 +393,55 @@ export const InterestForm = () => {
           </div>
 
         </div>
+
+        {/* Delegate FAQs Accordion */}
+        {eventData?.faqs && (
+          <div className="mt-10 sm:mt-12">
+            <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#DCD5F6] p-5 sm:p-8 shadow-md">
+              <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-[#DCD5F6]/70">
+                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
+                  <HelpCircle className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-bold font-display text-[#14053A]">
+                    Frequently Asked Questions (FAQ)
+                  </h3>
+                  <span className="text-xs text-[#190649]/65">Everything you need to know about attending .NET Conf Amravati</span>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {eventData.faqs.map((faq) => {
+                  const isOpen = openFaq === faq.id;
+                  return (
+                    <div
+                      key={faq.id}
+                      className="border border-[#DCD5F6]/70 rounded-xl overflow-hidden transition-all bg-[#FBFBFE]"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setOpenFaq(isOpen ? null : faq.id)}
+                        className="w-full text-left p-4 flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-[#14053A] hover:text-[#512BD4] transition-colors"
+                      >
+                        <span>{faq.question}</span>
+                        {isOpen ? (
+                          <ChevronUp className="w-4 h-4 text-[#512BD4] shrink-0" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4 text-[#190649]/40 shrink-0" />
+                        )}
+                      </button>
+                      {isOpen && (
+                        <div className="px-4 pb-4 pt-1 text-xs text-[#190649]/75 leading-relaxed border-t border-[#DCD5F6]/40">
+                          {faq.answer}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </section>

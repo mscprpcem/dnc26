@@ -15,6 +15,7 @@ import {
   Square
 } from 'lucide-react';
 import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon, XIcon } from '../ui/SocialIcons.jsx';
+import { eventData } from '../../data/event.js';
 
 const ROLE_PRESETS = [
   'Student Developer',
@@ -80,14 +81,15 @@ export const AttendeeBadge = () => {
   const getSharePostText = () => {
     const roleString = role.trim() ? ` as ${role.trim()}` : '';
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
+    const dateStr = eventData?.displayDate ? ` on ${eventData.displayDate}` : '';
     return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
-Join me for the premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati on 20 April 2026.
+Join me for Central India's premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati${dateStr}.
 
-Get your official attendee badge here:
+Generate your personalized attendee badge here:
 👉 https://dotnetconf.mscprpcem.tech
 
-#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #community`;
+#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #CentralIndia`;
   };
 
   const handleShareWhatsApp = () => {

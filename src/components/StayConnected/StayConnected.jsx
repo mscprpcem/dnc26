@@ -1,12 +1,13 @@
 import React from 'react';
 import { Globe, Mail, ArrowUpRight, Users } from 'lucide-react';
-import { LinkedInIcon, LinktreeIcon, GitHubIcon, YouTubeIcon, InstagramIcon, WhatsAppIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, LinktreeIcon, GitHubIcon, YouTubeIcon, InstagramIcon, WhatsAppIcon, XIcon } from '../ui/SocialIcons.jsx';
 import { eventData } from '../../data/event.js';
 
 export const StayConnected = () => {
   const channels = [
     {
       name: 'WhatsApp Community',
+      desc: 'Instant Alerts & Community Chat',
       href: eventData.socialLinks.whatsapp,
       icon: WhatsAppIcon,
       iconBg: 'bg-[#25D366] text-white',
@@ -14,6 +15,7 @@ export const StayConnected = () => {
     },
     {
       name: 'LinkedIn',
+      desc: 'Professional Network & Updates',
       href: eventData.socialLinks.linkedin,
       icon: LinkedInIcon,
       iconBg: 'bg-[#0A66C2] text-white',
@@ -21,6 +23,7 @@ export const StayConnected = () => {
     },
     {
       name: 'Instagram',
+      desc: 'Behind the Scenes & Reels',
       href: eventData.socialLinks.instagram,
       icon: InstagramIcon,
       iconBg: 'bg-gradient-to-tr from-[#FD1D1D] via-[#E1306C] to-[#833AB4] text-white',
@@ -28,6 +31,7 @@ export const StayConnected = () => {
     },
     {
       name: 'YouTube',
+      desc: 'Session Recordings & Live Streams',
       href: eventData.socialLinks.youtube,
       icon: YouTubeIcon,
       iconBg: 'bg-[#FF0000] text-white',
@@ -35,6 +39,7 @@ export const StayConnected = () => {
     },
     {
       name: 'GitHub',
+      desc: 'Conference Code & Demos',
       href: eventData.socialLinks.github,
       icon: GitHubIcon,
       iconBg: 'bg-[#181717] text-white',
@@ -42,14 +47,24 @@ export const StayConnected = () => {
     },
     {
       name: 'Linktree',
+      desc: 'All Resources & Official Links',
       href: eventData.socialLinks.linktree,
       icon: LinktreeIcon,
       iconBg: 'bg-[#20D048] text-[#063311]',
       borderHover: 'hover:border-[#20D048] hover:shadow-[#20D048]/20',
     },
     {
+      name: 'X (Twitter)',
+      desc: 'Live Tweets & Announcements',
+      href: 'https://x.com/mscprpcem',
+      icon: XIcon,
+      iconBg: 'bg-[#180805] text-[#FAF7F2]',
+      borderHover: 'hover:border-black hover:shadow-black/20',
+    },
+    {
       name: 'Official Email',
-      href: eventData.socialLinks.email,
+      desc: 'Delegate & Speaker Queries',
+      href: `mailto:${eventData.contactEmail}`,
       icon: Mail,
       iconBg: 'bg-[#512BD4] text-white',
       borderHover: 'hover:border-[#512BD4] hover:shadow-[#512BD4]/20',
@@ -101,9 +116,14 @@ export const StayConnected = () => {
                 >
                   <IconComp className="w-5 h-5" />
                 </div>
-                <span className="text-sm font-bold font-display text-[#14053A] group-hover:text-[#512BD4] transition-colors truncate">
-                  {ch.name}
-                </span>
+                <div className="flex flex-col text-left min-w-0">
+                  <span className="text-sm font-bold font-display text-[#14053A] group-hover:text-[#512BD4] transition-colors truncate">
+                    {ch.name}
+                  </span>
+                  <span className="text-[11px] text-[#190649]/65 font-sans truncate">
+                    {ch.desc}
+                  </span>
+                </div>
                 <ArrowUpRight className="w-4 h-4 text-[#8C7BD8]/60 group-hover:text-[#512BD4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all ml-auto shrink-0" />
               </a>
             );

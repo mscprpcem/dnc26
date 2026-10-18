@@ -84,7 +84,9 @@ export const Tickets = () => {
 
         {/* Security & Partner reassurance */}
         <div className="mt-8 sm:mt-10 text-center flex items-center justify-center gap-1.5 text-xs text-[#190649]/70">
-           </div>
+          <ShieldCheck className="w-4 h-4 text-[#0E7A66]" />
+          <span>Verified delegate access &bull; Digital attendee badge with QR entry pass &bull; Instant confirmation via email</span>
+        </div>
 
       </div>
     </section>

@@ -84,8 +84,13 @@ export const DncVenue = () => {
                   <Compass className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-bold text-[#E5A93C] block">Transit &amp; Proximity</span>
-                  <span className="text-[#FAF7F2]/80">15 mins from Amravati Station · 30 mins from Badnera Jn (BD)</span>
+                  <span className="font-bold text-[#E5A93C] block">Transit &amp; Distance</span>
+                  <div className="flex flex-wrap gap-1.5 mt-1.5">
+                    <span className="px-2 py-0.5 rounded bg-[#38130D] border border-[#FAF7F2]/30 text-[11px] font-mono font-bold text-[#E5A93C]">Amravati Stn: 6 km (15m)</span>
+                    <span className="px-2 py-0.5 rounded bg-[#38130D] border border-[#FAF7F2]/30 text-[11px] font-mono font-bold text-[#E5A93C]">Badnera Jxn: 14 km (25m)</span>
+                    <span className="px-2 py-0.5 rounded bg-[#38130D] border border-[#FAF7F2]/30 text-[11px] font-mono font-bold text-[#E5A93C]">Central Bus Stand: 5.5 km</span>
+                    <span className="px-2 py-0.5 rounded bg-[#38130D] border border-[#FAF7F2]/30 text-[11px] font-mono font-bold text-[#E5A93C]">Free Campus Parking</span>
+                  </div>
                 </div>
               </div>
 
@@ -105,7 +110,7 @@ export const DncVenue = () => {
                 </div>
                 <div>
                   <span className="font-bold text-[#E5A93C] block">Event Format</span>
-                  <span className="text-[#FAF7F2]/80">In-person Developer Conference (Main Auditorium &amp; AI Labs)</span>
+                  <span className="text-[#FAF7F2]/80">In-person Developer Gathering (Main Auditorium &amp; CSE AI Labs)</span>
                 </div>
               </div>
             </div>
@@ -231,8 +236,8 @@ export const DncVenue = () => {
           <Megaphone className="w-4 h-4" />
         </div>
         <p className="text-xs sm:text-sm font-sans font-medium text-[#FAF7F2]">
-          <span className="font-bold text-[#E5A93C]">Delegate Notice : </span>
-          <span>Campus entry passes and parking information will be issued 48 hours prior to the event.</span>
+          <span className="font-bold text-[#E5A93C]">Delegate Advisory : </span>
+          <span>Please carry a government or college photo ID for campus gate security. Check-in opens at 08:30 AM at PRPCEM Gate 1. Wi-Fi credentials and kit will be provided at the reception desk.</span>
         </p>
       </div>
     </section>

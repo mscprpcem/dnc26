@@ -8,6 +8,7 @@ export const DncSponsors = () => {
       id: 'msft',
       name: 'MICROSOFT',
       role: 'GLOBAL TECHNOLOGY PARTNER',
+      desc: 'Developer ecosystem, Azure platform support & MVP community leadership.',
       roleBg: 'bg-[#E0F2FE] text-[#0284C7]',
       boxBg: 'bg-[#E0F2FE]',
       url: 'https://microsoft.com',
@@ -24,6 +25,7 @@ export const DncSponsors = () => {
       id: 'jetbrains',
       name: 'JETBRAINS',
       role: 'DEVELOPER TOOLS PARTNER',
+      desc: 'Empowering attendees with modern developer tooling & Rider / ReSharper licenses.',
       roleBg: 'bg-[#FCE7F3] text-[#D600AA]',
       boxBg: 'bg-[#FCE7F3]',
       url: 'https://jetbrains.com',
@@ -39,6 +41,7 @@ export const DncSponsors = () => {
       id: 'prpcem',
       name: 'PRPCEM AMRAVATI',
       role: 'HOST CAMPUS',
+      desc: 'Academic institution partner providing 800-seat auditorium and advanced computing labs.',
       roleBg: 'bg-[#FEF3C7] text-[#D97706]',
       boxBg: 'bg-[#FEF3C7]',
       url: 'https://prpotepatilengg.ac.in/',
@@ -54,6 +57,7 @@ export const DncSponsors = () => {
       id: 'mscprpcem',
       name: 'MSC PRPCEM',
       role: 'COMMUNITY ORGANIZERS',
+      desc: "Central India's leading Microsoft student chapter organizing tech conferences and hackathons.",
       roleBg: 'bg-[#E0F7FA] text-[#00838F]',
       boxBg: 'bg-[#E0F7FA]',
       url: 'https://www.mscprpcem.tech',
@@ -154,14 +158,19 @@ export const DncSponsors = () => {
               </div>
 
               {/* Title */}
-              <h4 className="font-black font-sans text-base sm:text-lg text-black uppercase leading-tight mb-2">
+              <h4 className="font-black font-sans text-base sm:text-lg text-black uppercase leading-tight mb-1.5">
                 {p.name}
               </h4>
 
               {/* Role Badge */}
-              <span className={`text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full border border-black/15 mb-4 ${p.roleBg}`}>
+              <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-full border border-black/15 mb-2.5 ${p.roleBg}`}>
                 {p.role}
               </span>
+
+              {/* Description */}
+              <p className="text-[11px] text-stone-600 font-sans leading-relaxed mb-4">
+                {p.desc}
+              </p>
 
               {/* Website Link */}
               <a
@@ -185,10 +194,10 @@ export const DncSponsors = () => {
             </div>
             <div>
               <h5 className="text-xs sm:text-sm font-bold font-sans text-black leading-snug">
-                Interested in supporting the community?
+                Interested in partnering with .NET Conf Amravati 2026?
               </h5>
               <p className="text-[11px] sm:text-xs text-stone-500 font-sans mt-0.5">
-                Let's collaborate and create a bigger impact together.
+                Connect your brand and engineering culture with 600+ passionate student developers, architects, and community leaders across Central India.
               </p>
             </div>
           </div>
@@ -197,7 +206,7 @@ export const DncSponsors = () => {
             href={`mailto:${eventData.contactEmail}?subject=%5BSponsorship%5D%20.NET%20Conf%202026%20Amravati`}
             className="bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-bold text-xs uppercase px-5 py-2.5 rounded-xl border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 shrink-0 cursor-pointer"
           >
-            <span>Contact the Sponsorship Team</span>
+            <span>Partner With Us</span>
             <ArrowRight className="w-4 h-4 stroke-[2.5]" />
           </a>
         </div>

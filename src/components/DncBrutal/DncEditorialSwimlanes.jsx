@@ -99,23 +99,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Modern .NET 11 & C# 14 features</span>
+                <span>Modern .NET 11 &amp; C# 14 records &amp; ref structs</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Cloud-native application design</span>
+                <span>Cloud-native distributed systems with .NET Aspire</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Microservices & distributed systems</span>
+                <span>Ultra-fast Minimal APIs &amp; Native AOT compilation</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Containerization with Azure</span>
+                <span>Containerization with Docker &amp; Azure Kubernetes (AKS)</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Performance, scalability & security</span>
+                <span>Zero-allocation performance &amp; memory profiling</span>
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@ export const DncEditorialSwimlanes = () => {
 
             {/* Title */}
             <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              AI, COPILOTS &<br />INTELLIGENT APPS
+              AI, COPILOTS &amp;<br />INTELLIGENT APPS
             </h3>
 
             {/* Description */}
@@ -164,23 +164,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Build with GitHub Copilot & Azure AI</span>
+                <span>Autonomous AI agents with Microsoft Semantic Kernel</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Integrate LLMs and RAG patterns</span>
+                <span>Enterprise RAG pipelines &amp; vector memory embeddings</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Develop autonomous agents</span>
+                <span>Deploying Small Language Models (SLMs) on Azure AI</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Vector search and embeddings</span>
+                <span>Building intelligent Copilots into enterprise C# code</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Responsible and secure AI adoption</span>
+                <span>Responsible AI governance, security &amp; privacy controls</span>
               </div>
             </div>
           </div>
@@ -229,23 +229,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Visual Studio & VS Code productivity</span>
+                <span>Visual Studio 2025 &amp; VS Code next-gen productivity</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>DevOps & CI/CD with GitHub</span>
+                <span>CI/CD automation pipelines with GitHub Actions</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Testing, debugging and best practices</span>
+                <span>Full-Stack unified web apps with Blazor WebAssembly</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Open source contributions</span>
+                <span>EF Core interceptors, query tuning &amp; DB migrations</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Modern frontend integration (Blazor)</span>
+                <span>NuGet package authoring &amp; open source collaboration</span>
               </div>
             </div>
           </div>
@@ -282,7 +282,7 @@ export const DncEditorialSwimlanes = () => {
 
             {/* Title */}
             <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              COMMUNITY,<br />CAREER & INNOVATION
+              COMMUNITY,<br />CAREER &amp; INNOVATION
             </h3>
 
             {/* Description */}
@@ -294,23 +294,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Keynotes from industry leaders</span>
+                <span>Headline Keynote &amp; Masterclasses from Microsoft MVPs</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Panel discussions and fireside chats</span>
+                <span>Tech career roadmap from college to global software roles</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Career guidance and learning paths</span>
+                <span>Microsoft Student Club PRPCEM leadership opportunities</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Networking with peers and experts</span>
+                <span>In-person mentor networking &amp; student delegation mixer</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
                 <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Innovation showcase and projects</span>
+                <span>Live tech quiz awards, conference swag kits &amp; certs</span>
               </div>
             </div>
           </div>

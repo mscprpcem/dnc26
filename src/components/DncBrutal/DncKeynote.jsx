@@ -197,77 +197,92 @@ export const DncKeynote = () => {
               {/* Keynote Themes Ribbon */}
               <div className="flex items-center gap-2 font-mono font-bold text-xs text-[#512BD4] uppercase mb-2">
                 <LayoutGrid className="w-4 h-4 text-[#D600AA]" />
-                <span>KEYNOTE THEMES</span>
+                <span>HEADLINE KEYNOTE SPOTLIGHT</span>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-black mb-3 leading-snug">
-                Building What's Next with .NET and AI
+              <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-black mb-2 leading-snug">
+                Building Next-Gen Intelligent Applications with .NET &amp; AI
               </h3>
 
+              {/* Featured Keynote Speaker Info */}
+              <div className="flex items-center gap-2.5 mb-3 bg-[#FAF8FF] border border-black/20 rounded-xl p-2.5">
+                <div className="w-8 h-8 rounded-lg bg-[#512BD4] text-white font-mono font-black text-xs flex items-center justify-center shrink-0">
+                  MVP
+                </div>
+                <div>
+                  <div className="text-xs font-bold font-sans text-black">
+                    Anuraj P. · Microsoft MVP &amp; Senior Architect
+                  </div>
+                  <div className="text-[10px] font-mono text-stone-500">
+                    Microsoft Most Valuable Professional · 20+ Years Enterprise Experience
+                  </div>
+                </div>
+              </div>
+
               {/* Description */}
-              <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-5">
-                A forward-looking session on modern .NET development, cloud-native architecture, and practical AI integration. Speaker details and the final session outline will be announced soon.
+              <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
+                An inspiring keynote deep dive exploring the evolution of .NET 11, C# 14 zero-allocation patterns, autonomous multi-agent systems powered by Semantic Kernel, and resilient cloud-native architectures with .NET Aspire on Azure.
               </p>
 
               {/* Tech Badges Row */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className="bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] px-3 py-1 rounded-full border border-purple-200">
-                  .NET
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                <span className="bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-purple-200">
+                  .NET 11
                 </span>
-                <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[11px] px-3 py-1 rounded-full border border-cyan-200">
-                  C#
+                <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-cyan-200">
+                  C# 14
                 </span>
-                <span className="bg-[#E8F0FE] text-[#1D4ED8] font-mono font-bold text-[11px] px-3 py-1 rounded-full border border-blue-200">
-                  Azure
+                <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-pink-200">
+                  Semantic Kernel
                 </span>
-                <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[11px] px-3 py-1 rounded-full border border-pink-200">
-                  AI & Copilots
+                <span className="bg-[#E8F0FE] text-[#1D4ED8] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-blue-200">
+                  Azure OpenAI
                 </span>
-                <span className="bg-[#E6FFFA] text-[#0D9488] font-mono font-bold text-[11px] px-3 py-1 rounded-full border border-teal-200">
-                  Cloud Native
+                <span className="bg-[#E6FFFA] text-[#0D9488] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-teal-200">
+                  .NET Aspire
                 </span>
               </div>
             </div>
 
             {/* 3 Theme Feature Columns */}
-            <div className="grid grid-cols-3 gap-3 pt-5 border-t border-stone-200 mt-auto">
-              {/* 1. Modern .NET */}
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-3 pt-4 border-t border-stone-200 mt-auto">
+              {/* 1. Runtime Innovations */}
               <div className="flex flex-col items-start">
-                <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center border border-purple-200 shadow-[1px_1px_0px_0px_#000] mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center border border-purple-200 shadow-[1px_1px_0px_0px_#000] mb-1.5">
                   <Cpu className="w-4 h-4 text-[#512BD4]" />
                 </div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Modern .NET
+                <span className="text-[11px] sm:text-xs font-bold font-sans text-black block leading-snug">
+                  Runtime Innovations
                 </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
-                  Application design and performance
+                <span className="text-[9px] sm:text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
+                  JIT breakthroughs &amp; memory profiling
                 </span>
               </div>
 
-              {/* 2. AI in Practice */}
+              {/* 2. Autonomous Agents */}
               <div className="flex flex-col items-start">
-                <div className="w-9 h-9 rounded-full bg-[#FCE7F3] text-[#D600AA] flex items-center justify-center border border-pink-200 shadow-[1px_1px_0px_0px_#000] mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#FCE7F3] text-[#D600AA] flex items-center justify-center border border-pink-200 shadow-[1px_1px_0px_0px_#000] mb-1.5">
                   <Brain className="w-4 h-4 text-[#D600AA]" />
                 </div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  AI in Practice
+                <span className="text-[11px] sm:text-xs font-bold font-sans text-black block leading-snug">
+                  Autonomous Agents
                 </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
-                  Copilots and intelligent applications
+                <span className="text-[9px] sm:text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
+                  Semantic Kernel &amp; tool-calling
                 </span>
               </div>
 
-              {/* 3. Cloud Architecture */}
+              {/* 3. Cloud Resilience */}
               <div className="flex flex-col items-start">
-                <div className="w-9 h-9 rounded-full bg-[#E0F7FA] text-[#00BDD6] flex items-center justify-center border border-cyan-200 shadow-[1px_1px_0px_0px_#000] mb-2">
+                <div className="w-8 h-8 rounded-full bg-[#E0F7FA] text-[#00BDD6] flex items-center justify-center border border-cyan-200 shadow-[1px_1px_0px_0px_#000] mb-1.5">
                   <Cloud className="w-4 h-4 text-[#00BDD6]" />
                 </div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Cloud Architecture
+                <span className="text-[11px] sm:text-xs font-bold font-sans text-black block leading-snug">
+                  Cloud Resilience
                 </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
-                  Scalable services and deployment
+                <span className="text-[9px] sm:text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">
+                  .NET Aspire &amp; Azure microservices
                 </span>
               </div>
             </div>

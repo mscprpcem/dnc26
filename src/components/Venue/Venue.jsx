@@ -82,8 +82,13 @@ export const Venue = () => {
                 <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#190649]/80">
                   <Compass className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-[#14053A] block">Transit</span>
-                    <span className="text-xs text-[#5F6368]">15 mins from Amravati Station · 30 mins from Badnera Jn (BD)</span>
+                    <span className="font-bold text-[#14053A] block">Transit &amp; Distance</span>
+                    <div className="flex flex-wrap gap-1.5 mt-1.5">
+                      <span className="px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4] text-[11px] font-mono font-bold">Amravati Stn: 6 km</span>
+                      <span className="px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4] text-[11px] font-mono font-bold">Badnera Jxn: 14 km</span>
+                      <span className="px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4] text-[11px] font-mono font-bold">Bus Stand: 5.5 km</span>
+                      <span className="px-2 py-0.5 rounded bg-[#E8F8F5] text-[#0E7A66] text-[11px] font-mono font-bold">Free Parking</span>
+                    </div>
                   </div>
                 </div>
 
@@ -91,7 +96,7 @@ export const Venue = () => {
                   <Navigation className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-[#14053A] block">Facilities</span>
-                    <span className="text-xs text-[#5F6368]">AC auditorium, high-speed Wi-Fi, lab workstations, & audio-visual stage setup.</span>
+                    <span className="text-xs text-[#5F6368]">Central AC auditorium, gigabit Wi-Fi, lab workstations, &amp; audio-visual stage setup.</span>
                   </div>
                 </div>
               </div>
@@ -209,6 +214,16 @@ export const Venue = () => {
 
           </div>
 
+        </div>
+
+        {/* Delegate Advisory Banner */}
+        <div className="mt-8 bg-[#FAF8FF] border border-[#DCD5F6] rounded-2xl p-4 sm:p-5 flex items-center justify-center gap-3 text-center max-w-4xl mx-auto shadow-xs">
+          <div className="w-8 h-8 rounded-xl bg-[#512BD4] text-white flex items-center justify-center shrink-0">
+            <Compass className="w-4 h-4" />
+          </div>
+          <p className="text-xs sm:text-sm text-[#190649]/80 font-medium">
+            <strong className="text-[#512BD4]">Delegate Logistics:</strong> Please carry a valid college or government photo ID for security clearance at PRPCEM Gate 1. Check-in opens at 08:30 AM; conference kits and high-speed Wi-Fi access tokens will be issued at the reception desk.
+          </p>
         </div>
 
       </div>

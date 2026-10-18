@@ -108,11 +108,11 @@ export const DncPastHighlights = () => {
       <div className="flex flex-col items-center mb-6 relative z-10">
         <div className="bg-[#512BD4] text-white px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] flex items-center gap-2.5 sm:gap-3 z-10">
           <span className="bg-[#00BDD6] text-black text-[10px] sm:text-xs font-mono font-bold px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000] uppercase">
-            LAST YEAR'S EDITION
+            RETROSPECTIVE
           </span>
           <span className="text-white/60 font-mono text-xs">✦</span>
           <span className="font-sans font-black text-sm sm:text-base md:text-lg tracking-wider uppercase">
-            2024 EDITION RECAP
+            PREVIOUS EDITION HIGHLIGHTS
           </span>
         </div>
 
@@ -133,7 +133,7 @@ export const DncPastHighlights = () => {
         <div className="flex justify-center mb-3">
           <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
             <Image className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>2024 EDITION GALLERY • PRPCEM CAMPUS</span>
+            <span>COMMUNITY ARCHIVE • PRPCEM CAMPUS, AMRAVATI</span>
           </div>
         </div>
 
@@ -144,7 +144,7 @@ export const DncPastHighlights = () => {
 
         {/* Subtitle */}
         <p className="text-stone-600 font-sans text-xs sm:text-sm md:text-base text-center max-w-2xl mx-auto leading-relaxed mb-8">
-          Revisit the sessions, hands-on learning and community moments that brought local developers together.
+          Revisit the landmark in-person gathering that brought together 500+ student developers, software engineers, Microsoft MVPs, and community innovators at PRPCEM Campus.
         </p>
 
         {/* 3 Moving Photo Cards Row */}
@@ -323,8 +323,8 @@ export const DncPastHighlights = () => {
             </div>
           </div>
 
-          {/* Middle: 3 Stats */}
-          <div className="flex items-center gap-5 sm:gap-8">
+          {/* Middle: 4 Stats */}
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-4 sm:gap-7">
             {/* Stat 1: 500+ Attendees */}
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] border border-purple-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
@@ -338,23 +338,34 @@ export const DncPastHighlights = () => {
 
             {/* Stat 2: Expert Speakers */}
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] border border-purple-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
+              <div className="w-9 h-9 rounded-full bg-[#E0F7FA] text-[#00838F] border border-cyan-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
                 <Mic className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-xs sm:text-sm font-black font-sans text-black block leading-none">Expert</span>
+                <span className="text-xs sm:text-sm font-black font-mono text-black block leading-none">8+</span>
                 <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">Speakers</span>
               </div>
             </div>
 
             {/* Stat 3: Hands-on Workshops */}
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] border border-purple-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
+              <div className="w-9 h-9 rounded-full bg-[#FCE7F3] text-[#D600AA] border border-pink-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
                 <Laptop className="w-4 h-4" />
               </div>
               <div>
-                <span className="text-xs sm:text-sm font-black font-sans text-black block leading-none">Hands-on</span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">Workshops</span>
+                <span className="text-xs sm:text-sm font-black font-mono text-black block leading-none">10+</span>
+                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">Tech Sessions</span>
+              </div>
+            </div>
+
+            {/* Stat 4: Colleges */}
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full bg-[#FEF3C7] text-[#D97706] border border-amber-200 flex items-center justify-center shrink-0 shadow-[1px_1px_0px_0px_#000]">
+                <MapPin className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="text-xs sm:text-sm font-black font-mono text-black block leading-none">15+</span>
+                <span className="text-[10px] text-stone-500 font-sans block leading-tight mt-0.5">Colleges</span>
               </div>
             </div>
           </div>

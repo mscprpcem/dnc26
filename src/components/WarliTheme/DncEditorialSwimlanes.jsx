@@ -107,23 +107,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Modern .NET 11 &amp; C# 14 features</span>
+                <span>Modern .NET 11 runtime &amp; C# 14 language innovations</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Cloud-native application design</span>
+                <span>.NET Aspire orchestrations &amp; distributed telemetry</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Microservices &amp; distributed systems</span>
+                <span>Native AOT compilation &amp; sub-millisecond cold starts</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Containerization with Azure</span>
+                <span>Resilient microservices with Azure Container Apps</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Performance, scalability &amp; security</span>
+                <span>Minimal APIs &amp; enterprise distributed pipelines</span>
               </div>
             </div>
           </div>
@@ -137,10 +137,10 @@ export const DncEditorialSwimlanes = () => {
               C# 14
             </span>
             <span className="bg-[#3A140E] text-[#E5A93C] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Azure
+              .NET Aspire
             </span>
             <span className="bg-[#3A140E] text-[#E5A93C] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Cloud Native
+              Native AOT
             </span>
           </div>
         </div>
@@ -173,23 +173,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Build with GitHub Copilot &amp; Azure AI</span>
+                <span>Autonomous agents with Microsoft Semantic Kernel</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Semantic Kernel &amp; RAG patterns</span>
+                <span>Enterprise RAG with Azure OpenAI &amp; pgvector</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Develop autonomous multi-agent systems</span>
+                <span>Local SLM execution via Ollama &amp; ONNX Runtime</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Vector search &amp; embeddings in C#</span>
+                <span>GitHub Copilot agentic extensions in VS 2025</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Responsible &amp; secure AI adoption</span>
+                <span>Responsible AI safety guardrails &amp; token economics</span>
               </div>
             </div>
           </div>
@@ -197,16 +197,16 @@ export const DncEditorialSwimlanes = () => {
           {/* Bottom Tags */}
           <div className="pt-3 border-t border-[#FAF7F2]/20 flex flex-wrap gap-1.5 mt-auto">
             <span className="bg-[#3A140E] text-[#FAF7F2] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Azure AI
+              Azure OpenAI
+            </span>
+            <span className="bg-[#3A140E] text-[#FAF7F2] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
+              Semantic Kernel
             </span>
             <span className="bg-[#3A140E] text-[#FAF7F2] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
               Copilots
             </span>
             <span className="bg-[#3A140E] text-[#FAF7F2] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              RAG
-            </span>
-            <span className="bg-[#3A140E] text-[#FAF7F2] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Agents
+              ONNX / SLMs
             </span>
           </div>
         </div>
@@ -239,23 +239,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#C84832] shrink-0 mt-0.5" />
-                <span>Visual Studio &amp; VS Code mastery</span>
+                <span>Visual Studio 2025 &amp; VS Code multi-root dev mastery</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#C84832] shrink-0 mt-0.5" />
-                <span>GitHub Actions CI/CD workflows</span>
+                <span>GitHub Actions enterprise CI/CD &amp; automated validation</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#C84832] shrink-0 mt-0.5" />
-                <span>Automated testing &amp; benchmarks</span>
+                <span>Blazor full-stack interactive WebAssembly apps</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#C84832] shrink-0 mt-0.5" />
-                <span>Open-source community contribution</span>
+                <span>BenchmarkDotNet performance profiling &amp; memory tuning</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#C84832] shrink-0 mt-0.5" />
-                <span>Blazor modern frontend integration</span>
+                <span>Open-source NuGet packaging &amp; community governance</span>
               </div>
             </div>
           </div>
@@ -263,16 +263,16 @@ export const DncEditorialSwimlanes = () => {
           {/* Bottom Tags */}
           <div className="pt-3 border-t border-[#FAF7F2]/20 flex flex-wrap gap-1.5 mt-auto">
             <span className="bg-[#3A140E] text-[#C84832] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Visual Studio
+              VS 2025
             </span>
             <span className="bg-[#3A140E] text-[#C84832] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              GitHub
+              GitHub Actions
+            </span>
+            <span className="bg-[#3A140E] text-[#C84832] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
+              Blazor WASM
             </span>
             <span className="bg-[#3A140E] text-[#C84832] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
               DevOps
-            </span>
-            <span className="bg-[#3A140E] text-[#C84832] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Blazor
             </span>
           </div>
         </div>
@@ -305,23 +305,23 @@ export const DncEditorialSwimlanes = () => {
             <div className="space-y-2 mb-5">
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Keynotes from industry Microsoft MVPs</span>
+                <span>Direct keynotes &amp; AMAs with Microsoft MVPs</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Panel discussions &amp; career insights</span>
+                <span>High-impact panel discussions on 2026 tech hiring</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>1-on-1 mentorship with senior engineers</span>
+                <span>1-on-1 architecture reviews with senior engineers</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Student project showcase &amp; awards</span>
+                <span>PRPCEM &amp; Vidarbha student hackathon showcase</span>
               </div>
               <div className="flex items-start gap-2 text-xs font-sans text-[#FAF7F2]/90">
                 <CheckCircle2 className="w-4 h-4 text-[#E5A93C] shrink-0 mt-0.5" />
-                <span>Vidarbha regional developer network</span>
+                <span>Lifelong peer network connecting 600+ delegates</span>
               </div>
             </div>
           </div>
@@ -338,7 +338,7 @@ export const DncEditorialSwimlanes = () => {
               PRPCEM
             </span>
             <span className="bg-[#3A140E] text-[#E5A93C] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-[#FAF7F2]/30">
-              Innovation
+              Mentorship
             </span>
           </div>
         </div>

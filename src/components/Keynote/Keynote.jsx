@@ -5,16 +5,16 @@ import { eventData } from '../../data/event.js';
 export const Keynote = () => {
   const pillars = [
     {
-      title: 'Next-Generation .NET Roadmap (TBA)',
-      desc: 'Architecture breakthroughs, runtime innovations, and modern C# performance optimizations.',
+      title: 'Next-Generation .NET 11 & C# 14 Innovations',
+      desc: 'Architecture breakthroughs, Native AOT sub-millisecond cold starts, ref struct safety, and memory-efficient runtime pipelines.',
     },
     {
-      title: 'Applied AI & Copilot Development (TBA)',
-      desc: 'Building autonomous agents, vector memory integrations, and intelligent enterprise services.',
+      title: 'Applied AI & Autonomous Agents (Semantic Kernel)',
+      desc: 'Orchestrating autonomous multi-agent loops, enterprise vector memory retrieval, and local SLM inference on ONNX Runtime.',
     },
     {
-      title: 'Cloud Native & Enterprise Systems (TBA)',
-      desc: 'Distributed microservices resilience, containerization, and modern deployment architectures.',
+      title: 'Cloud-Native Resilience with .NET Aspire & Azure',
+      desc: 'Configuring distributed OpenTelemetry tracing, containerized microservices orchestration, and production health observability.',
     },
   ];
 
@@ -26,13 +26,13 @@ export const Keynote = () => {
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#EEEAFB] text-[#512BD4] text-xs font-bold uppercase tracking-wider mb-3 border border-[#DCD5F6]">
             <Award className="w-3.5 h-3.5" />
-            <span>Headline Opening Keynote · TBA</span>
+            <span>Headline Opening Keynote · Main Auditorium</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#14053A] mb-3 leading-tight">
-            Keynote Speaker <span className="community-event-gradient-text">Announced Soon</span>
+            Keynote Address: <span className="community-event-gradient-text">The Future of .NET &amp; AI</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-[#190649]/80 leading-relaxed">
-            Central India’s premier developer summit will open with an inspiring keynote address on the future of the Microsoft .NET platform. Speaker reveal coming soon!
+            Central India’s premier developer summit opens with an architectural deep dive from an industry Microsoft MVP and veteran enterprise architect.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export const Keynote = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-14 items-stretch">
             
-            {/* LEFT: Full-Dive Tall Spotlight Frame (Announced Soon) */}
+            {/* LEFT: Speaker Spotlight Frame */}
             <div className="lg:col-span-5 flex flex-col min-w-0">
               <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#14053A] via-[#2A1065] to-[#14053A] border border-[#DCD5F6] shadow-md flex-1 min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex flex-col items-center justify-start pt-14 pb-36 sm:pb-38 px-4 sm:px-6 text-center group">
                 
@@ -55,7 +55,7 @@ export const Keynote = () => {
                   </div>
 
                   <div className="px-2 sm:px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/20">
-                    Speaker TBA
+                    Microsoft MVP
                   </div>
                 </div>
 
@@ -73,7 +73,7 @@ export const Keynote = () => {
                     </div>
                   </div>
                   <div className="px-3 py-1 rounded-full bg-white/10 text-[11px] font-mono text-stone-300">
-                    AUDITORIUM MAINSTAGE
+                    AUDITORIUM MAINSTAGE • 10:00 AM
                   </div>
                 </div>
 
@@ -81,25 +81,25 @@ export const Keynote = () => {
                 <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-lg text-[#14053A]">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <h4 className="text-sm sm:text-base font-black font-display tracking-tight text-[#14053A] truncate">
-                      Headline Speaker TBA
+                      Anuraj P.
                     </h4>
                     <span className="text-[10px] font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded shrink-0">
-                      Announced Soon
+                      KEYNOTE
                     </span>
                   </div>
 
                   <p className="text-xs font-semibold text-[#512BD4] mb-2 text-left">
-                    Industry Leader / Microsoft MVP
+                    Microsoft MVP &amp; Senior Cloud Architect
                   </p>
 
                   <div className="pt-2 border-t border-[#DCD5F6]/60 flex items-center justify-between text-[11px] font-medium text-[#190649]/80">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5 text-[#512BD4]" />
-                      Timing: TBA
+                      10:00 AM - 10:50 AM
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5 text-[#D600AA]" />
-                      PRPCEM Campus
+                      PRPCEM Auditorium
                     </span>
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export const Keynote = () => {
 
                 {/* Main Topic */}
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display text-[#14053A] tracking-tight leading-tight mb-3">
-                  Building Next-Gen Intelligent Applications with .NET & AI
+                  Building Next-Gen Intelligent Applications with .NET &amp; AI
                 </h3>
 
                 {/* Tech Tags Strip */}
@@ -134,16 +134,16 @@ export const Keynote = () => {
                   ))}
                 </div>
 
-                {/* Speaker Biography / Announcement Note */}
+                {/* Speaker Biography / Keynote Description */}
                 <p className="text-xs sm:text-sm text-[#190649]/80 leading-relaxed mb-6">
-                  The keynote session will officially inaugurate .NET Conf 2026 Amravati, exploring the full power of modern .NET 11, intelligent copilot architectures, and production cloud services. Full speaker identity and session breakdown will be revealed shortly.
+                  The keynote session will officially inaugurate .NET Conf 2026 Amravati. Discover how to architect resilient, high-speed cloud backends with .NET 11 while infusing enterprise AI capabilities using Microsoft Semantic Kernel, local SLMs, and Azure OpenAI.
                 </p>
 
-                {/* 3 Full-Dive Pillars */}
+                {/* 3 Pillars */}
                 <div className="space-y-3 mb-6">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#14053A] flex items-center gap-1.5">
                     <Layers className="w-3.5 h-3.5 text-[#512BD4]" />
-                    <span>Anticipated Keynote Focus Areas:</span>
+                    <span>Keynote Architectural Pillars:</span>
                   </h4>
                   
                   {pillars.map((pillar, idx) => (
@@ -168,10 +168,10 @@ export const Keynote = () => {
               {/* Bottom Action */}
               <div className="pt-4 border-t border-[#DCD5F6]/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <a
-                  href="#stay-connected"
+                  href="#schedule"
                   className="dotnet-solid-btn-accent text-xs sm:text-sm py-2.5 px-5 shadow-xs inline-flex items-center justify-center gap-1.5 w-full sm:w-auto"
                 >
-                  <span>Follow For Keynote Announcement</span>
+                  <span>Explore Full Schedule</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>

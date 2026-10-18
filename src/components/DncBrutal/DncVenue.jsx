@@ -171,33 +171,58 @@ export const DncVenue = () => {
             </div>
           </div>
 
-          {/* Campus Landmarks Box */}
+          {/* Campus Landmarks & Transit Box */}
           <div className="bg-[#FAF9FF] border border-black/15 rounded-2xl p-3.5 mt-4">
-            <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-[#512BD4] uppercase mb-2">
-              <Star className="w-3.5 h-3.5" />
-              <span>CAMPUS LANDMARKS</span>
+            <div className="flex items-center justify-between gap-1.5 text-xs font-mono font-bold text-[#512BD4] uppercase mb-2">
+              <span className="flex items-center gap-1.5">
+                <Star className="w-3.5 h-3.5" />
+                <span>TRANSIT &amp; LANDMARKS</span>
+              </span>
+              <span className="text-[10px] text-stone-500 font-mono">KATHORA ROAD</span>
             </div>
 
-            <div className="grid grid-cols-2 divide-x divide-stone-200 pt-1">
+            <div className="grid grid-cols-2 divide-x divide-stone-200 pt-1 mb-3">
               {/* Landmark 1 */}
               <div className="flex items-center gap-2.5 pr-2">
                 <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
                   <Building2 className="w-4 h-4" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
-                  Main Auditorium
-                </span>
+                <div className="text-left">
+                  <span className="text-xs sm:text-[13px] font-bold font-sans text-black block leading-none">
+                    Main Auditorium
+                  </span>
+                  <span className="text-[10px] text-stone-500 font-mono mt-0.5 block">800+ Tiered Seating</span>
+                </div>
               </div>
 
               {/* Landmark 2 */}
               <div className="flex items-center gap-2.5 pl-3">
-                <div className="w-8 h-8 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
+                <div className="w-8 h-8 rounded-xl bg-[#E0F7FA] text-[#00838F] flex items-center justify-center shrink-0 border border-cyan-200">
                   <Cpu className="w-4 h-4" />
                 </div>
-                <span className="text-xs sm:text-[13px] font-bold font-sans text-black">
-                  CSE &amp; AI Labs
-                </span>
+                <div className="text-left">
+                  <span className="text-xs sm:text-[13px] font-bold font-sans text-black block leading-none">
+                    CSE &amp; AI Labs
+                  </span>
+                  <span className="text-[10px] text-stone-500 font-mono mt-0.5 block">High-Speed Dev Rigs</span>
+                </div>
               </div>
+            </div>
+
+            {/* Transit pills */}
+            <div className="pt-2 border-t border-stone-200 flex flex-wrap gap-2 text-[10px] font-mono font-bold text-stone-700">
+              <span className="bg-white border border-black/20 px-2 py-0.5 rounded-md">
+                🚆 Amravati Stn: 6 km
+              </span>
+              <span className="bg-white border border-black/20 px-2 py-0.5 rounded-md">
+                🚆 Badnera Jxn: 14 km
+              </span>
+              <span className="bg-white border border-black/20 px-2 py-0.5 rounded-md">
+                🚌 Central Bus Stand: 5.5 km
+              </span>
+              <span className="bg-white border border-black/20 px-2 py-0.5 rounded-md">
+                🅿️ Free Campus Parking
+              </span>
             </div>
           </div>
         </div>
@@ -209,8 +234,8 @@ export const DncVenue = () => {
           <Megaphone className="w-4 h-4" />
         </div>
         <p className="text-xs sm:text-sm font-sans font-medium text-stone-800">
-          <span className="font-bold text-black">Delegate Notice : </span>
-          <span>Campus entry passes and parking information will be issued 48 hours prior to the event.</span>
+          <span className="font-bold text-black">Delegate Advisory : </span>
+          <span>Please carry your valid Student ID or Government photo ID for security verification at the PRPCEM registration desk. High-speed campus Wi-Fi access will be provisioned on check-in.</span>
         </p>
       </div>
     </section>

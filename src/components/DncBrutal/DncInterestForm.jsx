@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, Mail, Phone, Briefcase, Building2, Target, Send, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown } from 'lucide-react';
+import { User, Mail, Phone, Briefcase, Building2, Target, Send, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown, Plus, Minus, HelpCircle } from 'lucide-react';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
+import { eventData } from '../../data/event.js';
 
 export const DncInterestForm = () => {
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -406,6 +408,55 @@ export const DncInterestForm = () => {
           </form>
         )}
       </div>
+
+      {/* Frequently Asked Questions Accordion */}
+      {eventData.faqs && eventData.faqs.length > 0 && (
+        <div className="mt-8 max-w-4xl mx-auto text-left">
+          <div className="flex items-center gap-2 mb-4 justify-center sm:justify-start">
+            <span className="w-8 h-8 rounded-lg bg-[#512BD4] text-white flex items-center justify-center font-bold">
+              <HelpCircle className="w-4 h-4" />
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-black">
+              Delegate FAQs &amp; Key Details
+            </h3>
+          </div>
+
+          <div className="space-y-3">
+            {eventData.faqs.map((faq, idx) => {
+              const isOpen = openFaqIndex === idx;
+              return (
+                <div
+                  key={idx}
+                  className={`bg-white border-[2px] border-black rounded-2xl overflow-hidden transition-all ${
+                    isOpen ? 'shadow-[4px_4px_0px_0px_#512BD4]' : 'shadow-[2px_2px_0px_0px_#000] hover:shadow-[3px_3px_0px_0px_#000]'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : idx)}
+                    className="w-full p-3.5 sm:p-4 text-left font-sans font-bold text-xs sm:text-sm text-black flex items-center justify-between gap-3 cursor-pointer hover:bg-stone-50"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <span className="w-6 h-6 rounded-md bg-[#EEEAFB] text-[#512BD4] font-mono text-[11px] font-bold flex items-center justify-center shrink-0">
+                        Q{idx + 1}
+                      </span>
+                      <span>{faq.q}</span>
+                    </span>
+                    <span className="w-6 h-6 rounded-md bg-[#FAF9FF] border border-black/30 flex items-center justify-center shrink-0">
+                      {isOpen ? <Minus className="w-3.5 h-3.5 stroke-[3]" /> : <Plus className="w-3.5 h-3.5 stroke-[3]" />}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-4 pb-4 pt-1 text-xs sm:text-[13px] text-stone-700 font-sans leading-relaxed border-t border-black/10 bg-[#FAF9FF]">
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Bottom Announcement Bar (3 Items) */}
       <div className="mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] max-w-4xl mx-auto">
