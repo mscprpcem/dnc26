@@ -153,7 +153,7 @@ export const DncInterestForm = () => {
       </div>
 
       {/* Main Neo-Brutalist Form Card */}
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] max-w-4xl mx-auto">
+      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-7xl mx-auto">
         {/* Top Center Pill */}
         <div className="flex justify-center mb-3">
           <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
@@ -459,7 +459,7 @@ export const DncInterestForm = () => {
       )}
 
       {/* Bottom Announcement Bar (3 Items) */}
-      <div className="mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] max-w-4xl mx-auto">
+      <div className="mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-left">
           {/* 1. Speaker updates */}
           <div className="flex items-start gap-3">

@@ -15,7 +15,7 @@ export const DncHero = () => {
   const [activeVisualTab, setActiveVisualTab] = useState('mural'); // 'mural' | 'code'
 
   return (
-    <section id="top" className="relative pt-2 sm:pt-4 pb-4 sm:pb-6 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-24">
+    <section id="top" className="relative pt-6 sm:pt-10 md:pt-12 pb-6 sm:pb-8 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-28">
 
       {/* Decorative Warli Diamonds & Dots in side margins */}
       <div className="absolute top-24 left-8 text-[#E5A93C]/40 font-mono text-xl font-bold select-none pointer-events-none hidden lg:block">◆</div>
@@ -40,21 +40,8 @@ export const DncHero = () => {
         rightSub="MAHARASHTRA"
       />
 
-      {/* Top Floating Badges bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3 sm:mb-4 max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-2 bg-[#260C07] text-[#FAF7F2] font-mono font-bold text-[11px] sm:text-xs px-3.5 sm:px-4 py-1.5 rounded-full border-[2px] border-[#FAF7F2] shadow-[2px_2px_0px_0px_#120402]">
-          <span className="w-2 h-2 rounded-full bg-[#E5A93C] shrink-0"></span>
-          <span>{eventData.organizer.badge}</span>
-        </div>
-
-        <div className="inline-flex items-center gap-2 bg-[#E5A93C] text-[#180805] font-mono font-bold text-[11px] sm:text-xs px-3.5 sm:px-4 py-1.5 rounded-full border-[2px] border-[#FAF7F2] shadow-[2px_2px_0px_0px_#120402]">
-          <span className="w-2 h-2 rounded-full bg-[#180805] shrink-0"></span>
-          <span>{eventData.duration} • WARLI THEME</span>
-        </div>
-      </div>
-
       {/* Main Warli Earthen Hero Card */}
-      <div className="relative z-10 bg-[#280D07] border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-11 shadow-[8px_8px_0px_0px_#120402] max-w-5xl mx-auto overflow-hidden text-[#FAF7F2]">
+      <div className="relative z-10 bg-[#280D07] border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-11 shadow-[8px_8px_0px_0px_#120402] w-full max-w-7xl mx-auto overflow-hidden text-[#FAF7F2]">
         
         {/* Warli Chaukat Corner Ornaments */}
         <WarliCornerOrnament position="top-left" fill="#FAF7F2" className="top-3 left-3 opacity-80" />
@@ -281,7 +268,7 @@ export const DncHero = () => {
       </div>
 
       {/* CONTINUOUS WARLI TARPA DANCERS RIBBON */}
-      <div className="max-w-5xl mx-auto mt-4 mb-2 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl py-2 px-3 shadow-[4px_4px_0px_0px_#120402]">
+      <div className="w-full max-w-7xl mx-auto mt-4 mb-2 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl py-2 px-3 shadow-[4px_4px_0px_0px_#120402]">
         <div className="flex items-center justify-between px-2 pb-1 border-b border-[#FAF7F2]/20 mb-1">
           <span className="font-mono text-[9px] sm:text-[10px] font-bold text-[#E5A93C] uppercase tracking-widest flex items-center gap-1.5">
             <span>🌾 TARPA COMMUNITY DANCE</span>
@@ -294,7 +281,7 @@ export const DncHero = () => {
       </div>
 
       {/* Bottom Announcement & Highlights Card */}
-      <div className="mt-3 sm:mt-4 bg-[#260C07] border-[2.5px] border-[#FAF7F2] rounded-3xl p-4 sm:p-6 shadow-[6px_6px_0px_0px_#120402] max-w-5xl mx-auto text-[#FAF7F2]">
+      <div className="mt-3 sm:mt-4 bg-[#260C07] border-[2.5px] border-[#FAF7F2] rounded-3xl p-4 sm:p-6 shadow-[6px_6px_0px_0px_#120402] w-full max-w-7xl mx-auto text-[#FAF7F2]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
           {/* Left Part: Coming Soon Notice */}
           <div className="lg:col-span-6 flex items-start gap-3.5 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-[#FAF7F2]/20 pb-4 lg:pb-0">

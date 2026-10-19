@@ -155,7 +155,7 @@ export const DncInterestForm = () => {
       </div>
 
       {/* Main Warli Form Card */}
-      <div className="bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] max-w-4xl mx-auto relative overflow-hidden text-[#FAF7F2]">
+      <div className="bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] w-full max-w-7xl mx-auto relative overflow-hidden text-[#FAF7F2]">
         
         {/* Warli Corner Ornaments */}
         <WarliCornerOrnament position="top-left" fill="#FAF7F2" className="top-2 left-2 opacity-50" />
@@ -463,7 +463,7 @@ export const DncInterestForm = () => {
       )}
 
       {/* Bottom Announcement Bar (3 Items) */}
-      <div className="mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_0px_#120402] max-w-4xl mx-auto">
+      <div className="mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_0px_#120402] w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-left">
           {/* 1. Speaker updates */}
           <div className="flex items-start gap-3">

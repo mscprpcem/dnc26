@@ -93,7 +93,7 @@ export const DncAgenda = () => {
       </div>
 
       {/* Main Warli Showcase Card */}
-      <div className="bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] max-w-5xl mx-auto relative overflow-hidden">
+      <div className="bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] w-full max-w-7xl mx-auto relative overflow-hidden">
         
         {/* Warli Corner Ornaments */}
         <WarliCornerOrnament position="top-left" fill="#FAF7F2" className="top-2 left-2 opacity-50" />

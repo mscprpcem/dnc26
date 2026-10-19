@@ -6,7 +6,7 @@ import DncSectionFlanks from './DncSectionFlanks.jsx';
 
 export const DncHero = () => {
   return (
-    <section id="top" className="relative pt-2 sm:pt-4 pb-4 sm:pb-6 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-24">
+    <section id="top" className="relative pt-6 sm:pt-10 md:pt-12 pb-6 sm:pb-8 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-28">
 
       {/* Decorative Plus Crosshairs matching user mockup */}
       <div className="absolute top-24 left-8 text-[#512BD4]/40 font-mono text-xl font-bold select-none pointer-events-none hidden lg:block">+</div>
@@ -31,21 +31,8 @@ export const DncHero = () => {
         rightSub="PRPCEM CAMPUS"
       />
 
-      {/* Top Floating Badges bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 mb-3 sm:mb-4 max-w-5xl mx-auto">
-        <div className="inline-flex items-center gap-2 bg-white text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3.5 sm:px-4 py-1.5 rounded-full border-[2px] border-black shadow-[2px_2px_0px_0px_#000]">
-          <span className="w-2 h-2 rounded-full bg-[#512BD4] shrink-0"></span>
-          <span>{eventData.organizer.badge}</span>
-        </div>
-
-        <div className="inline-flex items-center gap-2 bg-[#00BDD6] text-black font-mono font-bold text-[11px] sm:text-xs px-3.5 sm:px-4 py-1.5 rounded-full border-[2px] border-black shadow-[2px_2px_0px_0px_#000]">
-          <span className="w-2 h-2 rounded-full bg-black shrink-0"></span>
-          <span>{eventData.duration}</span>
-        </div>
-      </div>
-
       {/* Main Neo-Brutalist Hero Card */}
-      <div className="relative z-10 bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-12 shadow-[6px_6px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000] max-w-5xl mx-auto overflow-hidden">
+      <div className="relative z-10 bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-12 shadow-[6px_6px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000] w-full max-w-7xl mx-auto overflow-hidden">
         {/* Decorative corner tag for desktop */}
         <div className="absolute top-0 right-0 bg-[#00BDD6] border-b-[2.5px] border-l-[2.5px] border-black font-mono font-bold text-xs px-6 py-2 uppercase rounded-bl-2xl rounded-tr-[29px] shadow-[2px_2px_0px_0px_#000] hidden md:block text-black tracking-wider">
           AMRAVATI • PRPCEM
@@ -71,7 +58,7 @@ export const DncHero = () => {
             </h1>
 
             {/* Exact Description */}
-            <p className="text-stone-800 font-sans text-sm sm:text-base md:text-[17px] font-medium leading-relaxed mb-5 max-w-xl">
+            <p className="text-stone-800 font-sans text-sm sm:text-base md:text-[17px] font-medium leading-relaxed mb-5 max-w-2xl sm:max-w-3xl">
               Central India's premier developer event for Amravati, celebrating the broader Microsoft ecosystem — from modern .NET and Azure cloud to Generative AI and developer tooling.
             </p>
 
@@ -195,7 +182,7 @@ export const DncHero = () => {
       </div>
 
       {/* Bottom Unified Announcement & Highlights Card (matching image below the main card) */}
-      <div className="mt-4 sm:mt-6 bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-6 shadow-[5px_5px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] max-w-5xl mx-auto">
+      <div className="mt-4 sm:mt-6 bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-6 shadow-[5px_5px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-center">
           {/* Left Part: Coming Soon Notice */}
           <div className="lg:col-span-6 flex items-start gap-3.5 pr-0 lg:pr-6 border-b lg:border-b-0 lg:border-r border-black/15 pb-4 lg:pb-0">

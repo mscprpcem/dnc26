@@ -128,7 +128,7 @@ export const DncPastHighlights = () => {
       </div>
 
       {/* Main Neo-Brutalist Showcase Card (relative z-10 ensures it's above any background rings) */}
-      <div className="relative z-10 bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] max-w-5xl mx-auto">
+      <div className="relative z-10 bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-7xl mx-auto">
         {/* Top Center Pill */}
         <div className="flex justify-center mb-3">
           <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">

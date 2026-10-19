@@ -654,7 +654,7 @@ Generate your custom Warli-edition attendee badge:
   };
 
   return (
-    <section id="attendee-badge" className="py-3 sm:py-5 px-3 sm:px-6 max-w-5xl mx-auto scroll-mt-20 relative">
+    <section id="attendee-badge" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
       <DncSectionFlanks
         leftIndex="07"
         leftTag="BADGE"

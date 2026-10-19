@@ -13,6 +13,9 @@ import {
   ChevronDown,
   ChevronUp,
   HelpCircle,
+  Megaphone,
+  Calendar,
+  Bell,
 } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
@@ -411,19 +414,27 @@ export const InterestForm = () => {
               </div>
 
               <div className="space-y-3">
-                {eventData.faqs.map((faq) => {
-                  const isOpen = openFaq === faq.id;
+                {eventData.faqs.map((faq, idx) => {
+                  const faqId = faq.id || `faq-${idx}`;
+                  const isOpen = openFaq === faqId;
+                  const question = faq.question || faq.q;
+                  const answer = faq.answer || faq.a;
                   return (
                     <div
-                      key={faq.id}
+                      key={faqId}
                       className="border border-[#DCD5F6]/70 rounded-xl overflow-hidden transition-all bg-[#FBFBFE]"
                     >
                       <button
                         type="button"
-                        onClick={() => setOpenFaq(isOpen ? null : faq.id)}
-                        className="w-full text-left p-4 flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-[#14053A] hover:text-[#512BD4] transition-colors"
+                        onClick={() => setOpenFaq(isOpen ? null : faqId)}
+                        className="w-full text-left p-4 flex items-center justify-between gap-3 text-xs sm:text-sm font-bold text-[#14053A] hover:text-[#512BD4] transition-colors cursor-pointer"
                       >
-                        <span>{faq.question}</span>
+                        <span className="flex items-center gap-2.5">
+                          <span className="w-5 h-5 rounded-md bg-[#EEEAFB] text-[#512BD4] text-[11px] font-bold flex items-center justify-center shrink-0">
+                            Q{idx + 1}
+                          </span>
+                          <span>{question}</span>
+                        </span>
                         {isOpen ? (
                           <ChevronUp className="w-4 h-4 text-[#512BD4] shrink-0" />
                         ) : (
@@ -431,8 +442,8 @@ export const InterestForm = () => {
                         )}
                       </button>
                       {isOpen && (
-                        <div className="px-4 pb-4 pt-1 text-xs text-[#190649]/75 leading-relaxed border-t border-[#DCD5F6]/40">
-                          {faq.answer}
+                        <div className="px-4 pb-4 pt-1 text-xs text-[#190649]/75 leading-relaxed border-t border-[#DCD5F6]/40 pl-11">
+                          {answer}
                         </div>
                       )}
                     </div>
@@ -442,6 +453,53 @@ export const InterestForm = () => {
             </div>
           </div>
         )}
+
+        {/* Bottom Announcement Cards */}
+        <div className="mt-8 bg-gradient-to-r from-[#FAF8FF] via-white to-[#F5F0FD] border border-[#DCD5F6] rounded-2xl p-4 sm:p-6 shadow-xs max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-left">
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
+                <Megaphone className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-[#14053A] leading-snug">
+                  Speaker updates
+                </h4>
+                <p className="text-[11px] text-[#190649]/70 leading-tight mt-0.5">
+                  Be the first to know about our keynote speakers and technical sessions.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center shrink-0 border border-blue-200">
+                <Calendar className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-[#14053A] leading-snug">
+                  Programme announcements
+                </h4>
+                <p className="text-[11px] text-[#190649]/70 leading-tight mt-0.5">
+                  Get detailed information about event tracks and schedules.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#FCE7F3] text-[#D600AA] flex items-center justify-center shrink-0 border border-pink-200">
+                <Bell className="w-4 h-4" />
+              </div>
+              <div>
+                <h4 className="text-xs sm:text-sm font-bold text-[#14053A] leading-snug">
+                  Registration information
+                </h4>
+                <p className="text-[11px] text-[#190649]/70 leading-tight mt-0.5">
+                  Receive updates on registration dates and important announcements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>

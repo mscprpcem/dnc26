@@ -148,7 +148,7 @@ export const App = () => {
       <Navbar />
 
       {/* Main Content Sections */}
-      <main className="w-full flex-1 z-10 pt-16 sm:pt-18">
+      <main className="w-full flex-1 z-10 pt-20 sm:pt-24 md:pt-28">
         {/* Section 1: Hero (DotNetConf 2026 Amravati, 3D Rocket mascot, Coming Soon) */}
         <Hero />
 

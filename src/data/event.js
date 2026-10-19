@@ -136,9 +136,23 @@ export const eventData = {
     {
       id: 'ai-immersion',
       tag: '02 · Autonomous AI & Copilots',
-      title: 'Keynotes, Parallel Technical Tracks & Hands-on Learning',
+      title: 'Semantic Kernel, Azure OpenAI & Autonomous Agents',
       description:
-        "From the opening keynote to dual parallel tracks covering Cloud Architecture and Generative AI, hands-on lab workshops, student lightning talks, and the grand closing ceremony, .NET Conf Amravati delivers high-impact technical immersion and verified industry credentials.",
+        "Dive deep into building intelligent enterprise agents using Microsoft Semantic Kernel, Azure OpenAI endpoints, retrieval-augmented generation (RAG) with vector databases, and local SLM inference on ONNX Runtime.",
+    },
+    {
+      id: 'developer-tooling',
+      tag: '03 · Developer Tooling & CI/CD',
+      title: 'Visual Studio 2025, GitHub Copilot & .NET Aspire',
+      description:
+        "Accelerate your developer inner-loop with next-gen tooling. Explore full-stack interactive web development with Blazor WebAssembly, automated testing, containerized microservices on Azure Container Apps, and automated GitHub Actions CI/CD pipelines.",
+    },
+    {
+      id: 'community-mentorship',
+      tag: '04 · Community & Industry Mentorship',
+      title: 'Keynotes, Parallel Technical Tracks & Verified Credentials',
+      description:
+        "From headline keynotes by Microsoft MVPs to dual parallel breakout tracks, 1-on-1 portfolio and architecture reviews, regional hackathon project showcases, and verified digital certificates of attendance, .NET Conf Amravati delivers high-impact technical immersion.",
     },
   ],
 
@@ -151,28 +165,46 @@ export const eventData = {
 
   faqs: [
     {
+      id: 'faq-1',
       q: 'What is .NET Conf Amravati 2026?',
+      question: 'What is .NET Conf Amravati 2026?',
       a: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and cloud enthusiasts to celebrate the .NET ecosystem, modern C#, Azure Cloud, and Generative AI.",
+      answer: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and cloud enthusiasts to celebrate the .NET ecosystem, modern C#, Azure Cloud, and Generative AI.",
     },
     {
+      id: 'faq-2',
       q: 'Who should attend the conference?',
+      question: 'Who should attend the conference?',
       a: 'The event is open to everyone! Whether you are a college student writing your first lines of C#, an experienced full-stack engineer architecting cloud services, or a faculty researcher exploring AI, you will find high-value technical tracks curated for your skill level.',
+      answer: 'The event is open to everyone! Whether you are a college student writing your first lines of C#, an experienced full-stack engineer architecting cloud services, or a faculty researcher exploring AI, you will find high-value technical tracks curated for your skill level.',
     },
     {
+      id: 'faq-3',
       q: 'Is there any registration fee to participate?',
+      question: 'Is there any registration fee to participate?',
       a: 'General community admission and interest registration are completely free. Subsidized student kits and VIP delegate passes (with lunch and swag) are announced closer to the event with nominal pricing to cover physical kits and catering.',
+      answer: 'General community admission and interest registration are completely free. Subsidized student kits and VIP delegate passes (with lunch and swag) are announced closer to the event with nominal pricing to cover physical kits and catering.',
     },
     {
+      id: 'faq-4',
       q: 'Will attendees receive a certificate of participation?',
+      question: 'Will attendees receive a certificate of participation?',
       a: 'Yes! All verified attendees who check in at PRPCEM and participate in the technical sessions will receive an official verifiable Digital Certificate of Attendance co-issued by Microsoft Student Club PRPCEM.',
+      answer: 'Yes! All verified attendees who check in at PRPCEM and participate in the technical sessions will receive an official verifiable Digital Certificate of Attendance co-issued by Microsoft Student Club PRPCEM.',
     },
     {
+      id: 'faq-5',
       q: 'What should I bring with me on conference day?',
+      question: 'What should I bring with me on conference day?',
       a: 'Please bring a valid College ID or Government photo ID for campus registration check-in. If you plan to participate in hands-on code labs, bring your laptop and charger. High-speed campus Wi-Fi access will be provided.',
+      answer: 'Please bring a valid College ID or Government photo ID for campus registration check-in. If you plan to participate in hands-on code labs, bring your laptop and charger. High-speed campus Wi-Fi access will be provided.',
     },
     {
+      id: 'faq-6',
       q: 'How can I reach the PRPCEM campus in Amravati?',
+      question: 'How can I reach the PRPCEM campus in Amravati?',
       a: 'P. R. Pote Patil College of Engineering and Management is conveniently located on Kathora Road in Amravati. It is easily accessible via auto-rickshaws, city buses, and cabs from Amravati Railway Station (approx. 6 km) and Badnera Junction (approx. 14 km).',
+      answer: 'P. R. Pote Patil College of Engineering and Management is conveniently located on Kathora Road in Amravati. It is easily accessible via auto-rickshaws, city buses, and cabs from Amravati Railway Station (approx. 6 km) and Badnera Junction (approx. 14 km).',
     },
   ],
 

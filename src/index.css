@@ -24,6 +24,7 @@
 
   --radius-dotnet: 6px;
   --radius-region: 24px;
+  --breakpoint-xs: 480px;
 }
 
 :root {
@@ -195,7 +196,8 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-.dotnet-outline-btn-accent {
+.dotnet-outline-btn-accent,
+.dotnet-outline-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -214,7 +216,8 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
 }
 
-.dotnet-outline-btn-accent:hover {
+.dotnet-outline-btn-accent:hover,
+.dotnet-outline-btn:hover {
   background-color: #EEEAFB;
   color: #4122AA;
   border-color: #4122AA;

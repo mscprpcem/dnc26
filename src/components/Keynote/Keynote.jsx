@@ -81,7 +81,7 @@ export const Keynote = () => {
                 <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-lg text-[#14053A]">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <h4 className="text-sm sm:text-base font-black font-display tracking-tight text-[#14053A] truncate">
-                      Anuraj P.
+                      Headline Keynote Speaker
                     </h4>
                     <span className="text-[10px] font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded shrink-0">
                       KEYNOTE
@@ -89,7 +89,7 @@ export const Keynote = () => {
                   </div>
 
                   <p className="text-xs font-semibold text-[#512BD4] mb-2 text-left">
-                    Microsoft MVP &amp; Senior Cloud Architect
+                    Microsoft MVP · To Be Announced Soon
                   </p>
 
                   <div className="pt-2 border-t border-[#DCD5F6]/60 flex items-center justify-between text-[11px] font-medium text-[#190649]/80">

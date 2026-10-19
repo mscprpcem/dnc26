@@ -46,7 +46,7 @@ export const DncVenue = () => {
       </div>
 
       {/* Main 2-Column Warli Venue Grid */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 w-full max-w-7xl mx-auto items-stretch">
         
         {/* ================= LEFT CARD: HOST CAMPUS ================= */}
         <div className="relative lg:col-span-6 bg-[#280D07] border-[2.5px] border-[#FAF7F2] rounded-[28px] p-5 sm:p-7 shadow-[6px_6px_0px_0px_#120402] flex flex-col justify-between text-left overflow-hidden">
@@ -231,7 +231,7 @@ export const DncVenue = () => {
       </div>
 
       {/* Bottom Announcement Bar */}
-      <div className="relative z-10 mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[4px_4px_0px_0px_#120402] text-center max-w-5xl mx-auto">
+      <div className="relative z-10 mt-6 bg-[#260C07] border-[2px] border-[#FAF7F2] rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[4px_4px_0px_0px_#120402] text-center w-full max-w-7xl mx-auto">
         <div className="w-8 h-8 rounded-xl bg-[#E5A93C] text-[#180805] flex items-center justify-center shrink-0 shadow-sm">
           <Megaphone className="w-4 h-4" />
         </div>

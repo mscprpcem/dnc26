@@ -129,7 +129,7 @@ export const DncPastHighlights = () => {
       </div>
 
       {/* Main Warli Showcase Card */}
-      <div className="relative z-10 bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] max-w-5xl mx-auto overflow-hidden">
+      <div className="relative z-10 bg-[#280D07] border-[2.5px] sm:border-[3px] border-[#FAF7F2] rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[8px_8px_0px_0px_#120402] w-full max-w-7xl mx-auto overflow-hidden">
         
         {/* Warli Corner Ornaments */}
         <WarliCornerOrnament position="top-left" fill="#FAF7F2" className="top-2 left-2 opacity-50" />

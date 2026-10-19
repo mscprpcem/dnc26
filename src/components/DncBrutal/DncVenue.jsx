@@ -32,7 +32,7 @@ export const DncVenue = () => {
       </div>
 
       {/* Main 2-Column Neo-Brutalist Venue Grid (relative z-10) */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 max-w-5xl mx-auto items-stretch">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 w-full max-w-7xl mx-auto items-stretch">
         {/* ================= LEFT CARD: HOST CAMPUS ================= */}
         <div className="lg:col-span-6 bg-white border-[2.5px] border-black rounded-[28px] p-5 sm:p-7 shadow-[5px_5px_0px_0px_#000] flex flex-col justify-between text-left">
           <div>
@@ -229,7 +229,7 @@ export const DncVenue = () => {
       </div>
 
       {/* Bottom Announcement Bar */}
-      <div className="relative z-10 mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[3px_3px_0px_0px_#000] text-center max-w-5xl mx-auto">
+      <div className="relative z-10 mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-3.5 sm:p-4 flex items-center justify-center gap-3 shadow-[3px_3px_0px_0px_#000] text-center w-full max-w-7xl mx-auto">
         <div className="w-8 h-8 rounded-xl bg-[#512BD4] text-white flex items-center justify-center shrink-0 shadow-sm">
           <Megaphone className="w-4 h-4" />
         </div>
