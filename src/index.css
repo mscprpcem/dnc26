@@ -538,7 +538,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 /* =========================================================================
-   Attendee Badge Generator - Comprehensive Multi-Breakpoint Media Queries
+   Attendee Badge Range Sliders & Interactive Elements
    ========================================================================= */
 
 .badge-canvas-wrapper {
@@ -549,7 +549,6 @@ input[type='range']::-moz-range-thumb {
   box-shadow: 0 20px 45px -12px rgba(81, 43, 212, 0.18);
 }
 
-/* Custom styling for range input sliders in Badge Studio */
 input[type='range'] {
   height: 6px;
   border-radius: 9999px;
@@ -573,7 +572,7 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.18);
   background: #4122AA;
 }
 
@@ -587,190 +586,618 @@ input[type='range']::-moz-range-thumb {
   box-shadow: 0 2px 5px rgba(81, 43, 212, 0.35);
 }
 
-/* 1. iPhone SE & Small Mobile Phones (<= 390px) */
-@media (max-width: 390px) {
-  #attendee-badge {
+/* ==========================================================================
+   GLOBAL RESPONSIVE SAFETY & TOUCH OPTIMIZATIONS
+   ========================================================================== */
+
+/* Prevent iOS Safari automatic zoom on focus by ensuring minimum 16px font size */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Safe area insets for notched mobile devices (iPhone X through 16 Pro Max) */
+@supports (padding: max(0px)) {
+  .overflow-container {
+    padding-left: max(0.5rem, env(safe-area-inset-left));
+    padding-right: max(0.5rem, env(safe-area-inset-right));
+  }
+  nav.fixed,
+  header.fixed,
+  footer {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT 1: ULTRA-COMPACT MOBILE SCREENS (max-width: 380px)
+   iPhone SE 1st/2nd/3rd gen, Galaxy Z Fold (outer 320-360px), small Androids
+   ========================================================================== */
+@media (max-width: 380px) {
+  /* Section Spacing & Card Compression */
+  section {
     padding-top: 1.75rem !important;
-    padding-bottom: 2.25rem !important;
-    overflow-x: hidden !important;
+    padding-bottom: 2rem !important;
   }
 
-  .badge-canvas-wrapper {
-    max-width: 100% !important;
-    width: 100% !important;
-    padding: 0.625rem !important;
+  .dotnet-content-region,
+  .rounded-2xl,
+  .rounded-3xl {
     border-radius: 1rem !important;
-    box-sizing: border-box !important;
+    padding: 0.85rem !important;
   }
 
-  .badge-canvas-wrapper canvas {
-    max-height: 310px !important;
+  /* Typography Scaling */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.12 !important;
+  }
+
+  h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.18 !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  p {
+    font-size: 0.8125rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Header & Navigation */
+  header nav {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 0.5rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+
+  .hero-title {
+    font-size: 1.85rem !important;
+  }
+
+  .hero-action-buttons {
+    flex-direction: column !important;
     width: 100% !important;
-    object-fit: contain !important;
+    gap: 0.5rem !important;
   }
 
-  /* Compact padding for buttons on iPhone SE */
-  .badge-canvas-wrapper button {
-    font-size: 11px !important;
-    padding-left: 0.35rem !important;
-    padding-right: 0.35rem !important;
+  .hero-action-buttons a,
+  .hero-action-buttons button {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 0.75rem !important;
+    min-height: 44px !important;
   }
 
-  input[type='range'] {
-    height: 7px;
+  /* Editorial Swimlanes */
+  #overview .grid {
+    gap: 0.75rem !important;
   }
-  input[type='range']::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-  }
-  input[type='range']::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-  }
-}
 
-/* 2. Standard Mobile Phones (391px to 639px) */
-@media (min-width: 391px) and (max-width: 639px) {
-  #attendee-badge {
-    padding-top: 2.25rem;
-    padding-bottom: 3.25rem;
-    overflow-x: hidden;
+  #overview .grid > div {
+    padding: 0.85rem !important;
+  }
+
+  /* Past Highlights Slideshow */
+  #highlights .aspect-16\/9,
+  #highlights .aspect-16\/10 {
+    aspect-ratio: 4 / 3 !important;
+    min-height: 220px !important;
+  }
+
+  /* Keynote Section */
+  #keynote .relative.bg-white\/95 {
+    padding: 0.85rem !important;
+  }
+
+  #keynote .min-h-\[460px\],
+  #keynote .min-h-\[500px\],
+  #keynote .min-h-\[540px\] {
+    min-height: 380px !important;
+    padding-top: 2.75rem !important;
+    padding-bottom: 7.5rem !important;
+  }
+
+  #keynote .w-28.h-28,
+  #keynote .w-36.h-36 {
+    width: 4.75rem !important;
+    height: 4.75rem !important;
+  }
+
+  /* Call for Proposals (CFP) */
+  #cfp .bg-white\/95 {
+    padding: 0.85rem !important;
+  }
+
+  #cfp form {
+    gap: 0.75rem !important;
+  }
+
+  #cfp input,
+  #cfp select,
+  #cfp textarea {
+    padding: 0.55rem 0.7rem !important;
+  }
+
+  #cfp .grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Agenda / Schedule */
+  #schedule .grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  #schedule .p-5,
+  #schedule .p-6 {
+    padding: 0.85rem !important;
+  }
+
+  /* Venue & Map */
+  .brutal-map-viewport {
+    min-height: 250px !important;
+    height: 260px !important;
+  }
+
+  #venue .p-5,
+  #venue .p-7 {
+    padding: 0.85rem !important;
+  }
+
+  /* Attendee Badge Studio */
+  #badge {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
   }
 
   .badge-canvas-wrapper {
-    max-width: 100% !important;
-    padding: 0.875rem !important;
-    border-radius: 1.25rem !important;
-    box-sizing: border-box !important;
-  }
-
-  .badge-canvas-wrapper canvas {
-    max-height: 380px !important;
-  }
-
-  input[type='range'] {
-    height: 8px;
-  }
-  input[type='range']::-webkit-slider-thumb {
-    width: 22px;
-    height: 22px;
-  }
-  input[type='range']::-moz-range-thumb {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-/* 3. Tablets & Small Laptops (640px to 1023px) */
-@media (min-width: 640px) and (max-width: 1023px) {
-  #attendee-badge {
-    padding-top: 3.5rem;
-    padding-bottom: 4.5rem;
-  }
-
-  .badge-canvas-wrapper {
-    max-width: 480px !important;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 1.25rem !important;
-  }
-
-  .badge-canvas-wrapper canvas {
-    max-height: 440px !important;
-  }
-}
-
-/* 4. Desktop Displays (1024px to 1439px) */
-@media (min-width: 1024px) and (max-width: 1439px) {
-  #attendee-badge {
-    padding-top: 4rem;
-    padding-bottom: 5rem;
-  }
-
-  .badge-canvas-wrapper {
-    max-width: 460px;
-  }
-}
-
-/* 5. Ultra-Wide Displays (1440px and up) */
-@media (min-width: 1440px) {
-  #attendee-badge {
-    padding-top: 5rem;
-    padding-bottom: 6rem;
-  }
-
-  .badge-canvas-wrapper {
-    max-width: 490px;
-  }
-}
-
-/* 6. Landscape Viewport on Mobile Devices (Short screen heights) */
-@media (max-height: 640px) and (orientation: landscape) {
-  .badge-canvas-wrapper {
-    position: static !important;
-    max-width: 360px !important;
+    width: 100% !important;
+    padding: 0.5rem !important;
   }
 
   .badge-canvas-wrapper canvas {
     max-height: 280px !important;
   }
-}
 
-/* 7. Print Optimization */
-@media print {
-  #attendee-badge {
-    padding: 0 !important;
+  .badge-canvas-wrapper button {
+    font-size: 11px !important;
+    padding: 0.4rem 0.5rem !important;
   }
-  .badge-canvas-wrapper {
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+
+  /* Interest Form */
+  #register form {
+    padding: 0.85rem !important;
   }
-  .badge-canvas-wrapper button,
-  .badge-canvas-wrapper .grid,
-  .badge-canvas-wrapper > div:last-child,
-  #attendee-badge .lg\:col-span-6:last-child {
-    display: none !important;
+
+  #register input,
+  #register select {
+    padding: 0.55rem 0.7rem !important;
+  }
+
+  /* Sponsors Grid */
+  #partners .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+
+  #partners .grid > div {
+    padding: 0.75rem 0.5rem !important;
+    min-height: 72px !important;
+  }
+
+  /* Footer */
+  footer {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
   }
 }
 
 /* ==========================================================================
-   GLOBAL VENUE MAP SYSTEM & RESPONSIVE MEDIA QUERIES
+   BREAKPOINT 2: STANDARD MOBILE PHONES (381px to 639px)
+   iPhone 12/13/14/15/16, Galaxy S21-S25, Pixel 6-9
    ========================================================================== */
+@media (min-width: 381px) and (max-width: 639px) {
+  section {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.75rem !important;
+  }
 
-/* Clean, natural high-clarity map viewport */
-.brutal-map-viewport iframe {
-  filter: none;
-}
+  .dotnet-content-region,
+  .rounded-2xl,
+  .rounded-3xl {
+    border-radius: 1.25rem !important;
+    padding: 1.15rem !important;
+  }
 
-@media (max-width: 480px) {
+  /* Hero Section */
+  .hero-section {
+    padding-top: 0.75rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  .hero-title {
+    font-size: 2.25rem !important;
+  }
+
+  .hero-action-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.65rem !important;
+  }
+
+  .hero-action-buttons a,
+  .hero-action-buttons button {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+
+  /* Past Highlights */
+  #highlights .aspect-16\/9,
+  #highlights .aspect-16\/10 {
+    aspect-ratio: 16 / 10 !important;
+    min-height: 250px !important;
+  }
+
+  /* Keynote Section */
+  #keynote .min-h-\[460px\],
+  #keynote .min-h-\[500px\],
+  #keynote .min-h-\[540px\] {
+    min-height: 420px !important;
+  }
+
+  /* Call for Proposals (CFP) */
+  #cfp .grid-cols-1.sm\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Agenda / Schedule Breakout */
+  #schedule .grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Venue Map Viewport */
   .brutal-map-viewport {
-    min-height: 280px !important;
-    height: 290px !important;
+    min-height: 290px !important;
+    height: 310px !important;
+  }
+
+  /* Attendee Badge Studio */
+  .badge-canvas-wrapper {
+    max-width: 100% !important;
+    padding: 0.85rem !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 360px !important;
+  }
+
+  /* Sponsors Grid */
+  #partners .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
   }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+/* ==========================================================================
+   BREAKPOINT 3: PHABLETS & SMALL TABLETS (640px to 767px)
+   iPad mini portrait, large foldables unfolded
+   ========================================================================== */
+@media (min-width: 640px) and (max-width: 767px) {
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  /* Hero Section */
+  .hero-title {
+    font-size: 2.75rem !important;
+  }
+
+  .hero-action-buttons {
+    flex-direction: row !important;
+    width: auto !important;
+  }
+
+  /* Editorial Swimlanes: 2-Column Grid */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  /* Past Highlights */
+  #highlights .aspect-16\/9,
+  #highlights .aspect-16\/10 {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 300px !important;
+  }
+
+  /* Venue Map Viewport */
   .brutal-map-viewport {
-    min-height: 340px !important;
-    height: 360px !important;
+    min-height: 330px !important;
+    height: 350px !important;
+  }
+
+  /* Attendee Badge Studio */
+  .badge-canvas-wrapper {
+    max-width: 440px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 400px !important;
+  }
+
+  /* Sponsors Grid */
+  #partners .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0.85rem !important;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+/* ==========================================================================
+   BREAKPOINT 4: TABLETS LANDSCAPE & SMALL LAPTOPS (768px to 1023px)
+   iPad 10.2", iPad Air, Surface Pro, 11-13" laptops
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 4.25rem !important;
+  }
+
+  /* Hero Section */
+  .hero-title {
+    font-size: 3.15rem !important;
+  }
+
+  /* Editorial Swimlanes: 2x2 Balanced Grid */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Keynote Section: 2 Columns */
+  #keynote .grid-cols-1.lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  #keynote .lg\:col-span-5 {
+    grid-column: span 5 / span 12 !important;
+  }
+
+  #keynote .lg\:col-span-7 {
+    grid-column: span 7 / span 12 !important;
+  }
+
+  /* Agenda Parallel Breakout Tracks: Side-by-Side Dual Columns */
+  #schedule .grid-cols-1.lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  /* Venue: Side-by-Side Grid */
+  #venue .grid-cols-1.lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+
+  #venue .lg\:col-span-5 {
+    grid-column: span 5 / span 12 !important;
+  }
+
+  #venue .lg\:col-span-7 {
+    grid-column: span 7 / span 12 !important;
+  }
+
   .brutal-map-viewport {
     min-height: 380px !important;
-    height: 400px !important;
+    height: 100% !important;
+  }
+
+  /* Attendee Badge Studio: 2 Columns */
+  .badge-canvas-wrapper {
+    max-width: 440px !important;
+  }
+
+  /* Sponsors Grid: 4 Columns */
+  #partners .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1rem !important;
   }
 }
 
-@media (min-width: 1025px) {
+/* ==========================================================================
+   BREAKPOINT 5: STANDARD LAPTOPS & DESKTOPS (1024px to 1279px)
+   MacBook Air 13", MacBook Pro 14", FHD Desktop Windows
+   ========================================================================== */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  section {
+    padding-top: 4.5rem !important;
+    padding-bottom: 5.5rem !important;
+  }
+
+  .hero-title {
+    font-size: 3.65rem !important;
+  }
+
+  /* Editorial Swimlanes: Full 4-Column Layout */
+  #overview .grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Venue Map: Full Height Flex Fill */
   .brutal-map-viewport {
     flex: 1 1 auto !important;
     height: 100% !important;
-    min-height: 380px !important;
+    min-height: 420px !important;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 460px !important;
   }
 }
+
+/* ==========================================================================
+   BREAKPOINT 6: LARGE DESKTOP DISPLAYS (1280px to 1535px)
+   Standard 24" - 27" Desktop Monitors (1080p, 1440p)
+   ========================================================================== */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  section {
+    padding-top: 5rem !important;
+    padding-bottom: 6rem !important;
+  }
+
+  .hero-title {
+    font-size: 4.15rem !important;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 480px !important;
+  }
+
+  .brutal-map-viewport {
+    min-height: 440px !important;
+    height: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT 7: ULTRA-WIDE & 4K MONITORS (1536px and up)
+   34"+ Ultrawide, 4K High-Resolution Displays
+   ========================================================================== */
+@media (min-width: 1536px) {
+  section {
+    padding-top: 5.5rem !important;
+    padding-bottom: 6.5rem !important;
+  }
+
+  .hero-title {
+    font-size: 4.5rem !important;
+  }
+
+  .hero-description {
+    font-size: 1.175rem !important;
+    max-width: 40rem !important;
+  }
+
+  .badge-canvas-wrapper {
+    max-width: 500px !important;
+  }
+
+  .brutal-map-viewport {
+    min-height: 460px !important;
+    height: 100% !important;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINT 8: SHORT LANDSCAPE MOBILE VIEWPORTS (max-height: 540px)
+   Mobile phones held horizontally
+   ========================================================================== */
+@media (max-height: 540px) and (orientation: landscape) {
+  header.fixed {
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+  }
+
+  .hero-section {
+    padding-top: 0.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .badge-canvas-wrapper {
+    position: static !important;
+    max-width: 320px !important;
+  }
+
+  .badge-canvas-wrapper canvas {
+    max-height: 230px !important;
+  }
+
+  #highlights .aspect-16\/9,
+  #highlights .aspect-16\/10 {
+    min-height: 180px !important;
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float-rocket,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   PRINT MEDIA STYLESHEET
+   Clean monochrome output, zero ink waste
+   ========================================================================== */
+@media print {
+  body,
+  .overflow-container {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+  header,
+  footer,
+  .fixed,
+  button,
+  input,
+  select,
+  textarea,
+  iframe,
+  .bg-gradient-ellipse {
+    display: none !important;
+  }
+
+  .dotnet-content-region,
+  .rounded-2xl,
+  .rounded-3xl {
+    box-shadow: none !important;
+    border: 1px solid #CCCCCC !important;
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555555;
+  }
+}
+
 
 
 
