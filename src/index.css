@@ -29,6 +29,13 @@
 
 :root {
   color-scheme: light;
+  /* .NET Conf 2026 Amravati Branding Design Tokens */
+  --conference-bg: #F0EFFB;
+  --conference-primary: #7046C8;
+  --conference-secondary: #A99AE8;
+  --conference-text: #292735;
+  --conference-white: #FFFFFF;
+
   --color-midnight-blue-primary: #190649;
   --color-midnight-blue-shade-10: #14053a;
   --color-midnight-blue-shade-20: #0f042c;
@@ -78,8 +85,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Accessibility focus ring */
 :focus-visible {
-  outline: 2px solid #512BD4;
+  outline: 2px solid var(--conference-primary, #7046C8);
   outline-offset: 2px;
+}
+
+/* Conference Theme Typography */
+.font-montserrat {
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+}
+.font-inter {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* Official DotNetConf Overflow Container & Ellipse background */
@@ -1197,6 +1212,58 @@ input[type='range']::-moz-range-thumb {
     color: #555555;
   }
 }
+
+/* ==========================================================================
+   LIVE STREETMAP ANIMATION ENGINE & LEAFLET ENHANCEMENTS
+   ========================================================================== */
+@keyframes live-radar-sweep {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.live-radar-beam {
+  background: conic-gradient(
+    from 0deg,
+    rgba(81, 43, 212, 0) 0deg,
+    rgba(81, 43, 212, 0.02) 280deg,
+    rgba(81, 43, 212, 0.18) 350deg,
+    rgba(169, 154, 232, 0.45) 360deg
+  );
+  animation: live-radar-sweep 4.5s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes live-route-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.live-route-flow {
+  animation: live-route-dash 0.9s linear infinite;
+}
+
+/* Custom Leaflet Styling */
+.leaflet-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  outline: none;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 16px !important;
+  box-shadow: 0 10px 25px -5px rgba(20, 5, 58, 0.15) !important;
+  border: 1px solid rgba(169, 154, 232, 0.4) !important;
+  padding: 4px !important;
+}
+
+.leaflet-popup-tip {
+  box-shadow: 0 10px 25px -5px rgba(20, 5, 58, 0.15) !important;
+}
+
 
 
 

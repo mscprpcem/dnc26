@@ -14,6 +14,7 @@ import { Footer } from './components/Footer/Footer.jsx';
 import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
 import { CallForSpeakers } from './components/CallForSpeakers/CallForSpeakers.jsx';
 import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.jsx';
+import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
 
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
@@ -23,6 +24,9 @@ export const App = () => {
       const path = window.location.pathname.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         return 'coc';
+      }
+      if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
+        return 'schedule';
       }
       if (search.includes('view=brutal') || hash.includes('brutal') || hash.includes('neobrutal')) {
         return 'dnc-brutal';
@@ -39,6 +43,8 @@ export const App = () => {
       const path = window.location.pathname.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         setCurrentView('coc');
+      } else if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
+        setCurrentView('schedule');
       } else if (search.includes('view=brutal') || hash.includes('brutal') || hash.includes('neobrutal')) {
         setCurrentView('dnc-brutal');
       } else {
@@ -64,10 +70,15 @@ export const App = () => {
     window.location.hash = '#code-of-conduct';
   };
 
+  const switchToSchedule = () => {
+    setCurrentView('schedule');
+    window.location.hash = '#schedule-view';
+  };
+
   const switchToClassic = () => {
     setCurrentView('classic');
-    if (window.location.hash.includes('brutal') || window.location.hash.includes('code-of-conduct') || window.location.hash.includes('coc')) {
-      history.replaceState(null, '', window.location.pathname.replace(/\/code-of-conduct\/?/i, '/'));
+    if (window.location.hash.includes('brutal') || window.location.hash.includes('code-of-conduct') || window.location.hash.includes('coc') || window.location.hash.includes('schedule')) {
+      history.replaceState(null, '', window.location.pathname.replace(/\/(code-of-conduct|schedule-page)\/?/i, '/'));
     }
   };
 
@@ -76,7 +87,12 @@ export const App = () => {
     return <CodeOfConductPage onBack={switchToClassic} />;
   }
 
-  // 2. Neo-brutalist styling edition (accessible via switcher & #brutal)
+  // 2. Standalone Schedule Page
+  if (currentView === 'schedule') {
+    return <SchedulePage onBack={switchToClassic} />;
+  }
+
+  // 3. Neo-brutalist styling edition (accessible via switcher & #brutal)
   if (currentView === 'dnc-brutal') {
     return (
       <DncBrutalPage 
@@ -85,7 +101,7 @@ export const App = () => {
     );
   }
 
-  // 3. Fallback / Classic layout (accessible via #classic)
+  // 4. Fallback / Classic layout (accessible via #classic)
   return (
     <div className="overflow-container selection:bg-[#512BD4]/20 selection:text-[#512BD4] relative">
       {/* Authentic DotNetConf Gradient Background Ellipses */}

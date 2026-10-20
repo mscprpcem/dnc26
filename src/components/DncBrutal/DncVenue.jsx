@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Building2, Building, Users, Info, Map, Star, Cpu, Megaphone, Navigation } from 'lucide-react';
 import { eventData } from '../../data/event.js';
+import { LiveStreetMap } from '../Venue/LiveStreetMap.jsx';
 
 export const DncVenue = () => {
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
@@ -146,29 +147,9 @@ export const DncVenue = () => {
             </a>
           </div>
 
-          {/* Map Viewport Container */}
-          <div className="relative rounded-2xl overflow-hidden border-[2px] border-black aspect-16/10 bg-[#EDF8F2] flex items-center justify-center group shadow-sm">
-            {/* Live Interactive Google Map */}
-            <iframe
-              src={eventData.location.embedMapUrl}
-              title="PRPCEM Campus Live Map"
-              className="w-full h-full border-0 select-auto"
-              loading="lazy"
-              allowFullScreen
-            />
-
-            {/* Floating OPEN IN MAPS Button */}
-            <div className="absolute bottom-3 right-3 flex items-center gap-2 z-10">
-              <a
-                href={directionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-xs sm:text-sm uppercase px-5 py-2.5 rounded-full border-[2px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center gap-2 cursor-pointer"
-              >
-                <Map className="w-4 h-4" />
-                <span>OPEN IN MAPS &gt;</span>
-              </a>
-            </div>
+          {/* Live Interactive StreetMap Container with Radar & Flow Animation */}
+          <div className="relative rounded-2xl overflow-hidden border-[2px] border-black bg-[#EDF8F2] shadow-sm">
+            <LiveStreetMap isBrutal={true} height="360px" />
           </div>
 
           {/* Campus Landmarks & Transit Box */}

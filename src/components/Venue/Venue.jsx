@@ -11,11 +11,12 @@ import {
   Car 
 } from 'lucide-react';
 import { eventData } from '../../data/event.js';
+import { LiveStreetMap } from './LiveStreetMap.jsx';
 
 export const Venue = () => {
   const [copiedCoords, setCopiedCoords] = useState(false);
 
-  const coordinatesText = '20.9167° N, 77.7289° E';
+  const coordinatesText = '20.9878° N, 77.7574° E';
   const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
 
   const handleCopyCoords = async () => {
@@ -159,15 +160,18 @@ export const Venue = () => {
             </div>
           </div>
 
-          {/* Right Map Card - Clean & Proper Google Maps Container */}
-          <div className="lg:col-span-7 bg-white rounded-2xl border-2 border-[#512BD4]/30 overflow-hidden shadow-xl flex flex-col min-h-[380px] sm:min-h-[440px]">
+          {/* Right Map Card - Live Animated StreetMap Container */}
+          <div className="lg:col-span-7 bg-white rounded-2xl border-2 border-[#512BD4]/30 overflow-hidden shadow-xl flex flex-col min-h-[420px] sm:min-h-[480px]">
             
             {/* Top Bar */}
             <div className="flex items-center justify-between px-4 py-2.5 bg-[#FAF8FF] border-b border-[#512BD4]/20">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#512BD4]" />
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
                 <span className="font-mono text-xs font-bold text-[#14053A]">
-                  PRPCEM Campus Map
+                  PRPCEM Campus · Live StreetMap
                 </span>
               </div>
 
@@ -187,16 +191,9 @@ export const Venue = () => {
               </div>
             </div>
 
-            {/* Map Viewport - Natural, Proper Clarity */}
-            <div className="brutal-map-viewport relative flex-1 w-full min-h-[300px] sm:min-h-[360px] md:min-h-[400px] bg-stone-100 overflow-hidden">
-              <iframe
-                title="PRPCEM Amravati Campus Map"
-                src={eventData.location.embedMapUrl}
-                className="w-full h-full min-h-[300px] sm:min-h-[360px] md:min-h-[400px] border-0"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            {/* Live Interactive Leaflet OpenStreetMap with Radar & Flow Animation */}
+            <div className="relative flex-1 w-full min-h-[360px] sm:min-h-[400px] bg-stone-100 overflow-hidden">
+              <LiveStreetMap isBrutal={false} height="100%" className="min-h-[360px] sm:min-h-[400px]" />
             </div>
 
             {/* Bottom Bar */}
