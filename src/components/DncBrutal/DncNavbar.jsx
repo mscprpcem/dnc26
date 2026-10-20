@@ -10,6 +10,7 @@ export const DncNavbar = () => {
     { label: 'ABOUT', path: '/about' },
     { label: 'HIGHLIGHTS', path: '/highlights' },
     { label: 'KEYNOTE', path: '/keynote' },
+    { label: 'CFP', path: '/cfp' },
     { label: 'SCHEDULE', path: '/schedule' },
     { label: 'VENUE', path: '/venue' },
     { label: 'BADGE', path: '/badge' },

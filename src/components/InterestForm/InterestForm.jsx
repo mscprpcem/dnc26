@@ -26,8 +26,8 @@ export const InterestForm = () => {
     fullName: '',
     email: '',
     phone: '',
-    college: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
-    role: 'Student (PRPCEM)',
+    college: '',
+    role: '',
     interests: ['.NET 11 & C# 14', 'Azure Cloud & Serverless'],
   });
 
@@ -339,6 +339,7 @@ export const InterestForm = () => {
                     required
                     value={formData.college}
                     onChange={(e) => setFormData({ ...formData, college: e.target.value })}
+                    placeholder="e.g., College or Organization Name"
                     className="w-full px-3.5 py-2.5 rounded-lg border-2 border-[#D8CEF7] hover:border-[#9C7DF5] focus:border-[#512BD4] focus:outline-none text-sm font-medium text-[#14053A] bg-white transition-colors shadow-2xs"
                   />
                 </div>

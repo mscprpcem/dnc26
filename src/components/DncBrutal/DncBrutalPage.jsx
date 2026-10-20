@@ -5,6 +5,7 @@ import DncHero from './DncHero.jsx';
 import DncEditorialSwimlanes from './DncEditorialSwimlanes.jsx';
 import DncPastHighlights from './DncPastHighlights.jsx';
 import DncKeynote from './DncKeynote.jsx';
+import DncCFP from './DncCFP.jsx';
 import DncAgenda from './DncAgenda.jsx';
 import DncVenue from './DncVenue.jsx';
 import DncAttendeeBadge from './DncAttendeeBadge.jsx';
@@ -15,7 +16,7 @@ import DncFooter from './DncFooter.jsx';
 import { ArrowUp } from 'lucide-react';
 import { scrollToSection } from '../../utils/sectionRouter.js';
 
-export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic, onSwitchToWarli }) => {
+export const DncBrutalPage = ({ onSwitchToClassic }) => {
   const [showScrollTop, setShowScrollTop] = React.useState(false);
   const [scrollY, setScrollY] = React.useState(0);
 
@@ -99,7 +100,10 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic, onSwitchTo
         {/* Section 4: Headline Opening Keynote Spotlight */}
         <DncKeynote />
 
-        {/* Section 5: Conference Schedule & Tracks Flow */}
+        {/* Section 5: Call for Proposals (CFP) / Speaker Submissions */}
+        <DncCFP />
+
+        {/* Section 6: Conference Schedule & Tracks Flow */}
         <DncAgenda />
 
         {/* Section 6: PRPCEM Campus Venue & Interactive Map */}
@@ -119,7 +123,7 @@ export const DncBrutalPage = ({ onSwitchToHackcon, onSwitchToClassic, onSwitchTo
       </main>
 
       {/* Footer */}
-      <DncFooter onSwitchToClassic={onSwitchToClassic} onSwitchToWarli={onSwitchToWarli} />
+      <DncFooter onSwitchToClassic={onSwitchToClassic} />
 
       {/* Floating Action Controls (Bottom Right - only shown when scrolled) */}
       {showScrollTop && (

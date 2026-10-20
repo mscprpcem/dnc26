@@ -5,6 +5,7 @@ export const SECTION_ROUTES = [
   { path: '/about', id: 'overview', label: 'ABOUT' },
   { path: '/highlights', id: 'highlights', label: 'HIGHLIGHTS' },
   { path: '/keynote', id: 'keynote', label: 'KEYNOTE' },
+  { path: '/cfp', id: 'cfp', label: 'CFP' },
   { path: '/schedule', id: 'schedule', label: 'SCHEDULE' },
   { path: '/venue', id: 'venue', label: 'VENUE' },
   { path: '/badge', id: 'attendee-badge', label: 'BADGE' },
@@ -23,6 +24,10 @@ export const PATH_TO_ID = {
   '/recap': 'highlights',
   '/gallery': 'highlights',
   '/keynote': 'keynote',
+  '/cfp': 'cfp',
+  '/call-for-proposals': 'cfp',
+  '/call-for-speakers': 'cfp',
+  '/speakers': 'cfp',
   '/schedule': 'schedule',
   '/agenda': 'schedule',
   '/tracks': 'schedule',
@@ -39,6 +44,8 @@ export const PATH_TO_ID = {
   '/community': 'community',
   '/stay-connected': 'community',
   '/connect': 'community',
+  '/code-of-conduct': 'code-of-conduct',
+  '/coc': 'code-of-conduct',
 };
 
 export const ID_TO_PATH = {
@@ -46,6 +53,9 @@ export const ID_TO_PATH = {
   'overview': '/about',
   'highlights': '/highlights',
   'keynote': '/keynote',
+  'cfp': '/cfp',
+  'call-for-speakers': '/cfp',
+  'speakers': '/cfp',
   'schedule': '/schedule',
   'venue': '/venue',
   'attendee-badge': '/badge',
@@ -55,6 +65,8 @@ export const ID_TO_PATH = {
   'register-interest': '/register',
   'community': '/community',
   'stay-connected': '/community',
+  'code-of-conduct': '/code-of-conduct',
+  'coc': '/code-of-conduct',
 };
 
 export const normalizePath = (p) => {
@@ -79,6 +91,11 @@ export const scrollToSection = (target, updateHistory = true) => {
     }
   }
 
+  if (targetId === 'code-of-conduct' || path === '/code-of-conduct' || targetId === 'coc') {
+    window.location.hash = '#code-of-conduct';
+    return;
+  }
+
   // Handle smooth scroll
   if (targetId === 'top' || path === '/') {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -89,6 +106,9 @@ export const scrollToSection = (target, updateHistory = true) => {
       path.replace(/^\//, ''),
       targetId.replace(/-/g, ''),
     ];
+    if (targetId === 'cfp' || targetId === 'speakers' || targetId === 'call-for-speakers') {
+      candidateIds.push('cfp', 'speakers', 'call-for-speakers');
+    }
     if (targetId === 'register' || targetId === 'register-interest') {
       candidateIds.push('register', 'register-interest');
     }

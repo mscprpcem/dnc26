@@ -11,100 +11,76 @@ import { InterestForm } from './components/InterestForm/InterestForm.jsx';
 import { Sponsors } from './components/Sponsors/Sponsors.jsx';
 import { StayConnected } from './components/StayConnected/StayConnected.jsx';
 import { Footer } from './components/Footer/Footer.jsx';
-import { HackconPage } from './components/Hackcon/HackconPage.jsx';
 import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
-import { Tent, LayoutTemplate } from 'lucide-react';
-
-const WarliThemePage = React.lazy(() => import('./components/WarliTheme/DncBrutalPage.jsx'));
+import { CallForSpeakers } from './components/CallForSpeakers/CallForSpeakers.jsx';
+import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.jsx';
 
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
     if (typeof window !== 'undefined') {
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (search.includes('view=hackcon') || hash.includes('hackcon')) {
-        return 'hackcon';
+      const path = window.location.pathname.toLowerCase();
+      if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
+        return 'coc';
       }
-      if (search.includes('view=warli') || hash.includes('warli')) {
-        return 'warli';
-      }
-      if (search.includes('view=classic') || hash.includes('classic')) {
-        return 'classic';
+      if (search.includes('view=brutal') || hash.includes('brutal') || hash.includes('neobrutal')) {
+        return 'dnc-brutal';
       }
     }
-    // Default view is the neo-brutalist DotNetConf landing page with Warli references
-    return 'dnc-brutal';
+    // Default view is the Normal / Classic DotNetConf experience
+    return 'classic';
   });
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      if (search.includes('view=hackcon') || hash.includes('hackcon')) {
-        setCurrentView('hackcon');
-      } else if (search.includes('view=warli') || hash.includes('warli')) {
-        setCurrentView('warli');
-      } else if (search.includes('view=classic') || hash.includes('classic')) {
-        setCurrentView('classic');
-      } else {
+      const path = window.location.pathname.toLowerCase();
+      if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
+        setCurrentView('coc');
+      } else if (search.includes('view=brutal') || hash.includes('brutal') || hash.includes('neobrutal')) {
         setCurrentView('dnc-brutal');
+      } else {
+        setCurrentView('classic');
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
   }, []);
-
-  const switchToHackcon = () => {
-    setCurrentView('hackcon');
-    window.location.hash = '#hackcon';
-  };
 
   const switchToDncBrutal = () => {
     setCurrentView('dnc-brutal');
-    if (window.location.hash.includes('hackcon') || window.location.hash.includes('classic') || window.location.hash.includes('warli')) {
-      history.replaceState(null, '', window.location.pathname);
-    }
+    window.location.hash = '#brutal';
   };
 
-  const switchToWarli = () => {
-    setCurrentView('warli');
-    window.location.hash = '#warli';
+  const switchToCoc = () => {
+    setCurrentView('coc');
+    window.location.hash = '#code-of-conduct';
   };
 
   const switchToClassic = () => {
     setCurrentView('classic');
-    window.location.hash = '#classic';
+    if (window.location.hash.includes('brutal') || window.location.hash.includes('code-of-conduct') || window.location.hash.includes('coc')) {
+      history.replaceState(null, '', window.location.pathname.replace(/\/code-of-conduct\/?/i, '/'));
+    }
   };
 
-  // 1. If user requests Hackcon test page:
-  if (currentView === 'hackcon') {
-    return <HackconPage onSwitchToDotNetConf={switchToDncBrutal} />;
+  // 1. Code of Conduct Page
+  if (currentView === 'coc') {
+    return <CodeOfConductPage onBack={switchToClassic} />;
   }
 
-  // 2. Full Warli Painting Theme Edition (Accessible via footer switcher & #warli)
-  if (currentView === 'warli') {
-    return (
-      <React.Suspense fallback={
-        <div className="min-h-screen bg-[#38130D] text-[#FAF7F2] flex items-center justify-center font-mono text-sm">
-          Loading Warli Edition...
-        </div>
-      }>
-        <WarliThemePage
-          onSwitchToDncBrutal={switchToDncBrutal}
-          onSwitchToClassic={switchToClassic}
-        />
-      </React.Suspense>
-    );
-  }
-
-  // 3. Primary experience: DotNetConf neo-brutal styling with subtle Warli cultural touches
+  // 2. Neo-brutalist styling edition (accessible via switcher & #brutal)
   if (currentView === 'dnc-brutal') {
     return (
       <DncBrutalPage 
-        onSwitchToHackcon={switchToHackcon}
         onSwitchToClassic={switchToClassic}
-        onSwitchToWarli={switchToWarli}
       />
     );
   }
@@ -161,7 +137,10 @@ export const App = () => {
         {/* Section 5: Keynote Speaker Spotlight (Headline Keynote - Announced Soon TBA) */}
         <Keynote />
 
-        {/* Section 6: Conference Schedule & Tracks */}
+        {/* Section 6: Call for Proposals (CFP) / Speaker Submissions */}
+        <CallForSpeakers />
+
+        {/* Section 7: Conference Schedule & Tracks */}
         <Agenda />
 
         {/* Section 6: Campus Venue & Google Maps (PRPCEM Campus, Amravati) */}
@@ -181,19 +160,8 @@ export const App = () => {
       </main>
 
       {/* Footer */}
-      <Footer onSwitchToNeoBrutal={switchToDncBrutal} onSwitchToWarli={switchToWarli} />
+      <Footer onSwitchToNeoBrutal={switchToDncBrutal} />
 
-      {/* Floating Mode Switcher to Neo-Brutalist DNC Page */}
-      <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50">
-        <button
-          onClick={switchToDncBrutal}
-          className="group bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-xs sm:text-sm px-4 py-3 rounded-2xl border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] hover:shadow-[1.5px_1.5px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center gap-2 cursor-pointer"
-          title="Switch to Neo-Brutalist Mode"
-        >
-          <span className="text-base group-hover:rotate-12 transition-transform">🎨</span>
-          <span>SWITCH TO NEO-BRUTALIST MODE</span>
-        </button>
-      </div>
     </div>
   );
 };

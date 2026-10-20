@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-export const DncFooter = ({ onSwitchToClassic, onSwitchToWarli }) => {
+export const DncFooter = ({ onSwitchToClassic }) => {
   return (
     <footer className="mt-4 sm:mt-6 font-sans select-none relative overflow-hidden bg-[#0C0227]">
       {/* Top Stepped Cyber Ribbon Banner */}
@@ -138,24 +138,6 @@ export const DncFooter = ({ onSwitchToClassic, onSwitchToWarli }) => {
                 </div>
               </div>
 
-              {/* Warli Painting Theme Edition Button */}
-              <button
-                type="button"
-                onClick={() => onSwitchToWarli && onSwitchToWarli()}
-                className="w-full py-3 px-4 rounded-2xl border-2 border-[#E5A93C]/60 bg-[#280D07] hover:border-[#E5A93C] hover:bg-[#38130D] transition-all flex items-center justify-between group cursor-pointer text-left shadow-[2px_2px_0px_#000]"
-                title="Switch to Warli Folk Art Painting Theme Edition"
-              >
-                <span className="flex items-center gap-2.5">
-                  <Sparkles className="w-4 h-4 text-[#E5A93C] group-hover:rotate-12 transition-transform shrink-0" />
-                  <span className="text-[#FAF7F2] font-mono font-bold text-xs sm:text-sm tracking-wider">
-                    WARLI EDITION
-                  </span>
-                </span>
-                <span className="bg-[#E5A93C] text-[#180805] px-2 py-0.5 rounded-lg text-xs font-mono font-black tracking-wide">
-                  Folk Art
-                </span>
-              </button>
-
               {/* Normal / Classic Mode Button */}
               <button
                 type="button"
@@ -191,10 +173,8 @@ export const DncFooter = ({ onSwitchToClassic, onSwitchToWarli }) => {
             <ul className="flex flex-col gap-3.5 font-sans mt-3">
               <li>
                 <a
-                  href="https://dotnetfoundation.org/about/code-of-conduct"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-stone-300 hover:text-[#00F0FF] flex items-center justify-between text-xs sm:text-sm font-medium transition-colors group"
+                  href="#code-of-conduct"
+                  className="text-stone-300 hover:text-[#00F0FF] flex items-center justify-between text-xs sm:text-sm font-medium transition-colors group cursor-pointer"
                 >
                   <span className="flex items-center gap-3">
                     <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-[#A78BFA] group-hover:text-[#00F0FF] transition-colors shrink-0" />

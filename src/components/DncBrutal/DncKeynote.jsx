@@ -1,6 +1,7 @@
 import React from 'react';
 import { Megaphone, Mic, Calendar, Bell, ArrowRight, LayoutGrid, Cpu, Brain, Cloud, Code2 } from 'lucide-react';
 import { scrollToSection } from '../../utils/sectionRouter.js';
+import { keynoteSpeaker } from '../../data/speakers.js';
 
 export const DncKeynote = () => {
   return (
@@ -202,7 +203,7 @@ export const DncKeynote = () => {
 
               {/* Title */}
               <h3 className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-black mb-2 leading-snug">
-                Building Next-Gen Intelligent Applications with .NET &amp; AI
+                {keynoteSpeaker.topic || 'Building Next-Gen Intelligent Applications with .NET & AI'}
               </h3>
 
               {/* Featured Keynote Speaker Info */}
@@ -212,17 +213,17 @@ export const DncKeynote = () => {
                 </div>
                 <div>
                   <div className="text-xs font-bold font-sans text-black">
-                    Anuraj P. · Microsoft MVP &amp; Senior Architect
+                    {keynoteSpeaker.name} · {keynoteSpeaker.designation}
                   </div>
                   <div className="text-[10px] font-mono text-stone-500">
-                    Microsoft Most Valuable Professional · 20+ Years Enterprise Experience
+                    {keynoteSpeaker.organization} · 20+ Years Enterprise Experience
                   </div>
                 </div>
               </div>
 
               {/* Description */}
               <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
-                An inspiring keynote deep dive exploring the evolution of .NET 11, C# 14 zero-allocation patterns, autonomous multi-agent systems powered by Semantic Kernel, and resilient cloud-native architectures with .NET Aspire on Azure.
+                {keynoteSpeaker.bio || 'An inspiring keynote deep dive exploring the evolution of .NET 11, C# 14 zero-allocation patterns, autonomous multi-agent systems powered by Semantic Kernel, and resilient cloud-native architectures with .NET Aspire on Azure.'}
               </p>
 
               {/* Tech Badges Row */}

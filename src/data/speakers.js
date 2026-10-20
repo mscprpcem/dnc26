@@ -1,16 +1,16 @@
-// Real speakers from .NET Conf Amravati & Microsoft Student Club PRPCEM Speaker Series
+// Conference Speakers & Keynote Roster (.NET Conf Amravati 2026)
 export const keynoteSpeaker = {
   id: 'keynote-1',
-  name: 'Anuraj P.',
-  designation: 'Microsoft MVP & Senior Architect',
-  organization: 'Microsoft MVP Community',
-  topic: 'Building Next-Gen Intelligent Applications with .NET & Modern C#',
+  name: 'Headline Keynote Speaker (TBA)',
+  designation: 'Industry Leader & Microsoft MVP',
+  organization: 'Announced Soon',
+  topic: 'Building Next-Gen Intelligent Applications with .NET 11 & AI',
   time: '10:15 AM – 11:15 AM IST',
-  hall: 'PRPCEM Campus, Amravati',
-  bio: 'Microsoft Most Valuable Professional (MVP) and globally recognized speaker with over two decades of enterprise expertise architecting scalable cloud applications, distributed microservices, and modern developer tooling across the Microsoft platform ecosystem.',
-  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85',
+  hall: 'PRPCEM Auditorium, Amravati',
+  bio: 'The inaugural keynote will officially open .NET Conf 2026 Amravati. Deep dive into next-generation runtime architectures, autonomous AI agents with Semantic Kernel, and cloud-native resilience with .NET Aspire.',
+  avatarUrl: '',
   isKeynote: true,
-  tags: ['.NET 11', 'C# 14', 'Semantic Kernel', 'Azure OpenAI', '.NET Aspire', 'Native AOT', 'Enterprise Architecture'],
+  tags: ['.NET 11', 'C# 14', 'Semantic Kernel', 'Azure AI', '.NET Aspire', 'Native AOT', 'Cloud Architecture'],
   pillars: [
     {
       title: '.NET 11 & C# 14 Architectural Roadmap',
@@ -32,59 +32,6 @@ export const keynoteSpeaker = {
   },
 };
 
-export const speakersData = [
-  {
-    id: 'spk-1',
-    name: 'Madhava Ganesh',
-    designation: 'Software Engineer',
-    organization: 'Microsoft',
-    topic: 'Modern Cloud Native Architectures with ASP.NET Core & Azure',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com', github: 'https://github.com' },
-  },
-  {
-    id: 'spk-2',
-    name: 'Kshitiz Kalra',
-    designation: 'Software Engineer',
-    organization: 'Microsoft',
-    topic: 'Building AI Agents & Copilots with Semantic Kernel in .NET',
-    avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com', github: 'https://github.com' },
-  },
-  {
-    id: 'spk-3',
-    name: 'Lakshit Pant',
-    designation: 'Software Engineer',
-    organization: 'Microsoft',
-    topic: 'Deep Dive: C# High-Performance Computing and Memory Profiling',
-    avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
-  },
-  {
-    id: 'spk-4',
-    name: 'Adithya Saladi',
-    designation: 'Software Engineer & Tech Speaker',
-    organization: 'Microsoft',
-    topic: 'Serverless Event-Driven Microservices with Azure Functions & .NET',
-    avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com' },
-  },
-  {
-    id: 'spk-5',
-    name: 'Tushar Sakhare',
-    designation: 'Senior Cloud Specialist',
-    organization: 'Accenture',
-    topic: 'Enterprise DevOps & CI/CD Pipelines for Azure Kubernetes Service',
-    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', github: 'https://github.com' },
-  },
-  {
-    id: 'spk-6',
-    name: 'Praffull Wankhade',
-    designation: 'Founder & Tech Lead',
-    organization: 'SohamGlobal',
-    topic: 'Full-Stack Development with Blazor WebAssembly and .NET Minimal APIs',
-    avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80',
-    socials: { linkedin: 'https://linkedin.com', x: 'https://x.com' },
-  },
-];
+export const speakersData = [];
+
+export default speakersData;

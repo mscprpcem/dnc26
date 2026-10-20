@@ -1,9 +1,10 @@
 import React from 'react';
 import { Award, ArrowRight, Clock, MapPin, Layers, Cpu, UserCheck, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
+import { keynoteSpeaker } from '../../data/speakers.js';
 
 export const Keynote = () => {
-  const pillars = [
+  const pillars = keynoteSpeaker.pillars || [
     {
       title: 'Next-Generation .NET 11 & C# 14 Innovations',
       desc: 'Architecture breakthroughs, Native AOT sub-millisecond cold starts, ref struct safety, and memory-efficient runtime pipelines.',
@@ -29,10 +30,10 @@ export const Keynote = () => {
             <span>Headline Opening Keynote · Main Auditorium</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight text-[#14053A] mb-3 leading-tight">
-            Keynote Address: <span className="community-event-gradient-text">The Future of .NET &amp; AI</span>
+            Keynote Address: <span className="community-event-gradient-text">{keynoteSpeaker.topic || 'The Future of .NET & AI'}</span>
           </h2>
           <p className="text-xs sm:text-sm md:text-base text-[#190649]/80 leading-relaxed">
-            Central India’s premier developer summit opens with an architectural deep dive from an industry Microsoft MVP and veteran enterprise architect.
+            Central India’s premier developer summit opens with an architectural deep dive from our headline keynote speaker.
           </p>
         </div>
 
@@ -55,7 +56,7 @@ export const Keynote = () => {
                   </div>
 
                   <div className="px-2 sm:px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider border border-white/20">
-                    Microsoft MVP
+                    Announced Soon
                   </div>
                 </div>
 
@@ -73,7 +74,7 @@ export const Keynote = () => {
                     </div>
                   </div>
                   <div className="px-3 py-1 rounded-full bg-white/10 text-[11px] font-mono text-stone-300">
-                    AUDITORIUM MAINSTAGE • 10:00 AM
+                    AUDITORIUM MAINSTAGE • {keynoteSpeaker.time ? keynoteSpeaker.time.split('–')[0]?.trim() || '10:15 AM' : '10:00 AM'}
                   </div>
                 </div>
 
@@ -81,21 +82,21 @@ export const Keynote = () => {
                 <div className="absolute bottom-3 left-3 right-3 p-3.5 sm:p-4 rounded-xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-lg text-[#14053A]">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <h4 className="text-sm sm:text-base font-black font-display tracking-tight text-[#14053A] truncate">
-                      Headline Keynote Speaker
+                      {keynoteSpeaker.name}
                     </h4>
                     <span className="text-[10px] font-bold text-[#512BD4] bg-[#EEEAFB] px-2 py-0.5 rounded shrink-0">
                       KEYNOTE
                     </span>
                   </div>
 
-                  <p className="text-xs font-semibold text-[#512BD4] mb-2 text-left">
-                    Microsoft MVP · To Be Announced Soon
+                  <p className="text-xs font-semibold text-[#512BD4] mb-2 text-left truncate">
+                    {keynoteSpeaker.designation} · {keynoteSpeaker.organization}
                   </p>
 
                   <div className="pt-2 border-t border-[#DCD5F6]/60 flex items-center justify-between text-[11px] font-medium text-[#190649]/80">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5 text-[#512BD4]" />
-                      10:00 AM - 10:50 AM
+                      {keynoteSpeaker.time || '10:15 AM - 11:15 AM'}
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5 text-[#D600AA]" />
@@ -119,12 +120,12 @@ export const Keynote = () => {
 
                 {/* Main Topic */}
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display text-[#14053A] tracking-tight leading-tight mb-3">
-                  Building Next-Gen Intelligent Applications with .NET &amp; AI
+                  {keynoteSpeaker.topic}
                 </h3>
 
                 {/* Tech Tags Strip */}
                 <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-                  {['.NET 11', 'C# 14', 'Semantic Kernel', 'Azure AI', '.NET Aspire', 'Native AOT', 'Cloud Architecture'].map((tag, idx) => (
+                  {(keynoteSpeaker.tags || ['.NET 11', 'C# 14', 'Semantic Kernel', 'Azure AI', '.NET Aspire', 'Native AOT', 'Cloud Architecture']).map((tag, idx) => (
                     <span
                       key={idx}
                       className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#EEEAFB] text-[#512BD4] border border-[#DCD5F6]"
@@ -136,7 +137,7 @@ export const Keynote = () => {
 
                 {/* Speaker Biography / Keynote Description */}
                 <p className="text-xs sm:text-sm text-[#190649]/80 leading-relaxed mb-6">
-                  The keynote session will officially inaugurate .NET Conf 2026 Amravati. Discover how to architect resilient, high-speed cloud backends with .NET 11 while infusing enterprise AI capabilities using Microsoft Semantic Kernel, local SLMs, and Azure OpenAI.
+                  {keynoteSpeaker.bio || 'The keynote session will officially inaugurate .NET Conf 2026 Amravati. Discover how to architect resilient, high-speed cloud backends with .NET 11 while infusing enterprise AI capabilities using Microsoft Semantic Kernel, local SLMs, and Azure OpenAI.'}
                 </p>
 
                 {/* 3 Pillars */}

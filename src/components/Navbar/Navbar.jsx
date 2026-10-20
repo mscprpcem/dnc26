@@ -7,6 +7,7 @@ const primaryNavItems = [
   { label: 'About', path: '/about', targetId: 'overview' },
   { label: 'Highlights', path: '/highlights', targetId: 'highlights' },
   { label: 'Keynote', path: '/keynote', targetId: 'keynote' },
+  { label: 'CFP', path: '/cfp', targetId: 'cfp' },
   { label: 'Schedule', path: '/schedule', targetId: 'schedule' },
   { label: 'Venue', path: '/venue', targetId: 'venue' },
   { label: 'Badge', path: '/badge', targetId: 'attendee-badge' },

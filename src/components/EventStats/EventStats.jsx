@@ -31,7 +31,7 @@ export const EventStats = () => {
                   {item.label}
                 </div>
                 <div className="text-[11px] text-[#5F6368] mt-0.5">
-                  {item.sublabel}
+                  {item.subtext || item.sublabel}
                 </div>
               </div>
             </div>

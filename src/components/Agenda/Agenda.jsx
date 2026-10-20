@@ -15,9 +15,9 @@ export const Agenda = () => {
 
   const filteredSchedule = agendaSchedule.filter((item) => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'track1') return item.type === 'parallel' || item.track1;
-    if (activeFilter === 'track2') return item.type === 'parallel' || item.track2;
-    if (activeFilter === 'general') return item.type !== 'parallel';
+    if (activeFilter === 'track1') return item.isParallel || item.type === 'keynote';
+    if (activeFilter === 'track2') return item.isParallel || item.type === 'keynote';
+    if (activeFilter === 'general') return !item.isParallel;
     return true;
   });
 
@@ -48,7 +48,7 @@ export const Agenda = () => {
             <button
               key={btn.id}
               onClick={() => setActiveFilter(btn.id)}
-              className={`text-xs font-bold px-3.5 py-1.5 rounded-full border transition-all ${
+              className={`text-xs font-bold px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
                 activeFilter === btn.id
                   ? 'bg-[#512BD4] text-white border-[#512BD4] shadow-sm'
                   : 'bg-white text-[#190649]/80 border-[#DCD5F6] hover:border-[#512BD4] hover:text-[#512BD4]'
@@ -85,7 +85,10 @@ export const Agenda = () => {
 
           <div className="space-y-4">
             {filteredSchedule.map((item) => {
-              if (item.type === 'parallel') {
+              if (item.isParallel) {
+                const showTrack1 = activeFilter === 'all' || activeFilter === 'track1';
+                const showTrack2 = activeFilter === 'all' || activeFilter === 'track2';
+
                 return (
                   <div key={item.id} className="p-4 sm:p-5 rounded-2xl bg-[#FBFBFE] border-2 border-[#DCD5F6]">
                     <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DCD5F6]/70 pb-3 mb-4">
@@ -95,7 +98,7 @@ export const Agenda = () => {
                           {item.time}
                         </span>
                         <span className="text-xs font-bold text-[#14053A] uppercase">
-                          Parallel Technical Breakouts
+                          {item.slotLabel || 'Parallel Technical Breakouts'}
                         </span>
                       </div>
                       <span className="text-[11px] font-semibold text-[#512BD4] bg-[#EEEAFB] px-2.5 py-0.5 rounded-full">
@@ -103,64 +106,76 @@ export const Agenda = () => {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className={`grid grid-cols-1 ${showTrack1 && showTrack2 ? 'lg:grid-cols-2' : 'grid-cols-1'} gap-4`}>
                       {/* Track 1 Card */}
-                      <div className="p-4 rounded-xl bg-white border border-[#512BD4]/30 shadow-xs flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4]">
-                              {item.track1.trackName}
-                            </span>
-                            <span className="text-[11px] text-[#190649]/60 flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-[#512BD4]" /> {item.track1.room}
-                            </span>
+                      {showTrack1 && (
+                        <div className="p-4 rounded-xl bg-white border border-[#512BD4]/30 shadow-xs flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4]">
+                                {item.track1.trackName}
+                              </span>
+                              <span className="text-[11px] text-[#190649]/60 flex items-center gap-1">
+                                <MapPin className="w-3 h-3 text-[#512BD4]" /> {item.track1.room}
+                              </span>
+                            </div>
+                            <h4 className="font-bold text-sm sm:text-base text-[#14053A] mb-1">
+                              {item.track1.title}
+                            </h4>
+                            <p className="text-xs text-[#512BD4] font-semibold mb-2">
+                              Speaker: {item.track1.speaker} {item.track1.speakerRole ? `(${item.track1.speakerRole})` : ''}
+                            </p>
+                            <p className="text-xs text-[#190649]/70 leading-relaxed mb-3">
+                              {item.track1.description || item.track1.desc}
+                            </p>
                           </div>
-                          <h4 className="font-bold text-sm sm:text-base text-[#14053A] mb-1">
-                            {item.track1.title}
-                          </h4>
-                          <p className="text-xs text-[#512BD4] font-semibold mb-2">
-                            Speaker: {item.track1.speaker}
-                          </p>
-                          <p className="text-xs text-[#190649]/70 leading-relaxed mb-3">
-                            {item.track1.desc}
-                          </p>
+                          <span className="inline-block self-start text-[10px] font-bold px-2 py-0.5 rounded bg-[#F4F2FC] text-[#512BD4]">
+                            {item.track1.category}
+                          </span>
                         </div>
-                        <span className="inline-block self-start text-[10px] font-bold px-2 py-0.5 rounded bg-[#F4F2FC] text-[#512BD4]">
-                          {item.track1.category}
-                        </span>
-                      </div>
+                      )}
 
                       {/* Track 2 Card */}
-                      <div className="p-4 rounded-xl bg-white border border-[#0E7A66]/30 shadow-xs flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#E8F8F5] text-[#0E7A66]">
-                              {item.track2.trackName}
-                            </span>
-                            <span className="text-[11px] text-[#190649]/60 flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-[#0E7A66]" /> {item.track2.room}
-                            </span>
+                      {showTrack2 && (
+                        <div className="p-4 rounded-xl bg-white border border-[#0E7A66]/30 shadow-xs flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#E8F8F5] text-[#0E7A66]">
+                                {item.track2.trackName}
+                              </span>
+                              <span className="text-[11px] text-[#190649]/60 flex items-center gap-1">
+                                <MapPin className="w-3 h-3 text-[#0E7A66]" /> {item.track2.room}
+                              </span>
+                            </div>
+                            <h4 className="font-bold text-sm sm:text-base text-[#14053A] mb-1">
+                              {item.track2.title}
+                            </h4>
+                            <p className="text-xs text-[#0E7A66] font-semibold mb-2">
+                              Speaker: {item.track2.speaker} {item.track2.speakerRole ? `(${item.track2.speakerRole})` : ''}
+                            </p>
+                            <p className="text-xs text-[#190649]/70 leading-relaxed mb-3">
+                              {item.track2.description || item.track2.desc}
+                            </p>
                           </div>
-                          <h4 className="font-bold text-sm sm:text-base text-[#14053A] mb-1">
-                            {item.track2.title}
-                          </h4>
-                          <p className="text-xs text-[#0E7A66] font-semibold mb-2">
-                            Speaker: {item.track2.speaker}
-                          </p>
-                          <p className="text-xs text-[#190649]/70 leading-relaxed mb-3">
-                            {item.track2.desc}
-                          </p>
+                          <span className="inline-block self-start text-[10px] font-bold px-2 py-0.5 rounded bg-[#E8F8F5] text-[#0E7A66]">
+                            {item.track2.category}
+                          </span>
                         </div>
-                        <span className="inline-block self-start text-[10px] font-bold px-2 py-0.5 rounded bg-[#E8F8F5] text-[#0E7A66]">
-                          {item.track2.category}
-                        </span>
-                      </div>
+                      )}
                     </div>
                   </div>
                 );
               }
 
               // Keynote or General Slot
+              const sess = item.session || {};
+              const category = sess.category || item.category || 'General';
+              const speaker = sess.speaker || item.speaker;
+              const speakerRole = sess.speakerRole || item.speakerRole;
+              const room = sess.room || item.room || 'PRPCEM Main Hall';
+              const title = sess.title || item.title;
+              const description = sess.description || sess.desc || item.description || item.desc;
+
               return (
                 <div
                   key={item.id}
@@ -174,29 +189,31 @@ export const Agenda = () => {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1">
                         <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-[#EEEAFB] text-[#512BD4]">
-                          {item.category}
+                          {category}
                         </span>
-                        {item.speaker && (
+                        {speaker && (
                           <span className="text-xs text-[#512BD4] font-bold">
-                            By {item.speaker}
+                            By {speaker} {speakerRole ? `(${speakerRole})` : ''}
                           </span>
                         )}
                         <span className="text-[11px] text-[#190649]/60">
-                          • {item.room}
+                          • {room}
                         </span>
                       </div>
                       <h4 className="text-xs sm:text-sm font-bold text-[#14053A] leading-snug">
-                        {item.title}
+                        {title}
                       </h4>
-                      <p className="text-[11px] sm:text-xs text-[#190649]/70 leading-snug mt-0.5">
-                        {item.desc}
-                      </p>
+                      {description && (
+                        <p className="text-[11px] sm:text-xs text-[#190649]/70 leading-snug mt-0.5">
+                          {description}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   <div className="shrink-0 self-start sm:self-center pl-0 sm:pl-2">
                     <span className="inline-block text-[10px] font-bold text-[#512BD4] bg-white px-2.5 py-1 rounded border border-[#DCD5F6] whitespace-nowrap">
-                      {item.room}
+                      {room}
                     </span>
                   </div>
                 </div>

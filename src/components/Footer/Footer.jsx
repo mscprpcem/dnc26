@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart, MapPin, Sparkles } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
-export const Footer = ({ onSwitchToNeoBrutal, onSwitchToWarli }) => {
+export const Footer = ({ onSwitchToNeoBrutal }) => {
   return (
     <footer className="w-full mt-auto border-t border-[#DCD5F6]/80 bg-white/70 backdrop-blur-md">
       {/* Upper Footer Links */}
@@ -26,36 +26,25 @@ export const Footer = ({ onSwitchToNeoBrutal, onSwitchToWarli }) => {
 
           {/* Theme Mode Switcher in Footer */}
           <div className="flex items-center gap-1.5 bg-[#F4F0FF] p-1 rounded-full border border-[#DCD5F6]/80 shadow-inner">
-            <div className="px-3 py-1 rounded-full text-xs font-bold bg-white text-[#512BD4] shadow-sm flex items-center gap-1.5 cursor-default select-none">
+            <div className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-white text-[#512BD4] shadow-sm flex items-center gap-1.5 cursor-default select-none">
               <span className="w-2 h-2 rounded-full bg-[#512BD4]"></span>
               <span>Normal</span>
             </div>
             <button
               type="button"
               onClick={() => onSwitchToNeoBrutal && onSwitchToNeoBrutal()}
-              className="px-3 py-1 rounded-full text-xs font-bold text-[#190649]/75 hover:text-[#512BD4] hover:bg-white/80 transition-all flex items-center gap-1.5 cursor-pointer"
+              className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[#190649]/75 hover:text-[#512BD4] hover:bg-white/80 transition-all flex items-center gap-1.5 cursor-pointer"
               title="Switch to Neo-Brutalist Mode"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E1306C]" />
               <span>Neo-Brutalism</span>
             </button>
-            <button
-              type="button"
-              onClick={() => onSwitchToWarli && onSwitchToWarli()}
-              className="px-3 py-1 rounded-full text-xs font-bold text-[#38130D] hover:bg-[#38130D] hover:text-[#FAF7F2] transition-all flex items-center gap-1.5 cursor-pointer"
-              title="Switch to Warli Folk Art Theme"
-            >
-              <span>🎨</span>
-              <span>Warli</span>
-            </button>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-[#190649]/80">
             <a
-              href="https://dotnetfoundation.org/about/code-of-conduct"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#512BD4] transition-colors"
+              href="#code-of-conduct"
+              className="hover:text-[#512BD4] transition-colors cursor-pointer"
             >
               Code of Conduct
             </a>
