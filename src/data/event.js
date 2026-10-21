@@ -1,11 +1,3 @@
-export const navigationItems = [
-  { label: 'About', href: '#overview' },
-  { label: 'Keynote', href: '#keynote' },
-  { label: 'Speakers', href: '#speakers' },
-  { label: 'Schedule', href: '#schedule' },
-  { label: 'Venue', href: '#venue' },
-];
-
 export const eventData = {
   name: '.NET Conf',
   edition: 'Amravati',
@@ -33,7 +25,7 @@ export const eventData = {
     country: 'India',
     venueName: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
     address: 'Pote Estate, Kathora Road, Amravati, Maharashtra 444602',
-    mapUrl: 'https://www.google.com/maps/search/?api=1&query=P.+R.+Pote+Patil+College+of+Engineering+and+Management+Amravati',
+    mapUrl: 'https://www.google.com/maps/place/P.+R.+Pote+Patil+College+of+Engineering+and+Management,+Amravati',
     embedMapUrl:
       'https://maps.google.com/maps?q=P.+R.+Pote+Patil+College+of+Engineering+and+Management,+Amravati&t=&z=16&ie=UTF8&iwloc=&output=embed',
   },
@@ -205,57 +197,6 @@ export const eventData = {
       question: 'How can I reach the PRPCEM campus in Amravati?',
       a: 'P. R. Pote Patil College of Engineering and Management is conveniently located on Kathora Road in Amravati. It is easily accessible via auto-rickshaws, city buses, and cabs from Amravati Railway Station (approx. 6 km) and Badnera Junction (approx. 14 km).',
       answer: 'P. R. Pote Patil College of Engineering and Management is conveniently located on Kathora Road in Amravati. It is easily accessible via auto-rickshaws, city buses, and cabs from Amravati Railway Station (approx. 6 km) and Badnera Junction (approx. 14 km).',
-    },
-  ],
-
-  tickets: [
-    {
-      id: 'community',
-      name: 'Community Delegate Pass',
-      price: 'Free',
-      badge: 'Early Access',
-      description: 'Standard in-person seat admission for local developers, students, and open-source enthusiasts.',
-      features: [
-        'Access to Keynote & All General Sessions',
-        'Official Digital Attendee Badge Studio',
-        'Live Technical Q&A with Microsoft MVPs',
-        'Verifiable Digital Certificate of Participation',
-        'MSC PRPCEM Community WhatsApp & Discord Access',
-      ],
-      ctaText: 'Register Interest',
-      highlighted: false,
-    },
-    {
-      id: 'student',
-      name: 'Student Delegate Pass',
-      price: '₹149',
-      badge: 'Most Popular',
-      description: 'All-inclusive subsidized pass for college & university students with kits, food, and lab entry.',
-      features: [
-        'Priority Auditorium Seating for Keynotes',
-        'Official .NET Conf Swag Kit & Laptop Decals',
-        'Hands-on Lab Workshop Access (Seats Reserved)',
-        'Networking Luncheon & Evening Refreshments',
-        'Printed & Digital Verified Certificate',
-      ],
-      ctaText: 'Coming Soon',
-      highlighted: true,
-    },
-    {
-      id: 'pro',
-      name: 'Professional & VIP Pass',
-      price: '₹499',
-      badge: 'Industry & Faculty',
-      description: 'Full VIP experience for working software engineers, architects, faculty, and community leads.',
-      features: [
-        'Front-Row Reserved Seating in Main Hall',
-        'Speaker & Mentor VIP Networking Luncheon',
-        'Premium Swag Pack & Conference T-Shirt',
-        'Full Workshop Slide Decks & Code Repositories',
-        'Special Stage Recognition at Valedictory',
-      ],
-      ctaText: 'Coming Soon',
-      highlighted: false,
     },
   ],
 };

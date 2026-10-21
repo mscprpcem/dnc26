@@ -14,7 +14,7 @@ import {
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon, XIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, XIcon } from '../ui/SocialIcons.jsx';
 import { eventData } from '../../data/event.js';
 
 const ROLE_PRESETS = [
@@ -87,7 +87,7 @@ export const AttendeeBadge = () => {
 Join me for Central India's premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati${dateStr}.
 
 Generate your personalized attendee badge here:
-👉 https://dotnetconf.mscprpcem.tech
+👉 https://dnc.mscprpcem.tech
 
 #DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #CentralIndia`;
   };
@@ -99,30 +99,11 @@ Generate your personalized attendee badge here:
   };
 
   const handleShareLinkedIn = () => {
-    const confUrl = 'https://dotnetconf.mscprpcem.tech';
+    const confUrl = 'https://dnc.mscprpcem.tech';
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(confUrl)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleShareInstagram = async () => {
-    const text = getSharePostText();
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2600);
-    } catch {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2600);
-    }
-    window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
-  };
-
-  const handleShareTelegram = () => {
-    const text = getSharePostText();
-    const confUrl = 'https://dotnetconf.mscprpcem.tech';
-    const url = `https://t.me/share/url?url=${encodeURIComponent(confUrl)}&text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
 
   const handleShareX = () => {
     const text = getSharePostText();
@@ -219,143 +200,137 @@ Generate your personalized attendee badge here:
     ctx.font = 'bold 23px "Space Grotesk", sans-serif';
     drawArcText(ctx, '★  .NET CONF 2026 · AMRAVATI  ★', centerX, centerY, 365, 0, 0.048, true);
 
-    // Bottom Arc Text
+    // Bottom Arc Text (Event date removed - location only)
     ctx.fillStyle = '#FFDB43';
     ctx.font = 'bold 20px "Space Grotesk", sans-serif';
-    drawArcText(ctx, '★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, centerY, 365, 0, 0.044, false);
-
-    // Inner Circle Card
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FAF8FF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
-    ctx.shadowBlur = 20;
-    ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#DCD5F6';
-    ctx.stroke();
-    ctx.restore();
-
-    // Delegate Tag
-    const passText = 'OFFICIAL DELEGATE PASS';
-    ctx.font = 'bold 15px "Space Grotesk", sans-serif';
-    const passWidth = ctx.measureText(passText).width + 36;
-    const passY = 205;
-    ctx.fillStyle = '#512BD4';
-    ctx.beginPath();
-    ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 28, 14);
-    ctx.fill();
-    ctx.fillStyle = '#FFFFFF';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(passText, centerX, passY + 14);
+    drawArcText(ctx, '★  PRPCEM CAMPUS · AMRAVATI  ★', centerX, centerY, 365, 0, 0.044, false);
 
     const [userImg, mascotImg] = await Promise.all([
       loadImage(customPhotoUrl),
       loadImage('/mascot/bot_frontal.png')
     ]);
 
-    // Center Portrait Frame
-    const portraitRadius = 100;
-    const portraitCenterY = 365;
-
+    // Inner Circle - Whole Center Space as the Image
     ctx.save();
     ctx.beginPath();
-    ctx.arc(centerX, portraitCenterY, portraitRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fill();
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#512BD4';
-    ctx.stroke();
+    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
     ctx.clip();
 
     if (userImg) {
-      const aspect = userImg.width / userImg.height;
-      let drawW = portraitRadius * 2;
-      let drawH = portraitRadius * 2;
-      let drawX = centerX - portraitRadius;
-      let drawY = portraitCenterY - portraitRadius;
-      if (aspect > 1) {
-        drawW = drawH * aspect;
-        drawX = centerX - drawW / 2;
-      } else {
-        drawH = drawW / aspect;
-        drawY = portraitCenterY - drawH / 2;
-      }
+      const scale = Math.max((innerRadius * 2) / userImg.width, (innerRadius * 2) / userImg.height);
+      const drawW = userImg.width * scale;
+      const drawH = userImg.height * scale;
+      const drawX = centerX - drawW / 2;
+      const drawY = centerY - drawH / 2;
       ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
     } else {
-      ctx.fillStyle = '#EEEAFB';
-      ctx.fillRect(centerX - portraitRadius, portraitCenterY - portraitRadius, portraitRadius * 2, portraitRadius * 2);
-      ctx.fillStyle = '#512BD4';
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY - 18, 38, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(centerX, portraitCenterY + 90, 75, Math.PI, Math.PI * 2);
-      ctx.fill();
+      const phGrad = ctx.createLinearGradient(centerX, centerY - innerRadius, centerX, centerY + innerRadius);
+      phGrad.addColorStop(0, '#EDE8FC');
+      phGrad.addColorStop(1, '#D8CEF8');
+      ctx.fillStyle = phGrad;
+      ctx.fillRect(centerX - innerRadius, centerY - innerRadius, innerRadius * 2, innerRadius * 2);
+      if (mascotImg) {
+        const mSize = 340;
+        ctx.drawImage(mascotImg, centerX - mSize / 2, centerY - mSize / 2 - 30, mSize, mSize);
+      }
     }
-    ctx.restore();
+
+    // Gradient scrim over lower half for badge contrast
+    const scrimGrad = ctx.createLinearGradient(centerX, centerY + 30, centerX, centerY + innerRadius);
+    scrimGrad.addColorStop(0, 'rgba(20, 5, 58, 0)');
+    scrimGrad.addColorStop(0.5, 'rgba(20, 5, 58, 0.6)');
+    scrimGrad.addColorStop(1, 'rgba(20, 5, 58, 0.95)');
+    ctx.fillStyle = scrimGrad;
+    ctx.fillRect(centerX - innerRadius, centerY + 30, innerRadius * 2, innerRadius - 30);
+
+    // Overlay Badge Card to show Name, Position & Details
+    const badgeW = 470;
+    const badgeH = college.trim() ? 175 : 140;
+    const badgeX = centerX - badgeW / 2;
+    const badgeY = centerY + (innerRadius - badgeH - 24);
+    const badgeRadius = 24;
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(badgeX, badgeY, badgeW, badgeH, badgeRadius);
+    ctx.fillStyle = 'rgba(20, 5, 58, 0.92)';
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
+    ctx.shadowBlur = 18;
+    ctx.fill();
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.stroke();
+
+    // Delegate Tag
+    const passText = 'OFFICIAL DELEGATE';
+    ctx.font = 'bold 14px "Space Grotesk", sans-serif';
+    const passWidth = ctx.measureText(passText).width + 24;
+    const passY = badgeY + 12;
+    ctx.fillStyle = '#00E5FF';
+    ctx.beginPath();
+    ctx.roundRect(centerX - passWidth / 2, passY, passWidth, 22, 11);
+    ctx.fill();
+    ctx.fillStyle = '#000000';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(passText, centerX, passY + 11);
 
     // Attendee Name
-    ctx.fillStyle = '#14053A';
-    ctx.font = '900 38px "Space Grotesk", sans-serif';
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 32px "Space Grotesk", sans-serif';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'alphabetic';
-    const displayName = (name.trim() || 'DELEGATE').toUpperCase();
-    ctx.fillText(displayName, centerX, 510);
+    ctx.textBaseline = 'middle';
+    const displayName = (name.trim() || 'YOUR NAME').toUpperCase();
+    ctx.fillText(displayName, centerX, passY + 44);
 
     // Role Pill
     const roleText = (role.trim() || 'DELEGATE').toUpperCase();
-    ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-    const roleWidth = ctx.measureText(roleText).width + 36;
-    const roleY = 530;
-    ctx.fillStyle = '#EEEAFB';
+    ctx.font = 'bold 16px "Space Grotesk", sans-serif';
+    const roleWidth = ctx.measureText(roleText).width + 28;
+    const roleY = passY + 68;
+    ctx.fillStyle = '#FFDB43';
     ctx.beginPath();
-    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 34, 17);
+    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 26, 13);
     ctx.fill();
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = '#512BD4';
-    ctx.stroke();
-    ctx.fillStyle = '#512BD4';
+    ctx.fillStyle = '#000000';
     ctx.textBaseline = 'middle';
-    ctx.fillText(roleText, centerX, roleY + 17);
+    ctx.fillText(roleText, centerX, roleY + 13);
 
     // College / Organization (only if entered)
     if (college.trim()) {
-      ctx.fillStyle = '#444444';
-      ctx.font = 'bold 20px "Open Sans", sans-serif';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.font = 'bold 16px "Open Sans", sans-serif';
       ctx.textBaseline = 'middle';
-      ctx.fillText(college.trim(), centerX, 595);
-
-      ctx.fillStyle = '#7B2BF9';
-      ctx.font = 'bold 16px "Space Grotesk", sans-serif';
-      ctx.fillText('★  ★  ★', centerX, 630);
-    } else {
-      ctx.fillStyle = '#7B2BF9';
-      ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('★  ★  ★', centerX, 600);
+      ctx.fillText(college.trim(), centerX, roleY + 36);
     }
+    ctx.restore(); // end badge
+    ctx.restore(); // end inner circle clip
 
-    // Mascot badge in bottom right corner
-    const mascotCenterX = 660;
-    const mascotCenterY = 600;
-    const mascotRadius = 75;
+    // Inner Circle Border Ring
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = '#DCD5F6';
+    ctx.stroke();
+
+    // Mascot badge in bottom right corner (Matches preview outer rim position)
+    const mascotCenterX = 715;
+    const mascotCenterY = 715;
+    const mascotRadius = 78;
 
     ctx.save();
     ctx.beginPath();
     ctx.arc(mascotCenterX, mascotCenterY, mascotRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
-    ctx.shadowBlur = 15;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+    ctx.shadowBlur = 18;
     ctx.fill();
     ctx.lineWidth = 5;
     ctx.strokeStyle = '#512BD4';
     ctx.stroke();
 
     if (mascotImg) {
-      const pad = 12;
+      const pad = 10;
       ctx.drawImage(
         mascotImg,
         mascotCenterX - mascotRadius + pad,
@@ -448,10 +423,10 @@ Generate your personalized attendee badge here:
     ctx.font = '900 48px "Space Grotesk", sans-serif';
     ctx.fillText("I'M ATTENDING!", centerX, headerY + 112);
 
-    // Date & Venue
+    // Venue Location (Event date removed)
     ctx.fillStyle = '#FFDB43';
     ctx.font = 'bold 20px "Space Grotesk", sans-serif';
-    ctx.fillText('★  20 APRIL 2026 · PRPCEM CAMPUS  ★', centerX, headerY + 158);
+    ctx.fillText('★  PRPCEM CAMPUS · AMRAVATI  ★', centerX, headerY + 158);
 
     const [userImg, mascotImg] = await Promise.all([
       loadImage(customPhotoUrl),
@@ -521,47 +496,51 @@ Generate your personalized attendee badge here:
     ctx.fillText(roleText, centerX, roleY + 19);
 
     // College / Organization
-    let nextY = roleY + 70;
     if (college.trim()) {
       ctx.fillStyle = '#444444';
       ctx.font = 'bold 22px "Open Sans", sans-serif';
-      ctx.fillText(college.trim(), centerX, nextY);
-      nextY += 36;
+      ctx.fillText(college.trim(), centerX, roleY + 68);
     }
 
-    // Stars
-    ctx.fillStyle = '#7B2BF9';
-    ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-    ctx.fillText('★  ★  ★', centerX, nextY);
+    // Footer Bar (Matches preview layout 1:1)
+    const footerH = 90;
+    const footerY = cardY + cardH - footerH - 42;
+    ctx.fillStyle = '#FAF8FF';
+    ctx.fillRect(cardX, footerY, cardW, footerH);
+    ctx.beginPath();
+    ctx.moveTo(cardX, footerY);
+    ctx.lineTo(cardX + cardW, footerY);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#DCD5F6';
+    ctx.stroke();
 
-    // Social Post Info & Hashtags
-    const footerInfoY = cardY + cardH - 95;
+    // Left Footer: Hashtag & Website
     ctx.textAlign = 'left';
     ctx.fillStyle = '#512BD4';
-    ctx.font = 'bold 18px "Space Grotesk", sans-serif';
-    ctx.fillText('#DotNetConf2026 · #DotNetConfAmravati', cardX + 50, footerInfoY);
+    ctx.font = 'bold 22px "Space Grotesk", sans-serif';
+    ctx.fillText('#DotNetConf2026', cardX + 40, footerY + 38);
     ctx.fillStyle = '#666666';
-    ctx.font = 'bold 14px "Space Grotesk", sans-serif';
-    ctx.fillText('Join me at: dotnetconf.mscprpcem.tech', cardX + 50, footerInfoY + 24);
+    ctx.font = 'bold 17px "Space Grotesk", sans-serif';
+    ctx.fillText('dnc.mscprpcem.tech', cardX + 40, footerY + 68);
 
-    // Companion Mascot badge in bottom right corner
-    const mascotCenterX = cardX + cardW - 120;
-    const mascotCenterY = cardY + cardH - 85;
-    const mascotRadius = 50;
+    // Right Footer: Mascot Avatar Stamp & Pill
+    const mascotCenterX = cardX + cardW - 145;
+    const mascotCenterY = footerY + 45;
+    const mascotRadius = 32;
 
     ctx.save();
     ctx.beginPath();
     ctx.arc(mascotCenterX, mascotCenterY, mascotRadius, 0, Math.PI * 2);
     ctx.fillStyle = '#FFFFFF';
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)';
-    ctx.shadowBlur = 15;
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+    ctx.shadowBlur = 8;
     ctx.fill();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = '#512BD4';
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = '#DCD5F6';
     ctx.stroke();
 
     if (mascotImg) {
-      const pad = 8;
+      const pad = 5;
       ctx.drawImage(
         mascotImg,
         mascotCenterX - mascotRadius + pad,
@@ -572,30 +551,31 @@ Generate your personalized attendee badge here:
     }
 
     const mascotLabel = '.NET BOT';
-    ctx.font = 'bold 11px "Space Grotesk", sans-serif';
+    ctx.font = 'bold 13px "Space Grotesk", sans-serif';
     const mLabelW = ctx.measureText(mascotLabel).width + 16;
-    const mLabelY = mascotCenterY + mascotRadius - 10;
+    const mLabelX = cardX + cardW - 65;
     ctx.fillStyle = '#512BD4';
     ctx.beginPath();
-    ctx.roundRect(mascotCenterX - mLabelW / 2, mLabelY, mLabelW, 18, 5);
+    ctx.roundRect(mLabelX - mLabelW / 2, mascotCenterY - 12, mLabelW, 24, 6);
     ctx.fill();
     ctx.fillStyle = '#FFFFFF';
+    ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.fillText(mascotLabel, mascotCenterX, mLabelY + 9);
+    ctx.fillText(mascotLabel, mLabelX, mascotCenterY);
     ctx.restore();
 
-    // Bottom Rim Bar
-    const bottomBarH = 38;
-    const bottomBarY = cardY + cardH - bottomBarH;
+    // Bottom Rim Banner (Matches preview 1:1)
+    const rimH = 42;
+    const rimY = cardY + cardH - rimH;
     ctx.fillStyle = '#14053A';
-    ctx.fillRect(cardX, bottomBarY, cardW, bottomBarH);
+    ctx.fillRect(cardX, rimY, cardW, rimH);
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 14px "Space Grotesk", sans-serif';
+    ctx.font = 'bold 15px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('MICROSOFT STUDENT CLUB · AMRAVATI CHAPTER', centerX, bottomBarY + bottomBarH / 2);
+    ctx.fillText('MICROSOFT STUDENT CLUB · AMRAVATI CHAPTER', centerX, rimY + rimH / 2);
 
-    ctx.restore();
+    ctx.restore(); // end card clip
 
     const link = document.createElement('a');
     link.download = `dnc26-square-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
@@ -853,61 +833,57 @@ Generate your personalized attendee badge here:
 
                     <text className="font-sans font-bold text-[11px] fill-[#FFDB43] uppercase tracking-[0.2em]">
                       <textPath href="#classic-bottom-path" startOffset="50%" textAnchor="middle">
-                        ★ 20 APRIL 2026 · PRPCEM CAMPUS ★
+                        ★ PRPCEM CAMPUS · AMRAVATI ★
                       </textPath>
                     </text>
                   </svg>
 
-                  {/* Inner Badge Disc */}
-                  <div className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full bg-white shadow-inner flex flex-col items-center justify-center p-3 sm:p-4 text-center relative z-10 border border-[#DCD5F6]">
-                    
-                    <div className="bg-[#512BD4] text-white font-sans font-bold text-[8.5px] sm:text-[9.5px] px-2.5 py-0.5 rounded-full uppercase mb-1.5 shadow-xs">
-                      OFFICIAL DELEGATE
-                    </div>
-
-                    {/* User Photo Frame */}
-                    <div 
-                      onClick={() => fileInputRef.current?.click()}
-                      title="Click to upload your photo"
-                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#512BD4] bg-[#EEEAFB] shadow-md overflow-hidden relative cursor-pointer group flex items-center justify-center mb-1.5 transition-transform hover:scale-105"
-                    >
-                      {customPhotoUrl ? (
-                        <>
-                          <img
-                            src={customPhotoUrl}
-                            alt={name || 'Attendee'}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <Camera className="w-4 h-4" />
-                          </div>
-                        </>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-[#512BD4] p-1">
-                          <Camera className="w-6 h-6 mb-0.5 group-hover:scale-110 transition-transform" />
-                          <span className="text-[8px] font-bold uppercase tracking-wider text-[#512BD4]">
-                            Add Photo
-                          </span>
+                  {/* Inner Badge Disc - Whole Center Space as the Image */}
+                  <div 
+                    onClick={() => fileInputRef.current?.click()}
+                    title="Click to upload your photo"
+                    className="w-[235px] h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full shadow-inner relative z-10 border-2 border-white/60 overflow-hidden cursor-pointer group select-none"
+                  >
+                    {customPhotoUrl ? (
+                      <>
+                        <img
+                          src={customPhotoUrl}
+                          alt={name || 'Attendee'}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white z-20">
+                          <Camera className="w-6 h-6" />
                         </div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-b from-[#EDE8FC] to-[#D8CEF8] flex flex-col items-center justify-center text-[#512BD4] p-4">
+                        <Camera className="w-8 h-8 mb-1 group-hover:scale-110 transition-transform" />
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#512BD4]">
+                          Click to Add Photo
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Gradient Scrim for Overlay Badge */}
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#14053A]/95 via-[#14053A]/60 to-transparent pointer-events-none z-10" />
+
+                    {/* Overlay Badge for Name & Position */}
+                    <div className="absolute bottom-2 inset-x-2.5 z-20 bg-[#14053A]/90 backdrop-blur-md rounded-xl p-2 border border-white/20 shadow-lg text-center flex flex-col items-center">
+                      <span className="text-[7.5px] font-mono font-bold text-[#00E5FF] uppercase tracking-wider leading-none mb-0.5">
+                        OFFICIAL DELEGATE
+                      </span>
+                      <h4 className="font-display font-black text-xs sm:text-[13px] text-white uppercase tracking-tight leading-tight max-w-[210px] truncate">
+                        {name.trim() || 'YOUR NAME'}
+                      </h4>
+                      <div className="mt-0.5 inline-block bg-[#FFDB43] text-black px-2 py-0.2 rounded-full font-sans font-bold text-[8.5px] uppercase max-w-[190px] truncate">
+                        {role.trim() || 'DELEGATE'}
+                      </div>
+                      {college.trim() && (
+                        <p className="font-sans text-[8px] text-white/80 font-medium max-w-[190px] truncate mt-0.5">
+                          {college.trim()}
+                        </p>
                       )}
                     </div>
-
-                    {/* Name */}
-                    <h4 className="font-display font-bold text-base sm:text-lg text-[#14053A] uppercase tracking-tight leading-tight max-w-[200px] truncate">
-                      {name.trim() || 'YOUR NAME'}
-                    </h4>
-
-                    {/* Role Pill */}
-                    <div className="mt-1 inline-block bg-[#EEEAFB] text-[#512BD4] border border-[#DCD5F6] px-2.5 py-0.5 rounded-full font-sans font-bold text-[9.5px] sm:text-[10px] max-w-[190px] truncate uppercase">
-                      {role.trim() || 'DELEGATE'}
-                    </div>
-
-                    {/* College */}
-                    {college.trim() && (
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-[#14053A]/75 mt-1 max-w-[190px] truncate">
-                        {college.trim()}
-                      </p>
-                    )}
                   </div>
 
                 </div>
@@ -946,7 +922,7 @@ Generate your personalized attendee badge here:
                       I'M ATTENDING!
                     </div>
                     <div className="font-sans font-bold text-[8.5px] sm:text-[9.5px] text-[#FFDB43] tracking-wide mt-0.5 uppercase">
-                      ★ 20 APRIL 2026 · PRPCEM CAMPUS ★
+                      ★ PRPCEM CAMPUS · AMRAVATI ★
                     </div>
                   </div>
 
@@ -996,11 +972,6 @@ Generate your personalized attendee badge here:
                         {college.trim()}
                       </p>
                     )}
-
-                    {/* Stars */}
-                    <div className="text-[#512BD4] font-bold text-[10px] mt-0.5 tracking-widest">
-                      ★ ★ ★
-                    </div>
                   </div>
 
                   {/* Clean Delegate Info & Mascot Stamp (Social Footer) */}
@@ -1010,7 +981,7 @@ Generate your personalized attendee badge here:
                         #DotNetConf2026
                       </span>
                       <span className="font-mono text-[7px] sm:text-[7.5px] text-stone-500 font-medium">
-                        dotnetconf.mscprpcem.tech
+                        dnc.mscprpcem.tech
                       </span>
                     </div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, ShieldCheck, Heart, AlertTriangle, Phone, Mail, CheckCircle2 } from 'lucide-react';
+import { X, ShieldCheck, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 export const CodeOfConductModal = ({ isOpen, onClose }) => {
   useEffect(() => {

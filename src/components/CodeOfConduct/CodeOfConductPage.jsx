@@ -8,7 +8,6 @@ import {
   Mail, 
   Phone, 
   Building2, 
-  Sparkles, 
   CheckCircle2, 
   Lock, 
   FileText,

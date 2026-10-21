@@ -1214,38 +1214,8 @@ input[type='range']::-moz-range-thumb {
 }
 
 /* ==========================================================================
-   LIVE STREETMAP ANIMATION ENGINE & LEAFLET ENHANCEMENTS
+   LEAFLET MAP ENHANCEMENTS
    ========================================================================== */
-@keyframes live-radar-sweep {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-.live-radar-beam {
-  background: conic-gradient(
-    from 0deg,
-    rgba(81, 43, 212, 0) 0deg,
-    rgba(81, 43, 212, 0.02) 280deg,
-    rgba(81, 43, 212, 0.18) 350deg,
-    rgba(169, 154, 232, 0.45) 360deg
-  );
-  animation: live-radar-sweep 4.5s linear infinite;
-  transform-origin: center center;
-}
-
-@keyframes live-route-dash {
-  to {
-    stroke-dashoffset: -20;
-  }
-}
-
-.live-route-flow {
-  animation: live-route-dash 0.9s linear infinite;
-}
 
 /* Custom Leaflet Styling */
 .leaflet-container {

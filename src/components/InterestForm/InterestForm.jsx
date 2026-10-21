@@ -9,7 +9,6 @@ import {
   CheckCircle2,
   Check,
   Send,
-  ArrowRight,
   ChevronDown,
   ChevronUp,
   HelpCircle,

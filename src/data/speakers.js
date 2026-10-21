@@ -5,7 +5,7 @@ export const keynoteSpeaker = {
   designation: 'Industry Leader & Microsoft MVP',
   organization: 'Announced Soon',
   topic: 'Building Next-Gen Intelligent Applications with .NET 11 & AI',
-  time: '10:15 AM – 11:15 AM IST',
+  time: 'Schedule & Timings TBA',
   hall: 'PRPCEM Auditorium, Amravati',
   bio: 'The inaugural keynote will officially open .NET Conf 2026 Amravati. Deep dive into next-generation runtime architectures, autonomous AI agents with Semantic Kernel, and cloud-native resilience with .NET Aspire.',
   avatarUrl: '',

@@ -4,7 +4,7 @@ import { eventData } from '../../data/event.js';
 import { LiveStreetMap } from '../Venue/LiveStreetMap.jsx';
 
 export const DncVenue = () => {
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
+  const directionsUrl = 'https://www.google.com/maps/dir//P.+R.+Pote+Patil+College+of+Engineering+and+Management+Amravati';
 
   return (
     <section id="venue" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
@@ -216,7 +216,7 @@ export const DncVenue = () => {
         </div>
         <p className="text-xs sm:text-sm font-sans font-medium text-stone-800">
           <span className="font-bold text-black">Delegate Advisory : </span>
-          <span>Please carry your valid Student ID or Government photo ID for security verification at the PRPCEM registration desk. High-speed campus Wi-Fi access will be provisioned on check-in.</span>
+          <span>Please carry your valid Student ID or Government photo ID for verification at the PRPCEM registration desk. Detailed arrival guidelines and entry pass instructions will be notified to registered attendees.</span>
         </p>
       </div>
     </section>

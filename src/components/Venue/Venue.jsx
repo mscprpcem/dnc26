@@ -17,7 +17,7 @@ export const Venue = () => {
   const [copiedCoords, setCopiedCoords] = useState(false);
 
   const coordinatesText = '20.9878° N, 77.7574° E';
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('P. R. Pote Patil College of Engineering and Management Amravati')}`;
+  const directionsUrl = 'https://www.google.com/maps/dir//P.+R.+Pote+Patil+College+of+Engineering+and+Management+Amravati';
 
   const handleCopyCoords = async () => {
     try {
@@ -219,7 +219,7 @@ export const Venue = () => {
             <Compass className="w-4 h-4" />
           </div>
           <p className="text-xs sm:text-sm text-[#190649]/80 font-medium">
-            <strong className="text-[#512BD4]">Delegate Logistics:</strong> Please carry a valid college or government photo ID for security clearance at PRPCEM Gate 1. Check-in opens at 08:30 AM; conference kits and high-speed Wi-Fi access tokens will be issued at the reception desk.
+            <strong className="text-[#512BD4]">Delegate Logistics:</strong> Please carry a valid student or government photo ID for campus registration check-in. Detailed arrival schedule and entry pass guidelines will be communicated to all registered delegates.
           </p>
         </div>
 

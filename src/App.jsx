@@ -65,15 +65,6 @@ export const App = () => {
     window.location.hash = '#brutal';
   };
 
-  const switchToCoc = () => {
-    setCurrentView('coc');
-    window.location.hash = '#code-of-conduct';
-  };
-
-  const switchToSchedule = () => {
-    setCurrentView('schedule');
-    window.location.hash = '#schedule-view';
-  };
 
   const switchToClassic = () => {
     setCurrentView('classic');

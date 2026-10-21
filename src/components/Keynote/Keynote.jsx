@@ -1,6 +1,5 @@
 import React from 'react';
-import { Award, ArrowRight, Clock, MapPin, Layers, Cpu, UserCheck, Sparkles } from 'lucide-react';
-import { eventData } from '../../data/event.js';
+import { Award, ArrowRight, Clock, MapPin, Layers, Cpu, Sparkles } from 'lucide-react';
 import { keynoteSpeaker } from '../../data/speakers.js';
 
 export const Keynote = () => {
@@ -74,7 +73,7 @@ export const Keynote = () => {
                     </div>
                   </div>
                   <div className="px-3 py-1 rounded-full bg-white/10 text-[11px] font-mono text-stone-300">
-                    AUDITORIUM MAINSTAGE • {keynoteSpeaker.time ? keynoteSpeaker.time.split('–')[0]?.trim() || '10:15 AM' : '10:00 AM'}
+                    AUDITORIUM MAINSTAGE • {keynoteSpeaker.time || 'Schedule TBA'}
                   </div>
                 </div>
 
@@ -96,7 +95,7 @@ export const Keynote = () => {
                   <div className="pt-2 border-t border-[#DCD5F6]/60 flex items-center justify-between text-[11px] font-medium text-[#190649]/80">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5 text-[#512BD4]" />
-                      {keynoteSpeaker.time || '10:15 AM - 11:15 AM'}
+                      {keynoteSpeaker.time || 'Schedule TBA'}
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5 text-[#D600AA]" />

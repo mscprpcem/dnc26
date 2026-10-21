@@ -5,7 +5,6 @@ import {
   ArrowUpRight,
   Settings,
   Sun,
-  Sparkles,
   Users,
   FileText,
   Mail,

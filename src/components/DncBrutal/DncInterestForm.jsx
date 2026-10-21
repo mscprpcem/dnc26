@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, Mail, Phone, Briefcase, Building2, Target, Send, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown, Plus, Minus, HelpCircle } from 'lucide-react';
+import { User, Mail, Phone, Briefcase, Building2, Target, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown, Plus, Minus, HelpCircle } from 'lucide-react';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
 import { eventData } from '../../data/event.js';
 
@@ -17,7 +17,6 @@ export const DncInterestForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const [isRoleOpen, setIsRoleOpen] = useState(false);
   const roleDropdownRef = useRef(null);
 

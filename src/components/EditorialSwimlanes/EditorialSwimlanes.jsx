@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Sparkles, Layers, Cloud, Terminal, ShieldCheck, CheckCircle2, Code2, Users } from 'lucide-react';
+import { Cpu, Sparkles, CheckCircle2, Code2, Users } from 'lucide-react';
 import { eventData } from '../../data/event.js';
 
 export const EditorialSwimlanes = () => {

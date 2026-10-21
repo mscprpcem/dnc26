@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, ArrowRight, Copy, Check, Users, MapPin } from 'lucide-react';
+import { Mail, ArrowRight, Users, MapPin } from 'lucide-react';
 import {
   LinkedInIcon,
   LinktreeIcon,
