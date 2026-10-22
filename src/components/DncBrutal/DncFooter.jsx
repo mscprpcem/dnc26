@@ -200,7 +200,7 @@ export const DncFooter = ({ onSwitchToClassic }) => {
                 >
                   <span className="flex items-center gap-3">
                     <Users className="w-4 h-4 sm:w-5 sm:h-5 text-[#A78BFA] group-hover:text-[#00F0FF] transition-colors shrink-0" />
-                    <span>MSC PRPCEM Chapter</span>
+                    <span>Microsoft Student Club PRPCEM</span>
                   </span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-stone-400 group-hover:text-[#00F0FF] transition-colors" />
                 </a>

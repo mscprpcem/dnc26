@@ -336,7 +336,7 @@ export const CodeOfConductPage = ({ onBack }) => {
           </ol>
 
           <div className="pt-4 border-t border-stone-200 text-xs font-mono text-stone-500">
-            Adopted by Microsoft Student Chapter (MSC), P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati. Based upon the .NET Foundation Code of Conduct and Contributor Covenant v2.1.
+            Adopted by Microsoft Student Club (MSC), P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati. Based upon the .NET Foundation Code of Conduct and Contributor Covenant v2.1.
           </div>
         </div>
 

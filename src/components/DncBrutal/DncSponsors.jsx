@@ -19,7 +19,7 @@ export const DncSponsors = () => {
           PARTNERS &amp; COLLABORATORS
         </h2>
         <p className="text-xs sm:text-sm text-stone-600 max-w-lg mt-1 font-sans">
-          Organized in collaboration with global industry leaders, host academic institutions, and student community chapters.
+          Organized in collaboration with global industry leaders, host academic institutions, and student community clubs.
         </p>
       </div>
 

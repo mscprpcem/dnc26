@@ -316,7 +316,12 @@ export function isScheduleEmpty(html) {
     return true;
   }
 
-  // 4. Fallback: very short template output
+  // 4. Positive detection: if session title or speaker names exist, it is NOT empty
+  if (lower.includes('sz-session__title') || lower.includes('sz-speaker__name') || lower.includes('sz-session__card')) {
+    return false;
+  }
+
+  // 5. Fallback: very short template output
   if (html.length < 500 && !lower.includes('sz-session')) {
     return true;
   }
@@ -330,16 +335,27 @@ export const isScheduleTba = isScheduleEmpty;
  * Tests endpoint connectivity with lightweight caching to prevent excessive network requests
  */
 const STATUS_CACHE = new Map();
-const STATUS_CACHE_TTL = 3 * 60 * 1000; // 3 minutes
+const STATUS_CACHE_TTL = 30 * 1000; // 30 seconds (fast update reflection)
 
-export async function checkEndpointStatus(url) {
+export async function checkEndpointStatus(url, forceRefresh = false) {
+  if (forceRefresh) {
+    STATUS_CACHE.delete(url);
+  }
+
   const cached = STATUS_CACHE.get(url);
-  if (cached && Date.now() - cached.timestamp < STATUS_CACHE_TTL) {
+  if (!forceRefresh && cached && Date.now() - cached.timestamp < STATUS_CACHE_TTL) {
     return cached.data;
   }
 
   try {
-    const res = await fetch(url, { method: 'GET' });
+    const fetchUrl = `${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`;
+    const res = await fetch(fetchUrl, {
+      method: 'GET',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+      },
+    });
     const text = await res.text();
     const isEmpty = isScheduleEmpty(text);
     const result = {

@@ -18,7 +18,7 @@ export const Sponsors = () => {
             Partners &amp; <span className="text-gradient-magenta">Collaborators</span>
           </h2>
           <p className="text-xs sm:text-sm text-[#190649]/75 leading-relaxed">
-            Organized in collaboration with global industry leaders, host academic institutions, and student community chapters.
+            Organized in collaboration with global industry leaders, host academic institutions, and student community clubs.
           </p>
         </div>
 

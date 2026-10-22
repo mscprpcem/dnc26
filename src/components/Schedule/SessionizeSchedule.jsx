@@ -45,7 +45,7 @@ export const SessionizeSchedule = ({
     setIsLoading(true);
     setHasError(false);
 
-    checkEndpointStatus(activeViewUrl)
+    checkEndpointStatus(activeViewUrl, refreshKey > 0)
       .then((status) => {
         if (!isMounted) return;
         setIsLoading(false);
@@ -253,9 +253,18 @@ export const SessionizeSchedule = ({
               Schedule Coming Soon
             </h3>
 
-            <p className="text-xs sm:text-sm text-[#292735]/75 font-inter leading-relaxed max-w-md mx-auto">
+            <p className="text-xs sm:text-sm text-[#292735]/75 font-inter leading-relaxed max-w-md mx-auto mb-4">
               Our Technical Advisory Board is finalizing session slots and room assignments. As soon as the schedule is published on Sessionize, the live interactive grid will appear here automatically.
             </p>
+
+            <button
+              type="button"
+              onClick={handleRetry}
+              className="px-4 py-2 rounded-xl text-xs font-semibold font-inter bg-[#7046C8] text-white hover:bg-[#5833A5] transition-all inline-flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
+            >
+              <RotateCw className="w-3.5 h-3.5" />
+              <span>Check for Updates from Sessionize</span>
+            </button>
           </div>
         )}
 

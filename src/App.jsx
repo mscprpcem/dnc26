@@ -15,13 +15,21 @@ import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
 import { CallForSpeakers } from './components/CallForSpeakers/CallForSpeakers.jsx';
 import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.jsx';
 import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
+import { NotFoundPage } from './components/NotFound/NotFoundPage.jsx';
+import { isKnownRoute, normalizePath, scrollToSection } from './utils/sectionRouter.js';
 
 export const App = () => {
   const [currentView, setCurrentView] = useState(() => {
     if (typeof window !== 'undefined') {
+      const path = normalizePath(window.location.pathname);
+      
+      // If path is not recognized, show the not-found view which displays a mascot message and auto-redirects
+      if (!isKnownRoute(path)) {
+        return 'not-found';
+      }
+
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      const path = window.location.pathname.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         return 'coc';
       }
@@ -37,10 +45,17 @@ export const App = () => {
   });
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const checkAndHandleRoute = () => {
+      const path = normalizePath(window.location.pathname);
+      
+      // If path is not recognized, set view to not-found
+      if (!isKnownRoute(path)) {
+        setCurrentView('not-found');
+        return;
+      }
+
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      const path = window.location.pathname.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         setCurrentView('coc');
       } else if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
@@ -52,11 +67,14 @@ export const App = () => {
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    window.addEventListener('popstate', handleHashChange);
+    // Run check on mount
+    checkAndHandleRoute();
+
+    window.addEventListener('hashchange', checkAndHandleRoute);
+    window.addEventListener('popstate', checkAndHandleRoute);
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-      window.removeEventListener('popstate', handleHashChange);
+      window.removeEventListener('hashchange', checkAndHandleRoute);
+      window.removeEventListener('popstate', checkAndHandleRoute);
     };
   }, []);
 
@@ -68,10 +86,29 @@ export const App = () => {
 
   const switchToClassic = () => {
     setCurrentView('classic');
-    if (window.location.hash.includes('brutal') || window.location.hash.includes('code-of-conduct') || window.location.hash.includes('coc') || window.location.hash.includes('schedule')) {
-      history.replaceState(null, '', window.location.pathname.replace(/\/(code-of-conduct|schedule-page)\/?/i, '/'));
+    if (window.location.pathname !== '/') {
+      window.history.replaceState(null, '', '/');
     }
+    if (window.location.hash.includes('brutal') || window.location.hash.includes('code-of-conduct') || window.location.hash.includes('coc') || window.location.hash.includes('schedule')) {
+      window.location.hash = '';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // 0. 404 / Not Found Interstitial Page (displayed on random paths before auto-redirecting home)
+  if (currentView === 'not-found') {
+    return (
+      <NotFoundPage 
+        onRedirectHome={switchToClassic}
+        onNavigateToSection={(target) => {
+          switchToClassic();
+          setTimeout(() => {
+            scrollToSection(target);
+          }, 150);
+        }}
+      />
+    );
+  }
 
   // 1. Code of Conduct Page
   if (currentView === 'coc') {

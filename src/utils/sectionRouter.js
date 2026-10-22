@@ -41,11 +41,13 @@ export const PATH_TO_ID = {
   '/collaborators': 'partners',
   '/register': 'register',
   '/register-interest': 'register',
+  '/interest': 'register',
   '/community': 'community',
   '/stay-connected': 'community',
   '/connect': 'community',
   '/code-of-conduct': 'code-of-conduct',
   '/coc': 'code-of-conduct',
+  '/schedule-page': 'schedule-page',
 };
 
 export const ID_TO_PATH = {
@@ -63,6 +65,7 @@ export const ID_TO_PATH = {
   'partners': '/partners',
   'register': '/register',
   'register-interest': '/register',
+  'interest': '/interest',
   'community': '/community',
   'stay-connected': '/community',
   'code-of-conduct': '/code-of-conduct',
@@ -73,6 +76,16 @@ export const normalizePath = (p) => {
   if (!p) return '/';
   const clean = p.replace(/\/+$/, '');
   return clean === '' ? '/' : clean.toLowerCase();
+};
+
+export const isKnownRoute = (p) => {
+  if (!p) return true;
+  const clean = normalizePath(p);
+  if (clean === '/' || clean === '') return true;
+  if (PATH_TO_ID[clean]) return true;
+  // Ignore static assets / files that have extensions (e.g. .html, .ics, .png, etc.)
+  if (/\.[a-z0-9]+$/i.test(clean)) return true;
+  return false;
 };
 
 export const scrollToSection = (target, updateHistory = true) => {
@@ -195,6 +208,10 @@ export const useSectionRouter = () => {
   useEffect(() => {
     const handlePopState = () => {
       const path = normalizePath(window.location.pathname);
+      if (!isKnownRoute(path)) {
+        setActivePath('/');
+        return;
+      }
       const targetId = PATH_TO_ID[path];
       if (targetId) {
         setActivePath(path);
@@ -213,7 +230,9 @@ export const useSectionRouter = () => {
 
     // Initial page load deep linking (e.g. /about, /schedule, /badge)
     const initialPath = normalizePath(window.location.pathname);
-    if (initialPath && initialPath !== '/') {
+    if (!isKnownRoute(initialPath)) {
+      setActivePath('/');
+    } else if (initialPath && initialPath !== '/') {
       setActivePath(initialPath);
       const timer = setTimeout(() => {
         scrollToSection(initialPath, false);

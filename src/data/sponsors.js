@@ -33,8 +33,8 @@ export const sponsorsData = [
   {
     id: 'mscprpcem',
     name: 'MSC PRPCEM',
-    tier: 'Community Chapter',
-    role: 'Organizing Chapter',
+    tier: 'Community Partner',
+    role: 'Organizing Club',
     url: 'https://www.mscprpcem.tech',
     websiteUrl: 'https://www.mscprpcem.tech',
     logoUrl: '/logos/mscprpcem-logo.png',
