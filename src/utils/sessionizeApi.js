@@ -103,7 +103,13 @@ export const SESSIONIZE_CFP_URL = 'https://sessionize.com/dnc26/';
  * @param {string} title - Accessible title for the document
  * @returns {string} HTML document string for iframe srcDoc
  */
-export function generateSessionizeEmbedDoc(scriptUrl, title = 'Conference Schedule') {
+export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule') {
+  const isHtml = typeof content === 'string' && (content.trim().startsWith('<') || content.includes('<div'));
+  
+  const bodyContent = isHtml
+    ? content
+    : `<script type="text/javascript" src="${escapeHtml(content)}" onerror="onSessionizeScriptError()"></script>`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,7 +151,7 @@ export function generateSessionizeEmbedDoc(scriptUrl, title = 'Conference Schedu
       padding: 8px 4px 16px 4px;
       background-color: transparent;
       color: var(--conference-text, #292735);
-      overflow-x: hidden;
+      overflow-x: auto;
       width: 100%;
     }
 
@@ -212,34 +218,30 @@ export function generateSessionizeEmbedDoc(scriptUrl, title = 'Conference Schedu
   </style>
 </head>
 <body>
-  <!-- Documented Sessionize Styled HTML Embed Script -->
-  <script type="text/javascript" src="${scriptUrl}" onerror="onSessionizeScriptError()"></script>
+  ${bodyContent}
 
   <script>
     function onSessionizeScriptError() {
       if (window.parent) {
         window.parent.postMessage({
           type: 'sessionize-status',
-          status: 'error',
-          url: '${scriptUrl}'
+          status: 'error'
         }, '*');
       }
     }
 
     function sendHeight() {
       try {
-        var body = document.body;
-        var html = document.documentElement;
-        if (!body) return;
-        var height = Math.max(
-          body.scrollHeight, body.offsetHeight,
-          html.clientHeight, html.scrollHeight, html.offsetHeight
-        );
+        var root = document.querySelector('.sz-root') || document.getElementById('sessionize') || document.body;
+        if (!root) return;
+        var height = Math.ceil(root.getBoundingClientRect().height);
+        if (!height || height < 100) {
+          height = root.scrollHeight || (document.body ? document.body.scrollHeight : 300);
+        }
         if (window.parent && height > 0) {
           window.parent.postMessage({
             type: 'sessionize-resize',
-            height: height,
-            url: '${scriptUrl}'
+            height: height
           }, '*');
         }
       } catch (e) {
@@ -247,16 +249,24 @@ export function generateSessionizeEmbedDoc(scriptUrl, title = 'Conference Schedu
       }
     }
 
-    window.addEventListener('load', function() {
+    function initSessionize() {
+      if (window.sessionize && typeof window.sessionize.onLoad === 'function') {
+        try { window.sessionize.onLoad(); } catch (e) {}
+      }
       sendHeight();
       if (window.parent) {
         window.parent.postMessage({
           type: 'sessionize-status',
-          status: 'loaded',
-          url: '${scriptUrl}'
+          status: 'loaded'
         }, '*');
       }
-    });
+    }
+
+    window.addEventListener('load', initSessionize);
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(initSessionize, 50);
+    }
 
     // Automatically detect content changes (e.g. tabs clicked inside Sessionize, modals, etc.)
     if (typeof ResizeObserver !== 'undefined' && document.body) {
@@ -271,8 +281,8 @@ export function generateSessionizeEmbedDoc(scriptUrl, title = 'Conference Schedu
     var poller = setInterval(function() {
       sendHeight();
       pollCount++;
-      if (pollCount > 12) clearInterval(poller);
-    }, 400);
+      if (pollCount > 15) clearInterval(poller);
+    }, 300);
   </script>
 </body>
 </html>`;
@@ -293,35 +303,46 @@ function escapeHtml(str) {
  * @returns {boolean}
  */
 export function isScheduleEmpty(html) {
-  if (!html) return true;
+  if (!html || typeof html !== 'string') return true;
   const lower = html.toLowerCase();
   
   // 1. Direct unannounced notice from Sessionize
-  if (lower.includes('no data or schedule not announced') || lower.includes('schedule not announced')) {
+  if (
+    lower.includes('no data or schedule not announced') || 
+    lower.includes('schedule not announced') ||
+    lower.includes('no sessions have been scheduled')
+  ) {
     return true;
   }
 
-  // 2. Empty Sessionize content between stylesheet and script tag
-  const styleEnd = html.indexOf('</style>');
-  const scriptStart = html.indexOf('<script', styleEnd !== -1 ? styleEnd : 0);
-  if (styleEnd !== -1 && scriptStart !== -1) {
-    const content = html.substring(styleEnd + 8, scriptStart).trim();
-    if (content.length === 0) {
-      return true;
-    }
-  }
+  // 2. Positive detection: actual sessions or day titles exist in HTML markup
+  const hasRealSessions = (
+    lower.includes('class="sz-session') ||
+    lower.includes("class='sz-session") ||
+    (lower.includes('sz-session__card') && lower.includes('<div') && !lower.includes('<ul class="sz-speakers--wall"> </ul>'))
+  ) && (
+    lower.includes('sz-session__title') ||
+    lower.includes('sz-day__title')
+  );
 
-  // 3. Wall or directory without speaker photos or names
-  if (lower.includes('sz-speakers') && !lower.includes('sz-speaker__photo') && !lower.includes('sz-speaker__name')) {
-    return true;
-  }
+  // 3. Positive detection: actual speakers exist in HTML markup
+  const hasRealSpeakers = (
+    lower.includes('class="sz-speaker__name') ||
+    lower.includes("class='sz-speaker__name") ||
+    lower.includes('class="sz-speaker__photo') ||
+    lower.includes("class='sz-speaker__photo")
+  );
 
-  // 4. Positive detection: if session title or speaker names exist, it is NOT empty
-  if (lower.includes('sz-session__title') || lower.includes('sz-speaker__name') || lower.includes('sz-session__card')) {
+  if (hasRealSessions || hasRealSpeakers) {
     return false;
   }
 
-  // 5. Fallback: very short template output
+  // 4. Wall or directory without speaker cards/photos
+  if (lower.includes('sz-speakers') || lower.includes('sz-speakers--wall')) {
+    return true;
+  }
+
+  // 5. Fallback: very short template output without sessions
   if (html.length < 500 && !lower.includes('sz-session')) {
     return true;
   }
@@ -332,10 +353,10 @@ export function isScheduleEmpty(html) {
 export const isScheduleTba = isScheduleEmpty;
 
 /**
- * Tests endpoint connectivity with lightweight caching to prevent excessive network requests
+ * Tests endpoint connectivity and retrieves HTML markup with lightweight caching
  */
 const STATUS_CACHE = new Map();
-const STATUS_CACHE_TTL = 30 * 1000; // 30 seconds (fast update reflection)
+const STATUS_CACHE_TTL = 30 * 1000; // 30 seconds
 
 export async function checkEndpointStatus(url, forceRefresh = false) {
   if (forceRefresh) {
@@ -348,19 +369,33 @@ export async function checkEndpointStatus(url, forceRefresh = false) {
   }
 
   try {
+    // Add cache buster query parameter only;
+    // DO NOT add custom headers like 'Cache-Control' or 'Pragma' because Sessionize does not allow them in CORS preflight OPTIONS!
     const fetchUrl = `${url}${url.includes('?') ? '&' : '?'}_t=${Date.now()}`;
     const res = await fetch(fetchUrl, {
       method: 'GET',
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-      },
     });
+
+    if (!res.ok) {
+      const result = {
+        ok: false,
+        status: res.status,
+        html: '',
+        isEmpty: true,
+        isTba: true,
+        length: 0,
+        error: `HTTP ${res.status}`,
+      };
+      STATUS_CACHE.set(url, { timestamp: Date.now(), data: result });
+      return result;
+    }
+
     const text = await res.text();
     const isEmpty = isScheduleEmpty(text);
     const result = {
       ok: res.ok,
       status: res.status,
+      html: text,
       isEmpty,
       isTba: isEmpty,
       length: text.length,
@@ -368,11 +403,14 @@ export async function checkEndpointStatus(url, forceRefresh = false) {
     STATUS_CACHE.set(url, { timestamp: Date.now(), data: result });
     return result;
   } catch (err) {
+    console.warn('Sessionize endpoint check:', err);
     const result = {
       ok: false,
       status: 0,
+      html: '',
       isEmpty: true,
       isTba: true,
+      length: 0,
       error: err.message,
     };
     STATUS_CACHE.set(url, { timestamp: Date.now(), data: result });

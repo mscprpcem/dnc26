@@ -2,31 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 export const NotFoundPage = ({ onRedirectHome }) => {
-  const [countdown, setCountdown] = useState(3);
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       document.title = 'Page Not Found | .NET Conf 2026';
     }
   }, []);
-
-  useEffect(() => {
-    if (countdown <= 0) {
-      if (onRedirectHome) {
-        onRedirectHome();
-      } else if (typeof window !== 'undefined') {
-        window.history.replaceState(null, '', '/');
-        window.location.reload();
-      }
-      return;
-    }
-
-    const timer = setInterval(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [countdown, onRedirectHome]);
 
   const handleRedirect = () => {
     if (onRedirectHome) {
@@ -59,10 +39,9 @@ export const NotFoundPage = ({ onRedirectHome }) => {
           Page Not Found
         </h1>
 
-        {/* Description & Countdown */}
+        {/* Description */}
         <p className="text-sm text-stone-600 mb-6 leading-relaxed">
-          The page you are looking for doesn't exist. Redirecting to home in{' '}
-          <span className="font-semibold text-[#512BD4]">{countdown}s</span>...
+          The page you are looking for doesn't exist or has been moved.
         </p>
 
         {/* Action Button */}

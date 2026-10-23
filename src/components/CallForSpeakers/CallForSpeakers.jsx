@@ -35,31 +35,31 @@ export const CallForSpeakers = () => {
   ];
 
   return (
-    <section id="cfp" className="w-full py-12 sm:py-16 md:py-20 scroll-mt-20">
+    <section id="cfp" className="w-full py-10 sm:py-12 md:py-14 scroll-mt-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#F0EFFB] text-[#7046C8] text-xs font-semibold uppercase tracking-wider mb-3 border border-[#A99AE8]/40">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F0EFFB] text-[#7046C8] text-xs font-semibold uppercase tracking-wider mb-2 border border-[#A99AE8]/40">
             <Mic className="w-3.5 h-3.5" />
             <span>Official Sessionize Integration · Call for Proposals</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#292735] font-montserrat tracking-tight mb-3 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#292735] font-montserrat tracking-tight mb-2 leading-tight">
             Call for Speakers Now Open
           </h2>
 
-          <p className="text-xs sm:text-sm md:text-base text-[#292735]/80 font-inter leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#292735]/80 font-inter leading-relaxed">
             All session submissions and speaker profiles are managed through <strong>Sessionize</strong>.
           </p>
 
-          <div className="w-12 h-1 bg-[#7046C8] rounded-full mx-auto mt-4" />
+          <div className="w-12 h-1 bg-[#7046C8] rounded-full mx-auto mt-3" />
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-3xl border border-[#A99AE8]/40 shadow-xs overflow-hidden p-6 sm:p-10 md:p-12 mb-10">
+        <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#A99AE8]/40 shadow-xs overflow-hidden p-5 sm:p-7 md:p-8 mb-8">
           
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-8 pb-8 border-b border-[#A99AE8]/30">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-6 pb-6 border-b border-[#A99AE8]/30">
             <div className="max-w-xl">
               <span className="text-[11px] font-bold text-[#7046C8] uppercase tracking-wider block mb-1">
                 Managed on Sessionize

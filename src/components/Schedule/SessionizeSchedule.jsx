@@ -27,11 +27,12 @@ export const SessionizeSchedule = ({
   className = '',
 }) => {
   const [activeTab, setActiveTab] = useState(defaultView);
-  const [iframeHeight, setIframeHeight] = useState(300);
+  const [iframeHeight, setIframeHeight] = useState(650);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isEmpty, setIsEmpty] = useState(true); // Default to empty/coming-soon until data is verified
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [htmlContent, setHtmlContent] = useState('');
   const [refreshKey, setRefreshKey] = useState(0);
 
   const iframeRef = useRef(null);
@@ -39,7 +40,7 @@ export const SessionizeSchedule = ({
   const activeViewUrl = getSessionizeViewUrl(activeTab, eventId);
   const activeViewMeta = SESSIONIZE_VIEWS.find((v) => v.id === activeTab) || SESSIONIZE_VIEWS[0];
 
-  // Check endpoint connectivity and data availability when view changes
+  // Check endpoint connectivity and retrieve live HTML data when view changes
   useEffect(() => {
     let isMounted = true;
     setIsLoading(true);
@@ -52,17 +53,22 @@ export const SessionizeSchedule = ({
         if (!status.ok && status.status === 404) {
           setHasError(true);
           setErrorMessage('The Sessionize schedule endpoint returned 404 or is currently being configured.');
+        } else if (!status.ok) {
+          setHasError(true);
+          setErrorMessage(status.error || 'Unable to connect to Sessionize.');
         } else if (status.isEmpty) {
           setIsEmpty(true);
+          setHtmlContent('');
         } else {
           setIsEmpty(false);
+          setHtmlContent(status.html || '');
         }
       })
       .catch((err) => {
         if (!isMounted) return;
         setIsLoading(false);
-        setIsEmpty(true);
-        console.warn('Endpoint connectivity check:', err);
+        setHasError(true);
+        setErrorMessage(err.message || 'Error connecting to Sessionize.');
       });
 
     return () => {
@@ -76,7 +82,7 @@ export const SessionizeSchedule = ({
       if (!event.data || typeof event.data !== 'object') return;
 
       if (event.data.type === 'sessionize-resize' && typeof event.data.height === 'number') {
-        const newHeight = Math.max(160, Math.min(event.data.height + 20, 2600));
+        const newHeight = Math.max(260, Math.min(Math.ceil(event.data.height) + 16, 2800));
         setIframeHeight(newHeight);
       }
 
@@ -116,9 +122,9 @@ export const SessionizeSchedule = ({
     }
   };
 
-  // Generate iframe document using documented embed mechanism
+  // Generate iframe document using live HTML content from Sessionize
   const embedDoc = generateSessionizeEmbedDoc(
-    activeViewUrl,
+    htmlContent || activeViewUrl,
     `.NET Conf 2026 Amravati - ${activeViewMeta.label}`
   );
 
@@ -166,6 +172,7 @@ export const SessionizeSchedule = ({
                   if (activeTab !== tab.id) {
                     setActiveTab(tab.id);
                     setIsLoading(true);
+                    setIframeHeight(tab.id === 'speakers' || tab.id === 'speakerWall' ? 380 : 650);
                   }
                 }}
                 className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-medium font-inter transition-all flex items-center justify-center gap-1.5 cursor-pointer select-none ${
@@ -275,7 +282,7 @@ export const SessionizeSchedule = ({
             ref={iframeRef}
             srcDoc={embedDoc}
             title={`.NET Conf 2026 Amravati Conference Schedule - ${activeViewMeta.label}`}
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox"
             loading="lazy"
             style={{
               width: '100%',

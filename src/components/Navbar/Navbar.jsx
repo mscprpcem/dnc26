@@ -26,24 +26,21 @@ export const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Handle URL path changes on initial load and browser back/forward
+  // Handle browser back/forward navigation
   useEffect(() => {
-    const handleLocationChange = () => {
+    const handlePopState = () => {
       const currentPath = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
       const matchedItem = primaryNavItems.find(
         (item) => item.path === currentPath || (item.path === '/interest' && currentPath === '/register')
       );
       if (matchedItem) {
-        setTimeout(() => {
-          const el = document.getElementById(matchedItem.targetId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
+        const el = document.getElementById(matchedItem.targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
     };
 
-    handleLocationChange();
-    window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const navigateToSection = (path, targetId) => {

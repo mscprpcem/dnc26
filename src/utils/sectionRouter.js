@@ -48,6 +48,12 @@ export const PATH_TO_ID = {
   '/code-of-conduct': 'code-of-conduct',
   '/coc': 'code-of-conduct',
   '/schedule-page': 'schedule-page',
+  '/gridsmart': 'schedule',
+  '/grid': 'schedule',
+  '/sessions': 'schedule',
+  '/speakerwall': 'schedule',
+  '/sessionize': 'schedule',
+  '/brutal': 'top',
 };
 
 export const ID_TO_PATH = {
@@ -74,7 +80,7 @@ export const ID_TO_PATH = {
 
 export const normalizePath = (p) => {
   if (!p) return '/';
-  const clean = p.replace(/\/+$/, '');
+  const clean = p.split('?')[0].split('#')[0].replace(/\/+$/, '');
   return clean === '' ? '/' : clean.toLowerCase();
 };
 
@@ -228,20 +234,19 @@ export const useSectionRouter = () => {
     };
     window.addEventListener('sectionnav', handleCustomNav);
 
-    // Initial page load deep linking (e.g. /about, /schedule, /badge)
-    const initialPath = normalizePath(window.location.pathname);
-    if (!isKnownRoute(initialPath)) {
-      setActivePath('/');
-    } else if (initialPath && initialPath !== '/') {
-      setActivePath(initialPath);
-      const timer = setTimeout(() => {
-        scrollToSection(initialPath, false);
-      }, 300);
-      return () => {
-        clearTimeout(timer);
-        window.removeEventListener('popstate', handlePopState);
-        window.removeEventListener('sectionnav', handleCustomNav);
-      };
+    // Only scroll on initial load if user explicitly provided a hash in the URL (e.g. /#schedule)
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const hashTarget = window.location.hash.replace(/^#/, '');
+      if (hashTarget) {
+        const timer = setTimeout(() => {
+          scrollToSection(hashTarget, false);
+        }, 200);
+        return () => {
+          clearTimeout(timer);
+          window.removeEventListener('popstate', handlePopState);
+          window.removeEventListener('sectionnav', handleCustomNav);
+        };
+      }
     }
 
     return () => {
@@ -250,7 +255,7 @@ export const useSectionRouter = () => {
     };
   }, []);
 
-  // Scroll spy to update active section in navbar and address bar as user scrolls
+  // Scroll spy to update active section in navbar as user scrolls
   useEffect(() => {
     const sectionElements = SECTION_ROUTES.map((route) => {
       const targetId = PATH_TO_ID[route.path] || route.id;
@@ -277,9 +282,6 @@ export const useSectionRouter = () => {
         
         // If near top, set to root '/'
         if (scrollPos < 150) {
-          if (window.location.pathname !== '/') {
-            window.history.replaceState(null, '', '/');
-          }
           setActivePath('/');
           return;
         }
@@ -299,9 +301,6 @@ export const useSectionRouter = () => {
 
         if (currentSection && currentSection.path) {
           setActivePath(currentSection.path);
-          if (window.location.pathname !== currentSection.path) {
-            window.history.replaceState(null, '', currentSection.path);
-          }
         }
       });
     };
