@@ -13,7 +13,7 @@ export const DncSponsors = () => {
             </h2>
           </div>
           <p className="lede">
-            .NET Conf 2026 brings together the entire modern developer stack &mdash; uniting .NET 11, Enterprise AI, Microsoft Azure, and engineering tools with 500+ builders.
+            .NET Conf 2026 brings together the entire modern developer stack &mdash; uniting .NET 11, Enterprise AI, Microsoft Azure, and engineering tools.
           </p>
         </div>
 
@@ -70,14 +70,14 @@ export const DncSponsors = () => {
                 href="https://www.microsoft.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sponsor-tile sponsor-tile--dark hover:border-[#00A4EF]"
+                className="sponsor-tile sponsor-tile--wide hover:border-[#00A4EF]"
                 title="Microsoft"
                 aria-label="Microsoft"
               >
                 <img
                   src="/Title%20Sponsor/microsoft.png"
                   alt="Microsoft"
-                  className="sponsor-tile-img"
+                  className="sponsor-tile-img sponsor-tile-img--wide"
                   loading="lazy"
                 />
               </a>
@@ -231,14 +231,14 @@ export const DncSponsors = () => {
                 href="https://azure.microsoft.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sponsor-tile sponsor-tile--dark hover:border-[#0078D4]"
+                className="sponsor-tile sponsor-tile--wide hover:border-[#0078D4]"
                 title="Microsoft Azure"
                 aria-label="Microsoft Azure"
               >
                 <img
                   src="/In%20%20kind%20support/Microsoft%20Azure/azure.png"
                   alt="Microsoft Azure"
-                  className="sponsor-tile-img"
+                  className="sponsor-tile-img sponsor-tile-img--wide"
                   loading="lazy"
                 />
               </a>
@@ -252,9 +252,12 @@ export const DncSponsors = () => {
                 title=".xyz Domains"
                 aria-label=".xyz Domains"
               >
-                <span className="font-mono font-black text-2xl text-[#120838] tracking-tight">
-                  .xyz
-                </span>
+                <img
+                  src="/logos/xyz-logo-color.png"
+                  alt=".xyz Domains"
+                  className="sponsor-tile-img"
+                  loading="lazy"
+                />
               </a>
 
               {/* In-Kind Inquiry Slot */}

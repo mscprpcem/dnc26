@@ -21,7 +21,9 @@ import DncSectionFlanks from './DncSectionFlanks.jsx';
 const ROLE_PRESETS = [
   'Student Developer',
   'Software Engineer',
-  'Cloud & AI Explorer',
+  'AI & Autonomous Agent Builder',
+  'Cloud & DevOps Architect',
+  'GitHub & Open Source Contributor',
   'Community Delegate',
 ];
 
@@ -84,12 +86,12 @@ export const DncAttendeeBadge = ({ isModal = false }) => {
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
     return `I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
-Join me for Central India's premier Microsoft developer gathering at PRPCEM Campus, Amravati celebrating modern .NET 11, Azure Cloud, and Generative AI.
+Join me for Central India's premier Microsoft ecosystem summit at PRPCEM Campus, Amravati — uniting Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11.
 
 Generate your official attendee badge here:
 https://dnc.mscprpcem.tech
 
-#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #developer`;
+#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #GenerativeAI #GitHubCopilot #DevOps #Azure #DotNet #Microsoft`;
   };
 
   const handleShareWhatsApp = () => {

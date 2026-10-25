@@ -1,81 +1,43 @@
 import React from 'react';
+import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 
 export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
   const fares = [
     {
-      name: 'Student Delegate',
-      type: 'Super Early Bird',
-      tagline: 'Empowering future Microsoft leaders.',
-      regular: '₹599',
-      price: '₹299',
-      discount: '50% off',
-      blurb: 'Specially discounted for college students and aspiring developers. Full access to all technical stages, code labs, delegate lunch, and verified certification.',
+      name: 'Early Bird',
+      tier: 'Early',
+      type: 'Phase 01',
+      tagline: 'For fast-action community builders.',
+      blurb: 'First access to technical stages (AI, DevOps, Cloud & .NET), hands-on code labs, official delegate kit, and catered lunch.',
       status: 'Register Interest',
-      isLive: false,
       color: 'var(--teal, #00F0FF)',
     },
     {
-      name: 'Professional Developer',
-      type: 'Early Bird',
-      tagline: 'For practicing engineers & architects.',
-      regular: '₹999',
-      price: '₹599',
-      discount: '40% off',
-      blurb: 'Full-day conference pass for software engineers, tech leads, and founders. Includes breakout workshops, technical deep-dives, and speaker networking.',
+      name: 'Normal Pass',
+      tier: 'Normal',
+      type: 'Phase 02',
+      tagline: 'Standard conference pass.',
+      blurb: 'Full-day summit pass covering Generative AI keynotes, breakout tracks, speaker networking, and participation credentials.',
       status: 'Register Interest',
-      isLive: false,
       color: 'var(--blue, #00B4D8)',
     },
     {
-      name: 'College Squad / Group',
-      type: 'Group Pass',
-      tagline: 'Learn together, build together.',
-      regular: '₹799',
-      price: '₹449',
-      discount: 'Group Rate',
-      blurb: 'Booking for 5 or more students/developers? Unlock our group rate and travel together with your campus tech club or dev team.',
+      name: 'Late Bird',
+      tier: 'Late',
+      type: 'Phase 03',
+      tagline: 'Final regular registrations.',
+      blurb: 'Released after standard phase closes. Includes full summit access, auditorium seating, and delegate networking lunch.',
       status: 'Register Interest',
-      isLive: false,
-      color: 'var(--magenta, #E0199E)',
+      color: 'var(--purple, #512BD4)',
     },
     {
-      name: 'VIP All-Access Pass',
-      type: 'Executive',
-      tagline: 'Exclusive networking & Azure swag.',
-      regular: '₹1,999',
-      price: '₹1,299',
-      discount: 'Limited',
-      blurb: 'Priority front-row seating, invite to speaker networking dinner, exclusive .NET Bot hoodie & collector swag pack, plus Microsoft Azure cloud credits.',
+      name: 'Tatkal Pass',
+      tier: 'Tatkal',
+      type: 'Phase 04',
+      tagline: 'Last-minute emergency rush.',
+      blurb: 'Limited quota passes opened right before summit day for last-minute attendees and traveling developers.',
       status: 'Register Interest',
-      isLive: false,
       color: 'var(--gold, #FFE89E)',
-    },
-  ];
-
-  const swagKitItems = [
-    {
-      title: 'Access to All Technical Stages',
-      desc: 'Seamlessly move between technical sessions, keynotes, live demos, and community breakouts.',
-    },
-    {
-      title: 'Full Delegate Lunch & High Tea',
-      desc: 'Catered auditorium lunch and evening networking snacks included with every ticket.',
-    },
-    {
-      title: 'Official .NET Bot Swag Kit',
-      desc: 'Exclusive .NET 11 sticker pack, official delegate lanyard, notebook, and collectibles.',
-    },
-    {
-      title: 'Hands-on Code Labs & Breakouts',
-      desc: 'Participate in live interactive coding sessions led by Microsoft MVPs and industry leads.',
-    },
-    {
-      title: 'Verified Certificate of Participation',
-      desc: 'Digital credential certified and issued by Microsoft Student Club PRPCEM.',
-    },
-    {
-      title: 'Hallway Networking & Hiring Lounge',
-      desc: 'Meet fellow developers, hiring partners, and student innovators across Central India.',
     },
   ];
 
@@ -107,6 +69,9 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
                 <span className="fcard__badge" style={{ color: f.color, borderColor: f.color }}>
                   {f.type}
                 </span>
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B6380]">
+                  {f.tier}
+                </span>
               </div>
 
               <h3 className="fcard__title">
@@ -116,13 +81,11 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
                 </span>
               </h3>
 
-              <div className="fcard__price">
-                {f.regular && (
-                  <span className="text-xs font-mono text-[#6B6380] line-through block font-normal">
-                    {f.regular} · {f.discount}
-                  </span>
-                )}
-                <span>{f.price}</span>
+              <div className="fcard__status-box">
+                <span className="fcard__status-pill">
+                  <span className="fcard__status-dot"></span>
+                  Dropping Soon
+                </span>
               </div>
 
               <p className="fcard__desc">{f.blurb}</p>
@@ -130,11 +93,11 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
               <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
                 <button
                   type="button"
-                  className="btn btn--primary w-full"
+                  className="btn btn--primary btn--sm w-full"
                   onClick={onOpenRegister || (() => {})}
                 >
                   <span>Register Interest</span>
-                  <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
+                  <svg className="btn__arrow" width="14" height="14" aria-hidden="true">
                     <use href="#i-arrow" />
                   </svg>
                 </button>
@@ -147,7 +110,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
         <div className="offerbar">
           <div className="flex items-center gap-3">
             <span className="offerbar__tag">
-              <span>Campus Squad</span>
+              <span>Group Delegation</span>
             </span>
             <p>
               Bringing 10 or more student developers? Contact us directly for bulk institutional discount passes and bus transit support.
@@ -159,9 +122,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg width="18" height="18" aria-hidden="true">
-              <use href="#s-whatsapp" />
-            </svg>
+            <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
             <span>Message on WhatsApp</span>
             <svg className="btn__arrow" width="15" height="15" aria-hidden="true">
               <use href="#i-arrow" />
@@ -169,59 +130,38 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
           </a>
         </div>
 
-        {/* The Full Delegate Kit */}
-        <div className="thali">
-          <div className="thali__head">
-            <p className="eyebrow">The complete delegate pass · Included in every ticket</p>
-            <h3 className="h-sub" style={{ marginTop: '.4rem', color: '#120838' }}>
-              Every delegate receives the full summit experience.
-            </h3>
-          </div>
-          <div className="thali__list">
-            {swagKitItems.map((item, idx) => (
-              <div key={idx} className="thali__item">
-                <span className="thali__item-check">✓</span>
-                <div>
-                  <b>{item.title}</b>
-                  <span>{item.desc}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Custom Attendee Badge Studio Banner */}
-          <div
-            className="sticker"
-            style={{
-              marginTop: '2rem',
-              padding: '1.75rem',
-              background: 'rgba(214, 0, 170, 0.08)',
-              borderColor: 'var(--magenta)',
-            }}
-          >
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-              <div>
-                <p className="eyebrow" style={{ color: 'var(--purple)' }}>
-                  Interactive Badge Studio
-                </p>
-                <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#120838', marginTop: '.3rem' }}>
-                  Generate your custom .NET Conf 2026 Attendee Badge!
-                </h4>
-                <p style={{ color: '#332B4A', fontSize: '.92rem', marginTop: '.3rem' }}>
-                  Showcase your presence with custom tech badges, .NET Bot mascots, and your personalized avatar to share on LinkedIn &amp; X.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={onOpenBadge || (() => {})}
-                className="btn btn--gold btn--sm flex-none cursor-pointer"
-              >
-                <span>Create my badge</span>
-                <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
-                  <use href="#i-arrow" />
-                </svg>
-              </button>
+        {/* Custom Attendee Badge Studio Banner */}
+        <div
+          className="sticker"
+          style={{
+            marginTop: '2.5rem',
+            padding: '1.75rem',
+            background: 'rgba(214, 0, 170, 0.08)',
+            borderColor: 'var(--magenta)',
+          }}
+        >
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <p className="eyebrow" style={{ color: 'var(--purple)' }}>
+                Interactive Badge Studio
+              </p>
+              <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#120838', marginTop: '.3rem' }}>
+                Generate your custom .NET Conf 2026 Attendee Badge!
+              </h4>
+              <p style={{ color: '#332B4A', fontSize: '.92rem', marginTop: '.3rem' }}>
+                Showcase your presence with custom tech badges, .NET Bot mascots, and your personalized avatar to share on LinkedIn &amp; X.
+              </p>
             </div>
+            <button
+              type="button"
+              onClick={onOpenBadge || (() => {})}
+              className="btn btn--gold btn--sm flex-none cursor-pointer"
+            >
+              <span>Create my badge</span>
+              <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>

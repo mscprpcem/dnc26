@@ -56,7 +56,7 @@ export const DncHero = ({ onOpenRegister }) => {
             <span className="hero__title-city">Amravati</span>
           </h1>
           <p className="hero__subtitle">
-            Deep-dive into <strong>.NET 11</strong>, <strong>C# 14</strong>, <strong>Semantic Kernel</strong>, <strong>Azure OpenAI</strong>, <strong>.NET Aspire</strong>, and <strong>Native AOT</strong> with Microsoft MVPs and cloud leaders in Amravati.
+            Central India&apos;s flagship developer summit uniting <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps</strong>, <strong>Microsoft Azure Cloud</strong>, and <strong>Modern .NET 11</strong>.
           </p>
         </div>
 
@@ -138,15 +138,17 @@ export const DncHero = ({ onOpenRegister }) => {
         {/* Road to .NET Conf: The Journey */}
         <div className="road" aria-label="Road to .NET Conf 2026">
           <ol className="road__rail">
-            <li className="road__stop is-done">
+            <li className="road__stop">
               <span className="road__node" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M20 6L9 17l-5-5" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                  <circle cx="12" cy="12" r="2"></circle>
+                  <path d="M6 12h.01M18 12h.01"></path>
                 </svg>
               </span>
-              <b>Tickets on sale</b>
-              <span>Super Early Bird passes live. Limited delegate seats.</span>
-              <a href="#tickets" onClick={(e) => handleSmoothScroll(e, 'tickets')}>See passes →</a>
+              <b>Tickets coming soon</b>
+              <span>Super Early Bird passes releasing soon. Limited delegate seats.</span>
+              <a href="#tickets" onClick={(e) => handleSmoothScroll(e, 'tickets')}>Coming soon →</a>
             </li>
             <li className="road__stop is-next">
               <span className="road__node" aria-hidden="true">
@@ -171,8 +173,8 @@ export const DncHero = ({ onOpenRegister }) => {
                 </svg>
               </span>
               <b>26 December 2026</b>
-              <span>Conference day. Deep-dive sessions, keynotes, and community labs.</span>
-              <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>Explore themes →</a>
+              <span>Conference day. AI keynotes, DevOps workshops, Azure cloud architecture &amp; .NET deep-dives.</span>
+              <a href="#schedule" onClick={(e) => handleSmoothScroll(e, 'schedule')}>View schedule →</a>
             </li>
           </ol>
         </div>

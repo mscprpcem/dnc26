@@ -15,7 +15,7 @@ export const DncCommunity = () => {
               <strong>Microsoft Student Club (MSC PRPCEM)</strong> is Central India&apos;s premier developer community based at P. R. Pote Patil College of Engineering and Management, Amravati.
             </p>
             <p>
-              We bring together students, open-source maintainers, and cloud developers to learn, build real-world software, and accelerate tech careers through hackathons, bootcamps, and summits.
+              We bring together builders across Generative AI, GitHub open-source ecosystems, Microsoft Azure cloud architecture, and modern .NET engineering to learn, build real-world software, and accelerate tech careers through hackathons, bootcamps, and summits.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '.85rem', flexWrap: 'wrap', marginTop: '2rem' }}>

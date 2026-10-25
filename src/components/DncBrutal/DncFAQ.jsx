@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
 export const DncFAQ = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {
       q: 'What is .NET Conf 2026 Amravati?',
-      a: ".NET Conf 2026 Amravati is Central India's premier Microsoft developer conference hosted at PRPCEM Campus. It brings together over 500+ developers, students, and Microsoft MVPs to celebrate the launch of .NET 11, C# 14, Semantic Kernel, and Azure Cloud Native technologies.",
+      a: ".NET Conf 2026 Amravati is Central India's flagship Microsoft developer summit. While rooted in modern .NET 11, the conference covers the entire modern engineering stack: Generative AI & Autonomous Agents (Semantic Kernel, Azure OpenAI), GitHub Copilot, DevOps & CI/CD pipelines, and Microsoft Azure Cloud-Native architecture alongside Microsoft MVPs and industry leaders.",
     },
     {
-      q: 'Do I need prior experience in .NET or C# to attend?',
-      a: 'Not at all! The conference caters to beginners, students, and seasoned enterprise architects alike. We feature foundational workshops, architecture deep dives, and hands-on coding sessions so everyone walks away with valuable new skills.',
+      q: 'Is the event only about .NET, or does it cover AI, GitHub & DevOps?',
+      a: 'It covers the entire Microsoft developer ecosystem! We feature dedicated stages and code labs on Generative AI & LLMs, GitHub Copilot productivity, CI/CD automation with GitHub Actions, and scalable Azure cloud systems alongside modern C# 14 and .NET 11.',
     },
     {
-      q: 'What are the conference tracks and themes?',
-      a: 'The official session tracks and agenda themes are revealing soon based on our open Call for Speakers on Sessionize. Focus themes include .NET 11 Runtime, Semantic Kernel & Azure OpenAI, .NET Aspire & Cloud-Native, and Full-Stack Blazor & Web APIs.',
+      q: 'What are the main conference tracks and themes?',
+      a: 'The summit is built upon four interconnected pillars: (1) Generative AI & Autonomous Agents, (2) GitHub Copilot, DevOps & Automation, (3) Microsoft Azure Cloud Architecture, and (4) Modern .NET 11 & High-Performance C#.',
     },
     {
       q: "What is included with my delegate pass?",

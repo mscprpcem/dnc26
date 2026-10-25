@@ -8,7 +8,7 @@ export const eventData = {
   timeFormatted: '09:00 AM – 06:00 PM IST',
   launchVersion: '.NET 11',
   poweredByVersion: '.NET 10.0.11',
-  tagline: 'Connect. Learn. Build.',
+  tagline: 'Be a force for good.',
   heroSubtitle:
     'P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati',
   
@@ -51,7 +51,7 @@ export const eventData = {
     date: '20 April 2024',
     venue: 'PRPCEM Campus, Amravati',
     description:
-      'Passionate developers, students, and Microsoft tech leaders gathered at PRPCEM Amravati for an unforgettable day of deep dives into .NET, modern C#, Cloud Native Azure, and AI.',
+      'Passionate developers, students, and Microsoft tech leaders gathered at PRPCEM Amravati for an unforgettable day of deep dives into Generative AI, GitHub Copilot, DevOps, Azure Cloud, and modern .NET.',
     stats: [],
     showcaseImage: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P7.jpg',
     gallery: [
@@ -120,39 +120,39 @@ export const eventData = {
 
   editorialSections: [
     {
-      id: 'cloud-architecture',
-      tag: '01 · Runtime & Cloud Architecture',
-      title: 'Modern .NET 11 & High-Performance Cloud Native',
+      id: 'ai-agents',
+      tag: '01 · Generative AI & Autonomous Agents',
+      title: 'Semantic Kernel, Azure OpenAI & Agentic Workflows',
       description:
-        "Organized by the Microsoft Student Club at PRPCEM Amravati, .NET Conf Amravati 2026 brings together student developers, software engineers, and cloud enthusiasts. Celebrate the launch of .NET 11, master modern C# 14, dive into distributed microservices on Azure, and build autonomous AI agents with Microsoft engineers and community MVPs.",
+        "Build autonomous multi-agent systems, leverage Microsoft Semantic Kernel, integrate Azure OpenAI reasoning endpoints, and execute retrieval-augmented generation (RAG) with vector databases and local SLMs.",
     },
     {
-      id: 'ai-immersion',
-      tag: '02 · Autonomous AI & Copilots',
-      title: 'Semantic Kernel, Azure OpenAI & Autonomous Agents',
+      id: 'github-devops',
+      tag: '02 · GitHub Copilot & DevOps Velocity',
+      title: 'AI Pair Programming, GitHub Actions & DevSecOps',
       description:
-        "Dive deep into building intelligent enterprise agents using Microsoft Semantic Kernel, Azure OpenAI endpoints, retrieval-augmented generation (RAG) with vector databases, and local SLM inference on ONNX Runtime.",
+        "Accelerate your developer loop with GitHub Copilot Workspace, automated testing, containerized pipelines, GitHub Actions CI/CD workflows, and enterprise DevSecOps automation.",
     },
     {
-      id: 'developer-tooling',
-      tag: '03 · Developer Tooling & CI/CD',
-      title: 'Visual Studio 2025, GitHub Copilot & .NET Aspire',
+      id: 'azure-cloud',
+      tag: '03 · Microsoft Azure Cloud Architecture',
+      title: 'Cloud-Native Resilience, Container Apps & .NET Aspire',
       description:
-        "Accelerate your developer inner-loop with next-gen tooling. Explore full-stack interactive web development with Blazor WebAssembly, automated testing, containerized microservices on Azure Container Apps, and automated GitHub Actions CI/CD pipelines.",
+        "Architect distributed systems built for scale on Microsoft Azure. Dive into Azure Container Apps, Kubernetes, Cosmos DB, distributed telemetry, and end-to-end orchestration with .NET Aspire.",
     },
     {
-      id: 'community-mentorship',
-      tag: '04 · Community & Industry Mentorship',
-      title: 'Keynotes, Parallel Technical Tracks & Verified Credentials',
+      id: 'modern-dotnet',
+      tag: '04 · Modern .NET 11 & High-Performance C# 14',
+      title: 'Native AOT, Blazor Full-Stack & Zero-Allocation C#',
       description:
-        "From headline keynotes by Microsoft MVPs to dual parallel breakout tracks, 1-on-1 portfolio and architecture reviews, regional hackathon project showcases, and verified digital certificates of attendance, .NET Conf Amravati delivers high-impact technical immersion.",
+        "Master the latest features of .NET 11 and C# 14: ultra-low latency Native AOT compilation, Minimal APIs, Blazor interactive web frontends, and high-throughput memory profiling.",
     },
   ],
 
   stats: [
-    { label: 'Expected Delegates', value: '600+', subtext: 'Students & Industry Engineers' },
-    { label: 'Technical Sessions', value: '12+', subtext: 'Keynotes, Tracks & Labs' },
-    { label: 'Parallel Breakouts', value: '2 Tracks', subtext: 'Cloud & Architecture + AI' },
+    { label: 'Expected Delegates', value: '600+', subtext: 'AI Builders, Engineers & Students' },
+    { label: 'Technical Sessions', value: '12+', subtext: 'Keynotes, DevOps Labs & AI Demos' },
+    { label: 'Ecosystem Tracks', value: '4 Pillars', subtext: 'AI · GitHub · Cloud · .NET' },
     { label: 'Verified Credential', value: '100%', subtext: 'Official Certificate for Delegates' },
   ],
 
@@ -161,15 +161,15 @@ export const eventData = {
       id: 'faq-1',
       q: 'What is .NET Conf Amravati 2026?',
       question: 'What is .NET Conf Amravati 2026?',
-      a: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and cloud enthusiasts to celebrate the .NET ecosystem, modern C#, Azure Cloud, and Generative AI.",
-      answer: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and cloud enthusiasts to celebrate the .NET ecosystem, modern C#, Azure Cloud, and Generative AI.",
+      a: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and tech enthusiasts for deep dives into Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11.",
+      answer: "Central India's premier annual Microsoft developer conference, hosted at PRPCEM Amravati by Microsoft Student Club PRPCEM. It brings together student coders, software professionals, and tech enthusiasts for deep dives into Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11.",
     },
     {
       id: 'faq-2',
       q: 'Who should attend the conference?',
       question: 'Who should attend the conference?',
-      a: 'The event is open to everyone! Whether you are a college student writing your first lines of C#, an experienced full-stack engineer architecting cloud services, or a faculty researcher exploring AI, you will find high-value technical tracks curated for your skill level.',
-      answer: 'The event is open to everyone! Whether you are a college student writing your first lines of C#, an experienced full-stack engineer architecting cloud services, or a faculty researcher exploring AI, you will find high-value technical tracks curated for your skill level.',
+      a: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are tracks tailored for you.',
+      answer: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are tracks tailored for you.',
     },
     {
       id: 'faq-3',

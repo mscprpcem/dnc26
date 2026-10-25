@@ -19,18 +19,8 @@ export const DncCFP = () => {
 
         {/* Call for Speakers Focus Topics */}
         <div className="looking">
-          <article className="lcard" style={{ '--tc': 'var(--blue, #00B4D8)' }}>
-            <span className="lcard__track">Topic · Runtime &amp; Performance</span>
-            <h3>Engineers who ship C#</h3>
-            <ul>
-              <li>.NET 11 internals, JIT compilation, and Native AOT</li>
-              <li>High-throughput APIs and memory optimization</li>
-              <li>Modern C# 14 language features in production</li>
-            </ul>
-          </article>
-
           <article className="lcard" style={{ '--tc': 'var(--magenta, #E0199E)' }}>
-            <span className="lcard__track">Topic · AI &amp; Intelligence</span>
+            <span className="lcard__track">Generative AI &amp; Agents</span>
             <h3>Autonomous AI builders</h3>
             <ul>
               <li>Semantic Kernel SDK multi-agent orchestration</li>
@@ -39,23 +29,33 @@ export const DncCFP = () => {
             </ul>
           </article>
 
-          <article className="lcard" style={{ '--tc': 'var(--gold, #FFE89E)' }}>
-            <span className="lcard__track">Topic · Cloud-Native Systems</span>
-            <h3>Cloud &amp; DevOps architects</h3>
+          <article className="lcard" style={{ '--tc': 'var(--blue, #00B4D8)' }}>
+            <span className="lcard__track">GitHub Copilot &amp; DevOps</span>
+            <h3>DevOps &amp; platform engineers</h3>
             <ul>
-              <li>.NET Aspire for multi-service local composition</li>
-              <li>Azure Container Apps, Kubernetes, and serverless</li>
-              <li>OpenTelemetry monitoring, tracing, and resilience</li>
+              <li>GitHub Actions automated CI/CD pipelines</li>
+              <li>AI-powered development with GitHub Copilot</li>
+              <li>DevSecOps, container security &amp; cloud automation</li>
+            </ul>
+          </article>
+
+          <article className="lcard" style={{ '--tc': 'var(--gold, #FFE89E)' }}>
+            <span className="lcard__track">Azure Cloud Architecture</span>
+            <h3>Cloud &amp; distributed architects</h3>
+            <ul>
+              <li>Azure Container Apps, Kubernetes &amp; Serverless</li>
+              <li>.NET Aspire for multi-service cloud orchestration</li>
+              <li>OpenTelemetry observability, resilience &amp; Kafka/RabbitMQ</li>
             </ul>
           </article>
 
           <article className="lcard" style={{ '--tc': 'var(--teal, #00F0FF)' }}>
-            <span className="lcard__track">Topic · Full-Stack &amp; Web</span>
-            <h3>Frontend &amp; client crafters</h3>
+            <span className="lcard__track">Modern .NET &amp; Web</span>
+            <h3>Engineers shipping modern C#</h3>
             <ul>
-              <li>Blazor WebAssembly &amp; server streaming UI</li>
-              <li>Cross-platform desktop &amp; mobile with .NET MAUI</li>
-              <li>Real-time apps with SignalR &amp; Minimal APIs</li>
+              <li>.NET 11 internals, JIT compilation &amp; Native AOT</li>
+              <li>Full-stack Blazor streaming &amp; reactive client UI</li>
+              <li>High-throughput Minimal APIs &amp; microservices</li>
             </ul>
           </article>
         </div>
@@ -63,18 +63,14 @@ export const DncCFP = () => {
         {/* Call For Speakers Box */}
         <div className="cfp">
           <div className="cfp__main">
-            <div className="flex items-center gap-3 mb-2">
-              <p className="eyebrow" style={{ margin: 0 }}>Sessionize submission</p>
-              <img
-                src="/CFP%20Partner/sessionize-logo.png"
-                alt="Sessionize"
-                className="h-5 max-w-[120px] object-contain"
-              />
-            </div>
-            <h3>Put your session on the official schedule.</h3>
+            <p className="eyebrow" style={{ margin: 0 }}>Call for Proposals</p>
+            <h3 style={{ marginTop: '0.4rem', marginBottom: '0.8rem' }}>
+              Put your session on the official schedule.
+            </h3>
             <p>
-              First-time speaker or veteran Microsoft MVP &mdash; full 40-minute deep-dives and 20-minute lightning sessions are equally welcomed.
+              First-time speaker or veteran Microsoft MVP &mdash; full deep-dives and lightning sessions are equally welcomed across Generative AI, DevOps, Cloud Architecture &amp; Modern .NET.
             </p>
+
             <div className="cfp__cta">
               <a
                 className="btn btn--primary btn--lg"
@@ -90,20 +86,32 @@ export const DncCFP = () => {
             </div>
           </div>
 
-          <ul className="cfp__facts">
-            <li>
-              <b>4</b>
-              <span>technical stages</span>
-            </li>
-            <li>
-              <b>16+</b>
-              <span>breakout sessions</span>
-            </li>
-            <li>
-              <b>500+</b>
-              <span>engineers in audience</span>
-            </li>
-          </ul>
+          <div className="cfp__right">
+            <ul className="cfp__facts">
+              <li>
+                <b>Multi-Track</b>
+                <span>AI, Cloud, DevOps &amp; .NET</span>
+              </li>
+              <li>
+                <b>All Levels</b>
+                <span>First-timers to MVPs welcome</span>
+              </li>
+              <li>
+                <b>Flexible</b>
+                <span>Deep-dives &amp; lightning formats</span>
+              </li>
+            </ul>
+
+            {/* Bottom Corner: Powered by Sessionize (clean, no green box) */}
+            <div className="cfp__corner">
+              <span className="cfp__corner-lbl">Powered by</span>
+              <img
+                src="/CFP%20Partner/sessionize-logo.png"
+                alt="Sessionize"
+                className="cfp__corner-logo"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

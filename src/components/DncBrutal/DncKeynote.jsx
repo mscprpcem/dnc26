@@ -88,12 +88,12 @@ export const DncKeynote = () => {
 
         {/* Main Headline */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-black font-sans uppercase tracking-tight text-black text-center mb-2.5">
-          A LOOK AHEAD AT <span className="text-[#512BD4]">.NET, AI & CLOUD</span>
+          A LOOK AHEAD AT <span className="text-[#512BD4]">AI, COPILOT, CLOUD &amp; .NET</span>
         </h2>
 
         {/* Subtitle */}
         <p className="text-stone-600 font-sans text-xs sm:text-sm md:text-base text-center max-w-2xl mx-auto leading-relaxed mb-8">
-          Explore the ideas shaping modern application development across the Microsoft ecosystem.
+          Explore the ideas shaping modern engineering across the entire Microsoft ecosystem &mdash; from Generative AI &amp; GitHub Copilot to Azure Cloud architecture and .NET 11.
         </p>
 
         {/* Two Column Layout */}
@@ -229,16 +229,19 @@ export const DncKeynote = () => {
               {/* Tech Badges Row */}
               <div className="flex flex-wrap gap-1.5 mb-5">
                 <span className="bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-purple-200">
-                  .NET 11
-                </span>
-                <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-cyan-200">
-                  C# 14
+                  .NET 11 &amp; C# 14
                 </span>
                 <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-pink-200">
                   Semantic Kernel
                 </span>
                 <span className="bg-[#E8F0FE] text-[#1D4ED8] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-blue-200">
                   Azure OpenAI
+                </span>
+                <span className="bg-[#FEF3C7] text-[#D97706] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-amber-200">
+                  GitHub Copilot
+                </span>
+                <span className="bg-[#DCFCE7] text-[#15803D] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-green-200">
+                  DevOps CI/CD
                 </span>
                 <span className="bg-[#E6FFFA] text-[#0D9488] font-mono font-bold text-[10px] sm:text-[11px] px-3 py-1 rounded-full border border-teal-200">
                   .NET Aspire

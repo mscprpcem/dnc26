@@ -1,21 +1,21 @@
 # .NET Conf 2026 — Amravati
 
-Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** — Central India’s premier Microsoft developer and community conference organized by the **Microsoft Student Club (MSC)** at **P. R. Pote Patil College of Engineering and Management (PRPCEM)**.
+Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** &mdash; Central India’s premier Microsoft ecosystem summit organized by the **Microsoft Student Club (MSC)** at **P. R. Pote Patil College of Engineering and Management (PRPCEM)**. Uniting **Generative AI &amp; Autonomous Agents**, **GitHub Copilot &amp; DevOps**, **Microsoft Azure Cloud Architecture**, and **Modern .NET 11**.
 
 ---
 
-## 🚀 Key Highlights & Features
+## Key Highlights & Features
 
-- **Pure Light Theme Aesthetic:** Clean Microsoft/.NET developer conference design using white (`#FFFFFF`), light gray (`#F7F7F8`), .NET purple (`#512BD4`), and Azure blue (`#0078D4`).
-- **Interactive Code Runner:** Hero code editor with functional **Red**, **Yellow**, and **Green** window controls, real-time .NET 9 API compilation simulation, and live HTTP 200 JSON inspection.
-- **Side-by-Side Parallel Tracks:** Comprehensive Agenda featuring parallel breakout sessions (*Track 1: Cloud & .NET* vs *Track 2: AI & Emerging Tech*) with interactive track view toggles.
-- **Official Sponsor & Partner Logos:** High-definition partner logos for Microsoft, JetBrains, PRPCEM Amravati, Microsoft Student Club PRPCEM, and Sessionize.
-- **Keynote Showcase:** Dedicated presentation section for keynote speaker **Anuraj P.** (Microsoft MVP & Senior Architect).
-- **Responsive & Accessible:** Pixel-perfect alignment and tailored layouts across mobile (360px–480px), tablets (768px–1024px), laptops (1280px), and wide monitors (1440px+).
+- **Four Core Ecosystem Pillars:** Comprehensive programming covering Generative AI (Semantic Kernel, Azure OpenAI, RAG), GitHub Copilot & DevOps CI/CD, Microsoft Azure Cloud-Native systems, and Modern .NET 11 runtime performance.
+- **Neo-Brutalist Conference Aesthetic:** Vibrant developer conference visual language featuring bold borders, high-contrast palette, dynamic marquee tickers, and interactive badges.
+- **Dynamic Attendee Badge Generator:** Custom badge studio supporting photo upload, custom designations, and direct one-click social sharing to LinkedIn, WhatsApp, and Instagram.
+- **Sessionize CFP Integration:** Live Call for Speakers integration for national and regional speakers.
+- **Official Sponsor & Partner Logos:** High-definition verified logos for Microsoft, Microsoft Azure, JetBrains, PRPCEM Amravati, MSC PRPCEM, and Sessionize.
+- **Responsive & Accessible:** Fully responsive across mobile devices (360px+), tablets, laptops, and ultra-wide displays.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework:** React 19 (`.jsx` / `.js`)
 - **Bundler:** Vite 8
@@ -25,7 +25,7 @@ Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** — Centr
 
 ---
 
-## 💻 Getting Started Locally
+## Getting Started Locally
 
 1. **Clone the repository:**
    ```bash
@@ -52,13 +52,13 @@ Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** — Centr
 
 ---
 
-## 🏛 Organization & Credits
+## Organization & Credits
 
 - **Host Institution:** [P. R. Pote Patil College of Engineering and Management (PRPCEM)](https://prpcem.ac.in), Amravati, Maharashtra 444604
 - **Call for Proposals Platform:** [Sessionize](https://sessionize.com/dnc26)
 
 ---
 
-## 📄 License
+## License
 
 Created for the .NET Conf Amravati developer community. © 2026 .NET Conf Amravati. All rights reserved.

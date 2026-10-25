@@ -135,7 +135,7 @@ export const SchedulePage = ({ onBack }) => {
                 Call for Speakers (CFP)
               </h4>
               <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed mb-4">
-                Got a talk on .NET 11, C# 14, Semantic Kernel, Azure OpenAI, or Cloud Architecture? Submit your session proposal on Sessionize today!
+                Got a talk on Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Azure Cloud Architecture, or Modern .NET 11? Submit your session proposal on Sessionize today!
               </p>
             </div>
             <a

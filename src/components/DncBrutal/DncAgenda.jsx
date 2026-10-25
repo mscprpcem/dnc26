@@ -1,44 +1,50 @@
 import React from 'react';
-import { Check, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 export const DncAgenda = () => {
   const scheduleItems = [
     {
       time: '08:30',
-      title: 'Check-in · Gates Open, Badge Pickup & Morning Coffee',
-      desc: 'Check-in at PRPCEM main foyer, collect your .NET Bot delegate swag kit, and network over hot coffee.',
+      title: 'Gates open · Registration & Morning Coffee',
+      desc: 'Doors open, badges, and delegate check-in at the foyer.',
       isConfirmed: true,
-      category: 'Check-in',
     },
     {
-      time: '10:00',
+      time: '-- : --',
       isConfirmed: false,
+      barWidth: '76%',
     },
     {
-      time: '11:15',
+      time: '-- : --',
       isConfirmed: false,
+      barWidth: '54%',
+    },
+    {
+      time: '-- : --',
+      isConfirmed: false,
+      barWidth: '82%',
     },
     {
       time: '13:00',
-      title: 'Delegate Buffet Lunch & Hallway Discussions',
-      desc: 'Full catered lunch at the campus food court. The famous hallway track starts here.',
+      title: 'Delegate Buffet Lunch & Hallway Track',
+      desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
       isConfirmed: true,
-      category: 'Lunch',
     },
     {
-      time: '14:15',
+      time: '-- : --',
       isConfirmed: false,
+      barWidth: '66%',
     },
     {
-      time: '16:00',
+      time: '-- : --',
       isConfirmed: false,
+      barWidth: '50%',
     },
     {
       time: '17:30',
-      title: 'Closing Ceremony · Swag Giveaway & Group Photo',
-      desc: 'Verified digital credentials, limited-edition astronaut bot collectibles, and the annual community photograph.',
+      title: 'Closing Ceremony · Swag & Group Photo',
+      desc: "Certificates of participation, exclusive collectibles, and community group photo.",
       isConfirmed: true,
-      category: 'Closing Ceremony',
     },
   ];
 
@@ -52,83 +58,49 @@ export const DncAgenda = () => {
               <span>Schedule &amp; Agenda · Tracks Timeline</span>
             </p>
             <h2 className="h-sec" style={{ marginBottom: 0 }}>
-              One power-packed day.<br />Four parallel tracks.
+              One power-packed day.<br />Four ecosystem tracks.
             </h2>
           </div>
           <p className="lede">
-            Check-in, Lunch, and Closing Ceremony are confirmed. Remaining session tracks are releasing soon.
+            Curated across Generative AI, GitHub Copilot &amp; DevOps, Azure Cloud, and Modern .NET. Check-in, Lunch, and Closing Ceremony confirmed &mdash; session breakouts releasing soon.
           </p>
         </div>
 
-        <div className="agenda">
+        {/* Timeline Board matching exact design */}
+        <div className="timeline-board">
           {scheduleItems.map((item, idx) => (
-            <div
-              key={idx}
-              className={`agenda__item group ${
-                item.isConfirmed
-                  ? 'border-black'
-                  : 'border-black hover:border-[#512BD4]'
-              }`}
-            >
+            <div key={idx} className="timeline-row">
               {/* Left Column: Time */}
-              <div className="agenda__time shrink-0 min-w-[95px]">
-                {item.isConfirmed ? (
-                  <div className="flex flex-col">
-                    <span className="font-mono text-base sm:text-lg font-black text-[#512BD4] tracking-tight">
-                      {item.time}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase">
-                      Confirmed
-                    </span>
-                  </div>
-                ) : (
-                  <div className="flex flex-col">
-                    <span className="font-mono text-base sm:text-lg font-black text-[#120838] tracking-tight">
-                      {item.time}
-                    </span>
-                    <span className="text-[11px] font-mono font-bold text-stone-400 tracking-widest mt-0.5">
-                      ......
-                    </span>
-                  </div>
-                )}
+              <div className={`timeline-time ${!item.isConfirmed ? 'is-placeholder' : ''}`}>
+                {item.time}
               </div>
 
-              {/* Middle Column: Details or just ...... */}
-              <div className="agenda__body flex-1">
+              {/* Middle Column: Details or Skeleton Bar */}
+              <div className="timeline-content">
                 {item.isConfirmed ? (
                   <div>
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-black/20 uppercase bg-[#DCFCE7] text-[#15803D]">
-                        {item.category}
-                      </span>
-                    </div>
-                    <b className="font-sans font-black text-base sm:text-lg text-[#120838] leading-snug">
-                      {item.title}
-                    </b>
-                    <span className="font-sans text-xs sm:text-sm text-stone-600 mt-1 block leading-relaxed">
-                      {item.desc}
-                    </span>
+                    <h3 className="timeline-title">{item.title}</h3>
+                    <p className="timeline-desc">{item.desc}</p>
                   </div>
                 ) : (
-                  <div className="flex items-center py-2">
-                    <span className="font-mono text-2xl sm:text-3xl font-black text-[#512BD4] tracking-widest select-none">
-                      ......
-                    </span>
+                  <div className="py-2">
+                    <span
+                      className="timeline-bar"
+                      style={{ width: item.barWidth }}
+                    />
                   </div>
                 )}
               </div>
 
-              {/* Right Column: Status Tag */}
-              <div className="agenda__status shrink-0 mt-2 sm:mt-0">
+              {/* Right Column: Pill Badge */}
+              <div className="timeline-badge">
                 {item.isConfirmed ? (
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs font-black uppercase px-3 py-1.5 rounded-lg border-2 border-black bg-[#DCFCE7] text-[#15803D] shadow-[2px_2px_0px_#000]">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
-                    <span>CONFIRMED</span>
+                  <span className="timeline-badge--confirmed">
+                    CONFIRMED
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-2 font-mono text-xs font-black uppercase px-3.5 py-1.5 rounded-lg border-2 border-black bg-[#FAF8FF] text-[#512BD4] shadow-[2px_2px_0px_#120838] group-hover:bg-[#FFD13B] group-hover:text-black transition-colors">
-                    <span className="w-3.5 h-3.5 border-2 border-[#512BD4] border-t-transparent rounded-full animate-spin shrink-0" />
-                    <span>......</span>
+                  <span className="timeline-badge--aging">
+                    AGING
                   </span>
                 )}
               </div>

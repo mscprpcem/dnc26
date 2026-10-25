@@ -12,7 +12,7 @@ export const DncTracks = () => {
             Tracks &amp; Themes
           </h2>
           <p className="lede" style={{ marginInline: 'auto' }}>
-            Official conference tracks and session themes will be announced soon.
+            Four core tracks spanning Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Microsoft Azure Cloud, and Modern .NET 11.
           </p>
         </div>
 
@@ -23,7 +23,7 @@ export const DncTracks = () => {
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl border-2 border-black bg-[#FAF8FF] text-[#512BD4] shadow-[2px_2px_0px_#120838] mb-6">
               <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
               <span className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider">
-                Tracks To Be Announced
+                Tracks Curating Across 4 Pillars
               </span>
             </div>
 
@@ -39,10 +39,10 @@ export const DncTracks = () => {
 
             {/* Message with balanced typography and margins */}
             <h3 className="font-sans font-black text-xl sm:text-2xl text-[#120838] uppercase mt-4 mb-2.5">
-              Tracks In Preparation
+              Multi-Track Agenda In Preparation
             </h3>
             <p className="font-sans text-sm sm:text-base text-stone-600 max-w-lg mx-auto leading-relaxed mb-8">
-              Our official session tracks and themes are being prepared and will be unveiled soon.
+              Deep dives being curated across <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps CI/CD</strong>, <strong>Azure Cloud-Native Architecture</strong>, and <strong>Modern .NET 11</strong>. Full schedule dropping soon!
             </p>
 
             {/* Simple Action */}

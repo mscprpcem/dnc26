@@ -16,52 +16,44 @@ export const DncEditorialSwimlanes = () => {
         <div>
           <p className="eyebrow">About .NET Conf 2026</p>
           <h2 className="h-sec">
-            Where code powers the<br />
-            intelligent cloud.
+            Not Just .NET.<br />
+            AI, GitHub, Cloud &amp; Tools.
           </h2>
 
           <div className="prose">
-            <p>Welcome to <strong>.NET Conf 2026 Amravati</strong> — Central India&apos;s premier annual Microsoft developer summit hosted by Microsoft Student Club in Amravati.</p>
+            <p>Welcome to <strong>.NET Conf 2026 Amravati</strong> &mdash; Central India&apos;s premier developer summit uniting the entire Microsoft engineering ecosystem, hosted by Microsoft Student Club PRPCEM.</p>
             <p>
-              This edition celebrates the launch of <strong>.NET 11</strong> and brings together student builders, engineering pioneers, Microsoft MVPs, and cloud architects from across Maharashtra.
-            </p>
-            <p>
-              From zero-allocation C# 14 algorithms to autonomous multi-agent systems with Semantic Kernel and Azure OpenAI, .NET Conf is where ideas transform into production software.
+              Going far beyond a single runtime, we bring together the complete modern stack: <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps Pipelines</strong>, <strong>Microsoft Azure Cloud</strong>, and <strong>High-Performance .NET 11</strong>.
             </p>
           </div>
 
           <ul className="needs">
             <li>
               <span className="needs__n">01</span>
-              <span className="needs__t">Master <strong>.NET 11 Runtime &amp; Native AOT.</strong></span>
+              <span className="needs__t">Build autonomous agents with <strong>Semantic Kernel &amp; Azure OpenAI.</strong></span>
             </li>
             <li>
               <span className="needs__n">02</span>
-              <span className="needs__t">Build autonomous AI with <strong>Semantic Kernel &amp; Azure OpenAI.</strong></span>
+              <span className="needs__t">Supercharge workflows with <strong>GitHub Copilot &amp; GitHub Actions.</strong></span>
             </li>
             <li>
               <span className="needs__n">03</span>
-              <span className="needs__t">Orchestrate cloud-native microservices with <strong>.NET Aspire.</strong></span>
+              <span className="needs__t">Architect scalable microservices on <strong>Microsoft Azure &amp; .NET Aspire.</strong></span>
             </li>
             <li>
               <span className="needs__n">04</span>
-              <span className="needs__t">Craft modern interactive web apps with <strong>Blazor &amp; Web API.</strong></span>
+              <span className="needs__t">Engineer ultra-fast backends with <strong>.NET 11 Runtime &amp; Native AOT.</strong></span>
             </li>
           </ul>
 
           <div className="prose">
             <p>
-              Whether you are an undergraduate exploring your first C# project or an experienced architect managing distributed enterprise clusters &mdash;
-              <br />
-              <strong>.NET Conf 2026 has a front-row seat for you.</strong>
-            </p>
-            <p>
-              Learn directly from leaders, get hands-on in code labs, and connect with peers building tomorrow&apos;s tech. <span className="u-mark">Join the movement.</span>
+              From student coders to enterprise architects &mdash; learn directly from Microsoft MVPs, dive into hands-on code labs, and connect with peers building tomorrow&apos;s software. <span className="u-mark">Be a force for good.</span>
             </p>
           </div>
 
           <div className="quote">
-            .NET Conf 2026 — Connect. Learn. Build. Grow.
+            .NET Conf 2026 &mdash; Be a force for good.
           </div>
 
           {/* Official Mascot Showcase Badge */}
@@ -73,7 +65,7 @@ export const DncEditorialSwimlanes = () => {
             />
             <div>
               <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.75rem', fontWeight: 800, color: 'var(--purple)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.2rem' }}>
-                OFFICIAL 2026 SUMMIT CREW
+                BE A FORCE FOR GOOD
               </p>
               <p style={{ fontWeight: 800, fontSize: '0.92rem', color: '#120838', margin: 0, lineHeight: 1.35 }}>
                 Accelerating Maharashtra&apos;s developer ecosystem into the intelligent cloud era.
@@ -93,8 +85,8 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">01 · Keynote &amp; .NET 11 Launchpad</span>
-                <span className="arc__d">Opening keynote exploring the latest innovations in .NET 11, C# 14, and Microsoft Cloud AI ecosystem.</span>
+                <span className="arc__t">01 · Keynote: The Intelligent Cloud &amp; AI Era</span>
+                <span className="arc__d">Opening keynote exploring the convergence of Generative AI, GitHub Copilot, Azure Cloud, and .NET 11.</span>
               </span>
             </div>
 
@@ -106,8 +98,8 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">02 · Deep-Dive Technical Sessions</span>
-                <span className="arc__d">Engaging technical stages with live coding, architectural breakdowns, and real-world system designs.</span>
+                <span className="arc__t">02 · Multi-Track Deep-Dive Sessions</span>
+                <span className="arc__d">Engaging technical stages covering Autonomous AI Agents, GitHub DevOps, Azure Cloud-Native, and Modern .NET.</span>
               </span>
             </div>
 
@@ -119,8 +111,8 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">03 · Hands-On Labs &amp; MVP Panels</span>
-                <span className="arc__d">Build live with Microsoft MVPs, get code reviewed, and discuss cloud solutions directly.</span>
+                <span className="arc__t">03 · Hands-On Labs &amp; MVP Mentorship</span>
+                <span className="arc__d">Code alongside Microsoft MVPs: orchestrate LLMs with Semantic Kernel, automate CI/CD, and deploy to Azure.</span>
               </span>
             </div>
 
@@ -134,8 +126,8 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">04 · Networking, Swag &amp; Community</span>
-                <span className="arc__d">Official .NET Bot swag kits, verified certificates, delegate lunch, and lifelong connections.</span>
+                <span className="arc__t">04 · Hallway Track, Swag &amp; Community</span>
+                <span className="arc__d">Official delegate kits, verified credentials, catered lunch, and lasting peer connections.</span>
               </span>
             </div>
           </div>

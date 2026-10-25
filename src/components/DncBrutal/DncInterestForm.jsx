@@ -28,7 +28,7 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
     phone: '',
     role: '',
     college: '',
-    interests: ['.NET & C#', 'Azure & Cloud'],
+    interests: ['Generative AI & Agents', 'Modern .NET & C#'],
     agreed: true,
   });
 
@@ -41,9 +41,11 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
   const roleOptions = [
     { value: 'student_prpcem', label: 'Student @ PRPCEM (Host Campus)', badge: 'PRPCEM', badgeBg: 'bg-[#512BD4] text-white' },
     { value: 'student_other', label: 'Student (Other College / University)', badge: 'Student', badgeBg: 'bg-[#00E5FF] text-black' },
-    { value: 'developer', label: 'Professional Software Developer', badge: 'Developer', badgeBg: 'bg-[#16A34A] text-white' },
-    { value: 'faculty', label: 'Faculty / Educator / Academician', badge: 'Faculty', badgeBg: 'bg-[#D600AA] text-white' },
-    { value: 'other', label: 'Tech Enthusiast / Community Member', badge: 'Community', badgeBg: 'bg-[#FFD13B] text-black' },
+    { value: 'developer', label: 'Software Engineer / Full-Stack Developer', badge: 'Engineer', badgeBg: 'bg-[#16A34A] text-white' },
+    { value: 'ai_engineer', label: 'AI Engineer / ML & LLM Practitioner', badge: 'AI/ML', badgeBg: 'bg-[#D600AA] text-white' },
+    { value: 'devops_cloud', label: 'Cloud Architect / DevOps / SRE', badge: 'Cloud/DevOps', badgeBg: 'bg-[#0284C7] text-white' },
+    { value: 'faculty', label: 'Faculty / Educator / Academician', badge: 'Faculty', badgeBg: 'bg-[#9333EA] text-white' },
+    { value: 'other', label: 'Tech Enthusiast / Open Source Contributor', badge: 'Community', badgeBg: 'bg-[#FFD13B] text-black' },
   ];
 
   useEffect(() => {
@@ -66,11 +68,11 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
   const selectedRole = roleOptions.find((r) => r.value === formData.role);
 
   const interestTopics = [
-    { id: '.NET & C#', label: '</> .NET & C#', bg: 'bg-[#EEEAFB] text-[#512BD4] border-purple-200' },
-    { id: 'Azure & Cloud', label: 'Azure & Cloud', bg: 'bg-[#E0F2FE] text-[#0284C7] border-blue-200' },
-    { id: 'AI & Copilots', label: 'AI & Copilots', bg: 'bg-[#FCE7F3] text-[#D600AA] border-pink-200' },
-    { id: 'Developer Tools', label: 'Developer Tools', bg: 'bg-[#DCFCE7] text-[#16A34A] border-green-200' },
-    { id: 'Community & Networking', label: 'Community & Networking', bg: 'bg-[#FEF3C7] text-[#D97706] border-amber-200' },
+    { id: 'Generative AI & Agents', label: 'Generative AI & Agents', bg: 'bg-[#FCE7F3] text-[#D600AA] border-pink-200' },
+    { id: 'GitHub Copilot & DevOps', label: 'GitHub Copilot & DevOps', bg: 'bg-[#DCFCE7] text-[#16A34A] border-green-200' },
+    { id: 'Azure Cloud Architecture', label: 'Azure Cloud Architecture', bg: 'bg-[#E0F2FE] text-[#0284C7] border-blue-200' },
+    { id: 'Modern .NET & C#', label: 'Modern .NET 11 & C#', bg: 'bg-[#EEEAFB] text-[#512BD4] border-purple-200' },
+    { id: 'Open Source & Community', label: 'Open Source & Community', bg: 'bg-[#FEF3C7] text-[#D97706] border-amber-200' },
   ];
 
   const handleToggleInterest = (topic) => {
@@ -118,7 +120,7 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
             Register Your <span className="text-[#512BD4]">Interest</span>
           </h2>
           <p className="text-stone-600 font-sans text-xs sm:text-sm mt-1 leading-relaxed">
-            Be the first to receive delegate ticket announcements, agenda details, and priority passes.
+            Get priority delegate announcements across Generative AI, GitHub Copilot &amp; DevOps, Azure Cloud, and Modern .NET tracks.
           </p>
         </div>
 
@@ -412,7 +414,7 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
 
         {/* Subtitle */}
         <p className="text-stone-600 font-sans text-xs sm:text-sm text-center max-w-xl mx-auto leading-relaxed mb-8">
-          Get event updates, speaker announcements and registration details for .NET Conf 2026 Amravati.
+          Get event updates, speaker announcements, and priority registration across AI, GitHub Copilot, DevOps, Cloud, and .NET tracks.
         </p>
 
         {isSubmitted ? (

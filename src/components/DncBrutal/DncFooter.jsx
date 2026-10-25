@@ -1,4 +1,12 @@
 import React from 'react';
+import { Mail, Globe } from 'lucide-react';
+import {
+  LinkedInIcon,
+  GitHubIcon,
+  WhatsAppIcon,
+  InstagramIcon,
+  YouTubeIcon,
+} from '../ui/SocialIcons.jsx';
 
 export const DncFooter = ({ onSwitchToClassic }) => {
   const handleScrollTo = (e, id) => {
@@ -19,38 +27,38 @@ export const DncFooter = ({ onSwitchToClassic }) => {
           {/* Brand Column */}
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#512BD4] text-white flex items-center justify-center font-mono font-black text-xs shadow-md border border-white/20 select-none">
-                .NET
-              </div>
+              <img
+                src="/logos/dotnet-logo.jpg"
+                alt=".NET Logo"
+                className="w-9 h-9 rounded-xl object-contain border border-black/20 shadow-md select-none"
+              />
               <span className="text-xl font-bold font-display text-[#120838]">
                 .NET Conf 2026 Amravati
               </span>
             </div>
             <p style={{ marginTop: '.85rem', maxWidth: '38ch', color: '#362F4B', fontSize: '.95rem', lineHeight: 1.6 }}>
-              Central India&apos;s premier Microsoft developer conference. Organized with passion by Microsoft Student Club at P. R. Pote Patil College of Engineering and Management (PRPCEM).
+              Central India&apos;s premier summit uniting Generative AI, GitHub Copilot, DevOps, Microsoft Azure Cloud, and Modern .NET. Organized with passion by Microsoft Student Club PRPCEM.
             </p>
 
             {/* Social Links */}
             <div className="foot__socials">
-              <a href="https://www.linkedin.com/company/mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="LinkedIn">
-                <svg width="18" height="18"><use href="#s-linkedin" /></svg>
+              <a href="https://www.linkedin.com/company/mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="LinkedIn" title="LinkedIn">
+                <LinkedInIcon className="w-4 h-4" />
               </a>
-              <a href="https://github.com/mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="GitHub">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
+              <a href="https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="WhatsApp" title="WhatsApp Community">
+                <WhatsAppIcon className="w-4 h-4" />
               </a>
-              <a href="https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="WhatsApp">
-                <svg width="18" height="18"><use href="#s-whatsapp" /></svg>
+              <a href="https://www.instagram.com/mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="Instagram" title="Instagram">
+                <InstagramIcon className="w-4 h-4" />
               </a>
-              <a href="https://www.instagram.com/mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="Instagram">
-                <svg width="18" height="18"><use href="#s-instagram" /></svg>
+              <a href="https://www.youtube.com/@mscprpcem" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="YouTube" title="YouTube Channel">
+                <YouTubeIcon className="w-4 h-4" />
               </a>
-              <a href="mailto:dotnetconfamt@prpotepatilengg.ac.in" className="foot__soc-btn" aria-label="Email">
-                <svg width="18" height="18"><use href="#s-mail" /></svg>
+              <a href="mailto:dotnetconfamt@prpotepatilengg.ac.in" className="foot__soc-btn" aria-label="Email" title="Email Us">
+                <Mail className="w-4 h-4" />
               </a>
-              <a href="https://www.mscprpcem.tech" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="Website">
-                <svg width="18" height="18"><use href="#s-globe" /></svg>
+              <a href="https://www.mscprpcem.tech" target="_blank" rel="noopener noreferrer" className="foot__soc-btn" aria-label="Website" title="MSC PRPCEM Website">
+                <Globe className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -86,7 +94,7 @@ export const DncFooter = ({ onSwitchToClassic }) => {
             &copy; 2026 Microsoft Student Club PRPCEM &amp; .NET Conf. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
-            <span>Powered by .NET 11 &amp; C# 14</span>
+            <span className="font-mono font-bold text-[#512BD4]">Be a force for good.</span>
             <span className="dot" aria-hidden="true"></span>
             <span>PRPCEM Campus, Amravati</span>
           </div>

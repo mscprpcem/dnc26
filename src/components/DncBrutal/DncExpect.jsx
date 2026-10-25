@@ -5,32 +5,32 @@ export const DncExpect = () => {
     {
       icon: '#i-mic',
       color: 'rgba(0, 180, 216, 0.25)',
-      title: 'Real-world architecture from Microsoft MVPs',
-      desc: 'Hear from recognized Microsoft MVPs, cloud architects, and engineering directors sharing battle-tested code patterns, performance benchmarks, and real-world system designs.',
+      title: 'Keynotes on Cloud, AI & Microsoft Ecosystem',
+      desc: 'Hear from recognized Microsoft MVPs, cloud architects, and engineering leads sharing real-world architecture in Azure OpenAI, GitHub Copilot workflows, and high-scale cloud backends.',
     },
     {
       icon: '#i-chat',
       color: 'rgba(224, 25, 158, 0.25)',
       title: 'Where conversations become collaborations',
-      desc: 'Meet over 500+ passionate .NET developers, student builders, and open-source contributors from across Central India. Spark meaningful discussions in the hallway track.',
+      desc: 'Meet over 500+ passionate engineers, AI builders, DevOps practitioners, and open-source contributors from across Central India in the hallway track.',
     },
     {
       icon: '#i-hands',
       color: 'rgba(255, 232, 158, 0.25)',
-      title: 'Hands-on code labs & live debugging',
-      desc: 'Bring your laptop and code alongside mentors. Build autonomous agents with Semantic Kernel, deploy distributed apps with .NET Aspire, and benchmark Native AOT executables.',
+      title: 'Hands-on code labs: AI agents, DevOps & Cloud',
+      desc: 'Bring your laptop and code live: build autonomous agents with Semantic Kernel, automate CI/CD with GitHub Actions, ship microservices with .NET Aspire, and benchmark Native AOT executables.',
     },
     {
       icon: '#i-gift',
       color: 'rgba(0, 240, 255, 0.25)',
-      title: 'Official .NET Bot swag kits & goodies',
-      desc: 'Take home limited-edition .NET 11 stickers, collector astronaut bot pins, premium delegate pass lanyards, and enjoy full catered buffet lunch with hi-tea.',
+      title: 'Official summit swag kits & developer goodies',
+      desc: 'Take home limited-edition developer sticker packs, collector astronaut bot pins, premium delegate pass lanyards, and enjoy full catered buffet lunch with hi-tea.',
     },
     {
       icon: '#i-spark',
       color: 'rgba(255, 46, 187, 0.25)',
-      title: 'Verified credentials & career opportunities',
-      desc: 'Earn your official certificate of participation from Microsoft Student Club PRPCEM and connect with top IT companies hiring .NET, Azure, and AI talent.',
+      title: 'Verified credentials & hiring connections',
+      desc: 'Earn your official certificate of participation from Microsoft Student Club PRPCEM and connect with top tech companies hiring AI, DevOps, Cloud, and Full-Stack talent.',
     },
   ];
 
@@ -52,7 +52,7 @@ export const DncExpect = () => {
             </h2>
           </div>
           <p className="lede">
-            An electrifying day at PRPCEM Campus with the people shaping the future of .NET &mdash; packed with live code, cutting-edge AI, and endless inspiration.
+            An electrifying day in Amravati with the engineers shaping Cloud, AI, and Software Engineering &mdash; packed with live code, Generative AI, GitHub DevOps, and modern .NET.
           </p>
         </div>
 
