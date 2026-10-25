@@ -9,7 +9,7 @@ Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** — Centr
 - **Pure Light Theme Aesthetic:** Clean Microsoft/.NET developer conference design using white (`#FFFFFF`), light gray (`#F7F7F8`), .NET purple (`#512BD4`), and Azure blue (`#0078D4`).
 - **Interactive Code Runner:** Hero code editor with functional **Red**, **Yellow**, and **Green** window controls, real-time .NET 9 API compilation simulation, and live HTTP 200 JSON inspection.
 - **Side-by-Side Parallel Tracks:** Comprehensive Agenda featuring parallel breakout sessions (*Track 1: Cloud & .NET* vs *Track 2: AI & Emerging Tech*) with interactive track view toggles.
-- **Official Sponsor & Partner Logos:** High-definition vector SVG logos for Microsoft, GitHub, PRPCEM Amravati, Microsoft Student Club PRPCEM, KonfHub, and SohamGlobal.
+- **Official Sponsor & Partner Logos:** High-definition partner logos for Microsoft, JetBrains, PRPCEM Amravati, Microsoft Student Club PRPCEM, and Sessionize.
 - **Keynote Showcase:** Dedicated presentation section for keynote speaker **Anuraj P.** (Microsoft MVP & Senior Architect).
 - **Responsive & Accessible:** Pixel-perfect alignment and tailored layouts across mobile (360px–480px), tablets (768px–1024px), laptops (1280px), and wide monitors (1440px+).
 
@@ -55,8 +55,7 @@ Official website for **.NET Conf 2026 (Amravati, Maharashtra, India)** — Centr
 ## 🏛 Organization & Credits
 
 - **Host Institution:** [P. R. Pote Patil College of Engineering and Management (PRPCEM)](https://prpcem.ac.in), Amravati, Maharashtra 444604
-- **Organizing Body:** [Microsoft Student Club (MSC) PRPCEM](https://mscprpcem.tech)
-- **Ticketing & Platform:** [KonfHub](https://konfhub.com)
+- **Call for Proposals Platform:** [Sessionize](https://sessionize.com/dnc26)
 
 ---
 

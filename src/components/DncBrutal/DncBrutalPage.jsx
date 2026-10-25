@@ -1,140 +1,186 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './DncBrutalStyles.css';
+import DncWarliSprites from './DncWarliSprites.jsx';
 import DncNavbar from './DncNavbar.jsx';
 import DncHero from './DncHero.jsx';
+import DncTicker from './DncTicker.jsx';
 import DncEditorialSwimlanes from './DncEditorialSwimlanes.jsx';
-import DncPastHighlights from './DncPastHighlights.jsx';
-import DncKeynote from './DncKeynote.jsx';
+import DncTracks from './DncTracks.jsx';
+import DncWhyTracks from './DncWhyTracks.jsx';
+import DncSpeakerWall from './DncSpeakerWall.jsx';
 import DncCFP from './DncCFP.jsx';
+import DncTickets from './DncTickets.jsx';
+import DncExpect from './DncExpect.jsx';
+import DncPastHighlights from './DncPastHighlights.jsx';
 import DncAgenda from './DncAgenda.jsx';
 import DncVenue from './DncVenue.jsx';
+import DncCommunity from './DncCommunity.jsx';
+import DncSponsors from './DncSponsors.jsx';
+import DncFAQ from './DncFAQ.jsx';
+import DncRegisterCTA from './DncRegisterCTA.jsx';
+import DncFooter from './DncFooter.jsx';
 import DncAttendeeBadge from './DncAttendeeBadge.jsx';
 import DncInterestForm from './DncInterestForm.jsx';
-import DncSponsors from './DncSponsors.jsx';
-import DncCommunity from './DncCommunity.jsx';
-import DncFooter from './DncFooter.jsx';
-import { ArrowUp } from 'lucide-react';
-import { scrollToSection } from '../../utils/sectionRouter.js';
+import { ArrowUp, X } from 'lucide-react';
 
-export const DncBrutalPage = ({ onSwitchToClassic }) => {
-  const [showScrollTop, setShowScrollTop] = React.useState(false);
-  const [scrollY, setScrollY] = React.useState(0);
+export const DncBrutalPage = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeModal, setActiveModal] = useState(null); // 'badge' | 'register' | null
 
   useEffect(() => {
-    document.title = ".NET Conf 2026 Amravati | PRPCEM Campus";
-    
-    let ticking = false;
+    document.title = ".NET Conf 2026 Amravati";
+
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentY = window.scrollY;
-          setScrollY(currentY);
-          setShowScrollTop(currentY > 400);
-          ticking = false;
-        });
-        ticking = true;
-      }
+      setShowScrollTop(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveModal(null);
+    };
+    if (activeModal) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModal]);
+
   const scrollToTop = () => {
-    scrollToSection('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="dnc-brutal-canvas min-h-screen font-sans selection:bg-[#512BD4] selection:text-white overflow-x-hidden relative">
-      {/* Animated Background Decorative Hollow Rings with Scroll Parallax */}
-      <div 
-        aria-hidden="true" 
-        className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none"
-      >
-        {/* Ring 1 - Upper Left */}
-        <div
-          className="absolute -left-32 sm:-left-44 top-[10%] w-[320px] sm:w-[440px] h-[320px] sm:h-[440px] rounded-full border-[28px] sm:border-[38px] border-[#8B5CF6]/20 bg-transparent transition-transform duration-75 ease-out"
-          style={{
-            transform: `translateY(${scrollY * 0.14}px) rotate(${scrollY * 0.04}deg)`,
-          }}
-        />
+    <div className="dnc-fest-canvas">
+      {/* Paper Grain Overlay */}
+      <div className="grain-overlay" aria-hidden="true"></div>
 
-        {/* Ring 2 - Upper Right */}
-        <div
-          className="absolute -right-32 sm:-right-48 top-[28%] w-[360px] sm:w-[480px] h-[360px] sm:h-[480px] rounded-full border-[32px] sm:border-[44px] border-[#8B5CF6]/20 bg-transparent transition-transform duration-75 ease-out"
-          style={{
-            transform: `translateY(-${scrollY * 0.1}px) rotate(-${scrollY * 0.03}deg)`,
-          }}
-        />
+      {/* Embedded Warli & Tech SVG Sprites System */}
+      <DncWarliSprites />
 
-        {/* Ring 3 - Middle Left */}
-        <div
-          className="absolute -left-28 sm:-left-40 top-[52%] w-[300px] sm:w-[420px] h-[300px] sm:h-[420px] rounded-full border-[26px] sm:border-[36px] border-[#8B5CF6]/18 bg-transparent transition-transform duration-75 ease-out"
-          style={{
-            transform: `translateY(${scrollY * 0.12}px) rotate(${scrollY * 0.05}deg)`,
-          }}
-        />
+      {/* Floating Navigation */}
+      <DncNavbar onOpenRegister={() => setActiveModal('register')} />
 
-        {/* Ring 4 - Lower Right */}
-        <div
-          className="absolute -right-28 sm:-right-44 top-[74%] w-[340px] sm:w-[460px] h-[340px] sm:h-[460px] rounded-full border-[30px] sm:border-[40px] border-[#8B5CF6]/18 bg-transparent transition-transform duration-75 ease-out"
-          style={{
-            transform: `translateY(-${scrollY * 0.13}px) rotate(-${scrollY * 0.04}deg)`,
-          }}
-        />
-      </div>
+      {/* Main Page Flow — Exact Structure and Aesthetics of DevFest Nashik 2026 */}
+      <main id="main">
+        <span id="top"></span>
 
-      {/* Sticky Header Navigation */}
-      <DncNavbar onSwitchToClassic={onSwitchToClassic} />
+        {/* 1. Hero Section with Illustrated Sky, Countdown, and Road to Conf */}
+        <DncHero onOpenRegister={() => setActiveModal('register')} />
 
-      {/* Main Content Sections - Exact 1:1 Parity with Normal Mode */}
-      <main className="relative z-10 w-full">
-        {/* Section 1: Hero (.NET Conf 2026 Amravati, Dev Terminal, Date Pill) */}
-        <DncHero />
+        {/* 2. Horizontal Infinite Marquee Ticker */}
+        <DncTicker />
 
-        {/* Section 2: Conference Pillars & Technical Immersion */}
+        {/* 3. About Section with Conversational Prose & The Arc of the Day */}
         <DncEditorialSwimlanes />
 
-        {/* Section 3: Highlights of Last Year (2024 Retrospective Slideshow & Gallery) */}
-        <DncPastHighlights />
+        {/* 4. Tracks & Themes Section (Revealing Soon) */}
+        <DncTracks />
 
-        {/* Section 4: Headline Opening Keynote Spotlight */}
-        <DncKeynote />
+        {/* 5. Speaker Wall (8-10 Speakers Roster) */}
+        <DncSpeakerWall />
 
-        {/* Section 5: Call for Proposals (CFP) / Speaker Submissions */}
+        {/* 6. Call For Proposals Banner */}
         <DncCFP />
 
-        {/* Section 6: Conference Schedule & Tracks Flow */}
+        {/* 7. Tickets & The Full Thali (Included in Every Pass) */}
+        <DncTickets
+          onOpenBadge={() => setActiveModal('badge')}
+          onOpenRegister={() => setActiveModal('register')}
+        />
+
+        {/* 8. What to Expect Feature Cards */}
+        <DncExpect />
+
+        {/* 9. Past Conference Retrospective Highlights Film Card */}
+        <DncPastHighlights />
+
+        {/* 10. Schedule Agenda Timeline with Confirmed Status Tags */}
         <DncAgenda />
 
-        {/* Section 6: PRPCEM Campus Venue & Interactive Map */}
-        <DncVenue />
+        {/* 11. MSC PRPCEM Community Numbers & Illustrated Art */}
+        <DncCommunity />
 
-        {/* Section 7: I am Attending Badge Generator Studio */}
-        <DncAttendeeBadge />
-
-        {/* Section 8: Register Your Interest (Priority Delegate Access) */}
-        <DncInterestForm />
-
-        {/* Section 9: Partners & Collaborators */}
+        {/* 13. Sponsors & Partners Tiered Cards */}
         <DncSponsors />
 
-        {/* Section 10: Follow & Connect With MSC PRPCEM (7 Channels & Surfing Mascot) */}
-        <DncCommunity />
+        {/* 14. Interactive FAQ Accordion */}
+        <DncFAQ />
+
+        {/* 15. Final Grand Ticket Call to Action with Dancing Figures */}
+        <DncRegisterCTA
+          onOpenRegister={() => setActiveModal('register')}
+        />
       </main>
 
-      {/* Footer */}
-      <DncFooter onSwitchToClassic={onSwitchToClassic} />
+      {/* 16. Footer with Skyline Horizon SVG and Links */}
+      <DncFooter />
 
-      {/* Floating Action Controls (Bottom Right - only shown when scrolled) */}
+      {/* Floating Action Controls (Bottom Right - Scroll to Top) */}
       {showScrollTop && (
-        <div className="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-50 flex flex-col gap-2.5 items-end animate-in fade-in duration-200">
-          <button
-            onClick={scrollToTop}
-            className="p-2.5 sm:p-3 bg-[#512BD4] hover:bg-[#4322B0] text-white rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] transition-all cursor-pointer"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
-          </button>
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-5 right-5 z-50 p-3 bg-[#512BD4] hover:bg-[#6139E6] text-white rounded-md border-[2px] border-[#120838] shadow-[3px_3px_0px_#120838] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-5 h-5 stroke-[2.5]" />
+        </button>
+      )}
+
+      {/* Interactive Modal: Attendee Badge Studio */}
+      {activeModal === 'badge' && (
+        <div 
+          className="fixed inset-0 z-[300] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative w-full max-w-4xl bg-white border-[3px] border-black rounded-2xl p-4 sm:p-7 shadow-[8px_8px_0px_#120838] my-auto max-h-[94vh] overflow-y-auto">
+            <button
+              onClick={() => setActiveModal(null)}
+              className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-lg border-2 border-black bg-white hover:bg-stone-100 text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer z-30"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5 stroke-[2.5]" />
+            </button>
+            <div id="attendee-badge">
+              <DncAttendeeBadge isModal={true} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Interactive Modal: Priority Interest Registration Form */}
+      {activeModal === 'register' && (
+        <div 
+          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-6 overflow-y-auto"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto">
+            <button
+              onClick={() => setActiveModal(null)}
+              className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5 stroke-[2.5]" />
+            </button>
+            <div id="interest-form">
+              <DncInterestForm isModal={true} onClose={() => setActiveModal(null)} />
+            </div>
+          </div>
         </div>
       )}
     </div>

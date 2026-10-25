@@ -34,10 +34,10 @@ export const Footer = ({ onSwitchToNeoBrutal }) => {
               type="button"
               onClick={() => onSwitchToNeoBrutal && onSwitchToNeoBrutal()}
               className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[#190649]/75 hover:text-[#512BD4] hover:bg-white/80 transition-all flex items-center gap-1.5 cursor-pointer"
-              title="Switch to Neo-Brutalist Mode"
+              title="Switch to DevFest Edition"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#E1306C]" />
-              <span>Neo-Brutalism</span>
+              <span>DevFest Edition</span>
             </button>
           </div>
 

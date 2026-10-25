@@ -185,7 +185,7 @@ export const DncKeynote = () => {
             {/* Bottom Tech Coordinate Bar */}
             <div className="relative z-10 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-stone-400">
               <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span>MAINSTAGE AUDITORIUM</span>
               </span>
               <span className="text-[#00BDD6]">PRPCEM CAMPUS</span>

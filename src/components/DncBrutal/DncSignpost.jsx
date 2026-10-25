@@ -48,9 +48,9 @@ export const DncSignpost = ({
     <div id={id} className={`flex flex-col items-center justify-center relative select-none scroll-mt-24 px-2 ${className}`}>
       <div className="relative inline-flex flex-col items-center max-w-full">
         {/* Main Signboard */}
-        <div className={`relative z-10 ${currentTheme.bg} ${currentTheme.text} border-[2.5px] border-black rounded-2xl sm:rounded-3xl px-4 sm:px-9 py-2.5 sm:py-3.5 ${currentTheme.shadow} flex flex-wrap items-center justify-center gap-2 sm:gap-3 transform -rotate-[0.5deg] hover:rotate-0 transition-transform duration-200 max-w-[94vw] sm:max-w-none`}>
+        <div className={`relative z-10 ${currentTheme.bg} ${currentTheme.text} border-[2.5px] border-black rounded-lg sm:rounded-xl px-4 sm:px-9 py-2.5 sm:py-3.5 ${currentTheme.shadow} flex flex-wrap items-center justify-center gap-2 sm:gap-3 transform -rotate-[0.5deg] hover:rotate-0 transition-transform duration-200 max-w-[94vw] sm:max-w-none`}>
           {badge && (
-            <span className={`${currentTheme.badgeBg} ${currentTheme.badgeText} text-[10px] sm:text-xs font-mono font-black px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] shrink-0`}>
+            <span className={`${currentTheme.badgeBg} ${currentTheme.badgeText} text-[10px] sm:text-xs font-mono font-black px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] shrink-0`}>
               {badge}
             </span>
           )}

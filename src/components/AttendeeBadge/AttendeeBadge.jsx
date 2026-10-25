@@ -82,12 +82,12 @@ export const AttendeeBadge = () => {
     const roleString = role.trim() ? ` as ${role.trim()}` : '';
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
     const dateStr = eventData?.displayDate ? ` on ${eventData.displayDate}` : '';
-    return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
+    return `I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
 Join me for Central India's premier Microsoft .NET developer gathering at PRPCEM Campus, Amravati${dateStr}.
 
 Generate your personalized attendee badge here:
-👉 https://dnc.mscprpcem.tech
+https://dnc.mscprpcem.tech
 
 #DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #CentralIndia`;
   };

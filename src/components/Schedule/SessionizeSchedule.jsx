@@ -134,20 +134,20 @@ export const SessionizeSchedule = ({
       {/* 1. Header (Compact, modern branding) */}
       {showHeader && (
         <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F0EFFB] text-[#7046C8] text-xs font-semibold tracking-wide mb-2 border border-[#A99AE8]/40">
-            <Calendar className="w-3.5 h-3.5 text-[#7046C8]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EEEAFB] text-[#512BD4] text-xs font-mono font-bold tracking-wide mb-2 border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] uppercase">
+            <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
             <span>.NET Conf 2026 Amravati · Sessionize Integration</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#292735] font-montserrat tracking-tight mb-1.5 leading-tight">
-            Conference Schedule
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black font-sans uppercase tracking-tight mb-1.5 leading-tight">
+            Conference <span className="text-[#512BD4]">Schedule</span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#292735]/80 font-inter leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed">
             Explore the sessions, meet the speakers, and plan your conference experience.
           </p>
 
-          <div className="w-12 h-1 bg-[#7046C8] rounded-full mx-auto mt-2.5" />
+          <div className="w-12 h-1 bg-[#512BD4] rounded-full mx-auto mt-2.5" />
         </div>
       )}
 
@@ -156,7 +156,7 @@ export const SessionizeSchedule = ({
         <div 
           role="tablist" 
           aria-label="Sessionize Schedule Views"
-          className="flex flex-wrap items-center justify-center gap-1 p-1 rounded-xl bg-[#F0EFFB] border border-[#A99AE8]/40 w-full sm:w-auto"
+          className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-xl bg-white border-[2px] border-black shadow-[3px_3px_0px_0px_#000] w-full sm:w-auto"
         >
           {SESSIONIZE_VIEWS.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -175,10 +175,10 @@ export const SessionizeSchedule = ({
                     setIframeHeight(tab.id === 'speakers' || tab.id === 'speakerWall' ? 380 : 650);
                   }
                 }}
-                className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-medium font-inter transition-all flex items-center justify-center gap-1.5 cursor-pointer select-none ${
+                className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer select-none ${
                   isActive
-                    ? 'bg-white text-[#7046C8] shadow-xs font-semibold'
-                    : 'text-[#292735]/70 hover:text-[#7046C8] hover:bg-white/60'
+                    ? 'bg-[#512BD4] text-white border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]'
+                    : 'text-stone-700 hover:text-black hover:bg-[#EEEAFB]'
                 }`}
                 title={tab.description}
               >
@@ -195,13 +195,13 @@ export const SessionizeSchedule = ({
         role="tabpanel"
         id={`panel-${activeTab}`}
         aria-labelledby={`tab-${activeTab}`}
-        className="relative w-full rounded-2xl bg-white border border-[#A99AE8]/40 overflow-hidden shadow-xs"
+        className="relative w-full rounded-2xl bg-white border-[2px] sm:border-[2.5px] border-black overflow-hidden shadow-[4px_4px_0px_0px_#000]"
       >
         {/* Loading Overlay */}
         {isLoading && (
           <div className="p-8 text-center flex flex-col items-center justify-center">
-            <div className="w-7 h-7 border-2 border-[#A99AE8]/30 border-t-[#7046C8] rounded-full animate-spin mb-2.5" />
-            <p className="text-xs font-semibold text-[#7046C8] font-inter">
+            <div className="w-8 h-8 border-[3px] border-black border-t-[#512BD4] rounded-full animate-spin mb-2.5" />
+            <p className="text-xs font-mono font-bold text-[#512BD4]">
               Checking {activeViewMeta.label}...
             </p>
           </div>
@@ -210,24 +210,24 @@ export const SessionizeSchedule = ({
         {/* Error Fallback Card */}
         {hasError && !isLoading && (
           <div className="p-6 sm:p-8 text-center max-w-md mx-auto">
-            <div className="w-10 h-10 rounded-full bg-[#F0EFFB] text-[#7046C8] flex items-center justify-center mx-auto mb-3 border border-[#A99AE8]/40">
-              <AlertCircle className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full bg-[#EEEAFB] text-[#512BD4] border-[2px] border-black flex items-center justify-center mx-auto mb-3 shadow-[2px_2px_0px_0px_#000]">
+              <AlertCircle className="w-5 h-5 stroke-[2.5]" />
             </div>
 
-            <h3 className="text-base font-bold font-montserrat text-[#292735] mb-1">
+            <h3 className="text-base font-black font-sans uppercase text-black mb-1">
               Unable to Load Schedule
             </h3>
 
-            <p className="text-xs text-[#292735]/75 font-inter leading-relaxed mb-4">
+            <p className="text-xs text-stone-600 font-sans leading-relaxed mb-4">
               {errorMessage || 'The schedule could not be loaded at this moment.'}
             </p>
 
             <button
               type="button"
               onClick={handleRetry}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-semibold font-inter bg-[#7046C8] text-white hover:bg-[#5833A5] transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl text-xs font-mono font-black uppercase bg-[#512BD4] text-white hover:bg-[#4322B0] border-[2px] border-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all inline-flex items-center gap-1.5 cursor-pointer"
             >
-              <RotateCw className="w-3 h-3" />
+              <RotateCw className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Retry</span>
             </button>
           </div>
@@ -238,7 +238,7 @@ export const SessionizeSchedule = ({
           <div className="py-8 sm:py-10 px-4 sm:px-6 text-center max-w-lg mx-auto">
             
             {/* Official .NET Bot Mascot Avatar */}
-            <div className="relative mx-auto mb-3.5 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#F0EFFB] border border-[#A99AE8]/50 flex items-center justify-center shadow-xs group">
+            <div className="relative mx-auto mb-3.5 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#EEEAFB] border-[2px] border-black flex items-center justify-center shadow-[3px_3px_0px_0px_#000] group">
               <img 
                 src="/mascot/bot_frontal.png" 
                 alt=".NET Bot Mascot" 
@@ -246,30 +246,30 @@ export const SessionizeSchedule = ({
                 loading="lazy"
               />
               <span 
-                className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white shadow-xs" 
+                className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-[1.5px] border-black shadow-xs" 
                 title="Sessionize Feed Connected" 
               />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F0EFFB] text-[#7046C8] text-[11px] font-bold uppercase tracking-wider mb-2 border border-[#A99AE8]/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#7046C8] animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-[#FFD13B] text-black text-[11px] font-mono font-bold uppercase tracking-wider mb-2 border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
+              <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
               <span>Schedule in Preparation</span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-bold font-montserrat text-[#292735] mb-2 tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-black font-sans uppercase text-black mb-2 tracking-tight">
               Schedule Coming Soon
             </h3>
 
-            <p className="text-xs sm:text-sm text-[#292735]/75 font-inter leading-relaxed max-w-md mx-auto mb-4">
+            <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed max-w-md mx-auto mb-4">
               Our Technical Advisory Board is finalizing session slots and room assignments. As soon as the schedule is published on Sessionize, the live interactive grid will appear here automatically.
             </p>
 
             <button
               type="button"
               onClick={handleRetry}
-              className="px-4 py-2 rounded-xl text-xs font-semibold font-inter bg-[#7046C8] text-white hover:bg-[#5833A5] transition-all inline-flex items-center gap-2 shadow-xs cursor-pointer active:scale-95"
+              className="px-5 py-2.5 rounded-xl text-xs font-mono font-black uppercase bg-[#512BD4] text-white hover:bg-[#4322B0] border-[2px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all inline-flex items-center gap-2 cursor-pointer active:scale-95"
             >
-              <RotateCw className="w-3.5 h-3.5" />
+              <RotateCw className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Check for Updates from Sessionize</span>
             </button>
           </div>

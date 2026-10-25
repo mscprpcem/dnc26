@@ -40,34 +40,34 @@ export const CallForSpeakers = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F0EFFB] text-[#7046C8] text-xs font-semibold uppercase tracking-wider mb-2 border border-[#A99AE8]/40">
-            <Mic className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EEEAFB] text-[#512BD4] text-xs font-mono font-bold uppercase tracking-wider mb-2 border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
+            <Mic className="w-3.5 h-3.5 text-[#512BD4]" />
             <span>Official Sessionize Integration · Call for Proposals</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#292735] font-montserrat tracking-tight mb-2 leading-tight">
-            Call for Speakers Now Open
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-black font-sans uppercase tracking-tight mb-2 leading-tight">
+            Call for Speakers <span className="text-[#512BD4]">Now Open</span>
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#292735]/80 font-inter leading-relaxed">
+          <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed">
             All session submissions and speaker profiles are managed through <strong>Sessionize</strong>.
           </p>
 
-          <div className="w-12 h-1 bg-[#7046C8] rounded-full mx-auto mt-3" />
+          <div className="w-12 h-1 bg-[#512BD4] rounded-full mx-auto mt-3" />
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#A99AE8]/40 shadow-xs overflow-hidden p-5 sm:p-7 md:p-8 mb-8">
+        <div className="bg-white rounded-3xl border-[2.5px] sm:border-[3px] border-black shadow-[6px_6px_0px_0px_#000] overflow-hidden p-5 sm:p-7 md:p-8 mb-8">
           
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-6 pb-6 border-b border-[#A99AE8]/30">
-            <div className="max-w-xl">
-              <span className="text-[11px] font-bold text-[#7046C8] uppercase tracking-wider block mb-1">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-6 pb-6 border-b-[2px] border-black">
+            <div className="max-w-xl text-left">
+              <span className="text-[11px] font-mono font-bold text-[#512BD4] uppercase tracking-wider block mb-1">
                 Managed on Sessionize
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold font-montserrat text-[#292735] mb-2">
+              <h3 className="text-xl sm:text-2xl font-black font-sans uppercase text-black mb-2">
                 Submit Your Session Proposal
               </h3>
-              <p className="text-xs sm:text-sm text-[#292735]/75 font-inter leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed mb-6">
                 Submit your talk proposals directly on Sessionize for .NET Conf 2026 Amravati.
               </p>
 
@@ -76,7 +76,7 @@ export const CallForSpeakers = () => {
                   href={SESSIONIZE_PUBLIC_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold font-inter bg-[#7046C8] text-white hover:bg-[#5833A5] transition-colors inline-flex items-center gap-2 shadow-2xs"
+                  className="px-5 py-3 rounded-xl text-xs sm:text-sm font-mono font-black uppercase bg-[#512BD4] text-white hover:bg-[#4322B0] border-[2px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all inline-flex items-center gap-2 cursor-pointer"
                 >
                   <Mic className="w-4 h-4" />
                   <span>Submit Talk on Sessionize</span>
@@ -85,7 +85,7 @@ export const CallForSpeakers = () => {
 
                 <a
                   href="#schedule"
-                  className="px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold font-inter bg-[#F0EFFB] text-[#7046C8] border border-[#A99AE8]/40 hover:bg-[#e7e3fa] transition-colors inline-flex items-center gap-2"
+                  className="px-4 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold uppercase bg-[#FAF8FF] text-[#512BD4] border-[2px] border-black hover:bg-[#EEEAFB] shadow-[2px_2px_0px_0px_#000] transition-colors inline-flex items-center gap-2"
                 >
                   <span>View Conference Schedule</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -94,35 +94,35 @@ export const CallForSpeakers = () => {
             </div>
 
             {/* Quick Facts Card */}
-            <div className="w-full lg:w-72 bg-[#F0EFFB]/60 border border-[#A99AE8]/40 rounded-2xl p-5 shrink-0 text-xs font-inter space-y-3">
-              <div className="font-bold font-montserrat text-[#292735] text-sm pb-2 border-b border-[#A99AE8]/30">
+            <div className="w-full lg:w-72 bg-[#FAF8FF] border-[2px] border-black rounded-2xl p-5 shrink-0 text-xs font-sans space-y-3 shadow-[3px_3px_0px_0px_#000] text-left">
+              <div className="font-black font-sans uppercase text-black text-sm pb-2 border-b-[1.5px] border-black">
                 CFP Key Information
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#292735]/70">Platform:</span>
+                <span className="text-stone-600 font-mono">Platform:</span>
                 <a 
                   href={SESSIONIZE_PUBLIC_URL}
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="font-semibold text-[#7046C8] hover:underline flex items-center gap-1"
+                  className="font-mono font-bold text-[#512BD4] hover:underline flex items-center gap-1"
                 >
                   <span>sessionize.com/dnc26</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#292735]/70">Talk Duration:</span>
-                <span className="font-semibold text-[#292735]">30–45 mins / 60–90 mins</span>
+                <span className="text-stone-600 font-mono">Talk Duration:</span>
+                <span className="font-bold text-black">30–45 / 60–90 mins</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#292735]/70">Location:</span>
-                <span className="font-semibold text-[#292735]">PRPCEM, Amravati</span>
+                <span className="text-stone-600 font-mono">Location:</span>
+                <span className="font-bold text-black">PRPCEM, Amravati</span>
               </div>
-              <div className="pt-2 border-t border-[#A99AE8]/30">
+              <div className="pt-2 border-t-[1.5px] border-black">
                 <button
                   type="button"
                   onClick={() => setShowCocModal(true)}
-                  className="text-[11px] text-[#7046C8] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+                  className="text-[11px] font-mono font-bold text-[#512BD4] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <HelpCircle className="w-3 h-3" />
                   <span>Review Speaker Code of Conduct</span>
@@ -132,20 +132,20 @@ export const CallForSpeakers = () => {
           </div>
 
           {/* Supported Tracks */}
-          <div className="pt-8">
-            <h4 className="text-sm font-bold font-montserrat text-[#292735] uppercase tracking-wider mb-4">
+          <div className="pt-8 text-left">
+            <h4 className="text-sm font-black font-sans uppercase tracking-wider text-black mb-4">
               Accepted Topics &amp; Tracks
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {tracks.map((track, i) => (
-                <div key={i} className="p-4 rounded-xl bg-[#F0EFFB]/30 border border-[#A99AE8]/30">
+                <div key={i} className="p-4 rounded-xl bg-[#FAF8FF] border-[2px] border-black shadow-[2px_2px_0px_0px_#000]">
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <h5 className="font-bold text-sm text-[#292735] font-montserrat">{track.title}</h5>
-                    <span className="text-[10px] font-bold text-[#7046C8] bg-white px-2 py-0.5 rounded border border-[#A99AE8]/30">
+                    <h5 className="font-black text-sm text-black font-sans uppercase">{track.title}</h5>
+                    <span className="text-[10px] font-mono font-bold text-[#512BD4] bg-white px-2 py-0.5 rounded-md border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000]">
                       {track.badge}
                     </span>
                   </div>
-                  <p className="text-xs text-[#292735]/70 font-inter">{track.desc}</p>
+                  <p className="text-xs text-stone-600 font-sans leading-relaxed">{track.desc}</p>
                 </div>
               ))}
             </div>

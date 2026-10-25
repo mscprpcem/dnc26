@@ -25,7 +25,7 @@ const ROLE_PRESETS = [
   'Community Delegate',
 ];
 
-export const DncAttendeeBadge = () => {
+export const DncAttendeeBadge = ({ isModal = false }) => {
   const [badgeShape, setBadgeShape] = useState('circular'); // 'circular' | 'square'
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
@@ -82,12 +82,12 @@ export const DncAttendeeBadge = () => {
   const getSharePostText = () => {
     const roleString = role.trim() ? ` as ${role.trim()}` : '';
     const collegeString = college.trim() ? ` from ${college.trim()}` : '';
-    return `🚀 I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
+    return `I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
 
 Join me for Central India's premier Microsoft developer gathering at PRPCEM Campus, Amravati celebrating modern .NET 11, Azure Cloud, and Generative AI.
 
 Generate your official attendee badge here:
-👉 https://dnc.mscprpcem.tech
+https://dnc.mscprpcem.tech
 
 #DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #dotnet #Azure #AI #developer`;
   };
@@ -696,27 +696,31 @@ Generate your official attendee badge here:
   };
 
   return (
-    <section id="attendee-badge" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
-      <DncSectionFlanks
-        leftIndex="07"
-        leftTag="BADGE"
-        leftBadgeText="🎟️ I'M ATTENDING!"
-        leftBadgeColor="bg-[#512BD4] text-white"
-        leftSub="CUSTOM BADGE"
-        rightIndex="1080P"
-        rightTag="SOCIAL"
-        rightBadgeText="SHARE POST"
-        rightBadgeColor="bg-[#00BDD6] text-black"
-        rightSub="INSTANT DOWNLOAD"
-      />
-      {/* Signpost Header */}
-      <DncSignpost
-        title="ATTENDEE BADGE STUDIO"
-        badge="GET YOUR BADGE"
-        theme="purple"
-      />
+    <section id="attendee-badge" className={isModal ? "py-1 px-1 w-full relative" : "py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative"}>
+      {!isModal && (
+        <>
+          <DncSectionFlanks
+            leftIndex="07"
+            leftTag="BADGE"
+            leftBadgeText="I'M ATTENDING!"
+            leftBadgeColor="bg-[#512BD4] text-white"
+            leftSub="CUSTOM BADGE"
+            rightIndex="1080P"
+            rightTag="SOCIAL"
+            rightBadgeText="SHARE POST"
+            rightBadgeColor="bg-[#00BDD6] text-black"
+            rightSub="INSTANT DOWNLOAD"
+          />
+          {/* Signpost Header */}
+          <DncSignpost
+            title="ATTENDEE BADGE STUDIO"
+            badge="GET YOUR BADGE"
+            theme="purple"
+          />
+        </>
+      )}
 
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]">
+      <div className={isModal ? "bg-white rounded-2xl p-2 sm:p-4 text-left" : "bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]"}>
 
         {/* Intro */}
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-9">

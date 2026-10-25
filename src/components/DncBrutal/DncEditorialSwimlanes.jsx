@@ -1,423 +1,142 @@
 import React from 'react';
-import { Box, Bot, Code2, Users, CheckCircle2, Star, Laptop, Play, Layers, MapPin } from 'lucide-react';
 
 export const DncEditorialSwimlanes = () => {
   return (
-    <section id="overview" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
-
-      {/* Decorative Plus Crosshairs */}
-      <div className="absolute top-16 right-16 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute top-24 right-10 text-[#512BD4]/40 font-mono text-base font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute top-64 -left-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute bottom-20 -right-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-
-      {/* Side spaces gutter badges (Desktop) */}
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -left-16 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
-          <span className="text-[#512BD4]">02</span>
-          <span className="text-stone-300">//</span>
-          <span className="uppercase tracking-wider">OVERVIEW</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-white text-[#512BD4] flex items-center gap-1.5">
-          <Layers className="w-3 h-3 text-[#512BD4]" />
-          <span>CONFERENCE PILLARS</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          'ARCHITECTURE • AI • CLOUD
-        </span>
-        <div className="font-mono text-[9px] font-bold text-stone-400 select-none tracking-widest mt-1">
-          + + +
-        </div>
+    <section className="section band--sun" id="about">
+      {/* Subtle organic confetti dots in user theme colors */}
+      <div className="confetti" aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+        <span style={{ position: 'absolute', top: '9%', left: '4%', width: '13px', height: '13px', borderRadius: '50%', background: 'var(--blue, #00B4D8)', opacity: 0.6 }}></span>
+        <span style={{ position: 'absolute', top: '22%', left: '92%', width: '20px', height: '20px', borderRadius: '50%', background: 'var(--teal, #00F0FF)', opacity: 0.5 }}></span>
+        <span style={{ position: 'absolute', top: '74%', left: '6%', width: '10px', height: '10px', borderRadius: '50%', background: 'var(--magenta, #E0199E)', opacity: 0.6 }}></span>
+        <span style={{ position: 'absolute', top: '86%', left: '95%', width: '18px', height: '18px', borderRadius: '50%', background: 'var(--gold, #FFE89E)', opacity: 0.5 }}></span>
       </div>
 
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -right-16 2xl:-right-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
-          <span className="text-black uppercase tracking-wider">.NET CONF 2026</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-[#EEEAFB] text-[#512BD4] flex items-center gap-1.5">
-          <MapPin className="w-3 h-3 text-[#512BD4]" />
-          <span>AMRAVATI • PRPCEM</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          LEARN • BUILD • CONNECT
-        </span>
-        <div className="font-mono text-[9px] font-bold text-stone-400 select-none tracking-widest mt-1">
-          + + +
-        </div>
-      </div>
+      <div className="wrap about__grid">
+        {/* Left Column: Festival Narrative */}
+        <div>
+          <p className="eyebrow">About .NET Conf 2026</p>
+          <h2 className="h-sec">
+            Where code powers the<br />
+            intelligent cloud.
+          </h2>
 
-      {/* Top Floating Badge Pill */}
-      <div className="flex justify-center mb-3">
-        <div className="inline-flex items-center gap-2 bg-white text-black font-mono font-bold text-xs px-4 py-1.5 rounded-full border-[2px] border-black shadow-[2px_2px_0px_0px_#000]">
-          <span className="w-2 h-2 rounded-full bg-[#512BD4] shrink-0" />
-          <span>TECHNICAL TRACKS</span>
-        </div>
-      </div>
-
-      {/* Section Title */}
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-sans uppercase tracking-tight text-black text-center mb-2.5">
-        CONFERENCE PILLARS & IMMERSION
-      </h2>
-
-      {/* Section Subtitle */}
-      <p className="text-stone-600 font-sans text-xs sm:text-sm md:text-base text-center max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-12">
-        Curated tracks and immersive experiences to help you learn, build, connect and grow with the .NET and Microsoft ecosystem.
-      </p>
-
-      {/* Main 4 Pillars Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-6">
-        {/* ================= PILLAR 1: .NET & CLOUD ARCHITECTURE ================= */}
-        <div className="bg-white border-[2.5px] border-black rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0px_0px_#512BD4] flex flex-col justify-between hover:-translate-y-1 transition-transform">
-          <div>
-            {/* Top header row */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="w-9 h-7 rounded-md bg-[#EEEAFB] text-[#512BD4] font-mono font-black text-xs flex items-center justify-center border border-purple-200">
-                01
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0">
-                <Box className="w-5 h-5 stroke-[2.2]" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              .NET & CLOUD<br />ARCHITECTURE
-            </h3>
-
-            {/* Description */}
-            <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
-              Build scalable, secure and high-performance applications using .NET 11, C# 14 and modern cloud architectures.
+          <div className="prose">
+            <p>Welcome to <strong>.NET Conf 2026 Amravati</strong> — Central India&apos;s premier annual Microsoft developer summit hosted by Microsoft Student Club in Amravati.</p>
+            <p>
+              This edition celebrates the launch of <strong>.NET 11</strong> and brings together student builders, engineering pioneers, Microsoft MVPs, and cloud architects from across Maharashtra.
             </p>
-
-            {/* Checklist */}
-            <div className="space-y-2 mb-5">
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Modern .NET 11 &amp; C# 14 records &amp; ref structs</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Cloud-native distributed systems with .NET Aspire</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Ultra-fast Minimal APIs &amp; Native AOT compilation</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Containerization with Docker &amp; Azure Kubernetes (AKS)</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
-                <span>Zero-allocation performance &amp; memory profiling</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Tags */}
-          <div className="pt-3 border-t border-stone-100 flex flex-wrap gap-1.5 mt-auto">
-            <span className="bg-[#F3E8FF] text-[#512BD4] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-purple-200">
-              .NET 11
-            </span>
-            <span className="bg-[#F3E8FF] text-[#512BD4] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-purple-200">
-              C# 14
-            </span>
-            <span className="bg-[#F3E8FF] text-[#512BD4] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-purple-200">
-              Azure
-            </span>
-            <span className="bg-[#F3E8FF] text-[#512BD4] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-purple-200">
-              Cloud Native
-            </span>
-          </div>
-        </div>
-
-        {/* ================= PILLAR 2: AI, COPILOTS & INTELLIGENT APPS ================= */}
-        <div className="bg-white border-[2.5px] border-black rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0px_0px_#00BDD6] flex flex-col justify-between hover:-translate-y-1 transition-transform">
-          <div>
-            {/* Top header row */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="w-9 h-7 rounded-md bg-[#E0F7FA] text-[#00838F] font-mono font-black text-xs flex items-center justify-center border border-cyan-200">
-                02
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#E0F7FA] text-[#00838F] flex items-center justify-center shrink-0">
-                <Bot className="w-5 h-5 stroke-[2.2]" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              AI, COPILOTS &amp;<br />INTELLIGENT APPS
-            </h3>
-
-            {/* Description */}
-            <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
-              Explore how AI is transforming development with Copilots, LLMs and intelligent agents. Learn, build and integrate AI into real-world apps.
+            <p>
+              From zero-allocation C# 14 algorithms to autonomous multi-agent systems with Semantic Kernel and Azure OpenAI, .NET Conf is where ideas transform into production software.
             </p>
-
-            {/* Checklist */}
-            <div className="space-y-2 mb-5">
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Autonomous AI agents with Microsoft Semantic Kernel</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Enterprise RAG pipelines &amp; vector memory embeddings</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Deploying Small Language Models (SLMs) on Azure AI</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Building intelligent Copilots into enterprise C# code</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#00838F] shrink-0 mt-0.5" />
-                <span>Responsible AI governance, security &amp; privacy controls</span>
-              </div>
-            </div>
           </div>
 
-          {/* Bottom Tags */}
-          <div className="pt-3 border-t border-stone-100 flex flex-wrap gap-1.5 mt-auto">
-            <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-cyan-200">
-              Azure AI
-            </span>
-            <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-cyan-200">
-              Copilots
-            </span>
-            <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-cyan-200">
-              RAG
-            </span>
-            <span className="bg-[#E0F7FA] text-[#00838F] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-cyan-200">
-              Agents
-            </span>
-          </div>
-        </div>
+          <ul className="needs">
+            <li>
+              <span className="needs__n">01</span>
+              <span className="needs__t">Master <strong>.NET 11 Runtime &amp; Native AOT.</strong></span>
+            </li>
+            <li>
+              <span className="needs__n">02</span>
+              <span className="needs__t">Build autonomous AI with <strong>Semantic Kernel &amp; Azure OpenAI.</strong></span>
+            </li>
+            <li>
+              <span className="needs__n">03</span>
+              <span className="needs__t">Orchestrate cloud-native microservices with <strong>.NET Aspire.</strong></span>
+            </li>
+            <li>
+              <span className="needs__n">04</span>
+              <span className="needs__t">Craft modern interactive web apps with <strong>Blazor &amp; Web API.</strong></span>
+            </li>
+          </ul>
 
-        {/* ================= PILLAR 3: MODERN DEVELOPER TOOLING ================= */}
-        <div className="bg-white border-[2.5px] border-black rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0px_0px_#D600AA] flex flex-col justify-between hover:-translate-y-1 transition-transform">
-          <div>
-            {/* Top header row */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="w-9 h-7 rounded-md bg-[#FCE7F3] text-[#D600AA] font-mono font-black text-xs flex items-center justify-center border border-pink-200">
-                03
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#FCE7F3] text-[#D600AA] flex items-center justify-center shrink-0">
-                <Code2 className="w-5 h-5 stroke-[2.2]" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              MODERN<br />DEVELOPER TOOLING
-            </h3>
-
-            {/* Description */}
-            <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
-              Boost productivity with the latest developer tools, platforms and practices across the Microsoft ecosystem.
+          <div className="prose">
+            <p>
+              Whether you are an undergraduate exploring your first C# project or an experienced architect managing distributed enterprise clusters &mdash;
+              <br />
+              <strong>.NET Conf 2026 has a front-row seat for you.</strong>
             </p>
-
-            {/* Checklist */}
-            <div className="space-y-2 mb-5">
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Visual Studio 2025 &amp; VS Code next-gen productivity</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>CI/CD automation pipelines with GitHub Actions</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>Full-Stack unified web apps with Blazor WebAssembly</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>EF Core interceptors, query tuning &amp; DB migrations</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#D600AA] shrink-0 mt-0.5" />
-                <span>NuGet package authoring &amp; open source collaboration</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Tags */}
-          <div className="pt-3 border-t border-stone-100 flex flex-wrap gap-1.5 mt-auto">
-            <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-pink-200">
-              Visual Studio
-            </span>
-            <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-pink-200">
-              GitHub
-            </span>
-            <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-pink-200">
-              DevOps
-            </span>
-            <span className="bg-[#FCE7F3] text-[#D600AA] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-pink-200">
-              Blazor
-            </span>
-          </div>
-        </div>
-
-        {/* ================= PILLAR 4: COMMUNITY, CAREER & INNOVATION ================= */}
-        <div className="bg-white border-[2.5px] border-black rounded-3xl p-5 sm:p-6 shadow-[5px_5px_0px_0px_#10B981] flex flex-col justify-between hover:-translate-y-1 transition-transform">
-          <div>
-            {/* Top header row */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="w-9 h-7 rounded-md bg-[#D1FAE5] text-[#059669] font-mono font-black text-xs flex items-center justify-center border border-emerald-200">
-                04
-              </span>
-              <div className="w-10 h-10 rounded-2xl bg-[#D1FAE5] text-[#059669] flex items-center justify-center shrink-0">
-                <Users className="w-5 h-5 stroke-[2.2]" />
-              </div>
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg sm:text-xl font-black font-sans uppercase tracking-tight text-black mb-2.5 leading-snug">
-              COMMUNITY,<br />CAREER &amp; INNOVATION
-            </h3>
-
-            {/* Description */}
-            <p className="text-stone-700 font-sans text-xs sm:text-[13px] leading-relaxed mb-4">
-              Engage with the community, learn from industry experts and get insights on career growth, open source and emerging tech trends.
+            <p>
+              Learn directly from leaders, get hands-on in code labs, and connect with peers building tomorrow&apos;s tech. <span className="u-mark">Join the movement.</span>
             </p>
+          </div>
 
-            {/* Checklist */}
-            <div className="space-y-2 mb-5">
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Headline Keynote &amp; Masterclasses from Microsoft MVPs</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Tech career roadmap from college to global software roles</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Microsoft Student Club PRPCEM leadership opportunities</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>In-person mentor networking &amp; student delegation mixer</span>
-              </div>
-              <div className="flex items-start gap-2 text-xs font-sans text-stone-800">
-                <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
-                <span>Live tech quiz awards, conference swag kits &amp; certs</span>
-              </div>
+          <div className="quote">
+            .NET Conf 2026 — Connect. Learn. Build. Grow.
+          </div>
+
+          {/* Official Mascot Showcase Badge */}
+          <div className="sticker" style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '1.25rem', padding: '1rem 1.25rem' }}>
+            <img
+              src="/assets/dotnetconf-bots-rocket-angled.png"
+              alt=".NET Conf 2026 Mascot Rocket with .NET Bots"
+              style={{ width: '100px', height: 'auto', flexShrink: 0, filter: 'drop-shadow(0 6px 14px rgba(81, 43, 212, 0.22))' }}
+            />
+            <div>
+              <p style={{ fontFamily: 'var(--f-mono)', fontSize: '0.75rem', fontWeight: 800, color: 'var(--purple)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.2rem' }}>
+                OFFICIAL 2026 SUMMIT CREW
+              </p>
+              <p style={{ fontWeight: 800, fontSize: '0.92rem', color: '#120838', margin: 0, lineHeight: 1.35 }}>
+                Accelerating Maharashtra&apos;s developer ecosystem into the intelligent cloud era.
+              </p>
             </div>
-          </div>
-
-          {/* Bottom Tags */}
-          <div className="pt-3 border-t border-stone-100 flex flex-wrap gap-1.5 mt-auto">
-            <span className="bg-[#D1FAE5] text-[#059669] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-200">
-              Career
-            </span>
-            <span className="bg-[#D1FAE5] text-[#059669] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-200">
-              Community
-            </span>
-            <span className="bg-[#D1FAE5] text-[#059669] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-200">
-              Open Source
-            </span>
-            <span className="bg-[#D1FAE5] text-[#059669] font-mono font-bold text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-200">
-              Innovation
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* ================= BOTTOM CARD: BEYOND SESSIONS / IMMERSIVE EXPERIENCES ================= */}
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-3 sm:p-4 shadow-[5px_5px_0px_0px_#000] flex flex-col lg:flex-row items-stretch lg:items-center gap-4 sm:gap-6">
-        {/* Left Solid Purple Block */}
-        <div className="bg-[#512BD4] text-white rounded-2xl px-5 py-4 border-[2px] border-black flex items-center gap-3.5 shrink-0 shadow-[2px_2px_0px_0px_#000]">
-          <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center shrink-0">
-            <Star className="w-5 h-5 text-white" />
-          </div>
-          <div className="font-sans font-black text-sm sm:text-base uppercase leading-tight tracking-tight">
-            <span>BEYOND</span><br />
-            <span>SESSIONS</span>
           </div>
         </div>
 
-        {/* Right Content */}
-        <div className="flex-1 flex flex-col justify-center">
-          {/* Header */}
-          <div>
-            <span className="text-xs sm:text-sm font-black font-sans uppercase text-black tracking-wider block">
-              IMMERSIVE EXPERIENCES
-            </span>
-            <span className="text-[11px] sm:text-xs text-stone-500 font-sans block mt-0.5">
-              More than just talks. Experience .NET Conf through hands-on learning, collaboration and real-world engagement.
-            </span>
-          </div>
-
-          {/* 4 Items in a Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-3 pt-3 border-t border-stone-200">
-            {/* 1. Hands-on Workshops */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 shadow-[1px_1px_0px_0px_#000]">
-                <Laptop className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Hands-on Workshops
-                </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight">
-                  Build and learn with experts
-                </span>
-              </div>
+        {/* Right Column: The Arc of the Day Sticker Card */}
+        <div className="sticker" style={{ padding: 'clamp(1.4rem, 3vw, 2.2rem)' }}>
+          <p className="eyebrow">The arc of the day</p>
+          <div className="arc" style={{ marginTop: '1.25rem' }}>
+            <div className="arc__step" style={{ '--c': 'var(--blue, #00B4D8)' }}>
+              <span className="arc__ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </span>
+              <span>
+                <span className="arc__t">01 · Keynote &amp; .NET 11 Launchpad</span>
+                <span className="arc__d">Opening keynote exploring the latest innovations in .NET 11, C# 14, and Microsoft Cloud AI ecosystem.</span>
+              </span>
             </div>
 
-            {/* 2. Live Demos */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 shadow-[1px_1px_0px_0px_#000]">
-                <Play className="w-4 h-4 fill-[#512BD4]" />
-              </div>
-              <div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Live Demos
-                </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight">
-                  See real-world solutions in action
-                </span>
-              </div>
+            <div className="arc__step" style={{ '--c': 'var(--magenta, #E0199E)' }}>
+              <span className="arc__ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 16v-4M12 8h.01"></path>
+                </svg>
+              </span>
+              <span>
+                <span className="arc__t">02 · Deep-Dive Technical Sessions</span>
+                <span className="arc__d">Engaging technical stages with live coding, architectural breakdowns, and real-world system designs.</span>
+              </span>
             </div>
 
-            {/* 3. Networking Spaces */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 shadow-[1px_1px_0px_0px_#000]">
-                <Users className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Networking Spaces
-                </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight">
-                  Connect with developers, mentors and industry experts
-                </span>
-              </div>
+            <div className="arc__step" style={{ '--c': 'var(--gold, #FFE89E)' }}>
+              <span className="arc__ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </span>
+              <span>
+                <span className="arc__t">03 · Hands-On Labs &amp; MVP Panels</span>
+                <span className="arc__d">Build live with Microsoft MVPs, get code reviewed, and discuss cloud solutions directly.</span>
+              </span>
             </div>
 
-            {/* 4. Project Showcase */}
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200 shadow-[1px_1px_0px_0px_#000]">
-                <Box className="w-4 h-4" />
-              </div>
-              <div>
-                <span className="text-xs font-bold font-sans text-black block leading-snug">
-                  Project Showcase
-                </span>
-                <span className="text-[10px] text-stone-500 font-sans block leading-tight">
-                  Explore innovative ideas from the community
-                </span>
-              </div>
+            <div className="arc__step" style={{ '--c': 'var(--teal, #00F0FF)' }}>
+              <span className="arc__ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </span>
+              <span>
+                <span className="arc__t">04 · Networking, Swag &amp; Community</span>
+                <span className="arc__d">Official .NET Bot swag kits, verified certificates, delegate lunch, and lifelong connections.</span>
+              </span>
             </div>
           </div>
         </div>

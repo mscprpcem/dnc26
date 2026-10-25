@@ -7,7 +7,7 @@ import React from 'react';
 export const DncSectionFlanks = ({
   leftIndex = '01',
   leftTag = 'SECTION',
-  leftBadgeText = '✦ .NET CONF',
+  leftBadgeText = '// .NET CONF',
   leftBadgeColor = 'bg-[#FFE600] text-black',
   leftSub = 'PRPCEM',
   leftRotate = '-rotate-6',
@@ -26,7 +26,7 @@ export const DncSectionFlanks = ({
         className="hidden 2xl:flex absolute -left-20 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
       >
         {/* Section Index Marker */}
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
+        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-md shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
           <span className="text-[#512BD4]">{leftIndex}</span>
           <span className="text-stone-300">//</span>
           <span className="uppercase tracking-wider">{leftTag}</span>
@@ -58,7 +58,7 @@ export const DncSectionFlanks = ({
         className="hidden 2xl:flex absolute -right-20 2xl:-right-24 top-12 flex-col items-center gap-2 select-none pointer-events-none z-10"
       >
         {/* Section Right Marker */}
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
+        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-md shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
           <span className="text-[#00BDD6]">{rightIndex}</span>
           <span className="text-stone-300">//</span>
           <span className="uppercase tracking-wider">{rightTag}</span>

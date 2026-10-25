@@ -30,10 +30,10 @@
 :root {
   color-scheme: light;
   /* .NET Conf 2026 Amravati Branding Design Tokens */
-  --conference-bg: #F0EFFB;
-  --conference-primary: #7046C8;
-  --conference-secondary: #A99AE8;
-  --conference-text: #292735;
+  --conference-bg: #FAF8F5;
+  --conference-primary: #512BD4;
+  --conference-secondary: #120838;
+  --conference-text: #120838;
   --conference-white: #FFFFFF;
 
   --color-midnight-blue-primary: #190649;
@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Accessibility focus ring */
 :focus-visible {
-  outline: 2px solid var(--conference-primary, #7046C8);
+  outline: 2px solid var(--conference-primary, #512BD4);
   outline-offset: 2px;
 }
 

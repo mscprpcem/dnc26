@@ -112,12 +112,12 @@ export const CodeOfConductPage = ({ onBack }) => {
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4 font-mono text-xs font-bold">
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">🌟 Experience Level</div>
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">🌈 Gender Identity</div>
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">♿ Disability & Accessibility</div>
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">🧠 Neurodiversity</div>
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">🌍 Ethnicity & Nationality</div>
-            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-xl">💻 Tech Stack & Background</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Experience Level</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Gender Identity</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Disability & Accessibility</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Neurodiversity</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Ethnicity & Nationality</div>
+            <div className="bg-[#FAF9FF] border border-black p-2.5 rounded-lg">Tech Stack & Background</div>
           </div>
 
           <p className="text-stone-700 text-sm font-sans leading-relaxed">
@@ -242,15 +242,15 @@ export const CodeOfConductPage = ({ onBack }) => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-sans">
-            <div className="bg-white border-[1.5px] border-black p-3.5 rounded-2xl shadow-[2px_2px_0px_0px_#000]">
-              <strong className="block text-black font-bold mb-1">🏛️ Physical Campus Spaces:</strong>
+            <div className="bg-white border-[1.5px] border-black p-3.5 rounded-lg shadow-[2px_2px_0px_0px_#000]">
+              <strong className="block text-black font-bold mb-1">Physical Campus Spaces:</strong>
               <p className="text-stone-600">
                 Main Auditorium, Keynote stage, Technical lab classrooms, Breakout tracks, Cafeteria lunch zones, and PRPCEM campus grounds.
               </p>
             </div>
 
-            <div className="bg-white border-[1.5px] border-black p-3.5 rounded-2xl shadow-[2px_2px_0px_0px_#000]">
-              <strong className="block text-black font-bold mb-1">💬 Digital & Online Channels:</strong>
+            <div className="bg-white border-[1.5px] border-black p-3.5 rounded-lg shadow-[2px_2px_0px_0px_#000]">
+              <strong className="block text-black font-bold mb-1">Digital & Online Channels:</strong>
               <p className="text-stone-600">
                 Official WhatsApp delegate community, Discord channels, GitHub repositories, Speaker submission portal, and social media interactions.
               </p>

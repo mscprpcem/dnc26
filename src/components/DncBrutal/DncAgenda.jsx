@@ -1,100 +1,139 @@
 import React from 'react';
-import { Calendar, MapPin } from 'lucide-react';
-import { SessionizeEmbed } from '../Agenda/SessionizeEmbed.jsx';
+import { Check, Calendar } from 'lucide-react';
 
 export const DncAgenda = () => {
+  const scheduleItems = [
+    {
+      time: '08:30',
+      title: 'Check-in · Gates Open, Badge Pickup & Morning Coffee',
+      desc: 'Check-in at PRPCEM main foyer, collect your .NET Bot delegate swag kit, and network over hot coffee.',
+      isConfirmed: true,
+      category: 'Check-in',
+    },
+    {
+      time: '10:00',
+      isConfirmed: false,
+    },
+    {
+      time: '11:15',
+      isConfirmed: false,
+    },
+    {
+      time: '13:00',
+      title: 'Delegate Buffet Lunch & Hallway Discussions',
+      desc: 'Full catered lunch at the campus food court. The famous hallway track starts here.',
+      isConfirmed: true,
+      category: 'Lunch',
+    },
+    {
+      time: '14:15',
+      isConfirmed: false,
+    },
+    {
+      time: '16:00',
+      isConfirmed: false,
+    },
+    {
+      time: '17:30',
+      title: 'Closing Ceremony · Swag Giveaway & Group Photo',
+      desc: 'Verified digital credentials, limited-edition astronaut bot collectibles, and the annual community photograph.',
+      isConfirmed: true,
+      category: 'Closing Ceremony',
+    },
+  ];
+
   return (
-    <section id="schedule" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
-
-      {/* Decorative Plus Crosshairs */}
-      <div className="absolute top-16 right-16 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute top-24 right-10 text-[#512BD4]/40 font-mono text-base font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute top-64 -left-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-      <div className="absolute bottom-20 -right-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
-
-      {/* Side spaces gutter badges (Desktop) */}
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -left-16 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#512BD4]" />
-          <span className="text-black uppercase tracking-wider">.NET CONF 2026</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-[#FFEBF7] text-[#D600AA] flex items-center gap-1.5">
-          <span className="text-amber-500 font-bold">⚡</span>
-          <span>AMRAVATI EDITION</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          LEARN • BUILD • CONNECT
-        </span>
-        <div className="font-mono text-[9px] font-bold text-stone-400 select-none tracking-widest mt-1">
-          + + +
-        </div>
-      </div>
-
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -right-16 2xl:-right-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF]" />
-          <span className="text-black uppercase tracking-wider">CENTRAL INDIA</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-white text-black flex items-center gap-1.5">
-          <MapPin className="w-3 h-3 text-[#512BD4]" />
-          <span>PRPCEM CAMPUS</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          DEVELOPERS • COMMUNITY • INNOVATION
-        </span>
-      </div>
-
-      {/* Hanging Signpost Header */}
-      <div className="flex flex-col items-center mb-6">
-        <div className="bg-[#512BD4] text-white px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] flex items-center gap-3 z-10">
-          <span className="bg-[#00E5FF] text-black text-[10px] sm:text-xs font-mono font-black px-3.5 py-1 rounded-full border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000] uppercase">
-            FULL DAY SCHEDULE
-          </span>
-          <span className="font-sans font-black text-sm sm:text-base md:text-lg tracking-wider uppercase">
-            CONFERENCE SCHEDULE
-          </span>
-        </div>
-
-        {/* 2 Hanging Cords Connecting to Main Card */}
-        <div className="flex justify-between w-64 -mt-1 -mb-1 z-0">
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
+    <section className="section band--paper2" id="schedule" style={{ scrollMarginTop: '80px' }}>
+      <div className="wrap">
+        <div className="sechead sechead--split">
+          <div>
+            <p className="eyebrow">
+              <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
+              <span>Schedule &amp; Agenda · Tracks Timeline</span>
+            </p>
+            <h2 className="h-sec" style={{ marginBottom: 0 }}>
+              One power-packed day.<br />Four parallel tracks.
+            </h2>
           </div>
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Neo-Brutalist Showcase Card */}
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-7xl mx-auto">
-        {/* Top Center Pill */}
-        <div className="flex justify-center mb-3">
-          <div className="inline-flex items-center gap-2 bg-white text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
-            <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>ANNUAL 2026 EDITION • SESSIONIZE INTEGRATION</span>
-          </div>
+          <p className="lede">
+            Check-in, Lunch, and Closing Ceremony are confirmed. Remaining session tracks are releasing soon.
+          </p>
         </div>
 
-        {/* Main Headline */}
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-black font-sans uppercase tracking-tight text-black text-center mb-2 leading-tight">
-          CONFERENCE <span className="text-[#512BD4]">SCHEDULE</span>
-        </h2>
+        <div className="agenda">
+          {scheduleItems.map((item, idx) => (
+            <div
+              key={idx}
+              className={`agenda__item group ${
+                item.isConfirmed
+                  ? 'border-black'
+                  : 'border-black hover:border-[#512BD4]'
+              }`}
+            >
+              {/* Left Column: Time */}
+              <div className="agenda__time shrink-0 min-w-[95px]">
+                {item.isConfirmed ? (
+                  <div className="flex flex-col">
+                    <span className="font-mono text-base sm:text-lg font-black text-[#512BD4] tracking-tight">
+                      {item.time}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-stone-500 uppercase">
+                      Confirmed
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    <span className="font-mono text-base sm:text-lg font-black text-[#120838] tracking-tight">
+                      {item.time}
+                    </span>
+                    <span className="text-[11px] font-mono font-bold text-stone-400 tracking-widest mt-0.5">
+                      ......
+                    </span>
+                  </div>
+                )}
+              </div>
 
-        {/* Subtitle */}
-        <p className="text-stone-600 font-sans text-xs sm:text-sm md:text-[14px] text-center max-w-2xl mx-auto leading-relaxed mb-6">
-          Explore the sessions, meet the speakers, and plan your conference experience.
-        </p>
+              {/* Middle Column: Details or just ...... */}
+              <div className="agenda__body flex-1">
+                {item.isConfirmed ? (
+                  <div>
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-black/20 uppercase bg-[#DCFCE7] text-[#15803D]">
+                        {item.category}
+                      </span>
+                    </div>
+                    <b className="font-sans font-black text-base sm:text-lg text-[#120838] leading-snug">
+                      {item.title}
+                    </b>
+                    <span className="font-sans text-xs sm:text-sm text-stone-600 mt-1 block leading-relaxed">
+                      {item.desc}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex items-center py-2">
+                    <span className="font-mono text-2xl sm:text-3xl font-black text-[#512BD4] tracking-widest select-none">
+                      ......
+                    </span>
+                  </div>
+                )}
+              </div>
 
-        {/* Live Sessionize Feed Embed */}
-        <div>
-          <SessionizeEmbed />
+              {/* Right Column: Status Tag */}
+              <div className="agenda__status shrink-0 mt-2 sm:mt-0">
+                {item.isConfirmed ? (
+                  <span className="inline-flex items-center gap-1.5 font-mono text-xs font-black uppercase px-3 py-1.5 rounded-lg border-2 border-black bg-[#DCFCE7] text-[#15803D] shadow-[2px_2px_0px_#000]">
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <span>CONFIRMED</span>
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-2 font-mono text-xs font-black uppercase px-3.5 py-1.5 rounded-lg border-2 border-black bg-[#FAF8FF] text-[#512BD4] shadow-[2px_2px_0px_#120838] group-hover:bg-[#FFD13B] group-hover:text-black transition-colors">
+                    <span className="w-3.5 h-3.5 border-2 border-[#512BD4] border-t-transparent rounded-full animate-spin shrink-0" />
+                    <span>......</span>
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

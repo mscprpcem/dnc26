@@ -22,7 +22,7 @@ export const CodeOfConductModal = ({ isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-[300] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div 
@@ -88,9 +88,9 @@ export const CodeOfConductModal = ({ isOpen, onClose }) => {
               If you experience or witness unacceptable behavior, contact the MSC PRPCEM Organizing Committee immediately:
             </p>
             <div className="font-mono text-xs font-bold text-black flex flex-wrap gap-3">
-              <span>📧 msc@prpcem.ac.in</span>
+              <span>msc@prpcem.ac.in</span>
               <span>•</span>
-              <span>📍 Help Desk at Main Auditorium</span>
+              <span>Help Desk at Main Auditorium</span>
             </div>
           </div>
         </div>

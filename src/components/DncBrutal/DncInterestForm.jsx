@@ -1,9 +1,26 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, Mail, Phone, Briefcase, Building2, Target, ArrowRight, Megaphone, Calendar, Bell, Check, Info, ChevronDown, Plus, Minus, HelpCircle } from 'lucide-react';
+import {
+  User,
+  Mail,
+  Phone,
+  Briefcase,
+  Building2,
+  Target,
+  ArrowRight,
+  Megaphone,
+  Calendar,
+  Bell,
+  Check,
+  Info,
+  ChevronDown,
+  Plus,
+  Minus,
+  HelpCircle,
+} from 'lucide-react';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
 import { eventData } from '../../data/event.js';
 
-export const DncInterestForm = () => {
+export const DncInterestForm = ({ isModal = false, onClose }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -17,6 +34,7 @@ export const DncInterestForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isRoleOpen, setIsRoleOpen] = useState(false);
   const roleDropdownRef = useRef(null);
 
@@ -49,10 +67,10 @@ export const DncInterestForm = () => {
 
   const interestTopics = [
     { id: '.NET & C#', label: '</> .NET & C#', bg: 'bg-[#EEEAFB] text-[#512BD4] border-purple-200' },
-    { id: 'Azure & Cloud', label: '☁️ Azure & Cloud', bg: 'bg-[#E0F2FE] text-[#0284C7] border-blue-200' },
-    { id: 'AI & Copilots', label: '🧠 AI & Copilots', bg: 'bg-[#FCE7F3] text-[#D600AA] border-pink-200' },
-    { id: 'Developer Tools', label: '🛠️ Developer Tools', bg: 'bg-[#DCFCE7] text-[#16A34A] border-green-200' },
-    { id: 'Community & Networking', label: '👥 Community & Networking', bg: 'bg-[#FEF3C7] text-[#D97706] border-amber-200' },
+    { id: 'Azure & Cloud', label: 'Azure & Cloud', bg: 'bg-[#E0F2FE] text-[#0284C7] border-blue-200' },
+    { id: 'AI & Copilots', label: 'AI & Copilots', bg: 'bg-[#FCE7F3] text-[#D600AA] border-pink-200' },
+    { id: 'Developer Tools', label: 'Developer Tools', bg: 'bg-[#DCFCE7] text-[#16A34A] border-green-200' },
+    { id: 'Community & Networking', label: 'Community & Networking', bg: 'bg-[#FEF3C7] text-[#D97706] border-amber-200' },
   ];
 
   const handleToggleInterest = (topic) => {
@@ -79,83 +97,309 @@ export const DncInterestForm = () => {
     }
   };
 
+  // Render Clean Modal Variant
+  if (isModal) {
+    return (
+      <div className="w-full text-left">
+        {/* Modal Header */}
+        <div className="pr-10 mb-4 sm:mb-5">
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <span className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-black shadow-[1.5px_1.5px_0px_#000] uppercase">
+              <Calendar className="w-3.5 h-3.5" />
+              <span>.NET CONF 2026 • AMRAVATI</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold px-2.5 py-1 rounded-lg bg-[#DCFCE7] text-[#16A34A] border-[1.5px] border-black shadow-[1.5px_1.5px_0px_#000] uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A]" />
+              <span>PRIORITY ACCESS</span>
+            </span>
+          </div>
+
+          <h2 id="interest-modal-title" className="text-2xl sm:text-3xl font-black font-sans uppercase tracking-tight text-[#120838] leading-tight mt-1">
+            Register Your <span className="text-[#512BD4]">Interest</span>
+          </h2>
+          <p className="text-stone-600 font-sans text-xs sm:text-sm mt-1 leading-relaxed">
+            Be the first to receive delegate ticket announcements, agenda details, and priority passes.
+          </p>
+        </div>
+
+        {isSubmitted ? (
+          <div className="bg-white border-[2.5px] border-black rounded-2xl p-6 sm:p-8 text-center shadow-[4px_4px_0px_0px_#120838]">
+            <div className="w-14 h-14 rounded-2xl bg-[#DCFCE7] text-[#16A34A] border-[2px] border-black flex items-center justify-center mx-auto mb-3 shadow-[2.5px_2.5px_0px_0px_#000]">
+              <Check className="w-8 h-8 stroke-[3]" />
+            </div>
+            <div className="inline-block bg-[#FFD13B] text-black font-mono font-bold text-[10px] px-3 py-1 rounded-md border-[1.5px] border-black mb-3 uppercase tracking-wider shadow-[1px_1px_0px_#000]">
+              INTEREST CONFIRMED
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black font-sans text-[#120838] uppercase mb-1.5">
+              You're On The Priority List!
+            </h3>
+            <p className="text-stone-600 font-sans text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6">
+              Thank you{formData.fullName ? `, ${formData.fullName}` : ''}! Your interest has been recorded. You'll receive delegate passes notification, speaker schedules, and badge invitations first.
+            </p>
+            {onClose && (
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-6 py-2.5 bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl border-[2px] border-black shadow-[3px_3px_0px_#000] hover:shadow-[1px_1px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer"
+              >
+                Close Window
+              </button>
+            )}
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-3.5">
+            {errorMessage && (
+              <div className="p-3 bg-red-50 border-2 border-red-500 rounded-xl text-xs font-mono text-red-700">
+                {errorMessage}
+              </div>
+            )}
+
+            {/* Row 1: Full name & Email */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+              <div className="space-y-1">
+                <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Full name *</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Alex Morgan"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Email address *</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="alex@domain.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Row 2: Mobile number & Custom Role Dropdown */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+              <div className="space-y-1">
+                <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Mobile number *</span>
+                </label>
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-2 rounded-xl border-2 border-black bg-[#FFD13B] text-black font-mono text-xs font-black shadow-[1.5px_1.5px_0px_#000] shrink-0 select-none flex items-center justify-center">
+                    +91
+                  </span>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="9876543210"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Role: Custom Neo-Brutalist Dropdown */}
+              <div className="space-y-1 relative" ref={roleDropdownRef}>
+                <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                  <Briefcase className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Role *</span>
+                </label>
+
+                {/* Trigger Button */}
+                <button
+                  type="button"
+                  id="dnc-modal-role-dropdown-btn"
+                  onClick={() => setIsRoleOpen(!isRoleOpen)}
+                  className={`w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans flex items-center justify-between transition-all cursor-pointer hover:bg-stone-50 ${
+                    isRoleOpen ? 'ring-2 ring-[#512BD4]/30 border-[#512BD4] bg-[#FAF8FF]' : ''
+                  }`}
+                  aria-haspopup="listbox"
+                  aria-expanded={isRoleOpen}
+                >
+                  {selectedRole ? (
+                    <div className="flex items-center gap-2 truncate">
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 shadow-[1px_1px_0px_0px_#000] ${selectedRole.badgeBg}`}>
+                        {selectedRole.badge}
+                      </span>
+                      <span className="font-bold text-black truncate">{selectedRole.label}</span>
+                    </div>
+                  ) : (
+                    <span className="text-stone-400 font-normal">Select your role...</span>
+                  )}
+                  <ChevronDown
+                    className={`w-4 h-4 text-black transition-transform duration-200 shrink-0 ${
+                      isRoleOpen ? 'rotate-180 text-[#512BD4]' : ''
+                    }`}
+                  />
+                </button>
+
+                <input
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  className="opacity-0 absolute pointer-events-none h-0 w-0 -bottom-2"
+                  value={formData.role}
+                  required
+                  onChange={() => {}}
+                />
+
+                {isRoleOpen && (
+                  <div 
+                    role="listbox"
+                    className="absolute z-50 left-0 right-0 top-full mt-1.5 bg-white rounded-2xl border-2 border-black shadow-[4px_4px_0px_0px_#000] p-1.5 space-y-1 max-h-56 overflow-y-auto"
+                  >
+                    {roleOptions.map((opt) => {
+                      const isSelected = formData.role === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          role="option"
+                          aria-selected={isSelected}
+                          onClick={() => {
+                            setFormData({ ...formData, role: opt.value });
+                            setIsRoleOpen(false);
+                          }}
+                          className={`w-full text-left px-3 py-2 rounded-xl text-xs sm:text-sm font-sans flex items-center justify-between transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-[#EEEAFB] text-[#512BD4] font-black border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000]'
+                              : 'text-black hover:bg-[#FAF8FF] hover:translate-x-1 font-semibold'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2 truncate">
+                            <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 ${opt.badgeBg}`}>
+                              {opt.badge}
+                            </span>
+                            <span className="truncate">{opt.label}</span>
+                          </div>
+                          {isSelected && <Check className="w-4 h-4 text-[#512BD4] shrink-0 stroke-[3]" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Row 3: College / organisation */}
+            <div className="space-y-1">
+              <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                <Building2 className="w-3.5 h-3.5 text-[#512BD4]" />
+                <span>College / organisation *</span>
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. PRPCEM Amravati or Company name"
+                value={formData.college}
+                onChange={(e) => setFormData({ ...formData, college: e.target.value })}
+                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+              />
+            </div>
+
+            {/* Row 4: Areas of interest */}
+            <div className="space-y-1.5 pt-0.5">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
+                  <Target className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Areas of interest (Optional)</span>
+                </label>
+                <span className="text-[10px] text-stone-500 font-mono">
+                  Select topics
+                </span>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {interestTopics.map((topic) => {
+                  const isSelected = formData.interests.includes(topic.id);
+                  return (
+                    <button
+                      key={topic.id}
+                      type="button"
+                      onClick={() => handleToggleInterest(topic.id)}
+                      className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-mono font-bold border transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#512BD4] text-white border-2 border-black shadow-[1.5px_1.5px_0px_#000] scale-[1.02]'
+                          : 'bg-white text-stone-700 border border-stone-300 hover:border-black hover:text-black'
+                      }`}
+                    >
+                      {topic.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Row 5: Checkbox */}
+            <div className="flex items-center gap-2 pt-0.5">
+              <input
+                id="agree-updates-modal"
+                type="checkbox"
+                checked={formData.agreed}
+                onChange={(e) => setFormData({ ...formData, agreed: e.target.checked })}
+                className="w-4 h-4 rounded text-[#512BD4] focus:ring-[#512BD4] cursor-pointer"
+              />
+              <label htmlFor="agree-updates-modal" className="text-xs font-sans text-stone-700 cursor-pointer select-none">
+                I agree to receive event announcements and ticket updates.
+              </label>
+            </div>
+
+            {/* Row 6: Submit Button */}
+            <div className="pt-1.5">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3.5 px-6 rounded-xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm uppercase tracking-wider border-[2.5px] border-black shadow-[4px_4px_0px_#120838] hover:shadow-[2px_2px_0px_#120838] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>REGISTERING INTEREST...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>REGISTER INTEREST</span>
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Subtext */}
+            <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-500 font-sans text-center pt-0.5">
+              <Info className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+              <span>Priority access to delegate passes · No spam</span>
+            </div>
+          </form>
+        )}
+      </div>
+    );
+  }
+
+  // Full-page standalone variant
   return (
     <section id="register" className="py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative">
-
       {/* Decorative Plus Crosshairs */}
       <div className="absolute top-16 right-16 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
       <div className="absolute top-24 right-10 text-[#512BD4]/40 font-mono text-base font-bold select-none pointer-events-none hidden lg:block">+</div>
       <div className="absolute top-64 -left-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
       <div className="absolute bottom-20 -right-6 text-[#512BD4] font-mono text-2xl font-bold select-none pointer-events-none hidden lg:block">+</div>
 
-      {/* Side spaces gutter badges (Desktop) */}
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -left-16 2xl:-left-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-white border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black text-black">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#512BD4]" />
-          <span className="text-black uppercase tracking-wider">CENTRAL INDIA</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-[#DCFCE7] text-[#16A34A] flex items-center gap-1.5">
-          <span>⚡</span>
-          <span>DEVELOPER COMMUNITY</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          LEARN • BUILD • CONNECT
-        </span>
-        <div className="font-mono text-[9px] font-bold text-stone-400 select-none tracking-widest mt-1">
-          + + +
-        </div>
-      </div>
-
-      <div 
-        aria-hidden="true"
-        className="hidden 2xl:flex absolute -right-16 2xl:-right-24 top-10 flex-col items-center gap-2 select-none pointer-events-none z-10"
-      >
-        <div className="bg-[#FFD13B] text-black border-[1.5px] border-black px-3 py-0.5 rounded-full shadow-[1.5px_1.5px_0px_0px_#000] flex items-center gap-1.5 font-mono text-[10px] font-black">
-          <span>👥 ALL ARE WELCOME</span>
-        </div>
-        <div className="px-3 py-1 rounded-lg border-[2px] border-black font-mono font-black text-[10px] shadow-[2px_2px_0px_0px_#000] uppercase whitespace-nowrap bg-[#EEEAFB] text-[#512BD4] flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#512BD4]" />
-          <span>AMRAVATI - PRPCEM</span>
-        </div>
-        <span className="font-mono text-[9px] font-bold text-stone-500 uppercase tracking-widest mt-0.5">
-          STUDENTS • DEVELOPERS • EDUCATORS
-        </span>
-        <div className="font-mono text-[9px] font-bold text-stone-400 select-none tracking-widest mt-1">
-          + + +
-        </div>
-      </div>
-
-      {/* Hanging Signpost Header */}
-      <div className="flex flex-col items-center mb-6">
-        <div className="bg-[#512BD4] text-white px-5 sm:px-7 py-2 sm:py-2.5 rounded-full border-[2.5px] border-black shadow-[4px_4px_0px_0px_#000] flex items-center gap-3 z-10">
-          <span className="bg-[#00E5FF] text-black text-[10px] sm:text-xs font-mono font-black px-3.5 py-1 rounded-full border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000] uppercase">
-            .NET CONF 2026 • AMRAVATI
-          </span>
-          <span className="text-white/60 font-mono text-xs">|</span>
-          <span className="font-sans font-black text-sm sm:text-base md:text-lg tracking-wider uppercase">
-            REGISTER YOUR INTEREST
-          </span>
-        </div>
-
-        {/* 2 Hanging Cords Connecting to Main Card */}
-        <div className="flex justify-between w-64 -mt-1 -mb-1 z-0">
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
-          </div>
-          <div className="w-3.5 h-6 bg-white border-[2px] border-black rounded-b-md flex items-center justify-center shadow-[1px_1px_0px_0px_#000]">
-            <div className="w-1.5 h-1.5 rounded-full bg-black"></div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Neo-Brutalist Form Card */}
-      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-[32px] p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-7xl mx-auto">
+      <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-xl p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-4xl mx-auto">
         {/* Top Center Pill */}
         <div className="flex justify-center mb-3">
-          <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
+          <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-md border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
             <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
             <span>.NET CONF 2026 • AMRAVATI</span>
           </div>
@@ -185,6 +429,12 @@ export const DncInterestForm = () => {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            {errorMessage && (
+              <div className="p-3 bg-red-50 border-2 border-red-500 rounded-lg text-xs font-mono text-red-700">
+                {errorMessage}
+              </div>
+            )}
+
             {/* Row 1: Full name & Email */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1 text-left">
@@ -226,8 +476,8 @@ export const DncInterestForm = () => {
                   <span>Mobile number *</span>
                 </label>
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-2.5 rounded-xl border-[2px] border-black bg-[#FFD13B] text-black font-mono text-xs font-bold shadow-[2px_2px_0px_0px_#000] shrink-0 select-none">
-                    🇮🇳 +91
+                  <span className="px-3 py-2.5 rounded-md border-[2px] border-black bg-[#FFD13B] text-black font-mono text-xs font-bold shadow-[2px_2px_0px_0px_#000] shrink-0 select-none">
+                    +91
                   </span>
                   <input
                     type="tel"
@@ -240,13 +490,13 @@ export const DncInterestForm = () => {
                 </div>
               </div>
 
-              {/* Role: Custom Neo-Brutalist Dropdown (No default OS grey) */}
+              {/* Role: Custom Neo-Brutalist Dropdown */}
               <div className="space-y-1 text-left relative" ref={roleDropdownRef}>
                 <label className="text-xs font-mono font-bold text-black flex items-center gap-1.5">
                   <Briefcase className="w-3.5 h-3.5 text-[#512BD4]" />
                   <span>Role *</span>
                 </label>
-                
+
                 {/* Trigger Button */}
                 <button
                   type="button"
@@ -275,7 +525,6 @@ export const DncInterestForm = () => {
                   />
                 </button>
 
-                {/* Hidden input for HTML5 required form validation */}
                 <input
                   tabIndex={-1}
                   aria-hidden="true"
@@ -285,7 +534,6 @@ export const DncInterestForm = () => {
                   onChange={() => {}}
                 />
 
-                {/* Dropdown Menu Popup */}
                 {isRoleOpen && (
                   <div 
                     role="listbox"
@@ -360,7 +608,7 @@ export const DncInterestForm = () => {
                       key={topic.id}
                       type="button"
                       onClick={() => handleToggleInterest(topic.id)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold border transition-all cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-md text-xs font-mono font-bold border transition-all cursor-pointer ${
                         isSelected
                           ? `${topic.bg} border-black shadow-[1.5px_1.5px_0px_0px_#000] scale-105`
                           : 'bg-stone-50 text-stone-600 border-stone-200 hover:border-black'
@@ -392,10 +640,19 @@ export const DncInterestForm = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-2xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm uppercase border-[2px] border-black shadow-[3px_3px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm uppercase tracking-wider border-[2.5px] border-black shadow-[4px_4px_0px_#120838] hover:shadow-[2px_2px_0px_#120838] hover:translate-x-[2px] hover:translate-y-[2px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
-                <span>SUBMIT INTEREST</span>
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                {isSubmitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>REGISTERING INTEREST...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>REGISTER INTEREST</span>
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                  </>
+                )}
               </button>
             </div>
 
@@ -458,9 +715,8 @@ export const DncInterestForm = () => {
       )}
 
       {/* Bottom Announcement Bar (3 Items) */}
-      <div className="mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] w-full max-w-7xl mx-auto">
+      <div className="mt-6 bg-[#FAF9FF] border-[2px] border-black rounded-2xl p-4 sm:p-5 shadow-[3px_3px_0px_0px_#000] w-full max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-left">
-          {/* 1. Speaker updates */}
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-[#EEEAFB] text-[#512BD4] flex items-center justify-center shrink-0 border border-purple-200">
               <Megaphone className="w-4 h-4" />
@@ -475,7 +731,6 @@ export const DncInterestForm = () => {
             </div>
           </div>
 
-          {/* 2. Programme announcements */}
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center shrink-0 border border-blue-200">
               <Calendar className="w-4 h-4" />
@@ -490,7 +745,6 @@ export const DncInterestForm = () => {
             </div>
           </div>
 
-          {/* 3. Registration information */}
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FCE7F3] text-[#D600AA] flex items-center justify-center shrink-0 border border-pink-200">
               <Bell className="w-4 h-4" />

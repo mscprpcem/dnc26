@@ -76,9 +76,11 @@ export const Navbar = () => {
             className="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#512BD4] rounded-lg"
             aria-label=".NET Conf 2026 Amravati"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#512BD4] text-white flex items-center justify-center font-mono font-black text-xs shadow-xs transition-transform duration-300 group-hover:scale-110 select-none">
-              .NET
-            </div>
+            <img
+              src="/logos/dotnet-logo.jpg"
+              alt=".NET Logo"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg object-contain border border-[#512BD4]/40 shadow-xs transition-transform duration-300 group-hover:scale-105"
+            />
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg sm:text-xl font-bold font-display tracking-tight text-gradient-magenta">
                 .NET Conf 2026

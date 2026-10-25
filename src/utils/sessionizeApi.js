@@ -125,10 +125,10 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
   <style>
     /* .NET Conf 2026 Amravati Brand Design Tokens */
     :root {
-      --conference-bg: #F0EFFB;
-      --conference-primary: #7046C8;
-      --conference-secondary: #A99AE8;
-      --conference-text: #292735;
+      --conference-bg: #FAF8F5;
+      --conference-primary: #512BD4;
+      --conference-secondary: #120838;
+      --conference-text: #120838;
       --conference-white: #FFFFFF;
     }
 
@@ -138,7 +138,7 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
 
     html {
       background-color: transparent;
-      color: var(--conference-text, #292735);
+      color: var(--conference-text, #120838);
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       font-size: 15px;
       line-height: 1.5;
@@ -150,7 +150,7 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
       margin: 0;
       padding: 8px 4px 16px 4px;
       background-color: transparent;
-      color: var(--conference-text, #292735);
+      color: var(--conference-text, #120838);
       overflow-x: auto;
       width: 100%;
     }
@@ -167,12 +167,12 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
 
     /* Subtle custom link styling */
     a {
-      color: var(--conference-primary, #7046C8);
+      color: var(--conference-primary, #512BD4);
       text-decoration: none;
       transition: color 0.15s ease-in-out;
     }
     a:hover {
-      color: #5833A5;
+      color: #4322B0;
       text-decoration: underline;
     }
 
@@ -192,17 +192,20 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
     }
     .sz-root::-webkit-scrollbar-thumb,
     .sessionize-wrapper::-webkit-scrollbar-thumb {
-      background: var(--conference-secondary, #A99AE8);
+      background: var(--conference-primary, #512BD4);
       border-radius: 9999px;
     }
 
     /* Card styling subtleties */
     .sz-session {
       border-radius: 12px !important;
+      border: 1.5px solid #120838 !important;
+      box-shadow: 2px 2px 0px #000 !important;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .sz-session:hover {
       transform: translateY(-1px);
+      box-shadow: 3px 3px 0px #000 !important;
     }
 
     /* Modal dialog styling inside iframe */
@@ -212,7 +215,7 @@ export function generateSessionizeEmbedDoc(content, title = 'Conference Schedule
 
     /* Accessibility focus indicators */
     button:focus-visible, a:focus-visible, input:focus-visible {
-      outline: 2px solid var(--conference-primary, #7046C8) !important;
+      outline: 2px solid var(--conference-primary, #512BD4) !important;
       outline-offset: 2px !important;
     }
   </style>
