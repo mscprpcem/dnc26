@@ -9,8 +9,7 @@
     "phone": "+919021212807",
     "description": "Collaborative technology and developer community initiative uniting Global AI Amravati (part of the worldwide Global AI Community network) and Microsoft Student Club PRPCEM. Dedicated to democratizing Generative AI, open-source Autonomous Agents, Microsoft Azure Cloud computing, and Modern .NET engineering across Central India with global community outreach and FOSS contributions.",
     "webpageUrl": {
-      "url": "https://globalai.community",
-      "wellKnown": "https://dnc.mscprpcem.tech"
+      "url": "https://dnc.mscprpcem.tech"
     }
   },
   "projects": [
