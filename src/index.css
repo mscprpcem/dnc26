@@ -111,56 +111,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #FAFAFC;
 }
 
-.bg-gradient-ellipse {
-  position: absolute;
-  width: 100%;
-  max-width: 1100px;
-  height: auto;
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-}
-
-.bg-gradient-ellipse:nth-child(1) {
-  left: -40%;
-  top: -15%;
-  transform: rotate(20deg);
-  opacity: 0.75;
-}
-
-.bg-gradient-ellipse:nth-child(2) {
-  left: 45%;
-  top: -5%;
-  transform: rotate(33deg);
-  opacity: 0.8;
-}
-
-.bg-gradient-ellipse:nth-child(3) {
-  left: -20%;
-  top: 32%;
-  opacity: 0.75;
-}
-
-.bg-gradient-ellipse:nth-child(4) {
-  left: -5%;
-  top: 55%;
-  transform: rotate(33deg);
-  opacity: 0.7;
-}
-
-.bg-gradient-ellipse:nth-child(5) {
-  left: 35%;
-  top: 78%;
-  opacity: 0.75;
-}
-
-@media (max-width: 768px) {
-  .bg-gradient-ellipse {
-    opacity: 0.4;
-    max-width: 500px;
-  }
-}
-
 /* Gradient text utilities */
 .text-gradient-magenta {
   background: linear-gradient(90deg, #7D1DC6 0%, #D600AA 100%);
@@ -1193,8 +1143,7 @@ input[type='range']::-moz-range-thumb {
   input,
   select,
   textarea,
-  iframe,
-  .bg-gradient-ellipse {
+  iframe {
     display: none !important;
   }
 

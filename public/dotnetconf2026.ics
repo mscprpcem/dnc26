@@ -1,13 +1,21 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//.NET Conf//dotnetconf.net//EN
+PRODID:-//.NET Conf 2026 Amravati//MSC PRPCEM//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
+X-WR-CALNAME:.NET Conf 2026 Amravati
+X-WR-TIMEZONE:Asia/Kolkata
 BEGIN:VEVENT
-SUMMARY:.NET Conf 2026 Amravati
-DESCRIPTION:Central India's premier 1-day developer conference at PRPCEM Amravati celebrating modern software engineering, Azure Cloud, and Generative AI. Date Coming Soon!
-URL:https://www.mscprpcem.tech
-LOCATION:P. R. Pote Patil College of Engineering and Management (PRPCEM), Kathora Road, Amravati, Maharashtra
-STATUS:TENTATIVE
+UID:dnc26-amravati-prpcem@mscprpcem.tech
+DTSTAMP:20261026T000000Z
+DTSTART:20261226T033000Z
+DTEND:20261226T123000Z
+SUMMARY:.NET Conf 2026 Amravati · AI, GitHub Copilot, Cloud & .NET Summit
+DESCRIPTION:Central India's flagship Microsoft ecosystem summit uniting Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11 at PRPCEM Campus, Amravati. Hosted by Microsoft Student Club PRPCEM.
+LOCATION:PRPCEM Central Auditorium, Pote Estate, Kathora Road, Amravati, Maharashtra 444602
+URL:https://dnc.mscprpcem.tech
+STATUS:CONFIRMED
+CATEGORIES:CONFERENCE,TECHNOLOGY,EDUCATION
+TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR

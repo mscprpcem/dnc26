@@ -16,11 +16,13 @@ import {
   Plus,
   Minus,
   HelpCircle,
+  Sparkles,
 } from 'lucide-react';
+import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
 import { eventData } from '../../data/event.js';
 
-export const DncInterestForm = ({ isModal = false, onClose }) => {
+export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -84,6 +86,21 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
     }));
   };
 
+  const handlePhoneChange = (val) => {
+    let clean = val.replace(/\D/g, '');
+    if (clean.startsWith('91') && clean.length > 10) {
+      clean = clean.slice(2);
+    } else if (clean.startsWith('0') && clean.length > 10) {
+      clean = clean.slice(1);
+    }
+    setFormData((prev) => ({ ...prev, phone: clean.slice(0, 10) }));
+  };
+
+  const handleShareSuccessWhatsApp = () => {
+    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -125,26 +142,64 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
         </div>
 
         {isSubmitted ? (
-          <div className="bg-white border-[2.5px] border-black rounded-2xl p-6 sm:p-8 text-center shadow-[4px_4px_0px_0px_#120838]">
-            <div className="w-14 h-14 rounded-2xl bg-[#DCFCE7] text-[#16A34A] border-[2px] border-black flex items-center justify-center mx-auto mb-3 shadow-[2.5px_2.5px_0px_0px_#000]">
-              <Check className="w-8 h-8 stroke-[3]" />
+          <div className="bg-white border-[2.5px] border-black rounded-2xl p-5 sm:p-7 text-center shadow-[4px_4px_0px_0px_#120838]">
+            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-[#DCFCE7] text-[#16A34A] border-[2px] border-black flex items-center justify-center mx-auto mb-2.5 shadow-[2.5px_2.5px_0px_0px_#000]">
+              <Check className="w-7 h-7 sm:w-8 sm:h-8 stroke-[3]" />
             </div>
-            <div className="inline-block bg-[#FFD13B] text-black font-mono font-bold text-[10px] px-3 py-1 rounded-md border-[1.5px] border-black mb-3 uppercase tracking-wider shadow-[1px_1px_0px_#000]">
+            <div className="inline-block bg-[#FFD13B] text-black font-mono font-bold text-[10px] px-3 py-0.5 rounded-md border-[1.5px] border-black mb-2.5 uppercase tracking-wider shadow-[1px_1px_0px_#000]">
               INTEREST CONFIRMED
             </div>
-            <h3 className="text-xl sm:text-2xl font-black font-sans text-[#120838] uppercase mb-1.5">
+            <h3 className="text-xl sm:text-2xl font-black font-sans text-[#120838] uppercase mb-1">
               You're On The Priority List!
             </h3>
-            <p className="text-stone-600 font-sans text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-6">
+            <p className="text-stone-600 font-sans text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-5">
               Thank you{formData.fullName ? `, ${formData.fullName}` : ''}! Your interest has been recorded. You'll receive delegate passes notification, speaker schedules, and badge invitations first.
             </p>
+
+            {/* High-Conversion Next Steps */}
+            <div className="space-y-2.5 mb-4">
+              {onOpenBadge && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onClose) onClose();
+                    onOpenBadge();
+                  }}
+                  className="w-full py-3 px-4 rounded-xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-xs sm:text-sm uppercase tracking-wider border-[2px] border-black shadow-[3px_3px_0px_#000] hover:shadow-[1px_1px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4 text-[#FFD13B]" />
+                  <span>Generate Your Attendee Badge &rarr;</span>
+                </button>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={handleShareSuccessWhatsApp}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-mono font-bold text-xs uppercase tracking-wide border-[1.5px] border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                >
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
+                  <span>Invite on WhatsApp</span>
+                </button>
+
+                <a
+                  href="/dotnetconf2026.ics"
+                  download="dotnetconf2026.ics"
+                  className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#FAF8FF] text-[#120838] font-mono font-bold text-xs uppercase tracking-wide border-[1.5px] border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                >
+                  <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
+                  <span>Add to Calendar (.ics)</span>
+                </a>
+              </div>
+            </div>
+
             {onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2.5 bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-bold text-xs uppercase tracking-wider rounded-xl border-[2px] border-black shadow-[3px_3px_0px_#000] hover:shadow-[1px_1px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer"
+                className="text-stone-500 hover:text-stone-800 text-xs font-mono font-bold uppercase underline underline-offset-4 cursor-pointer"
               >
-                Close Window
+                Done / Back to Summit Home
               </button>
             )}
           </div>
@@ -204,8 +259,9 @@ export const DncInterestForm = ({ isModal = false, onClose }) => {
                     type="tel"
                     required
                     placeholder="9876543210"
+                    maxLength={10}
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => handlePhoneChange(e.target.value)}
                     className="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
                   />
                 </div>

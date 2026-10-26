@@ -1,0 +1,6 @@
+# Robots.txt for .NET Conf 2026 Amravati
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dnc.mscprpcem.tech/sitemap.xml

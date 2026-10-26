@@ -14,7 +14,7 @@ import {
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon, XIcon } from '../ui/SocialIcons.jsx';
 import DncSignpost from './DncSignpost.jsx';
 import DncSectionFlanks from './DncSectionFlanks.jsx';
 
@@ -103,6 +103,12 @@ https://dnc.mscprpcem.tech
   const handleShareLinkedIn = () => {
     const confUrl = 'https://dnc.mscprpcem.tech';
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(confUrl)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareX = () => {
+    const text = `I'm attending .NET Conf 2026 Amravati at PRPCEM! 🎉\n\nCentral India's flagship summit uniting Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11.\n\nGenerate your badge: https://dnc.mscprpcem.tech\n\n#DotNetConf2026 #MSCPRPCEM #Azure #DotNet`;
+    const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -1168,7 +1174,7 @@ https://dnc.mscprpcem.tech
                 </div>
 
                 {/* Social Share Buttons */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                   {/* WhatsApp */}
                   <button
                     type="button"
@@ -1191,6 +1197,17 @@ https://dnc.mscprpcem.tech
                     <span>LinkedIn</span>
                   </button>
 
+                  {/* X (Twitter) */}
+                  <button
+                    type="button"
+                    onClick={handleShareX}
+                    className="py-2 px-1.5 bg-black hover:bg-stone-800 text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Share on X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                    <span>X (Twitter)</span>
+                  </button>
+
                   {/* Instagram */}
                   <button
                     type="button"
@@ -1206,7 +1223,7 @@ https://dnc.mscprpcem.tech
                   <button
                     type="button"
                     onClick={handleShareTelegram}
-                    className="py-2 px-1.5 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="py-2 px-1.5 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1"
                     title="Share on Telegram"
                   >
                     <TelegramIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />

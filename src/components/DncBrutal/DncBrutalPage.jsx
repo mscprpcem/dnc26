@@ -176,7 +176,11 @@ export const DncBrutalPage = () => {
               <X className="w-5 h-5 stroke-[2.5]" />
             </button>
             <div id="interest-form">
-              <DncInterestForm isModal={true} onClose={() => setActiveModal(null)} />
+              <DncInterestForm 
+                isModal={true} 
+                onClose={() => setActiveModal(null)} 
+                onOpenBadge={() => setActiveModal('badge')}
+              />
             </div>
           </div>
         </div>
