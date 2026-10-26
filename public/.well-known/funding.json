@@ -1,0 +1,122 @@
+{
+  "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+  "version": "v1.1.0",
+  "entity": {
+    "type": "group",
+    "role": "steward",
+    "name": "Global AI Amravati & Microsoft Student Club PRPCEM",
+    "email": "dotnetconfamt@prpotepatilengg.ac.in",
+    "phone": "+919021212807",
+    "description": "Collaborative technology and developer community initiative uniting Global AI Amravati (part of the worldwide Global AI Community network) and Microsoft Student Club PRPCEM. Dedicated to democratizing Generative AI, open-source Autonomous Agents, Microsoft Azure Cloud computing, and Modern .NET engineering across Central India with global community outreach and FOSS contributions.",
+    "webpageUrl": {
+      "url": "https://globalai.community",
+      "wellKnown": "https://dnc.mscprpcem.tech"
+    }
+  },
+  "projects": [
+    {
+      "guid": "dnc26-amravati",
+      "name": ".NET Conf 2026 Amravati",
+      "description": "Central India's flagship community-driven developer summit with global scope uniting Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11.",
+      "webpageUrl": {
+        "url": "https://dnc.mscprpcem.tech"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/mscprpcem/dnc26"
+      },
+      "licenses": [
+        "spdx:MIT"
+      ],
+      "tags": [
+        "dotnet",
+        "csharp",
+        "generative-ai",
+        "github-copilot",
+        "devops",
+        "azure",
+        "global-ai",
+        "community",
+        "conference",
+        "open-source"
+      ]
+    },
+    {
+      "guid": "global-ai-amravati",
+      "name": "Global AI Community - Amravati Chapter",
+      "description": "Local chapter of the international Global AI Community network connecting regional developers and AI engineers with global AI initiatives, Semantic Kernel agent architecture, Azure OpenAI, and open research.",
+      "webpageUrl": {
+        "url": "https://globalai.community"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/mscprpcem/dnc26"
+      },
+      "licenses": [
+        "spdx:MIT"
+      ],
+      "tags": [
+        "artificial-intelligence",
+        "machine-learning",
+        "generative-ai",
+        "semantic-kernel",
+        "azure-openai",
+        "global-ai",
+        "community",
+        "foss"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "community-sponsorship",
+        "type": "payment-provider",
+        "address": "dotnetconfamt@prpotepatilengg.ac.in",
+        "description": "Community sponsorship and grant disbursement for open-source AI workshops, delegate access, and global developer engagement."
+      },
+      {
+        "guid": "institutional-grant",
+        "type": "bank",
+        "address": "Global AI Amravati & PRPCEM, Amravati",
+        "description": "Institutional bank transfer for community tech summits, CSR grants, and global conference track logistics."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "global-foss-patron",
+        "status": "active",
+        "name": "Global AI & FOSS Community Patron",
+        "description": "Supports open delegate access, student AI research stipends, cloud compute credits, and open-source tooling for young engineers in Central India.",
+        "amount": 0,
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "community-sponsorship",
+          "institutional-grant"
+        ]
+      },
+      {
+        "guid": "track-workshop-supporter",
+        "status": "active",
+        "name": "Global AI & Cloud Workshop Supporter",
+        "description": "Sponsors hands-on AI code labs, hackathons, and multi-track workshops connecting regional developers with global tech ecosystems.",
+        "amount": 25000,
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "community-sponsorship",
+          "institutional-grant"
+        ]
+      }
+    ],
+    "history": [
+      {
+        "year": 2024,
+        "income": 0,
+        "expenses": 0,
+        "taxes": 0,
+        "currency": "INR",
+        "description": "Previous edition organized on community grants and grassroots developer support across Amravati."
+      }
+    ]
+  }
+}

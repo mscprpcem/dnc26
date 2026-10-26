@@ -42,6 +42,10 @@ export const DncBrutalPage = () => {
     if (activeModal) {
       document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => {
+        const modalScroll = document.getElementById('badge-modal-scroll');
+        if (modalScroll) modalScroll.scrollTop = 0;
+      }, 10);
     } else {
       document.body.style.overflow = '';
     }
@@ -135,23 +139,38 @@ export const DncBrutalPage = () => {
       {/* Interactive Modal: Attendee Badge Studio */}
       {activeModal === 'badge' && (
         <div 
-          className="fixed inset-0 z-[300] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative w-full max-w-4xl bg-white border-[3px] border-black rounded-2xl p-4 sm:p-7 shadow-[8px_8px_0px_#120838] my-auto max-h-[94vh] overflow-y-auto">
-            <button
-              onClick={() => setActiveModal(null)}
-              className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2 rounded-lg border-2 border-black bg-white hover:bg-stone-100 text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all cursor-pointer z-30"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5 stroke-[2.5]" />
-            </button>
-            <div id="attendee-badge">
-              <DncAttendeeBadge isModal={true} />
+          <div className="relative w-full max-w-5xl bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] flex flex-col overflow-hidden">
+            {/* Pinned Modal Header */}
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 bg-white border-b-2 border-black flex-shrink-0">
+              <div className="flex items-center gap-2.5">
+                <span className="font-mono text-xs font-black bg-[#FFD13B] text-black px-2 py-0.5 rounded border border-black uppercase shadow-[1px_1px_0px_#000]">
+                  OFFICIAL PASS
+                </span>
+                <h3 className="font-sans font-black text-sm sm:text-base md:text-lg text-[#14053A] uppercase tracking-tight">
+                  Attendee Badge Studio
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveModal(null)}
+                className="w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5 stroke-[2.5]" />
+              </button>
+            </div>
+
+            {/* Scrollable Modal Content */}
+            <div id="badge-modal-scroll" className="p-3 sm:p-6 overflow-y-auto flex-1">
+              <div>
+                <DncAttendeeBadge isModal={true} />
+              </div>
             </div>
           </div>
         </div>

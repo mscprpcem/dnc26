@@ -172,24 +172,15 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 </button>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="w-full">
                 <button
                   type="button"
                   onClick={handleShareSuccessWhatsApp}
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-mono font-bold text-xs uppercase tracking-wide border-[1.5px] border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1.5 cursor-pointer transition-all"
+                  className="w-full py-3 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-mono font-bold text-xs sm:text-sm uppercase tracking-wide border-[2px] border-black shadow-[2.5px_2.5px_0px_#000] flex items-center justify-center gap-2 cursor-pointer transition-all"
                 >
                   <WhatsAppIcon className="w-4 h-4 fill-white" />
-                  <span>Invite on WhatsApp</span>
+                  <span>Invite Developers on WhatsApp</span>
                 </button>
-
-                <a
-                  href="/dotnetconf2026.ics"
-                  download="dotnetconf2026.ics"
-                  className="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-[#FAF8FF] text-[#120838] font-mono font-bold text-xs uppercase tracking-wide border-[1.5px] border-black shadow-[2px_2px_0px_#000] flex items-center justify-center gap-1.5 cursor-pointer transition-all"
-                >
-                  <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
-                  <span>Add to Calendar (.ics)</span>
-                </a>
               </div>
             </div>
 

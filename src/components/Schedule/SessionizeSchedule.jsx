@@ -43,8 +43,6 @@ export const SessionizeSchedule = ({
   // Check endpoint connectivity and retrieve live HTML data when view changes
   useEffect(() => {
     let isMounted = true;
-    setIsLoading(true);
-    setHasError(false);
 
     checkEndpointStatus(activeViewUrl, refreshKey > 0)
       .then((status) => {

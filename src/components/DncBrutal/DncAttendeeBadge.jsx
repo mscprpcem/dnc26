@@ -14,7 +14,7 @@ import {
   Circle,
   Square
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, InstagramIcon, TelegramIcon, XIcon } from '../ui/SocialIcons.jsx';
+import { LinkedInIcon, WhatsAppIcon, InstagramIcon } from '../ui/SocialIcons.jsx';
 import DncSignpost from './DncSignpost.jsx';
 import DncSectionFlanks from './DncSectionFlanks.jsx';
 
@@ -36,6 +36,7 @@ export const DncAttendeeBadge = ({ isModal = false }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isNativeSharing, setIsNativeSharing] = useState(false);
 
   const fileInputRef = useRef(null);
 
@@ -106,12 +107,6 @@ https://dnc.mscprpcem.tech
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const handleShareX = () => {
-    const text = `I'm attending .NET Conf 2026 Amravati at PRPCEM! 🎉\n\nCentral India's flagship summit uniting Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11.\n\nGenerate your badge: https://dnc.mscprpcem.tech\n\n#DotNetConf2026 #MSCPRPCEM #Azure #DotNet`;
-    const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
   const handleShareInstagram = async () => {
     const text = getSharePostText();
     try {
@@ -123,13 +118,6 @@ https://dnc.mscprpcem.tech
       setTimeout(() => setCopied(false), 2600);
     }
     window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
-  };
-
-  const handleShareTelegram = () => {
-    const text = getSharePostText();
-    const confUrl = 'https://dnc.mscprpcem.tech';
-    const url = `https://t.me/share/url?url=${encodeURIComponent(confUrl)}&text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyShare = async () => {
@@ -186,10 +174,8 @@ https://dnc.mscprpcem.tech
       img.src = src;
     });
 
-  // 1. Download Circular Badge Canvas (1080x1080 High-DPI Crisp Social Format)
-  const handleDownloadCircularBadge = async () => {
-    setIsDownloading(true);
-
+  // 1. Render Circular Badge Canvas (1080x1080 High-DPI Crisp Social Format)
+  const renderCircularCanvas = async () => {
     if (document.fonts) {
       await document.fonts.ready;
     }
@@ -423,18 +409,11 @@ https://dnc.mscprpcem.tech
     ctx.fillText(passLabel, 0, pLabelY);
 
     ctx.restore();
-
-    const link = document.createElement('a');
-    link.download = `dnc26-circular-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    setIsDownloading(false);
+    return canvas;
   };
 
-  // 2. Download Square Social Badge Canvas (1080x1080 - Social Media Post Format)
-  const handleDownloadSquareBadge = async () => {
-    setIsDownloading(true);
-
+  // 2. Render Square Social Badge Canvas (1080x1080 - Social Media Post Format)
+  const renderSquareCanvas = async () => {
     if (document.fonts) {
       await document.fonts.ready;
     }
@@ -687,24 +666,75 @@ https://dnc.mscprpcem.tech
     ctx.fillText('MICROSOFT STUDENT CLUB · AMRAVATI CHAPTER', centerX, rimY + rimH / 2);
 
     ctx.restore(); // end card clip
-
-    const link = document.createElement('a');
-    link.download = `dnc26-square-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    setIsDownloading(false);
+    return canvas;
   };
 
-  const handleDownloadBadge = () => {
-    if (badgeShape === 'circular') {
-      handleDownloadCircularBadge();
-    } else {
-      handleDownloadSquareBadge();
+  const handleDownloadBadge = async () => {
+    try {
+      setIsDownloading(true);
+      const canvas = badgeShape === 'circular'
+        ? await renderCircularCanvas()
+        : await renderSquareCanvas();
+
+      const link = document.createElement('a');
+      link.download = `dnc26-${badgeShape}-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (err) {
+      console.error('Download error:', err);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  const handleNativeShareBadge = async () => {
+    if (typeof navigator === 'undefined' || !navigator.share) {
+      handleCopyShare();
+      return;
+    }
+    try {
+      setIsNativeSharing(true);
+      const canvas = badgeShape === 'circular'
+        ? await renderCircularCanvas()
+        : await renderSquareCanvas();
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          setIsNativeSharing(false);
+          return;
+        }
+        const file = new File(
+          [blob],
+          `dnc26-${badgeShape}-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`,
+          { type: 'image/png' }
+        );
+        const shareData = {
+          title: '.NET Conf 2026 Amravati Attendee Badge',
+          text: getSharePostText(),
+        };
+
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          shareData.files = [file];
+        }
+
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.warn('Native share error:', err);
+          }
+        } finally {
+          setIsNativeSharing(false);
+        }
+      }, 'image/png');
+    } catch (err) {
+      console.error('Native share error:', err);
+      setIsNativeSharing(false);
     }
   };
 
   return (
-    <section id="attendee-badge" className={isModal ? "py-1 px-1 w-full relative" : "py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative"}>
+    <section id={isModal ? undefined : "attendee-badge"} className={isModal ? "py-1 px-1 w-full relative" : "py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative"}>
       {!isModal && (
         <>
           <DncSectionFlanks
@@ -728,26 +758,28 @@ https://dnc.mscprpcem.tech
         </>
       )}
 
-      <div className={isModal ? "bg-white rounded-2xl p-2 sm:p-4 text-left" : "bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]"}>
+      <div className={isModal ? "bg-transparent p-0 text-left" : "bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]"}>
 
-        {/* Intro */}
-        <div className="text-center max-w-xl mx-auto mb-6 sm:mb-9">
-          <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5">
-            <Ticket className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>Official Conference Delegate Pass</span>
+        {/* Intro (Only in standalone page section) */}
+        {!isModal && (
+          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-9">
+            <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5">
+              <Ticket className="w-3.5 h-3.5 text-[#512BD4]" />
+              <span>Official Conference Delegate Pass</span>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2">
+              Create Your Attendee Badge
+            </h3>
+
+            <p className="text-stone-700 font-sans text-xs sm:text-sm leading-relaxed">
+              Choose your badge format (Circular Badge or Square Social Post), upload your picture, enter your details, and download or share your badge directly to social media!
+            </p>
           </div>
-
-          <h3 className="text-2xl sm:text-3xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2">
-            Create Your Attendee Badge
-          </h3>
-
-          <p className="text-stone-700 font-sans text-xs sm:text-sm leading-relaxed">
-            Choose your badge format (Circular Badge or Square Social Post), upload your picture, enter your details, and download or share your badge directly to social media!
-          </p>
-        </div>
+        )}
 
         {/* 2-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 
           {/* Left Column: Form Controls */}
           <div className="lg:col-span-6 bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 shadow-[3px_3px_0px_0px_#000] space-y-4 text-left">
@@ -941,7 +973,7 @@ https://dnc.mscprpcem.tech
               <div className="relative select-none">
 
                 {/* Outer Circular Container */}
-                <div className="w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center">
+                <div className={isModal ? "w-[260px] h-[260px] sm:w-[300px] sm:h-[300px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] relative overflow-hidden flex items-center justify-center" : "w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center"}>
 
                   {/* SVG Circular Text Ring */}
                   <svg viewBox="0 0 400 400" className="w-full h-full absolute inset-0 pointer-events-none">
@@ -1047,7 +1079,7 @@ https://dnc.mscprpcem.tech
               <div className="relative select-none">
 
                 {/* Outer Square Container - Social Media Graphic Post */}
-                <div className="w-[280px] h-[350px] xs:w-[310px] xs:h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between">
+                <div className={isModal ? "w-[260px] h-[320px] sm:w-[310px] sm:h-[370px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between" : "w-[280px] h-[350px] xs:w-[310px] xs:h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between"}>
 
                   {/* Header Banner - Social Media Post Style */}
                   <div className="bg-[#512BD4] text-white border-b-[3px] border-black py-2.5 px-3 text-center">
@@ -1163,6 +1195,22 @@ https://dnc.mscprpcem.tech
                 </span>
               </button>
 
+              {/* Native Mobile Share Button (Instant Share to WhatsApp, Stories, X, Gallery) */}
+              {typeof navigator !== 'undefined' && typeof navigator.share === 'function' && (
+                <button
+                  type="button"
+                  onClick={handleNativeShareBadge}
+                  disabled={isNativeSharing}
+                  className="w-full bg-[#FFD13B] hover:bg-[#ffc81a] text-black font-mono font-black text-xs sm:text-sm py-2.5 px-4 rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  title="Share badge image directly via your device's apps"
+                >
+                  <Share2 className="w-4 h-4" />
+                  <span>
+                    {isNativeSharing ? 'OPENING SHARE SHEET...' : 'SHARE BADGE IMAGE (MOBILE)'}
+                  </span>
+                </button>
+              )}
+
               {/* Direct Social Media Sharing Panel */}
               <div className="bg-[#FAF8FF] border-[2px] border-black rounded-2xl p-3 shadow-[2.5px_2.5px_0px_0px_#000] space-y-2.5">
                 <div className="flex items-center justify-between px-1">
@@ -1173,61 +1221,39 @@ https://dnc.mscprpcem.tech
                   <span className="text-[10px] font-mono text-stone-500 font-bold">1-Click</span>
                 </div>
 
-                {/* Social Share Buttons */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                {/* Social Share Buttons: WhatsApp, Instagram, LinkedIn only */}
+                <div className="grid grid-cols-3 gap-2">
                   {/* WhatsApp */}
                   <button
                     type="button"
                     onClick={handleShareWhatsApp}
-                    className="py-2 px-1.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="py-2.5 px-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     title="Share on WhatsApp"
                   >
-                    <WhatsAppIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white flex-shrink-0" />
                     <span>WhatsApp</span>
-                  </button>
-
-                  {/* LinkedIn */}
-                  <button
-                    type="button"
-                    onClick={handleShareLinkedIn}
-                    className="py-2 px-1.5 bg-[#0A66C2] hover:bg-[#084e96] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Share on LinkedIn"
-                  >
-                    <LinkedInIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
-                    <span>LinkedIn</span>
-                  </button>
-
-                  {/* X (Twitter) */}
-                  <button
-                    type="button"
-                    onClick={handleShareX}
-                    className="py-2 px-1.5 bg-black hover:bg-stone-800 text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Share on X (Twitter)"
-                  >
-                    <XIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
-                    <span>X (Twitter)</span>
                   </button>
 
                   {/* Instagram */}
                   <button
                     type="button"
                     onClick={handleShareInstagram}
-                    className="py-2 px-1.5 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-90 text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="py-2.5 px-2 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-90 text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     title="Share on Instagram (Copies caption & opens Instagram)"
                   >
-                    <InstagramIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
+                    <InstagramIcon className="w-4 h-4 fill-white flex-shrink-0" />
                     <span>Instagram</span>
                   </button>
 
-                  {/* Telegram */}
+                  {/* LinkedIn */}
                   <button
                     type="button"
-                    onClick={handleShareTelegram}
-                    className="py-2 px-1.5 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer col-span-2 sm:col-span-1"
-                    title="Share on Telegram"
+                    onClick={handleShareLinkedIn}
+                    className="py-2.5 px-2 bg-[#0A66C2] hover:bg-[#084e96] text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    title="Share on LinkedIn"
                   >
-                    <TelegramIcon className="w-3.5 h-3.5 fill-white flex-shrink-0" />
-                    <span>Telegram</span>
+                    <LinkedInIcon className="w-4 h-4 fill-white flex-shrink-0" />
+                    <span>LinkedIn</span>
                   </button>
                 </div>
 
