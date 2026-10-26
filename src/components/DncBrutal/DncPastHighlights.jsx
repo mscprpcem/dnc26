@@ -2,40 +2,64 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const pastImages = [
   {
-    url: '/past-edition/dnc24-auditorium-keynote.jpg',
+    url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg',
     tag: 'Auditorium Keynote',
     title: 'Packed Auditorium & Full House Audience',
-    desc: 'Over 500+ student developers, engineers, and tech leaders gathered at PRPCEM Campus.',
+    desc: 'Over 500+ student developers, engineers, and tech leaders gathered at PRPCEM Swami Vivekananda Auditorium.',
   },
   {
-    url: '/past-edition/dnc24-technical-speaker.jpg',
-    tag: 'Technical Stage',
-    title: 'Deep-Dive Technical Deliberations',
-    desc: 'Expert tech talks covering modern .NET architecture, cloud infrastructure, and software engineering.',
+    url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P7.jpg',
+    tag: 'Headline Keynote',
+    title: 'Main Keynote Stage & Speakers',
+    desc: 'Distinguished speakers delivering foundational talks on the .NET ecosystem, modern C#, and cloud innovation.',
   },
   {
-    url: '/past-edition/dnc24-hands-on-lab.jpg',
+    url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG_20250109_121040577_HDR.jpg',
     tag: 'Hands-on Labs',
-    title: 'Interactive Code Labs & Mentorship',
+    title: 'Interactive Workshops & Hands-on Labs',
     desc: 'Practical code walkthroughs, live demonstrations, and mentor-guided development tracks.',
   },
   {
-    url: '/past-edition/dnc24-community-delegation.jpg',
-    tag: 'Community',
-    title: 'Student Delegation & Youth Innovators',
-    desc: 'Youth developers and student delegations celebrating technology leadership and innovation across Vidarbha.',
+    url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P4.jpg',
+    tag: 'Technical Tracks',
+    title: 'Session Deliberations & Technical Discussions',
+    desc: 'Attendees engaging in deep-dive architectural discussions and real-world implementation techniques.',
   },
   {
-    url: '/past-edition/dnc24-closing-awards.jpg',
+    url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG_20250111_143135.jpg',
+    tag: 'Campus Life',
+    title: 'Campus Experience & Community Networking',
+    desc: 'Delegates connecting and collaborating between technical sessions across the PRPCEM campus.',
+  },
+  {
+    url: 'https://mscprpcem.blob.core.windows.net/general/event2.jpg',
+    tag: 'Community Pride',
+    title: 'Student Delegation & Youth Innovators',
+    desc: 'Youth developers and student club delegations celebrating technology leadership and innovation.',
+  },
+  {
+    url: 'https://mscprpcem.blob.core.windows.net/general/event10.jpg',
     tag: 'Valedictory & Awards',
     title: 'Valedictory & Awards Distribution',
     desc: 'Honoring hackathon champions, technical quiz winners, and community contributors with trophies.',
   },
   {
-    url: '/past-edition/dnc24-showcase.jpg',
-    tag: 'Keynote Stage',
-    title: 'Main Stage Presentations & Leadership',
-    desc: 'Distinguished speakers delivering foundational talks on the Microsoft developer ecosystem.',
+    url: 'https://mscprpcem.blob.core.windows.net/general/event7.jpg',
+    tag: 'Speaker Q&A',
+    title: 'Speaker Interactions & Technical Q&A',
+    desc: 'Direct in-person Q&A exchanges between Microsoft community leaders and delegates.',
+  },
+  {
+    url: 'https://mscprpcem.blob.core.windows.net/general/event3.jpg',
+    tag: 'Mentorship',
+    title: 'Collaborative Learning & Mentorship',
+    desc: 'Peer learning and industry mentorship fostering the next generation of .NET software engineers.',
+  },
+  {
+    url: 'https://mscprpcem.blob.core.windows.net/general/event5.jpg',
+    tag: 'Team Milestone',
+    title: 'Organizing Team & Volunteer Milestone',
+    desc: 'Microsoft Student Club PRPCEM leadership and volunteer team celebrating an unforgettable edition.',
   },
 ];
 
@@ -103,7 +127,8 @@ export const DncPastHighlights = () => {
                   className="past-gallery__img"
                   loading={idx === 0 ? 'eager' : 'lazy'}
                   onError={(e) => {
-                    e.currentTarget.src = '/past-edition/dnc24-auditorium-keynote.jpg';
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg';
                   }}
                 />
               </div>
@@ -188,7 +213,8 @@ export const DncPastHighlights = () => {
                       alt={img.title}
                       loading="lazy"
                       onError={(e) => {
-                        e.currentTarget.src = '/past-edition/dnc24-auditorium-keynote.jpg';
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg';
                       }}
                     />
                     <span className="past-thumb__tag">{img.tag}</span>

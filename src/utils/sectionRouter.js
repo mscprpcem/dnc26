@@ -47,6 +47,9 @@ export const PATH_TO_ID = {
   '/connect': 'community',
   '/code-of-conduct': 'code-of-conduct',
   '/coc': 'code-of-conduct',
+  '/privacy': 'privacy-policy',
+  '/privacy-policy': 'privacy-policy',
+  '/policy': 'privacy-policy',
   '/schedule-page': 'schedule-page',
   '/gridsmart': 'schedule',
   '/grid': 'schedule',
@@ -76,6 +79,8 @@ export const ID_TO_PATH = {
   'stay-connected': '/community',
   'code-of-conduct': '/code-of-conduct',
   'coc': '/code-of-conduct',
+  'privacy-policy': '/privacy-policy',
+  'privacy': '/privacy-policy',
 };
 
 export const normalizePath = (p) => {

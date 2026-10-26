@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
 import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.jsx';
+import { PrivacyPolicyPage } from './components/PrivacyPolicy/PrivacyPolicyPage.jsx';
 import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
 import { NotFoundPage } from './components/NotFound/NotFoundPage.jsx';
 import { isKnownRoute, normalizePath, scrollToSection } from './utils/sectionRouter.js';
@@ -19,6 +20,9 @@ export const App = () => {
       const hash = window.location.hash.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         return 'coc';
+      }
+      if (search.includes('view=privacy') || hash.includes('privacy') || path.includes('privacy')) {
+        return 'privacy';
       }
       if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
         return 'schedule';
@@ -41,6 +45,8 @@ export const App = () => {
       const search = window.location.search.toLowerCase();
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         setCurrentView('coc');
+      } else if (search.includes('view=privacy') || hash.includes('privacy') || path.includes('privacy')) {
+        setCurrentView('privacy');
       } else if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
         setCurrentView('schedule');
       } else {
@@ -82,6 +88,11 @@ export const App = () => {
   // 1. Code of Conduct Page
   if (currentView === 'coc') {
     return <CodeOfConductPage onBack={switchToDncBrutal} />;
+  }
+
+  // 1.1 Privacy Policy Page
+  if (currentView === 'privacy') {
+    return <PrivacyPolicyPage onBack={switchToDncBrutal} />;
   }
 
   // 2. Standalone Schedule Page
