@@ -26,7 +26,7 @@
 
 // Email address(es) that should receive notifications.
 // For multiple emails, separate them with commas.
-const NOTIFICATION_EMAILS = "mlsc@prpotepatilengg.ac.in";
+const NOTIFICATION_EMAILS = "dotnetconfamt@prpotepatilengg.ac.in, mlsc@prpotepatilengg.ac.in";
 
 // Default timezone
 const TIMEZONE = "Asia/Kolkata";
@@ -41,7 +41,8 @@ function doGet(e) {
     .createTextOutput(
       JSON.stringify({
         status: "online",
-        message: "MSC PRPCEM Webhook backend is active and ready to receive submissions.",
+        event: ".NET Conf 2026 Amravati",
+        message: "MSC PRPCEM & .NET Conf 2026 Amravati Webhook backend is active and ready to receive submissions.",
         recipientEmail: NOTIFICATION_EMAILS,
         serverTimeIST: Utilities.formatDate(new Date(), TIMEZONE, "dd/MM/yyyy HH:mm:ss")
       })
@@ -85,19 +86,22 @@ function doPost(e) {
     if (
       rawType === "SPEAKER_APPLICATION" ||
       rawType === "SPEAKER" ||
+      rawType === "CFP_SUBMISSION" ||
+      rawType === "CFP" ||
       data.sessionTitle ||
+      data.talkTitle ||
       data.sessionFormat ||
       data.topic ||
       data.previousSpeaking
     ) {
-      const topic = getVal(data, "topic", "topicDomain", "domain", "subject");
-      const sessionTitle = getVal(data, "sessionTitle", "title", "proposedTitle", "session");
+      const topic = getVal(data, "topic", "topicDomain", "domain", "subject", "track");
+      const sessionTitle = getVal(data, "sessionTitle", "title", "proposedTitle", "session", "talkTitle");
       const sessionFormat = getVal(data, "sessionFormat", "format", "sessionType") || "Session / Workshop";
       const audienceLevel = getVal(data, "audienceLevel", "level", "targetAudience") || "All Levels";
-      const location = getVal(data, "location", "city", "address");
+      const location = getVal(data, "location", "city", "address", "country");
       const linkedin = getVal(data, "linkedin", "linkedinUrl", "socialProfile");
-      const previousSpeaking = getVal(data, "previousSpeaking", "experience", "pastSessions");
-      const additionalNotes = getVal(data, "additionalNotes", "notes", "message");
+      const previousSpeaking = getVal(data, "previousSpeaking", "experience", "pastSessions", "pastTalks");
+      const additionalNotes = getVal(data, "additionalNotes", "notes", "message", "abstract");
 
       const sheet = getOrCreateSheet(
         ss,
@@ -375,14 +379,39 @@ function doPost(e) {
       data.eventTitle ||
       data.branch ||
       data.college ||
-      data.yearOfStudy
+      data.yearOfStudy ||
+      data.role ||
+      data.interests
     ) {
-      const eventTitle = getVal(data, "eventTitle", "eventName", "event", "title") || "MSC PRPCEM Event";
-      const eventId = getVal(data, "eventId", "id") || "general";
-      const gender = getVal(data, "gender") || "Not Specified";
-      const college = getVal(data, "college", "institution", "collegeName") || "PRPCEM Amravati";
+      const eventTitle = getVal(data, "eventTitle", "eventName", "event", "title") || ".NET Conf 2026 Amravati";
+      const eventId = getVal(data, "eventId", "id") || "dotnetconf-2026-amravati";
+      const gender = getVal(data, "gender") || "";
+      const college = getVal(data, "college", "institution", "collegeName", "organization", "company", "workplace") || "PRPCEM Campus, Amravati";
       const branch = getVal(data, "branch", "department", "branchName") || "";
-      const yearOfStudy = getVal(data, "yearOfStudy", "year", "currentYear") || "";
+      
+      // Multi-alias role extraction with friendly labels
+      const roleMap = {
+        "student_prpcem": "Student @ PRPCEM (Host Campus)",
+        "student_other": "Student (Other College / University)",
+        "developer": "Software Engineer / Full-Stack Developer",
+        "ai_engineer": "AI Engineer / ML & LLM Practitioner",
+        "devops_cloud": "Cloud Architect / DevOps / SRE",
+        "faculty": "Faculty / Educator / Academician",
+        "other": "Tech Enthusiast / Open Source Contributor"
+      };
+
+      const rawRole = getVal(data, "role", "roleLabel", "designation", "jobTitle", "yearOfStudy", "year");
+      const role = data.roleLabel || roleMap[rawRole] || rawRole || "Attendee / Delegate";
+
+      // Formatted topics of interest
+      let interests = "";
+      if (Array.isArray(data.interests)) {
+        interests = data.interests.join(", ");
+      } else {
+        interests = getVal(data, "interests", "topics", "message", "notes");
+      }
+
+      const yearOfStudy = getVal(data, "yearOfStudy", "year", "currentYear") || role;
       const rollNo = getVal(data, "rollNo", "prnNumber", "rollNumber", "enrollmentNo") || "";
 
       // 1. Get Event Sheet
@@ -405,18 +434,19 @@ function doPost(e) {
 
       const participantIndex = Math.max(1, eventSheet.getLastRow() - 2);
 
+      // Append row to event sheet (preserves alignment with existing 11 columns)
       eventSheet.appendRow([
         participantIndex,
         timestamp,
         safeText(fullName),
         safeText(email),
         phoneAsText(phone),
-        safeText(gender),
+        safeText(gender || role),
         safeText(college),
         safeText(branch),
-        safeText(yearOfStudy),
+        safeText(role || yearOfStudy),
         safeText(rollNo),
-        safeText(message)
+        safeText(interests || message)
       ]);
 
       // 3. Record in Master "Event_Registrations" Tab
@@ -430,12 +460,12 @@ function doPost(e) {
           "Full Name",
           "Email",
           "Phone",
-          "Gender",
+          "Gender / Role",
           "College / Institution",
           "Branch / Department",
-          "Year of Study",
+          "Year of Study / Designation",
           "Roll No / PRN",
-          "Notes / Comments"
+          "Notes / Interests"
         ]
       );
 
@@ -446,32 +476,45 @@ function doPost(e) {
         safeText(fullName),
         safeText(email),
         phoneAsText(phone),
-        safeText(gender),
+        safeText(gender || role),
         safeText(college),
         safeText(branch),
-        safeText(yearOfStudy),
+        safeText(role || yearOfStudy),
         safeText(rollNo),
-        safeText(message)
+        safeText(interests || message)
       ]);
 
-      // 4. Send Email Notification
+      // 4. Send Rich Email Notification
+      const emailFields = [
+        { label: "Event", value: eventTitle },
+        { label: "Full Name", value: fullName },
+        { label: "Email", value: email },
+        { label: "Phone / WhatsApp", value: phone },
+        { label: "Role / Background", value: role },
+        { label: "College / Organization", value: college },
+        { label: "Topics of Interest", value: interests }
+      ];
+
+      if (branch) {
+        emailFields.push({ label: "Branch", value: branch });
+      }
+      if (rollNo) {
+        emailFields.push({ label: "Roll No / PRN", value: rollNo });
+      }
+      if (gender && gender !== "Not Specified") {
+        emailFields.push({ label: "Gender", value: gender });
+      }
+      if (message && message !== interests) {
+        emailFields.push({ label: "Notes / Message", value: message });
+      }
+
       sendEmailNotification(
-        "🎟️ [New Event Registration] " +
-          (fullName || "Student") +
-          " - " +
+        "🎟️ [New Delegate Interest] " +
+          (fullName || "Attendee") +
+          " (" + (role || "Delegate") + ") - " +
           eventTitle,
-        "New Event Registration",
-        [
-          { label: "Event", value: eventTitle },
-          { label: "Full Name", value: fullName },
-          { label: "Email", value: email },
-          { label: "Phone", value: phone },
-          { label: "Gender", value: gender },
-          { label: "College", value: college },
-          { label: "Branch & Year", value: branch + (yearOfStudy ? " (" + yearOfStudy + ")" : "") },
-          { label: "Roll No / PRN", value: rollNo },
-          { label: "Notes / Queries", value: message }
-        ],
+        "New Delegate Interest Registration",
+        emailFields,
         data
       );
     }
@@ -604,20 +647,31 @@ function isDuplicateParticipant(sheet, email, phone, startRow, emailCol, phoneCo
   if (lastRow < startRow) return false;
 
   const cleanEmail = String(email || "").toLowerCase().trim();
+  const cleanPhone = String(phone || "").replace(/\D/g, "");
 
-  if (!cleanEmail) {
+  if (!cleanEmail && !cleanPhone) {
     return false;
   }
 
   const numRows = lastRow - startRow + 1;
-  const data = sheet.getRange(startRow, 1, numRows, emailCol).getValues();
+  const maxCol = Math.max(emailCol, phoneCol || 0);
+  const data = sheet.getRange(startRow, 1, numRows, maxCol).getValues();
 
   for (let i = 0; i < data.length; i++) {
+    // 1. Exact email match
     const rowEmail = String(data[i][emailCol - 1] || "").toLowerCase().trim();
-
-    // Exact email match
     if (cleanEmail && rowEmail && cleanEmail === rowEmail) {
       return true;
+    }
+
+    // 2. Normalized 10-digit phone match (handles country codes +91 / 0 gracefully)
+    if (phoneCol && cleanPhone && cleanPhone.length >= 10) {
+      const rowPhone = String(data[i][phoneCol - 1] || "").replace(/\D/g, "");
+      if (rowPhone && rowPhone.length >= 10) {
+        if (rowPhone.slice(-10) === cleanPhone.slice(-10)) {
+          return true;
+        }
+      }
     }
   }
 
@@ -1075,21 +1129,22 @@ function escapeHtml(text) {
 // Run this function from the Apps Script editor to verify sheets, emails & duplicate checks.
 
 function testWebhook() {
+  const primaryEmail = NOTIFICATION_EMAILS ? NOTIFICATION_EMAILS.split(",")[0].trim() : Session.getActiveUser().getEmail();
+
   const fakeEvent = {
     postData: {
       contents: JSON.stringify({
         type: "EVENT_REGISTRATION",
-        eventTitle: "Azure AI Workshop 2026",
-        eventId: "azure-ai-2026",
-        fullName: "Verification Student",
-        email: NOTIFICATION_EMAILS || Session.getActiveUser().getEmail(),
+        eventTitle: ".NET Conf 2026 Amravati",
+        eventId: "dotnetconf-2026-amravati",
+        fullName: "Test Delegate",
+        email: primaryEmail,
         phone: "+91 9876543210",
-        gender: "Male",
-        college: "P. R. Pote Patil College of Engineering & Management, Amravati",
-        branch: "Computer Science & Engineering (CSE)",
-        yearOfStudy: "Third Year",
-        rollNo: "PRN123456",
-        notes: "Webhook, duplicate verification and email alert test completed successfully."
+        role: "developer",
+        roleLabel: "Software Engineer / Full-Stack Developer",
+        college: "PRPCEM Campus, Amravati",
+        interests: "Generative AI & Agents, Modern .NET 11 & C#",
+        notes: "Webhook verification test completed successfully."
       })
     }
   };

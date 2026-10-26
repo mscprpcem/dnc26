@@ -2,13 +2,12 @@ import React from 'react';
 import { Mail, Globe } from 'lucide-react';
 import {
   LinkedInIcon,
-  GitHubIcon,
   WhatsAppIcon,
   InstagramIcon,
   YouTubeIcon,
 } from '../ui/SocialIcons.jsx';
 
-export const DncFooter = ({ onSwitchToClassic }) => {
+export const DncFooter = () => {
   const handleScrollTo = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);

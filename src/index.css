@@ -1213,27 +1213,6 @@ input[type='range']::-moz-range-thumb {
   }
 }
 
-/* ==========================================================================
-   LEAFLET MAP ENHANCEMENTS
-   ========================================================================== */
-
-/* Custom Leaflet Styling */
-.leaflet-container {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  outline: none;
-}
-
-.leaflet-popup-content-wrapper {
-  border-radius: 16px !important;
-  box-shadow: 0 10px 25px -5px rgba(20, 5, 58, 0.15) !important;
-  border: 1px solid rgba(169, 154, 232, 0.4) !important;
-  padding: 4px !important;
-}
-
-.leaflet-popup-tip {
-  box-shadow: 0 10px 25px -5px rgba(20, 5, 58, 0.15) !important;
-}
-
 
 
 

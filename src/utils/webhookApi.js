@@ -31,6 +31,22 @@ export async function sendInterestSubmission(formData) {
     timeStyle: "short",
   });
 
+  // Resolve human-readable role and formatted interests
+  const roleLabels = {
+    student_prpcem: "Student @ PRPCEM (Host Campus)",
+    student_other: "Student (Other College / University)",
+    developer: "Software Engineer / Full-Stack Developer",
+    ai_engineer: "AI Engineer / ML & LLM Practitioner",
+    devops_cloud: "Cloud Architect / DevOps / SRE",
+    faculty: "Faculty / Educator / Academician",
+    other: "Tech Enthusiast / Open Source Contributor",
+  };
+
+  const roleLabel = roleLabels[formData.role] || formData.roleLabel || formData.role || "";
+  const formattedInterests = Array.isArray(formData.interests)
+    ? formData.interests.join(", ")
+    : (formData.interests || "");
+
   const payload = {
     type: "EVENT_REGISTRATION",
     eventId: "dotnetconf-2026-amravati",
@@ -38,11 +54,14 @@ export async function sendInterestSubmission(formData) {
     fullName: formData.fullName || "",
     email: formData.email || "",
     phone: formData.phone || "",
+    role: formData.role || "",
+    roleLabel: roleLabel,
     college: formData.college || "",
+    interests: formattedInterests,
     branch: formData.branch || "",
-    yearOfStudy: formData.yearOfStudy || formData.role || "",
+    yearOfStudy: formData.yearOfStudy || roleLabel || "",
     rollNo: formData.rollNo || "",
-    message: formData.interests || formData.message || "Expressed Interest in .NET Conf 2026 Amravati",
+    message: formattedInterests || formData.message || "Expressed Interest in .NET Conf 2026 Amravati",
     timestamp,
     submittedAt,
   };
@@ -80,90 +99,6 @@ export async function sendInterestSubmission(formData) {
   return {
     success: true,
     message: "Your interest has been recorded!",
-  };
-}
-
-/**
- * Send Call for Proposals (CFP) submission
- * Stores locally in localStorage and forwards to Google Apps Script webhook
- * @param {Object} cfpData
- * @returns {Promise<{success: boolean, message: string, proposalId: string}>}
- */
-export async function sendCfpSubmission(cfpData) {
-  const webhookUrl = getWebhookUrl();
-  const timestamp = new Date().toISOString();
-  const submittedAt = new Date().toLocaleString("en-US", {
-    timeZone: "Asia/Kolkata",
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-
-  const proposalId = `DNC26-CFP-${Math.floor(1000 + Math.random() * 9000)}`;
-
-  const payload = {
-    type: "CFP_SUBMISSION",
-    proposalId,
-    eventId: "dotnetconf-2026-amravati",
-    eventTitle: ".NET Conf 2026 Amravati",
-    // Speaker Info
-    fullName: cfpData.fullName || "",
-    email: cfpData.email || "",
-    phone: cfpData.phone || "",
-    jobTitle: cfpData.jobTitle || "",
-    company: cfpData.company || "",
-    city: cfpData.city || "",
-    country: cfpData.country || "",
-    bio: cfpData.bio || "",
-    hasHeadshot: Boolean(cfpData.headshotUrl),
-    // Socials
-    linkedin: cfpData.linkedin || "",
-    github: cfpData.github || "",
-    twitter: cfpData.twitter || "",
-    website: cfpData.website || "",
-    pastTalks: cfpData.pastTalks || "",
-    // Proposal
-    format: cfpData.format || "Talk",
-    track: cfpData.track || "",
-    level: cfpData.level || "Intermediate",
-    talkTitle: cfpData.talkTitle || "",
-    abstract: cfpData.abstract || "",
-    takeaways: cfpData.takeaways || "",
-    prerequisites: cfpData.prerequisites || "",
-    presentedBefore: cfpData.presentedBefore || "No - Brand new talk",
-    agreedToCodeOfConduct: Boolean(cfpData.agreedToCodeOfConduct),
-    timestamp,
-    submittedAt,
-  };
-
-  // 1. Local storage backup
-  try {
-    const storageKey = "dnc26_cfp_submissions";
-    const existing = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    localStorage.setItem(storageKey, JSON.stringify([payload, ...existing]));
-  } catch (err) {
-    console.warn("Could not save local CFP backup:", err);
-  }
-
-  // 2. Dispatch to webhook if available
-  if (webhookUrl) {
-    try {
-      await fetch(webhookUrl, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(payload),
-      });
-    } catch (err) {
-      console.warn("Webhook dispatch error for CFP:", err);
-    }
-  }
-
-  return {
-    success: true,
-    proposalId,
-    message: "Your proposal for .NET Conf 2026 Amravati has been submitted successfully!",
   };
 }
 

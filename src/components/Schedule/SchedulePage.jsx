@@ -7,8 +7,7 @@ import {
   Mic,
   Share2,
   Check,
-  Calendar,
-  Sparkles
+  Calendar
 } from 'lucide-react';
 import { SessionizeSchedule } from './SessionizeSchedule.jsx';
 import { SESSIONIZE_PUBLIC_URL } from '../../utils/sessionizeApi.js';
