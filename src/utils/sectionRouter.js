@@ -38,6 +38,9 @@ export const PATH_TO_ID = {
   '/attendee-badge': 'attendee-badge',
   '/partners': 'partners',
   '/sponsors': 'partners',
+  '/sponsorship': 'sponsorship-page',
+  '/sponshirp': 'sponsorship-page',
+  '/sponsorships': 'sponsorship-page',
   '/collaborators': 'partners',
   '/register': 'register',
   '/register-interest': 'register',
@@ -81,6 +84,9 @@ export const ID_TO_PATH = {
   'coc': '/code-of-conduct',
   'privacy-policy': '/privacy-policy',
   'privacy': '/privacy-policy',
+  'sponsorship-page': '/sponsorship',
+  'sponsorship': '/sponsorship',
+  'sponshirp': '/sponsorship',
 };
 
 export const normalizePath = (p) => {
@@ -117,6 +123,15 @@ export const scrollToSection = (target, updateHistory = true) => {
 
   if (targetId === 'code-of-conduct' || path === '/code-of-conduct' || targetId === 'coc') {
     window.location.hash = '#code-of-conduct';
+    return;
+  }
+
+  if (targetId === 'sponsorship-page' || targetId === 'sponsorship' || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
+    if (window.location.pathname !== '/sponsorship') {
+      window.history.pushState({ path: '/sponsorship', sectionId: 'sponsorship-page' }, '', '/sponsorship');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
 

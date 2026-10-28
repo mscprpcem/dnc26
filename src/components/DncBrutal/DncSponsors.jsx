@@ -386,10 +386,25 @@ export const DncSponsors = () => {
           {/* CTA Row */}
           <div style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', borderTop: '1px dashed rgba(255,255,255,0.2)', paddingTop: '1.5rem' }}>
             <p style={{ color: 'var(--text-emphasis)', fontSize: '.95rem' }}>
-              Want to sponsor or partner with .NET Conf 2026? Custom sponsorship decks available for campus hiring, technology booths, and workshop stages.
+              Want to sponsor or partner with .NET Conf 2026? Explore our dedicated sponsorship prospectus with complete tier comparison, booth specs, and deliverables.
             </p>
             <a
               className="btn btn--primary btn--sm"
+              href="/sponsorship"
+              onClick={(e) => {
+                e.preventDefault();
+                window.history.pushState({}, '', '/sponsorship');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span>View Tiers &amp; Benefits Table</span>
+              <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
+                <use href="#i-arrow" />
+              </svg>
+            </a>
+            <a
+              className="btn btn--ghost btn--sm"
               href="mailto:dotnetconfamt@prpotepatilengg.ac.in?subject=Sponsorship%20Inquiry%20-%20.NET%20Conf%202026"
             >
               <span>Download Sponsor Deck</span>

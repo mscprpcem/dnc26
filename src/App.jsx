@@ -3,6 +3,7 @@ import { DncBrutalPage } from './components/DncBrutal/DncBrutalPage.jsx';
 import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.jsx';
 import { PrivacyPolicyPage } from './components/PrivacyPolicy/PrivacyPolicyPage.jsx';
 import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
+import { SponsorshipPage } from './components/Sponsorship/SponsorshipPage.jsx';
 import { NotFoundPage } from './components/NotFound/NotFoundPage.jsx';
 import { isKnownRoute, normalizePath, scrollToSection } from './utils/sectionRouter.js';
 
@@ -27,6 +28,9 @@ export const App = () => {
       if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
         return 'schedule';
       }
+      if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
+        return 'sponsorship';
+      }
       return 'dnc-brutal';
     }
     return 'dnc-brutal';
@@ -49,6 +53,8 @@ export const App = () => {
         setCurrentView('privacy');
       } else if (search.includes('view=schedule') || hash.includes('schedule-view') || hash.includes('schedule-page') || path === '/schedule-page') {
         setCurrentView('schedule');
+      } else if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
+        setCurrentView('sponsorship');
       } else {
         setCurrentView('dnc-brutal');
       }
@@ -67,6 +73,9 @@ export const App = () => {
   const switchToDncBrutal = () => {
     setCurrentView('dnc-brutal');
     window.location.hash = '';
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -98,6 +107,11 @@ export const App = () => {
   // 2. Standalone Schedule Page
   if (currentView === 'schedule') {
     return <SchedulePage onBack={switchToDncBrutal} />;
+  }
+
+  // 2.1 Standalone Sponsorship & Benefits Page
+  if (currentView === 'sponsorship') {
+    return <SponsorshipPage onBack={switchToDncBrutal} />;
   }
 
   // 3. Main Conference DevFest Experience (Permanent Default)

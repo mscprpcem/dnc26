@@ -85,6 +85,7 @@ export const DncFooter = () => {
             <div className="foot__nav">
               <a href="/code-of-conduct">Code of Conduct</a>
               <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/sponsorship">Sponsorship &amp; Tiers</a>
               <a href="https://www.mscprpcem.tech" target="_blank" rel="noopener noreferrer">About MSC PRPCEM</a>
               <a href="https://dotnet.microsoft.com" target="_blank" rel="noopener noreferrer">Official .NET Portal</a>
               <a href="https://dotnetfoundation.org" target="_blank" rel="noopener noreferrer">.NET Foundation</a>
