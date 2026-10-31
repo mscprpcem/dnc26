@@ -978,7 +978,7 @@ function sendEmailNotification(subject, heading, fields, rawData) {
       '<table border="0" cellpadding="0" cellspacing="0">' +
       '<tr>' +
       '<td valign="middle" style="padding-right:12px;line-height:0;">' +
-      '<img src="https://www.mscprpcem.tech/assets/email/msc_logo.png" alt="MSC PRPCEM Logo" width="44" height="44" style="display:block;width:44px;height:44px;border:0;" />' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/mscprpcemlogo.png" alt="MSC PRPCEM Logo" width="44" height="44" style="display:block;width:44px;height:44px;border:0;" />' +
       '</td>' +
       '<td valign="middle" style="line-height:1;">' +
       '<span style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;font-size:20px;font-weight:900;color:#0f172a;letter-spacing:-0.3px;">MSC PRPCEM</span>' +
@@ -1000,7 +1000,7 @@ function sendEmailNotification(subject, heading, fields, rawData) {
       // Hero Banner
       '<tr><td style="padding:0;line-height:0;background-color:#ffffff;">' +
       '<a href="https://www.mscprpcem.tech" target="_blank" style="display:block;text-decoration:none;">' +
-      '<img src="https://www.mscprpcem.tech/assets/email/email_hero_banner.png" alt="Microsoft Student Club PRPCEM" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/upper%20banner.png" alt="Microsoft Student Club PRPCEM" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />' +
       '</a>' +
       '</td></tr>' +
 
@@ -1041,7 +1041,7 @@ function sendEmailNotification(subject, heading, fields, rawData) {
       '<div style="font-size:11px;color:#64748b;margin-top:2px;line-height:1.4;">P. R. Pote (Patil) College of Engineering &amp; Management, Amravati</div>' +
       '</td>' +
       '<td valign="bottom" align="right" style="text-align:right;vertical-align:bottom;width:38%;">' +
-      '<img src="https://www.mscprpcem.tech/assets/email/email_force_for_good.png" alt="Be a Force for Good." width="155" style="display:inline-block;max-width:155px;width:100%;height:auto;border:0;" />' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/lower%20banner.png" alt="Be a Force for Good." width="155" style="display:inline-block;max-width:155px;width:100%;height:auto;border:0;" />' +
       '</td>' +
       '</tr>' +
       '</table>' +
