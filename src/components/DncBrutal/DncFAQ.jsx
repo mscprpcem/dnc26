@@ -30,7 +30,7 @@ export const DncFAQ = () => {
     },
     {
       q: 'Where and when is the event taking place?',
-      a: 'The summit takes place on Saturday, 26 December 2026 in Amravati, Maharashtra. The exact campus auditorium and hall details will be announced soon.',
+      a: 'The summit takes place on Saturday, 26 December 2026 (Tentative) in Amravati, Maharashtra. The exact campus auditorium and hall details will be announced soon.',
     },
     {
       q: 'How can I submit a talk proposal or become a sponsor?',

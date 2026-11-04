@@ -107,7 +107,7 @@ export const SchedulePage = ({ onBack }) => {
           </p>
 
           <div className="mt-6 pt-4 border-t border-white/20 flex flex-wrap items-center gap-4 text-xs font-mono text-white/80">
-            <span>DATE: SATURDAY, DECEMBER 26, 2026</span>
+            <span>DATE: SATURDAY, DECEMBER 26, 2026 (TENTATIVE)</span>
             <span>•</span>
             <span>VENUE: PRPCEM CAMPUS, AMRAVATI</span>
             <span>•</span>

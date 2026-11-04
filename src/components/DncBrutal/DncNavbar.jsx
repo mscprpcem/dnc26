@@ -151,7 +151,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
             </svg>
           </button>
           <p className="eyebrow" style={{ justifyContent: 'center' }}>
-            Saturday | 26 December 2026 | Amravati
+            Saturday | 26 December 2026 (Tentative) | Amravati
           </p>
         </div>
       </div>

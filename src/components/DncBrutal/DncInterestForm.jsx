@@ -97,7 +97,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
   };
 
   const handleShareSuccessWhatsApp = () => {
-    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
+    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026 - Tentative) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
   };
 
