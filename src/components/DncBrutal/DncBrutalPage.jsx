@@ -40,17 +40,37 @@ export const DncBrutalPage = () => {
       if (e.key === 'Escape') setActiveModal(null);
     };
     if (activeModal) {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.dataset.modalScrollY = String(scrollY);
       window.addEventListener('keydown', handleKeyDown);
       setTimeout(() => {
         const modalScroll = document.getElementById('badge-modal-scroll');
         if (modalScroll) modalScroll.scrollTop = 0;
       }, 10);
     } else {
+      const savedY = parseInt(document.body.dataset.modalScrollY || '0', 10);
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      delete document.body.dataset.modalScrollY;
+      window.scrollTo(0, savedY);
     }
     return () => {
+      const savedY = parseInt(document.body.dataset.modalScrollY || '0', 10);
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      delete document.body.dataset.modalScrollY;
+      window.scrollTo(0, savedY);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [activeModal]);
@@ -139,14 +159,14 @@ export const DncBrutalPage = () => {
       {/* Interactive Modal: Attendee Badge Studio */}
       {activeModal === 'badge' && (
         <div 
-          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto"
+          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden overscroll-contain modal-overlay"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative w-full max-w-5xl bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] flex flex-col overflow-hidden">
+          <div className="relative w-full max-w-5xl bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] flex flex-col overflow-hidden overscroll-contain">
             {/* Pinned Modal Header */}
             <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 bg-white border-b-2 border-black flex-shrink-0">
               <div className="flex items-center gap-2.5">
@@ -167,7 +187,7 @@ export const DncBrutalPage = () => {
             </div>
 
             {/* Scrollable Modal Content */}
-            <div id="badge-modal-scroll" className="p-3 sm:p-6 overflow-y-auto flex-1">
+            <div id="badge-modal-scroll" className="p-3 sm:p-6 overflow-y-auto flex-1 overscroll-contain custom-modal-scrollbar no-scrollbar">
               <div>
                 <DncAttendeeBadge isModal={true} />
               </div>
@@ -179,14 +199,14 @@ export const DncBrutalPage = () => {
       {/* Interactive Modal: Priority Interest Registration Form */}
       {activeModal === 'register' && (
         <div 
-          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-6 overflow-y-auto"
+          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-6 overflow-hidden overscroll-contain modal-overlay"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto">
+          <div className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto overscroll-contain custom-modal-scrollbar no-scrollbar">
             <button
               onClick={() => setActiveModal(null)}
               className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"

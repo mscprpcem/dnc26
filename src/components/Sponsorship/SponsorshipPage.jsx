@@ -567,7 +567,7 @@ export const SponsorshipPage = ({ onBack }) => {
     },
     {
       q: 'When is the deadline to confirm our sponsorship commitment?',
-      a: 'To guarantee inclusion on printed conference collaterals (such as physical lanyards, stage backdrops, attendee kits, and t-shirts), sponsorship agreements should be confirmed at least 4 weeks prior to the event date (November 28, 2026 - Tentative). Digital-only packages can be onboarded up to 10 days before the conference.',
+      a: 'To guarantee inclusion on printed conference collaterals (such as physical lanyards, stage backdrops, attendee kits, and t-shirts), sponsorship agreements should be confirmed at least 4 weeks prior to the event date (November 28, 2026). Digital-only packages can be onboarded up to 10 days before the conference.',
     },
     {
       q: 'What facilities are provided in the exhibition booth space?',
@@ -669,14 +669,14 @@ export const SponsorshipPage = ({ onBack }) => {
             
             <div className="sechead sechead--split" style={{ alignItems: 'flex-start' }}>
               <div>
-                <p className="eyebrow">Partnership Prospectus · Dec 26, 2026 (Tentative)</p>
+                <p className="eyebrow">Partnership Prospectus · Dec 26, 2026</p>
                 <h1 className="h-sec">
                   Sponsor .NET Conf 2026<br />
                   <span style={{ color: 'var(--purple)' }}>Amravati Edition</span>
                 </h1>
               </div>
               <p className="lede">
-                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday, December 26, 2026 (Tentative).
+                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday, December 26, 2026.
               </p>
             </div>
 

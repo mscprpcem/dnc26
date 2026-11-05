@@ -69,12 +69,12 @@ export const DncHero = ({ onOpenRegister }) => {
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            December 26, 2026 (Tentative)
+            December 26, 2026
           </span>
           <span className="hero__date-divider" aria-hidden="true">|</span>
           <span className="hero__date-day">Saturday</span>
           <span className="hero__date-divider" aria-hidden="true">|</span>
-          <span className="hero__date-venue-soon">Venue Announcing Soon</span>
+          <span className="hero__date-venue-soon">P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati</span>
         </div>
 
         {/* Live Countdown Timer */}
@@ -162,8 +162,8 @@ export const DncHero = ({ onOpenRegister }) => {
               <span className="road__node" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><use href="#i-pin" /></svg>
               </span>
-              <b>Venue Announcing Soon</b>
-              <span>Amravati, Maharashtra. Exact campus venue details releasing soon.</span>
+              <b>PRPCEM Campus Venue</b>
+              <span>P. R. Pote Patil College of Engineering and Management (PRPCEM), Kathora Road, Amravati.</span>
               <a href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>About the summit →</a>
             </li>
             <li className="road__stop is-end">
@@ -172,7 +172,7 @@ export const DncHero = ({ onOpenRegister }) => {
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
               </span>
-              <b>26 December 2026 (Tentative)</b>
+              <b>26 December 2026</b>
               <span>Conference day. AI keynotes, DevOps workshops, Azure cloud architecture &amp; .NET deep-dives.</span>
               <a href="#schedule" onClick={(e) => handleSmoothScroll(e, 'schedule')}>View schedule →</a>
             </li>

@@ -517,6 +517,20 @@ function doPost(e) {
         emailFields,
         data
       );
+
+      // 5. Send Themed Confirmation Email Directly to the User/Delegate
+      if (email && String(email).indexOf("@") !== -1) {
+        sendDelegateConfirmationEmail(
+          email,
+          fullName,
+          eventTitle,
+          role,
+          college,
+          interests,
+          phone,
+          timestamp
+        );
+      }
     }
 
     // ==========================================================================
@@ -1155,4 +1169,226 @@ function testWebhook() {
   // Test duplicate prevention
   const response2 = doPost(fakeEvent);
   Logger.log("Second Submission (Expected Already Registered): " + response2.getContent());
+}
+
+// ==============================================================================
+// 9. OFFICIAL DELEGATE CONFIRMATION EMAIL (SENT DIRECTLY TO ATTENDEE)
+// ==============================================================================
+
+function sendDelegateConfirmationEmail(
+  recipientEmail,
+  fullName,
+  eventTitle,
+  role,
+  college,
+  interests,
+  phone,
+  timestamp
+) {
+  try {
+    if (!recipientEmail || recipientEmail.indexOf("@") === -1) {
+      console.warn("Invalid recipient email for confirmation:", recipientEmail);
+      return;
+    }
+
+    var cleanName = escapeHtml(fullName || "Delegate");
+    var cleanEvent = escapeHtml(eventTitle || ".NET Conf 2026 Amravati");
+    var cleanRole = escapeHtml(role || "Delegate / Attendee");
+    var cleanCollege = escapeHtml(college || "PRPCEM Amravati");
+    var cleanInterests = escapeHtml(interests || "Generative AI, GitHub Copilot, Azure Cloud, Modern .NET 11");
+    var cleanPhone = phone ? escapeHtml(phone) : "Not Specified";
+
+    var subject = "🎉 Registration Confirmed: " + cleanEvent + " | MSC PRPCEM";
+    var heading = "Welcome to " + cleanEvent + "!";
+
+    var detailsHtml =
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;width:150px;">Summit Event</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:700;font-size:13px;">' + cleanEvent + '</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Event Date</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#512bd4;font-weight:700;font-size:13px;">Saturday, 26 December 2026</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Timing</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">09:00 AM – 06:00 PM IST (Full Day)</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Campus Venue</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">P. R. Pote Patil College of Engineering and Management (PRPCEM), Pote Estate, Kathora Road, Amravati, Maharashtra 444602</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Delegate Name</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:700;font-size:13px;">' + cleanName + '</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Registered Role</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">' + cleanRole + '</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">College / Org</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">' + cleanCollege + '</td></tr>' +
+      '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Track Interests</td>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">' + cleanInterests + '</td></tr>';
+
+    var htmlBody =
+      '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' +
+      '<html xmlns="http://www.w3.org/1999/xhtml" lang="en">' +
+      '<head>' +
+      '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />' +
+      '<title>' + escapeHtml(heading) + '</title>' +
+      '<style type="text/css">' +
+      '  body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }' +
+      '  table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }' +
+      '  img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }' +
+      '  @media only screen and (max-width: 600px) {' +
+      '    .email-container { width: 100% !important; max-width: 100% !important; border-radius: 12px !important; }' +
+      '    .email-body-pad { padding: 20px 16px !important; }' +
+      '    .email-header-pad { padding: 16px !important; }' +
+      '    .email-logo-text { font-size: 17px !important; }' +
+      '    .email-slogan-text { font-size: 13px !important; }' +
+      '    .email-heading-name { font-size: 18px !important; }' +
+      '    .email-action-btn { display: block !important; width: 100% !important; margin: 8px 0 !important; box-sizing: border-box !important; text-align: center !important; }' +
+      '    .email-summary-label { width: 38% !important; font-size: 12px !important; padding: 8px 10px !important; }' +
+      '    .email-summary-val { width: 62% !important; font-size: 12px !important; padding: 8px 10px !important; }' +
+      '    .email-signoff-left, .email-signoff-right { display: block !important; width: 100% !important; text-align: left !important; }' +
+      '    .email-signoff-right { margin-top: 14px !important; }' +
+      '    .email-footer-left, .email-footer-right { display: block !important; width: 100% !important; text-align: center !important; margin: 6px 0 !important; }' +
+      '    .email-footer-divider { display: none !important; }' +
+      '    .email-social-table { margin: 0 auto !important; }' +
+      '  }' +
+      '</style>' +
+      '</head>' +
+      '<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">' +
+      '<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f1f5f9;padding:24px 8px;width:100%;table-layout:fixed;box-sizing:border-box;">' +
+      '<tr><td align="center" style="padding:0;">' +
+      '<table class="email-container" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;width:100%;background-color:#ffffff;border-radius:20px;border:1px solid #e2e8f0;overflow:hidden;box-shadow:0 10px 30px rgba(15,23,42,0.08);table-layout:fixed;box-sizing:border-box;">' +
+      
+      // Top Navigation Bar (Official Logo + Slogan)
+      '<tr><td class="email-header-pad" style="padding:22px 28px 16px 28px;background-color:#ffffff;border-top-left-radius:20px;border-top-right-radius:20px;">' +
+      '<table border="0" cellpadding="0" cellspacing="0" width="100%">' +
+      '<tr>' +
+      '<td align="left" valign="middle">' +
+      '<a href="https://dnc.mscprpcem.tech" target="_blank" style="text-decoration:none;display:inline-block;vertical-align:middle;">' +
+      '<table border="0" cellpadding="0" cellspacing="0">' +
+      '<tr>' +
+      '<td valign="middle" style="padding-right:12px;line-height:0;">' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/mscprpcemlogo.png" alt="MSC PRPCEM Logo" width="44" height="44" style="display:block;width:44px;height:44px;border:0;" />' +
+      '</td>' +
+      '<td valign="middle" style="line-height:1;">' +
+      '<span class="email-logo-text" style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;font-size:20px;font-weight:900;color:#0f172a;letter-spacing:-0.3px;">MSC PRPCEM</span>' +
+      '</td>' +
+      '</tr>' +
+      '</table>' +
+      '</a>' +
+      '</td>' +
+      '<td align="right" valign="middle">' +
+      '<a href="https://dnc.mscprpcem.tech" target="_blank" style="text-decoration:none;display:inline-block;">' +
+      '<div class="email-slogan-text" style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;font-size:16px;font-weight:800;color:#0f172a;letter-spacing:-0.2px;line-height:1.2;">Be a <span style="color:#2563eb;">Force for Good</span>.</div>' +
+      '<div style="height:2.5px;width:64px;background:linear-gradient(90deg,#2563eb,#6366f1);margin:3px 0 0 auto;border-radius:2px;"></div>' +
+      '</a>' +
+      '</td>' +
+      '</tr>' +
+      '</table>' +
+      '</td></tr>' +
+
+      // Hero Banner
+      '<tr><td style="padding:0;line-height:0;background-color:#ffffff;">' +
+      '<a href="https://dnc.mscprpcem.tech" target="_blank" style="display:block;text-decoration:none;">' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/upper%20banner.png" alt=".NET Conf 2026 Amravati" width="600" style="display:block;width:100%;max-width:600px;height:auto;border:0;" />' +
+      '</a>' +
+      '</td></tr>' +
+
+      // Main Confirmation Body Area
+      '<tr><td class="email-body-pad" style="padding:28px 32px 24px 32px;background-color:#ffffff;color:#334155;font-size:15px;line-height:1.65;box-sizing:border-box;word-break:break-word;">' +
+      '<div style="display:inline-block;background-color:#eff6ff;color:#2563eb;font-weight:800;font-size:11px;padding:4px 12px;border-radius:6px;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:12px;">' +
+      'Priority Delegate Confirmation' +
+      '</div>' +
+      '<p class="email-heading-name" style="margin:0 0 16px 0;font-size:20px;font-weight:800;color:#0f172a;line-height:1.3;">' +
+      'Hi <span style="color:#512bd4;font-weight:900;">' + cleanName + '</span>,' +
+      '</p>' +
+      '<p style="font-size:15px;color:#334155;margin:0 0 16px 0;line-height:1.6;">' +
+      'Thank you for registering your priority interest for <strong>' + cleanEvent + '</strong>, hosted at <strong>P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati</strong> by <strong>Microsoft Student Club (MSC PRPCEM)</strong>!' +
+      '</p>' +
+      '<p style="font-size:14px;color:#475569;margin:0 0 20px 0;line-height:1.6;">' +
+      'We are excited to welcome you to Central India\'s flagship Microsoft developer conference uniting <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps</strong>, <strong>Microsoft Azure Cloud</strong>, and <strong>Modern .NET 11</strong>.' +
+      '</p>' +
+
+      // Submission Details Table
+      '<table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:20px 0;background-color:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;table-layout:fixed;box-sizing:border-box;">' +
+      '<tr><td colspan="2" style="padding:10px 14px;background-color:#f1f5f9;border-bottom:1px solid #e2e8f0;font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:0.5px;">' +
+      'Your Registration Summary' +
+      '</td></tr>' +
+      detailsHtml +
+      '</table>' +
+
+      // Action Buttons
+      '<div style="text-align:center;margin:28px 0 20px 0;">' +
+      '<a class="email-action-btn" href="https://dnc.mscprpcem.tech/#tickets" target="_blank" style="display:inline-block;background-color:#512bd4;color:#ffffff!important;font-weight:700;font-size:14px;text-decoration:none;padding:13px 28px;border-radius:10px;box-shadow:0 4px 14px rgba(81,43,212,0.3);text-align:center;margin:4px;">' +
+      'Generate Your Attendee Badge &rarr;' +
+      '</a>' +
+      '<a class="email-action-btn" href="https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67" target="_blank" style="display:inline-block;background-color:#16a34a;color:#ffffff!important;font-weight:700;font-size:14px;text-decoration:none;padding:13px 28px;border-radius:10px;box-shadow:0 4px 14px rgba(22,163,74,0.3);text-align:center;margin:4px;">' +
+      'Join WhatsApp Community &rarr;' +
+      '</a>' +
+      '</div>' +
+
+      // Sign-off
+      '<table class="email-signoff-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top:32px;border-top:1px solid #f1f5f9;padding-top:22px;table-layout:fixed;">' +
+      '<tr>' +
+      '<td class="email-signoff-left" valign="bottom" align="left" style="text-align:left;vertical-align:bottom;width:62%;">' +
+      '<div style="font-size:13px;color:#64748b;font-weight:500;margin-bottom:3px;">Best Regards,</div>' +
+      '<div style="font-size:16px;color:#0f172a;font-weight:800;letter-spacing:-0.2px;margin-bottom:6px;">Team MSC PRPCEM &amp; .NET Conf</div>' +
+      '<div style="height:3px;width:42px;background-color:#512bd4;border-radius:2px;margin-bottom:10px;"></div>' +
+      '<div style="font-size:13px;font-weight:700;color:#1e293b;line-height:1.3;">Microsoft Student Club PRPCEM</div>' +
+      '<div style="font-size:11px;color:#64748b;margin-top:2px;line-height:1.4;">P. R. Pote (Patil) College of Engineering &amp; Management, Amravati</div>' +
+      '</td>' +
+      '<td class="email-signoff-right" valign="bottom" align="right" style="text-align:right;vertical-align:bottom;width:38%;">' +
+      '<img src="https://mscprpcem.blob.core.windows.net/email-template/lower%20banner.png" alt="Be a Force for Good." width="155" style="display:inline-block;max-width:155px;width:100%;height:auto;border:0;" />' +
+      '</td>' +
+      '</tr>' +
+      '</table>' +
+      '</td></tr>' +
+
+      // Deep Navy Footer
+      '<tr><td style="padding:16px 24px;background-color:#081630;border-bottom-left-radius:20px;border-bottom-right-radius:20px;box-sizing:border-box;">' +
+      '<table border="0" cellpadding="0" cellspacing="0" width="100%">' +
+      '<tr>' +
+      '<td class="email-footer-left" align="left" valign="middle" style="line-height:0;">' +
+      '<table class="email-social-table" border="0" cellpadding="0" cellspacing="0">' +
+      '<tr>' +
+      '<td style="padding-right:10px;line-height:0;"><a href="https://www.instagram.com/mscprpcem/" target="_blank" style="text-decoration:none;"><img src="https://www.mscprpcem.tech/assets/email/icon_instagram.png" width="30" height="30" alt="Instagram" style="display:block;border:0;" /></a></td>' +
+      '<td style="padding-right:10px;line-height:0;"><a href="https://www.linkedin.com/company/mscprpcem/" target="_blank" style="text-decoration:none;"><img src="https://www.mscprpcem.tech/assets/email/icon_linkedin.png" width="30" height="30" alt="LinkedIn" style="display:block;border:0;" /></a></td>' +
+      '<td style="padding-right:10px;line-height:0;"><a href="https://youtube.com/@mscprpcem" target="_blank" style="text-decoration:none;"><img src="https://www.mscprpcem.tech/assets/email/icon_youtube.png" width="30" height="30" alt="YouTube" style="display:block;border:0;" /></a></td>' +
+      '<td style="padding-right:14px;line-height:0;"><a href="https://dnc.mscprpcem.tech" target="_blank" style="text-decoration:none;"><img src="https://www.mscprpcem.tech/assets/email/icon_website.png" width="30" height="30" alt="Website" style="display:block;border:0;" /></a></td>' +
+      '<td class="email-footer-divider" style="border-left:1px solid rgba(255,255,255,0.2);height:24px;width:1px;"></td>' +
+      '</tr>' +
+      '</table>' +
+      '</td>' +
+      '<td class="email-footer-right" align="right" valign="middle" style="color:#94a3b8;font-size:11px;line-height:1.35;text-align:right;">' +
+      '<div style="color:#ffffff;font-weight:700;font-size:11px;">Microsoft Student Club PRPCEM</div>' +
+      '<div style="color:#94a3b8;font-size:10px;margin-top:1px;">P. R. Pote Patil College of Engineering &amp; Management</div>' +
+      '</td>' +
+      '</tr>' +
+      '</table>' +
+      '</td></tr>' +
+      '</table>' +
+      '</td></tr></table>' +
+      '</body></html>';
+
+    // Dispatch with primary MailApp, and fallback to GmailApp
+    try {
+      MailApp.sendEmail({
+        to: recipientEmail,
+        subject: subject,
+        htmlBody: htmlBody,
+        name: "MSC PRPCEM (.NET Conf 2026)",
+        replyTo: "dotnetconfamt@prpotepatilengg.ac.in"
+      });
+      console.log("Confirmation email successfully sent via MailApp to:", recipientEmail);
+    } catch (mailAppErr) {
+      console.warn("MailApp failed, attempting fallback to GmailApp:", mailAppErr.toString());
+      try {
+        GmailApp.sendEmail(recipientEmail, subject, "", {
+          htmlBody: htmlBody,
+          name: "MSC PRPCEM (.NET Conf 2026)",
+          replyTo: "dotnetconfamt@prpotepatilengg.ac.in"
+        });
+        console.log("Confirmation email successfully sent via GmailApp fallback to:", recipientEmail);
+      } catch (gmailAppErr) {
+        console.error("Both MailApp and GmailApp failed to send email to " + recipientEmail + ":", gmailAppErr.toString());
+      }
+    }
+
+  } catch (err) {
+    console.error("Delegate confirmation email error:", err.toString());
+  }
 }

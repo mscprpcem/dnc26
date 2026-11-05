@@ -107,9 +107,9 @@ export const SchedulePage = ({ onBack }) => {
           </p>
 
           <div className="mt-6 pt-4 border-t border-white/20 flex flex-wrap items-center gap-4 text-xs font-mono text-white/80">
-            <span>DATE: SATURDAY, DECEMBER 26, 2026 (TENTATIVE)</span>
+            <span>DATE: SATURDAY, DECEMBER 26, 2026</span>
             <span>•</span>
-            <span>VENUE: PRPCEM CAMPUS, AMRAVATI</span>
+            <span>VENUE: P. R. POTE PATIL COLLEGE OF ENGINEERING AND MANAGEMENT (PRPCEM), AMRAVATI</span>
             <span>•</span>
             <span>SESSIONIZE INTEGRATED</span>
           </div>
@@ -157,7 +157,7 @@ export const SchedulePage = ({ onBack }) => {
                 Conference Venue &amp; Campus
               </h4>
               <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed mb-4">
-                PRPCEM Campus, Badnera Road, Amravati, Maharashtra 444607. Dual presentation halls with high-speed internet and live stream facilities.
+                P. R. Pote Patil College of Engineering and Management (PRPCEM), Pote Estate, Kathora Road, Amravati, Maharashtra 444602. Dual presentation halls with high-speed internet and live stream facilities.
               </p>
             </div>
             <button

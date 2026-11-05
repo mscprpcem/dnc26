@@ -97,7 +97,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
   };
 
   const handleShareSuccessWhatsApp = () => {
-    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026 - Tentative) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
+    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
   };
 
@@ -153,7 +153,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
               You're On The Priority List!
             </h3>
             <p className="text-stone-600 font-sans text-xs sm:text-sm max-w-md mx-auto leading-relaxed mb-5">
-              Thank you{formData.fullName ? `, ${formData.fullName}` : ''}! Your interest has been recorded. You'll receive delegate passes notification, speaker schedules, and badge invitations first.
+              Thank you{formData.fullName ? `, ${formData.fullName}` : ''}! Your interest has been confirmed and a confirmation email has been dispatched to <strong>{formData.email}</strong>. Check your inbox for passes, schedules, and badge invitations.
             </p>
 
             {/* High-Conversion Next Steps */}
@@ -473,7 +473,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
               Interest Submitted!
             </h3>
             <p className="text-stone-600 font-sans text-sm max-w-md mx-auto">
-              Thank you for registering your interest. You'll receive delegate priority updates, session schedules, and badge invitations.
+              Thank you for registering your interest! A confirmation email has been dispatched to <strong>{formData.email}</strong> with your priority delegate details.
             </p>
           </div>
         ) : (
@@ -708,7 +708,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
             {/* Subtext under button */}
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-500 font-sans text-center pt-1">
               <Info className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-              <span>Submitting this form records your interest; attendance confirmation and venue details will be shared separately.</span>
+              <span>Submitting this form records your priority interest for .NET Conf 2026 at P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati.</span>
             </div>
           </form>
         )}

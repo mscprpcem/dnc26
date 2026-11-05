@@ -1,7 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export const DncNavbar = ({ onOpenRegister }) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  useEffect(() => {
+    if (isSheetOpen) {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.dataset.navScrollY = String(scrollY);
+
+      return () => {
+        const savedY = parseInt(document.body.dataset.navScrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+        delete document.body.dataset.navScrollY;
+        window.scrollTo(0, savedY);
+      };
+    }
+  }, [isSheetOpen]);
 
   const navLinks = [
     { label: 'About', href: '#about' },
@@ -64,7 +90,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
           </nav>
 
           {/* CTA & Actions */}
-          <div className="flex items-center gap-2 ml-auto lg:ml-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 ml-auto lg:ml-0">
             <button
               type="button"
               className="btn btn--primary btn--sm nav__cta cursor-pointer"
@@ -77,7 +103,8 @@ export const DncNavbar = ({ onOpenRegister }) => {
                 }
               }}
             >
-              <span>Register Interest</span>
+              <span className="hidden sm:inline">Register Interest</span>
+              <span className="sm:hidden">Register</span>
               <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
                 <use href="#i-arrow" />
               </svg>
@@ -87,14 +114,17 @@ export const DncNavbar = ({ onOpenRegister }) => {
             <button
               className="nav__burger"
               id="burger"
+              type="button"
               aria-expanded={isSheetOpen}
               aria-controls="sheet"
               aria-label={isSheetOpen ? 'Close menu' : 'Open menu'}
               onClick={() => setIsSheetOpen(!isSheetOpen)}
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              {isSheetOpen ? (
+                <X className="w-5 h-5 text-[#512BD4]" strokeWidth={2.5} />
+              ) : (
+                <Menu className="w-5 h-5 text-[#512BD4]" strokeWidth={2.5} />
+              )}
             </button>
           </div>
         </div>
@@ -102,6 +132,32 @@ export const DncNavbar = ({ onOpenRegister }) => {
 
       {/* Mobile Slide-down Sheet */}
       <div className={`sheet ${isSheetOpen ? 'is-open' : ''}`} id="sheet" aria-hidden={!isSheetOpen}>
+        <div className="sheet__header">
+          <div className="flex items-center gap-2">
+            <img
+              src="/logos/dotnet-logo.jpg"
+              alt=".NET Logo"
+              className="w-7 h-7 rounded-md object-contain border border-[#512BD4]/30"
+            />
+            <div className="flex flex-col text-left">
+              <span className="font-sans font-black text-sm text-[#120838] leading-tight">
+                .NET Conf 2026
+              </span>
+              <span className="font-mono text-[10px] font-bold text-[#512BD4] tracking-widest uppercase">
+                Amravati
+              </span>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="w-9 h-9 rounded-lg bg-[#512BD4]/10 hover:bg-[#512BD4]/20 border border-[#512BD4]/30 text-[#512BD4] flex items-center justify-center transition-all cursor-pointer"
+            aria-label="Close menu"
+            onClick={() => setIsSheetOpen(false)}
+          >
+            <X className="w-5 h-5" strokeWidth={2.5} />
+          </button>
+        </div>
+
         <nav aria-label="Mobile">
           <a className="sheet__link" href="#about" onClick={(e) => handleLinkClick(e, '#about')}>
             <i>01</i> About
@@ -150,8 +206,8 @@ export const DncNavbar = ({ onOpenRegister }) => {
               <use href="#i-arrow" />
             </svg>
           </button>
-          <p className="eyebrow" style={{ justifyContent: 'center' }}>
-            Saturday | 26 December 2026 (Tentative) | Amravati
+          <p className="eyebrow" style={{ justifyContent: 'center', textAlign: 'center' }}>
+            Saturday | 26 December 2026 | P. R. Pote Patil College of Engineering and Management, Amravati
           </p>
         </div>
       </div>
