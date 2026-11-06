@@ -23,7 +23,14 @@ import { ArrowUp, X } from 'lucide-react';
 
 export const DncBrutalPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [activeModal, setActiveModal] = useState(null); // 'badge' | 'register' | null
+  const [activeModal, setActiveModal] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const search = window.location.search.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (search.includes('modal=register') || hash.includes('register')) return 'register';
+    }
+    return null;
+  }); // 'register' | null
 
   useEffect(() => {
     document.title = ".NET Conf 2026 Amravati";
@@ -114,7 +121,14 @@ export const DncBrutalPage = () => {
 
         {/* 7. Tickets & The Full Thali (Included in Every Pass) */}
         <DncTickets
-          onOpenBadge={() => setActiveModal('badge')}
+          onOpenBadge={() => {
+            const el = document.getElementById('attendee-badge');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.location.href = '/badge';
+            }
+          }}
           onOpenRegister={() => setActiveModal('register')}
         />
 
@@ -129,6 +143,9 @@ export const DncBrutalPage = () => {
 
         {/* 11. MSC PRPCEM Community Numbers & Illustrated Art */}
         <DncCommunity />
+
+        {/* 12. Official Attendee Badge Studio (Embedded in System) */}
+        <DncAttendeeBadge isModal={false} />
 
         {/* 13. Sponsors & Partners Tiered Cards */}
         <DncSponsors />
@@ -156,46 +173,6 @@ export const DncBrutalPage = () => {
         </button>
       )}
 
-      {/* Interactive Modal: Attendee Badge Studio */}
-      {activeModal === 'badge' && (
-        <div 
-          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden overscroll-contain modal-overlay"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setActiveModal(null);
-          }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="relative w-full max-w-5xl bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] flex flex-col overflow-hidden overscroll-contain">
-            {/* Pinned Modal Header */}
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-3.5 bg-white border-b-2 border-black flex-shrink-0">
-              <div className="flex items-center gap-2.5">
-                <span className="font-mono text-xs font-black bg-[#FFD13B] text-black px-2 py-0.5 rounded border border-black uppercase shadow-[1px_1px_0px_#000]">
-                  OFFICIAL PASS
-                </span>
-                <h3 className="font-sans font-black text-sm sm:text-base md:text-lg text-[#14053A] uppercase tracking-tight">
-                  Attendee Badge Studio
-                </h3>
-              </div>
-              <button
-                onClick={() => setActiveModal(null)}
-                className="w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5 stroke-[2.5]" />
-              </button>
-            </div>
-
-            {/* Scrollable Modal Content */}
-            <div id="badge-modal-scroll" className="p-3 sm:p-6 overflow-y-auto flex-1 overscroll-contain custom-modal-scrollbar no-scrollbar">
-              <div>
-                <DncAttendeeBadge isModal={true} />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Interactive Modal: Priority Interest Registration Form */}
       {activeModal === 'register' && (
         <div 
@@ -218,7 +195,15 @@ export const DncBrutalPage = () => {
               <DncInterestForm 
                 isModal={true} 
                 onClose={() => setActiveModal(null)} 
-                onOpenBadge={() => setActiveModal('badge')}
+                onOpenBadge={() => {
+                  setActiveModal(null);
+                  const el = document.getElementById('attendee-badge');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    window.location.href = '/badge';
+                  }
+                }}
               />
             </div>
           </div>

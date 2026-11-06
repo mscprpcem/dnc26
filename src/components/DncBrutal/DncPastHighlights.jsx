@@ -5,7 +5,7 @@ const pastImages = [
     url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/IMG-20250111-WA0322.jpg',
     tag: 'Auditorium Keynote',
     title: 'Packed Auditorium & Full House Audience',
-    desc: 'Over 500+ student developers, engineers, and tech leaders gathered at PRPCEM Swami Vivekananda Auditorium.',
+    desc: 'Over 500+ student developers, engineers, and tech leaders gathered at Swami Vivekanand Auditorium, PRPCEM.',
   },
   {
     url: 'https://dotnetconfamravati.blob.core.windows.net/website-images/P7.jpg',

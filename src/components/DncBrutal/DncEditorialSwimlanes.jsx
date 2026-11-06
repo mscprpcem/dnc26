@@ -98,8 +98,8 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">02 · Multi-Track Deep-Dive Sessions</span>
-                <span className="arc__d">Engaging technical stages covering Autonomous AI Agents, GitHub DevOps, Azure Cloud-Native, and Modern .NET.</span>
+                <span className="arc__t">02 · Deep-Dive Technical Sessions</span>
+                <span className="arc__d">Engaging stage sessions covering Autonomous AI Agents, GitHub DevOps, Azure Cloud-Native, and Modern .NET.</span>
               </span>
             </div>
 

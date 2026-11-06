@@ -274,8 +274,8 @@ export const SponsorshipPage = ({ onBack }) => {
           community: { type: 'none' },
         },
         {
-          name: 'Technical Workshop / Breakout Track',
-          desc: 'Host a dedicated hands-on code laboratory or technical breakout track.',
+          name: 'Technical Workshop / Masterclass Session',
+          desc: 'Host a dedicated hands-on code laboratory or technical masterclass session.',
           title: { type: 'highlight', text: '60 Mins (Exclusive)' },
           platinum: { type: 'highlight', text: '45 Mins (Dedicated)' },
           gold: { type: 'highlight', text: '30 Mins (Co-host)' },
@@ -669,14 +669,14 @@ export const SponsorshipPage = ({ onBack }) => {
             
             <div className="sechead sechead--split" style={{ alignItems: 'flex-start' }}>
               <div>
-                <p className="eyebrow">Partnership Prospectus · Dec 26, 2026</p>
+                <p className="eyebrow">Partnership Prospectus · Jan 2–3, 2027</p>
                 <h1 className="h-sec">
                   Sponsor .NET Conf 2026<br />
                   <span style={{ color: 'var(--purple)' }}>Amravati Edition</span>
                 </h1>
               </div>
               <p className="lede">
-                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday, December 26, 2026.
+                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday &amp; Sunday, January 2–3, 2027.
               </p>
             </div>
 
@@ -708,7 +708,7 @@ export const SponsorshipPage = ({ onBack }) => {
               <div className="ml-auto hidden xl:flex items-center gap-4 text-xs font-mono text-stone-600">
                 <span className="flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-[#512BD4]" />
-                  PRPCEM Kathora Road, Amravati
+                  Swami Vivekanand Auditorium, PRPCEM
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1.5">
@@ -1144,7 +1144,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 onClick={() => scrollToInquiry()}
                 className="font-bold text-[#512BD4] hover:underline cursor-pointer"
               >
-                Need custom multi-track allocations? Contact us →
+                Need custom partnership allocations? Contact us →
               </button>
             </div>
 
@@ -1360,7 +1360,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       <div>
                         <div className="font-bold text-[#120838]">Campus Venue</div>
                         <div className="text-stone-700">
-                          P. R. Pote Patil College of Engineering and Management, Kathora Road, Amravati 444602
+                          Swami Vivekanand Auditorium, PRPCEM, Kathora Road, Amravati 444602
                         </div>
                       </div>
                     </div>

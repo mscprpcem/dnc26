@@ -381,7 +381,7 @@ export const CodeOfConductPage = ({ onBack }) => {
                     <div className="p-3.5 bg-[#FAF8FF] border border-black/30 rounded-lg shadow-[1px_1px_0px_#120838]">
                       <strong className="block text-[#120838] font-bold mb-1">Physical Campus Spaces:</strong>
                       <p className="text-stone-600 leading-relaxed">
-                        Swami Vivekananda Auditorium, Keynote stage, Technical lab classrooms, Breakout tracks, Cafeteria lunch zones, and PRPCEM campus grounds.
+                        Swami Vivekanand Auditorium, Main Keynote Stage, Technical Lab Classrooms, Cafeteria Lunch Zones, and PRPCEM campus grounds.
                       </p>
                     </div>
 

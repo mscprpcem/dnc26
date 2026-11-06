@@ -10,7 +10,7 @@ export const DncFAQ = () => {
     },
     {
       q: 'Is the event only about .NET, or does it cover AI, GitHub & DevOps?',
-      a: 'It covers the entire Microsoft developer ecosystem! We feature dedicated stages and code labs on Generative AI & LLMs, GitHub Copilot productivity, CI/CD automation with GitHub Actions, and scalable Azure cloud systems alongside modern C# 14 and .NET 11.',
+      a: 'It covers the entire Microsoft developer ecosystem! We feature dedicated keynote sessions, technical presentations, and hands-on code labs on Generative AI & LLMs, GitHub Copilot productivity, CI/CD automation with GitHub Actions, and scalable Azure cloud systems alongside modern C# 14 and .NET 11.',
     },
     {
       q: 'What are the main conference tracks and themes?',
@@ -30,7 +30,7 @@ export const DncFAQ = () => {
     },
     {
       q: 'Where and when is the event taking place?',
-      a: 'The summit takes place on Saturday, 26 December 2026 at P. R. Pote Patil College of Engineering and Management (PRPCEM), Kathora Road, Amravati, Maharashtra.',
+      a: 'The summit takes place on Saturday & Sunday, 2–3 January 2027 at Swami Vivekanand Auditorium, PRPCEM, Kathora Road, Amravati, Maharashtra.',
     },
     {
       q: 'How can I submit a talk proposal or become a sponsor?',

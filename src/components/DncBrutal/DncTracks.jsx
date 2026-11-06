@@ -6,13 +6,13 @@ export const DncTracks = () => {
       <div className="wrap">
         <div className="sechead sechead--center">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>
-            Conference Tracks
+            Summit Themes
           </p>
           <h2 className="h-sec">
-            Tracks &amp; Themes
+            Themes &amp; Key Pillars
           </h2>
           <p className="lede" style={{ marginInline: 'auto' }}>
-            Four core tracks spanning Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Microsoft Azure Cloud, and Modern .NET 11.
+            Four core pillars spanning Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Microsoft Azure Cloud, and Modern .NET 11.
           </p>
         </div>
 
@@ -23,7 +23,7 @@ export const DncTracks = () => {
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl border-2 border-black bg-[#FAF8FF] text-[#512BD4] shadow-[2px_2px_0px_#120838] mb-6">
               <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
               <span className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider">
-                Tracks Curating Across 4 Pillars
+                Curating Across 4 Pillars
               </span>
             </div>
 
@@ -39,7 +39,7 @@ export const DncTracks = () => {
 
             {/* Message with balanced typography and margins */}
             <h3 className="font-sans font-black text-xl sm:text-2xl text-[#120838] uppercase mt-4 mb-2.5">
-              Multi-Track Agenda In Preparation
+              Summit Agenda In Preparation
             </h3>
             <p className="font-sans text-sm sm:text-base text-stone-600 max-w-lg mx-auto leading-relaxed mb-8">
               Deep dives being curated across <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps CI/CD</strong>, <strong>Azure Cloud-Native Architecture</strong>, and <strong>Modern .NET 11</strong>. Full schedule dropping soon!

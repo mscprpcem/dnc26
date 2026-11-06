@@ -4,6 +4,7 @@ import { CodeOfConductPage } from './components/CodeOfConduct/CodeOfConductPage.
 import { PrivacyPolicyPage } from './components/PrivacyPolicy/PrivacyPolicyPage.jsx';
 import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
 import { SponsorshipPage } from './components/Sponsorship/SponsorshipPage.jsx';
+import { AttendeeBadgePage } from './components/AttendeeBadge/AttendeeBadgePage.jsx';
 import { NotFoundPage } from './components/NotFound/NotFoundPage.jsx';
 import { isKnownRoute, normalizePath, scrollToSection } from './utils/sectionRouter.js';
 
@@ -31,6 +32,9 @@ export const App = () => {
       if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
         return 'sponsorship';
       }
+      if (search.includes('view=badge') || path === '/badge' || path === '/attendee-badge') {
+        return 'badge';
+      }
       return 'dnc-brutal';
     }
     return 'dnc-brutal';
@@ -55,6 +59,8 @@ export const App = () => {
         setCurrentView('schedule');
       } else if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
         setCurrentView('sponsorship');
+      } else if (search.includes('view=badge') || path === '/badge' || path === '/attendee-badge') {
+        setCurrentView('badge');
       } else {
         setCurrentView('dnc-brutal');
       }
@@ -112,6 +118,11 @@ export const App = () => {
   // 2.1 Standalone Sponsorship & Benefits Page
   if (currentView === 'sponsorship') {
     return <SponsorshipPage onBack={switchToDncBrutal} />;
+  }
+
+  // 2.2 Dedicated Attendee Badge Studio Page
+  if (currentView === 'badge') {
+    return <AttendeeBadgePage onBack={switchToDncBrutal} />;
   }
 
   // 3. Main Conference DevFest Experience (Permanent Default)

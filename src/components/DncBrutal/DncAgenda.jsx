@@ -62,7 +62,7 @@ export const DncAgenda = () => {
             </h2>
           </div>
           <p className="lede">
-            Curated across Generative AI, GitHub Copilot &amp; DevOps, Azure Cloud, and Modern .NET. Check-in, Lunch, and Closing Ceremony confirmed &mdash; session breakouts releasing soon.
+            Curated across Generative AI, GitHub Copilot &amp; DevOps, Azure Cloud, and Modern .NET. Check-in, Lunch, and Closing Ceremony confirmed &mdash; keynote &amp; technical sessions releasing soon.
           </p>
         </div>
 

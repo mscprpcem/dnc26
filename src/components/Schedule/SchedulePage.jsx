@@ -103,13 +103,13 @@ export const SchedulePage = ({ onBack }) => {
           </h1>
 
           <p className="text-white/90 text-sm sm:text-base font-sans leading-relaxed max-w-2xl">
-            Keynotes, architecture deep dives, live hands-on labs, and community lightning talks hosted at PRPCEM Campus, Amravati.
+            Keynotes, architecture deep dives, live hands-on labs, and community lightning talks hosted at Swami Vivekanand Auditorium, PRPCEM, Amravati.
           </p>
 
           <div className="mt-6 pt-4 border-t border-white/20 flex flex-wrap items-center gap-4 text-xs font-mono text-white/80">
-            <span>DATE: SATURDAY, DECEMBER 26, 2026</span>
+            <span>DATE: SATURDAY &amp; SUNDAY, JANUARY 2–3, 2027</span>
             <span>•</span>
-            <span>VENUE: P. R. POTE PATIL COLLEGE OF ENGINEERING AND MANAGEMENT (PRPCEM), AMRAVATI</span>
+            <span>VENUE: SWAMI VIVEKANAND AUDITORIUM, PRPCEM, AMRAVATI</span>
             <span>•</span>
             <span>SESSIONIZE INTEGRATED</span>
           </div>
@@ -157,7 +157,7 @@ export const SchedulePage = ({ onBack }) => {
                 Conference Venue &amp; Campus
               </h4>
               <p className="text-xs sm:text-sm text-stone-600 font-sans leading-relaxed mb-4">
-                P. R. Pote Patil College of Engineering and Management (PRPCEM), Pote Estate, Kathora Road, Amravati, Maharashtra 444602. Dual presentation halls with high-speed internet and live stream facilities.
+                Swami Vivekanand Auditorium, PRPCEM, Pote Estate, Kathora Road, Amravati, Maharashtra 444602. High-speed internet and live stream facilities.
               </p>
             </div>
             <button

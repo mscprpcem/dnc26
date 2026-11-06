@@ -17,7 +17,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
       tier: 'Normal',
       type: 'Phase 02',
       tagline: 'Standard conference pass.',
-      blurb: 'Full-day summit pass covering Generative AI keynotes, breakout tracks, speaker networking, and participation credentials.',
+      blurb: 'Full-day summit pass covering Generative AI keynotes, technical sessions, speaker networking, and participation credentials.',
       status: 'Register Interest',
       color: 'var(--blue, #00B4D8)',
     },
@@ -118,7 +118,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
           </div>
           <a
             className="offerbar__cta"
-            href="https://wa.me/919021212807?text=Hi%20MSC%20PRPCEM!%20We're%20a%20group%20of%2010%2B%20planning%20to%20attend%20.NET%20Conf%202026."
+            href="https://wa.me/919359982959?text=Hi%20MSC%20PRPCEM!%20We're%20a%20group%20of%2010%2B%20planning%20to%20attend%20.NET%20Conf%202026."
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -128,41 +128,6 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
               <use href="#i-arrow" />
             </svg>
           </a>
-        </div>
-
-        {/* Custom Attendee Badge Studio Banner */}
-        <div
-          className="sticker"
-          style={{
-            marginTop: '2.5rem',
-            padding: '1.75rem',
-            background: 'rgba(214, 0, 170, 0.08)',
-            borderColor: 'var(--magenta)',
-          }}
-        >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-            <div>
-              <p className="eyebrow" style={{ color: 'var(--purple)' }}>
-                Interactive Badge Studio
-              </p>
-              <h4 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#120838', marginTop: '.3rem' }}>
-                Generate your custom .NET Conf 2026 Attendee Badge!
-              </h4>
-              <p style={{ color: '#332B4A', fontSize: '.92rem', marginTop: '.3rem' }}>
-                Showcase your presence with custom tech badges, .NET Bot mascots, and your personalized avatar to share on LinkedIn &amp; X.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={onOpenBadge || (() => {})}
-              className="btn btn--gold btn--sm flex-none cursor-pointer"
-            >
-              <span>Create my badge</span>
-              <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
-                <use href="#i-arrow" />
-              </svg>
-            </button>
-          </div>
         </div>
       </div>
     </section>

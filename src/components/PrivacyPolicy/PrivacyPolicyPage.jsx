@@ -120,7 +120,7 @@ export const PrivacyPolicyPage = ({ onBack }) => {
               </span>
               <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded border border-black/30 shadow-[1px_1px_0px_#120838]">
                 <MapPin className="w-3.5 h-3.5 text-[#512BD4]" />
-                PRPCEM Campus, Kathora Road, Amravati
+                Venue: Swami Vivekanand Auditorium, PRPCEM
               </span>
               <span className="flex items-center gap-1.5 bg-[#DCFCE7] px-3 py-1.5 rounded border border-black/40 text-emerald-900 font-bold shadow-[1px_1px_0px_#120838]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" />

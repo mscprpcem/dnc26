@@ -97,7 +97,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
   };
 
   const handleShareSuccessWhatsApp = () => {
-    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Dec 26, 2026) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
+    const text = `Hey! I just registered my priority interest for .NET Conf 2026 Amravati at PRPCEM Campus (Jan 2-3, 2027) — covering Generative AI, GitHub Copilot, Azure Cloud & Modern .NET 11!\n\nJoin the priority delegate list with me here: https://dnc.mscprpcem.tech`;
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
   };
 
@@ -708,7 +708,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
             {/* Subtext under button */}
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-500 font-sans text-center pt-1">
               <Info className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-              <span>Submitting this form records your priority interest for .NET Conf 2026 at P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati.</span>
+              <span>Submitting this form records your priority interest for .NET Conf 2026 at Swami Vivekanand Auditorium, PRPCEM, Amravati.</span>
             </div>
           </form>
         )}

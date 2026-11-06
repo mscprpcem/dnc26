@@ -52,7 +52,7 @@ export const DncExpect = () => {
             </h2>
           </div>
           <p className="lede">
-            An electrifying day in Amravati with the engineers shaping Cloud, AI, and Software Engineering &mdash; packed with live code, Generative AI, GitHub DevOps, and modern .NET.
+            An electrifying 2-day summit in Amravati with the engineers shaping Cloud, AI, and Software Engineering &mdash; packed with live code, Generative AI, GitHub DevOps, and modern .NET.
           </p>
         </div>
 

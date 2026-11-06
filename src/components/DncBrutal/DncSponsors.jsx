@@ -27,7 +27,7 @@ export const DncSponsors = () => {
                   TITLE
                 </span>
               </div>
-              <b style={{ color: '#120838' }}>Host Institution &amp; Title Partners</b>
+              <b style={{ color: '#120838' }}>Host Institution &amp; Title Partner</b>
               <i></i>
             </div>
             <div className="slots">
@@ -39,6 +39,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#120838]"
                 title="PRPCEM Amravati"
                 aria-label="PRPCEM Amravati"
+                data-sponsor-name="PRPCEM Amravati"
               >
                 <img
                   src="/logos/prpcem-logo.jpeg"
@@ -46,40 +47,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img sponsor-tile-img--square"
                   loading="lazy"
                 />
-              </a>
-
-              {/* IBM */}
-              <a
-                href="https://community.ibm.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sponsor-tile hover:border-[#120838]"
-                title="IBM"
-                aria-label="IBM"
-              >
-                <img
-                  src="/logos/User-Groups-page-promo.png"
-                  alt="IBM"
-                  className="sponsor-tile-img sponsor-tile-img--square"
-                  loading="lazy"
-                />
-              </a>
-
-              {/* Microsoft */}
-              <a
-                href="https://www.microsoft.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sponsor-tile sponsor-tile--wide hover:border-[#00A4EF]"
-                title="Microsoft"
-                aria-label="Microsoft"
-              >
-                <img
-                  src="/Title%20Sponsor/microsoft.png"
-                  alt="Microsoft"
-                  className="sponsor-tile-img sponsor-tile-img--wide"
-                  loading="lazy"
-                />
+                <span className="sponsor-tooltip">PRPCEM Amravati</span>
               </a>
             </div>
           </div>
@@ -217,6 +185,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#FE2857]"
                 title="JetBrains"
                 aria-label="JetBrains"
+                data-sponsor-name="JetBrains"
               >
                 <img
                   src="/In%20%20kind%20support/Jetbrains/jetbrains.png"
@@ -224,6 +193,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">JetBrains</span>
               </a>
 
               {/* Microsoft Azure */}
@@ -234,6 +204,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile sponsor-tile--wide hover:border-[#0078D4]"
                 title="Microsoft Azure"
                 aria-label="Microsoft Azure"
+                data-sponsor-name="Microsoft Azure"
               >
                 <img
                   src="/In%20%20kind%20support/Microsoft%20Azure/azure.png"
@@ -241,6 +212,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img sponsor-tile-img--wide"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">Microsoft Azure</span>
               </a>
 
               {/* .xyz */}
@@ -251,6 +223,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#120838]"
                 title=".xyz Domains"
                 aria-label=".xyz Domains"
+                data-sponsor-name=".xyz Domains"
               >
                 <img
                   src="/logos/xyz-logo-color.png"
@@ -258,6 +231,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">.xyz Domains</span>
               </a>
 
               {/* In-Kind Inquiry Slot */}
@@ -294,6 +268,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#120838]"
                 title="IBM User Group Amravati"
                 aria-label="IBM User Group Amravati"
+                data-sponsor-name="IBM User Group Amravati"
               >
                 <img
                   src="/logos/User-Groups-page-promo.png"
@@ -301,6 +276,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img sponsor-tile-img--square"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">IBM User Group Amravati</span>
               </div>
 
               {/* Global AI Amravati */}
@@ -308,6 +284,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#d5522b]"
                 title="Global AI Amravati"
                 aria-label="Global AI Amravati"
+                data-sponsor-name="Global AI Amravati"
               >
                 <img
                   src="/Community%20Partner/logo.svg"
@@ -315,6 +292,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">Global AI Amravati</span>
               </div>
 
               {/* Microsoft Student Club PRPCEM */}
@@ -325,6 +303,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#512BD4]"
                 title="Microsoft Student Club PRPCEM"
                 aria-label="Microsoft Student Club PRPCEM"
+                data-sponsor-name="Microsoft Student Club PRPCEM"
               >
                 <img
                   src="/logos/mscprpcem-logo.png"
@@ -332,6 +311,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img sponsor-tile-img--square"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">Microsoft Student Club PRPCEM</span>
               </a>
 
               {/* Community Inquiry */}
@@ -372,6 +352,7 @@ export const DncSponsors = () => {
                 className="sponsor-tile hover:border-[#1BA39C]"
                 title="Sessionize"
                 aria-label="Sessionize"
+                data-sponsor-name="Sessionize"
               >
                 <img
                   src="/CFP%20Partner/sessionize-logo.png"
@@ -379,6 +360,7 @@ export const DncSponsors = () => {
                   className="sponsor-tile-img"
                   loading="lazy"
                 />
+                <span className="sponsor-tooltip">Sessionize</span>
               </a>
             </div>
           </div>

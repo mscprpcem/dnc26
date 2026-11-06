@@ -89,7 +89,7 @@ export const DncCFP = () => {
           <div className="cfp__right">
             <ul className="cfp__facts">
               <li>
-                <b>Multi-Track</b>
+                <b>Single Stage</b>
                 <span>AI, Cloud, DevOps &amp; .NET</span>
               </li>
               <li>

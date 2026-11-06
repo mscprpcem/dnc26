@@ -10,7 +10,7 @@
 **Central India's Premier Microsoft Ecosystem & Developer Summit**  
 Organized by **Microsoft Student Club (MSC)** at **P. R. Pote Patil College of Engineering and Management (PRPCEM)**
 
-- 📅 **Date:** Saturday, December 26, 2026  
+- 📅 **Date:** Saturday & Sunday, January 2–3, 2027  
 - 📍 **Venue:** P. R. Pote Patil College of Engineering and Management (PRPCEM), Pote Estate, Kathora Road, Amravati, Maharashtra 444602  
 - 🌐 **Live Platform:** [dnc.mscprpcem.tech](https://dnc.mscprpcem.tech)
 
@@ -171,7 +171,6 @@ dnc26/
 │   └── index.css               # Global theme tokens, brutalist resets & scrollbars
 ├── index.html                  # HTML entry point with SEO metadata & JSON-LD
 ├── package.json                # Project dependencies and npm scripts
-├── report.md                   # Comprehensive testing and verification report
 └── vite.config.js              # Vite configuration with Tailwind CSS plugin
 ```
 

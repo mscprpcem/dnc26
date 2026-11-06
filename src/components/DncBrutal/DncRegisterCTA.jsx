@@ -20,7 +20,7 @@ export const DncRegisterCTA = ({ onOpenRegister }) => {
         </div>
 
         <p className="eyebrow" style={{ justifyContent: 'center', color: 'var(--gold, #FFE89E)' }}>
-          Saturday | 26 December 2026 | P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati
+          Saturday &amp; Sunday | 2–3 January 2027 | Swami Vivekanand Auditorium, PRPCEM, Amravati
         </p>
         <h2>Register interest for .NET Conf 2026.</h2>
         <p className="lede" style={{ color: '#FFFFFF', marginTop: '1rem', textAlign: 'center', maxWidth: '52ch' }}>

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import {
   Download,
-  Share2,
   Check,
   User,
   Briefcase,
@@ -9,34 +8,17 @@ import {
   Upload,
   Camera,
   X,
-  Sparkles,
   Ticket,
-  Circle,
-  Square
+  Sparkles,
 } from 'lucide-react';
-import { LinkedInIcon, WhatsAppIcon, InstagramIcon } from '../ui/SocialIcons.jsx';
-import DncSignpost from './DncSignpost.jsx';
-import DncSectionFlanks from './DncSectionFlanks.jsx';
 
-const ROLE_PRESETS = [
-  'Student Developer',
-  'Software Engineer',
-  'AI & Autonomous Agent Builder',
-  'Cloud & DevOps Architect',
-  'GitHub & Open Source Contributor',
-  'Community Delegate',
-];
-
-export const DncAttendeeBadge = ({ isModal = false }) => {
-  const [badgeShape, setBadgeShape] = useState('circular'); // 'circular' | 'square'
+export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) => {
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
   const [college, setCollege] = useState('');
   const [customPhotoUrl, setCustomPhotoUrl] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [isNativeSharing, setIsNativeSharing] = useState(false);
 
   const fileInputRef = useRef(null);
 
@@ -82,85 +64,6 @@ export const DncAttendeeBadge = ({ isModal = false }) => {
     }
   };
 
-  const getSharePostText = () => {
-    const roleString = role.trim() ? ` as ${role.trim()}` : '';
-    const collegeString = college.trim() ? ` from ${college.trim()}` : '';
-    return `I'm attending .NET Conf 2026 Amravati${roleString}${collegeString}!
-
-Join me for Central India's premier Microsoft ecosystem summit at PRPCEM Campus, Amravati — uniting Generative AI & Autonomous Agents, GitHub Copilot & DevOps, Microsoft Azure Cloud Architecture, and Modern .NET 11.
-
-Generate your official attendee badge here:
-https://dnc.mscprpcem.tech
-
-#DotNetConf2026 #DotNetConfAmravati #MSCPRPCEM #GenerativeAI #GitHubCopilot #DevOps #Azure #DotNet #Microsoft`;
-  };
-
-  const handleShareWhatsApp = () => {
-    const text = getSharePostText();
-    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleShareLinkedIn = () => {
-    const confUrl = 'https://dnc.mscprpcem.tech';
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(confUrl)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleShareInstagram = async () => {
-    const text = getSharePostText();
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2600);
-    } catch {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2600);
-    }
-    window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
-  };
-
-  const handleCopyShare = async () => {
-    const shareText = getSharePostText();
-    try {
-      await navigator.clipboard.writeText(shareText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
-    } catch {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
-    }
-  };
-
-  // Canvas helpers for curved text along an arc (for Circular Badge)
-  const drawTopArcText = (ctx, text, centerX, centerY, radius, letterSpacingAngle = 0.046) => {
-    const chars = text.split('');
-    const totalAngle = (chars.length - 1) * letterSpacingAngle;
-    chars.forEach((char, i) => {
-      const theta = -totalAngle / 2 + i * letterSpacingAngle;
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(theta);
-      ctx.translate(0, -radius);
-      ctx.fillText(char, 0, 0);
-      ctx.restore();
-    });
-  };
-
-  const drawBottomArcText = (ctx, text, centerX, centerY, radius, letterSpacingAngle = 0.042) => {
-    const chars = text.split('');
-    const totalAngle = (chars.length - 1) * letterSpacingAngle;
-    chars.forEach((char, i) => {
-      const phi = -totalAngle / 2 + i * letterSpacingAngle;
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(-phi);
-      ctx.translate(0, radius);
-      ctx.fillText(char, 0, 0);
-      ctx.restore();
-    });
-  };
-
   // Safe helper to load image (never enforces crossOrigin on data URIs)
   const loadImage = (src) =>
     new Promise((resolve) => {
@@ -174,496 +77,272 @@ https://dnc.mscprpcem.tech
       img.src = src;
     });
 
-  // 1. Render Circular Badge Canvas (1080x1080 High-DPI Crisp Social Format)
-  const renderCircularCanvas = async () => {
-    if (document.fonts) {
-      await document.fonts.ready;
-    }
-
-    const canvas = document.createElement('canvas');
-    canvas.width = 1080;
-    canvas.height = 1080;
-    const ctx = canvas.getContext('2d');
-
-    const centerX = 540;
-    const centerY = 540;
-    const outerRadius = 460;
-    const innerRadius = 360;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Outer drop shadow (Neo-Brutalist offset)
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX + 10, centerY + 10, outerRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000';
-    ctx.fill();
-    ctx.restore();
-
-    // Outer ring fill (Microsoft Purple)
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#512BD4';
-    ctx.fill();
-    ctx.lineWidth = 12;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-
-    // Top Arc Text: ★ .NET CONF 2026 · AMRAVATI ★
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 27px "JetBrains Mono", monospace';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    drawTopArcText(ctx, '★  .NET CONF 2026 · AMRAVATI  ★', centerX, centerY, 410, 0.048);
-
-    // Bottom Arc Text: ★ PRPCEM CAMPUS · AMRAVATI ★ (Event date removed)
-    ctx.fillStyle = '#FFDB43';
-    ctx.font = 'bold 24px "JetBrains Mono", monospace';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    drawBottomArcText(ctx, '★  PRPCEM CAMPUS · AMRAVATI  ★', centerX, centerY, 410, 0.044);
-
-    // Inner Circle Background & Border
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#FAF8FF';
-    ctx.fill();
-    ctx.lineWidth = 9;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
-    ctx.clip();
-
-    // Load user portrait & .NET Mascot
-    const [userImg, mascotImg] = await Promise.all([
-      loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png'),
-    ]);
-
-    // Draw user portrait to fill the whole inner disc space
-    if (userImg) {
-      const scale = Math.max((innerRadius * 2) / userImg.width, (innerRadius * 2) / userImg.height);
-      const drawW = userImg.width * scale;
-      const drawH = userImg.height * scale;
-      const drawX = centerX - drawW / 2;
-      const drawY = centerY - drawH / 2;
-      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
-    } else {
-      ctx.fillStyle = '#EEEAFB';
-      ctx.fillRect(centerX - innerRadius, centerY - innerRadius, innerRadius * 2, innerRadius * 2);
-      if (mascotImg) {
-        const mSize = 360;
-        ctx.drawImage(mascotImg, centerX - mSize / 2, centerY - mSize / 2 - 30, mSize, mSize);
-      }
-    }
-
-    // Gradient scrim over lower half for text legibility
-    const scrimGrad = ctx.createLinearGradient(centerX, centerY + 20, centerX, centerY + innerRadius);
-    scrimGrad.addColorStop(0, 'rgba(20, 5, 58, 0)');
-    scrimGrad.addColorStop(0.5, 'rgba(20, 5, 58, 0.7)');
-    scrimGrad.addColorStop(1, 'rgba(20, 5, 58, 0.95)');
-    ctx.fillStyle = scrimGrad;
-    ctx.fillRect(centerX - innerRadius, centerY + 20, innerRadius * 2, innerRadius - 20);
-
-    // Neo-Brutalist Overlay Badge Card for Name, Position & Details
-    const badgeW = 480;
-    const badgeH = college.trim() ? 175 : 140;
-    const badgeX = centerX - badgeW / 2;
-    const badgeY = centerY + (innerRadius - badgeH - 24);
-    const badgeRadius = 20;
-
-    ctx.save();
-    // Drop shadow
-    ctx.fillStyle = '#000000';
-    ctx.beginPath();
-    ctx.roundRect(badgeX + 6, badgeY + 6, badgeW, badgeH, badgeRadius);
-    ctx.fill();
-
-    // White badge card
-    ctx.fillStyle = '#FFFFFF';
-    ctx.beginPath();
-    ctx.roundRect(badgeX, badgeY, badgeW, badgeH, badgeRadius);
-    ctx.fill();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-
-    // Top Delegate Chip
-    const delChip = 'OFFICIAL DELEGATE';
-    ctx.font = 'bold 15px "JetBrains Mono", monospace';
-    const delW = ctx.measureText(delChip).width + 24;
-    const delY = badgeY + 12;
-    ctx.fillStyle = '#00BDD6';
-    ctx.beginPath();
-    ctx.roundRect(centerX - delW / 2, delY, delW, 24, 12);
-    ctx.fill();
-    ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.fillStyle = '#000000';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(delChip, centerX, delY + 12);
-
-    // Attendee Name
-    ctx.fillStyle = '#000000';
-    ctx.font = '900 32px "Space Grotesk", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const displayName = (name.trim() || 'YOUR NAME').toUpperCase();
-    ctx.fillText(displayName, centerX, delY + 44);
-
-    // Role Pill
-    const roleText = (role.trim() || 'DELEGATE').toUpperCase();
-    ctx.font = 'bold 16px "JetBrains Mono", monospace';
-    const roleWidth = ctx.measureText(roleText).width + 28;
-    const roleY = delY + 68;
-    ctx.fillStyle = '#FFDB43';
-    ctx.beginPath();
-    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 26, 13);
-    ctx.fill();
-    ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.fillStyle = '#000000';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(roleText, centerX, roleY + 13);
-
-    // College / Organization (only if provided)
-    if (college.trim()) {
-      ctx.fillStyle = '#333333';
-      ctx.font = 'bold 16px "Open Sans", sans-serif';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(college.trim(), centerX, roleY + 36);
-    }
-    ctx.restore(); // end badge
-    ctx.restore(); // end inner circle clip
-
-    // Crisp black border on top of clipped disc
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(centerX, centerY, innerRadius, 0, Math.PI * 2);
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.restore();
-
-    // Official .NET Mascot Seal (Replacing .NET Verified)
-    const sealCenterX = 870;
-    const sealCenterY = 870;
-    const sealRadius = 115;
-
-    ctx.save();
-    ctx.translate(sealCenterX, sealCenterY);
-    ctx.rotate(-6 * (Math.PI / 180));
-
-    // Drop shadow
-    ctx.beginPath();
-    ctx.arc(8, 8, sealRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#000000';
-    ctx.fill();
-
-    // Purple circle base
-    ctx.beginPath();
-    ctx.arc(0, 0, sealRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#512BD4';
-    ctx.fill();
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-
-    // Draw .NET Mascot
-    if (mascotImg) {
-      const botW = 145;
-      const botH = 145;
-      ctx.drawImage(mascotImg, -botW / 2, -botH / 2 - 14, botW, botH);
-    } else {
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = '900 36px "Space Grotesk", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('.NET BOT', 0, -10);
-    }
-
-    // Yellow label chip ".NET BOT"
-    const passLabel = '.NET BOT';
-    ctx.font = 'bold 16px "JetBrains Mono", monospace';
-    const pLabelW = ctx.measureText(passLabel).width + 24;
-    const pLabelH = 28;
-    const pLabelY = sealRadius - 16;
-
-    ctx.fillStyle = '#FFDB43';
-    ctx.beginPath();
-    ctx.roundRect(-pLabelW / 2, pLabelY - pLabelH / 2, pLabelW, pLabelH, 8);
-    ctx.fill();
-    ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-
-    ctx.fillStyle = '#000000';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(passLabel, 0, pLabelY);
-
-    ctx.restore();
-    return canvas;
+  // ─── Theme Tokens (Official .NET Conf 2026 Amravati DncBrutal Palette) ───
+  const T = {
+    purple: '#512BD4',       // Primary .NET Brand Purple
+    purpleLight: '#7B5CE5',  // Gradient midtone
+    magenta: '#D600AA',      // Action / Accent Fuchsia
+    blue: '#0B6CFF',         // Vivid Azure Blue
+    teal: '#28C2D1',         // Copilot Teal
+    gold: '#F7B548',         // Warm Gold / Saffron
+    ink: '#120838',          // Deep Dark Violet text
+    textSecondary: '#332B4A',
+    textMuted: '#5C5577',
+    fontDisplay: '"Outfit", "Space Grotesk", system-ui, sans-serif',
+    fontBody: '"Inter", system-ui, sans-serif',
+    fontMono: '"JetBrains Mono", monospace',
   };
 
-  // 2. Render Square Social Badge Canvas (1080x1080 - Social Media Post Format)
+  // ─── Render 1080×1080 Canvas Badge (Official .NET Conf 2026 Neo-Brutalist Theme) ───
   const renderSquareCanvas = async () => {
     if (document.fonts) {
       await document.fonts.ready;
     }
 
+    const S = 1080;
     const canvas = document.createElement('canvas');
-    canvas.width = 1080;
-    canvas.height = 1080;
+    canvas.width = S;
+    canvas.height = S;
     const ctx = canvas.getContext('2d');
 
+    // Outer margin & card geometry
     const cardX = 40;
     const cardY = 40;
-    const cardW = 1000;
-    const cardH = 1000;
+    const cardW = S - 80; // 1000px
+    const cardH = S - 80; // 1000px
     const cardRadius = 36;
-    const centerX = 540;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, S, S);
 
-    // Drop Shadow
+    // 1. Neo-Brutalist Offset Drop Shadow (Dark Violet / Ink offset)
     ctx.save();
     ctx.beginPath();
     ctx.roundRect(cardX + 12, cardY + 12, cardW, cardH, cardRadius);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = T.ink;
     ctx.fill();
     ctx.restore();
 
-    // Main Card Background
+    // 2. Main Card Background & Black Border
     ctx.save();
     ctx.beginPath();
     ctx.roundRect(cardX, cardY, cardW, cardH, cardRadius);
-    ctx.fillStyle = '#FAF8FF';
+    
+    // Subtle gradient background
+    const bgGrad = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
+    bgGrad.addColorStop(0, '#FFFFFF');
+    bgGrad.addColorStop(0.65, '#FAF8FF');
+    bgGrad.addColorStop(1, '#F5F0FF');
+    ctx.fillStyle = bgGrad;
     ctx.fill();
-    ctx.lineWidth = 8;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.clip();
 
-    // Header Banner - Social Media Post Style
-    const headerY = cardY;
-    const headerH = 190;
-    ctx.fillStyle = '#512BD4';
-    ctx.fillRect(cardX, headerY, cardW, headerH);
-
-    // Decorative geometric stripes in header
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+    // Crisp Neo-Brutalist Black Border
     ctx.lineWidth = 5;
-    for (let lx = cardX; lx < cardX + cardW + 150; lx += 45) {
-      ctx.beginPath();
-      ctx.moveTo(lx, headerY + headerH);
-      ctx.lineTo(lx - 60, headerY);
-      ctx.stroke();
-    }
-
     ctx.strokeStyle = '#000000';
-    ctx.lineWidth = 6;
-    ctx.beginPath();
-    ctx.moveTo(cardX, headerY + headerH);
-    ctx.lineTo(cardX + cardW, headerY + headerH);
     ctx.stroke();
+    ctx.clip(); // All subsequent elements clip inside the rounded card!
 
-    // Top Pill: ★ .NET CONF 2026 · AMRAVATI ★
-    const pillText = '★  .NET CONF 2026 · AMRAVATI  ★';
-    ctx.font = 'bold 21px "JetBrains Mono", monospace';
-    const pillW = ctx.measureText(pillText).width + 36;
-    const pillY = headerY + 26;
-    ctx.fillStyle = '#FFDB43';
+    // 3. Right-Side Angled Speed Capsules (Framing the Photo / Mascot)
+    // Capsule 1 (Upper-Right): .NET Purple -> Azure Blue (Peeks out above photo)
+    ctx.save();
+    ctx.translate(860, 300);
+    ctx.rotate((34 * Math.PI) / 180);
+    const grad1 = ctx.createLinearGradient(0, -280, 0, 280);
+    grad1.addColorStop(0, T.purple);
+    grad1.addColorStop(1, T.blue);
+    ctx.fillStyle = grad1;
     ctx.beginPath();
-    ctx.roundRect(centerX - pillW / 2, pillY, pillW, 34, 17);
+    ctx.roundRect(-65, -280, 130, 560, 65);
     ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.fillStyle = '#000000';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(pillText, centerX, pillY + 17);
+    ctx.restore();
 
-    // Headline: "I'M ATTENDING!"
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '900 48px "Space Grotesk", sans-serif';
-    ctx.fillText("I'M ATTENDING!", centerX, headerY + 112);
+    // Capsule 2 (Lower-Right): Purple Light -> Fuchsia Magenta (Peeks out below photo, parallel)
+    ctx.save();
+    ctx.translate(680, 720);
+    ctx.rotate((34 * Math.PI) / 180);
+    const grad2 = ctx.createLinearGradient(0, -250, 0, 250);
+    grad2.addColorStop(0, T.purpleLight);
+    grad2.addColorStop(1, T.magenta);
+    ctx.fillStyle = grad2;
+    ctx.beginPath();
+    ctx.roundRect(-60, -250, 120, 500, 60);
+    ctx.fill();
+    ctx.restore();
 
-    // Subtitle: Venue Location (Event date removed)
-    ctx.fillStyle = '#00BDD6';
-    ctx.font = 'bold 19px "JetBrains Mono", monospace';
-    ctx.fillText('★  PRPCEM CAMPUS · AMRAVATI  ★', centerX, headerY + 158);
-
-    // Load user portrait & mascot
+    // 4. Load User Portrait & .NET Bot Mascot
     const [userImg, mascotImg] = await Promise.all([
       loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png')
+      loadImage('/mascot/bot_frontal.png'),
     ]);
 
-    // Center Portrait Frame - Square with Rounded Corners
-    const photoW = 340;
-    const photoH = 340;
-    const photoX = centerX - photoW / 2;
-    const photoY = headerY + headerH + 35;
-    const photoRadius = 26;
-
-    // Shadow for portrait
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(photoX + 8, photoY + 8, photoW, photoH, photoRadius);
-    ctx.fillStyle = '#000000';
-    ctx.fill();
-    ctx.restore();
-
-    // Portrait card background & border
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(photoX, photoY, photoW, photoH, photoRadius);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fill();
-    ctx.lineWidth = 7;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.clip();
-
+    // 5. Draw Attendee Portrait / Mascot (Nestled Seamlessly Between the Capsules!)
     if (userImg) {
+      const photoW = 500;
+      const photoH = 720;
+      const photoX = 500;
+      const photoY = 320;
+
+      // Offscreen canvas for soft bottom alpha gradient dissolve (NO box / NO rectangle!)
+      const photoCanvas = document.createElement('canvas');
+      photoCanvas.width = photoW;
+      photoCanvas.height = photoH;
+      const pCtx = photoCanvas.getContext('2d');
+
       const scale = Math.max(photoW / userImg.width, photoH / userImg.height);
-      const drawW = userImg.width * scale;
-      const drawH = userImg.height * scale;
-      const drawX = photoX + (photoW - drawW) / 2;
-      const drawY = photoY + (photoH - drawH) / 2;
-      ctx.drawImage(userImg, drawX, drawY, drawW, drawH);
-    } else {
-      ctx.fillStyle = '#EEEAFB';
-      ctx.fillRect(photoX, photoY, photoW, photoH);
-      ctx.fillStyle = '#512BD4';
-      ctx.beginPath();
-      ctx.arc(centerX, photoY + photoH * 0.38, 55, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(centerX, photoY + photoH * 0.96, 110, Math.PI, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.restore();
+      const dw = userImg.width * scale;
+      const dh = userImg.height * scale;
+      const dx = (photoW - dw) / 2;
 
-    // Attendee Name
-    ctx.fillStyle = '#14053A';
-    ctx.font = '900 44px "Space Grotesk", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const displayName = (name.trim() || 'DELEGATE').toUpperCase();
-    ctx.fillText(displayName, centerX, photoY + photoH + 50);
+      pCtx.drawImage(userImg, dx, 0, dw, dh);
 
-    // Role Pill
-    const roleText = (role.trim() || 'OFFICIAL DELEGATE').toUpperCase();
-    ctx.font = 'bold 20px "JetBrains Mono", monospace';
-    const roleWidth = ctx.measureText(roleText).width + 38;
-    const roleY = photoY + photoH + 85;
-    ctx.fillStyle = '#FFDB43';
-    ctx.beginPath();
-    ctx.roundRect(centerX - roleWidth / 2, roleY, roleWidth, 38, 19);
-    ctx.fill();
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.fillStyle = '#000000';
-    ctx.fillText(roleText, centerX, roleY + 19);
+      // Smooth alpha fade dissolve starting at 62% height
+      pCtx.globalCompositeOperation = 'destination-in';
+      const fadeGrad = pCtx.createLinearGradient(0, photoH * 0.62, 0, photoH);
+      fadeGrad.addColorStop(0, 'rgba(0, 0, 0, 1)');
+      fadeGrad.addColorStop(0.85, 'rgba(0, 0, 0, 0.25)');
+      fadeGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      pCtx.fillStyle = fadeGrad;
+      pCtx.fillRect(0, 0, photoW, photoH);
 
-    // College / Organization (if entered)
-    if (college.trim()) {
-      ctx.fillStyle = '#444444';
-      ctx.font = 'bold 22px "Open Sans", sans-serif';
-      ctx.fillText(college.trim(), centerX, roleY + 68);
+      ctx.drawImage(photoCanvas, photoX, photoY);
+    } else if (mascotImg) {
+      // Draw official front-facing .NET Bot proudly nestled between capsules
+      const mW = 420;
+      const mH = 420;
+      const mX = 540;
+      const mY = 510;
+      ctx.save();
+      ctx.shadowColor = 'rgba(18, 8, 56, 0.25)';
+      ctx.shadowBlur = 28;
+      ctx.shadowOffsetY = 14;
+      ctx.drawImage(mascotImg, mX, mY, mW, mH);
+      ctx.restore();
     }
 
-    // Footer Bar (Matches preview layout 1:1)
-    const footerH = 92;
-    const footerY = cardY + cardH - footerH - 42;
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(cardX, footerY, cardW, footerH);
-    ctx.beginPath();
-    ctx.moveTo(cardX, footerY);
-    ctx.lineTo(cardX + cardW, footerY);
-    ctx.lineWidth = 2.5;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
+    // 6. Left Column Content Layout
+    const leftX = cardX + 64;
+    const contentMaxW = 450;
 
-    // Left Footer: Hashtag & Website
+    // ── 6.1 Top Brand Lockup: Host Organization (No redundant icon, name is already there) ──
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#512BD4';
-    ctx.font = 'bold 22px "JetBrains Mono", monospace';
-    ctx.fillText('#DotNetConf2026', cardX + 40, footerY + 38);
-    ctx.fillStyle = '#555555';
-    ctx.font = 'bold 17px "JetBrains Mono", monospace';
-    ctx.fillText('dnc.mscprpcem.tech', cardX + 40, footerY + 68);
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = T.purple;
+    ctx.font = `800 24px ${T.fontDisplay}`;
+    ctx.fillText('Microsoft Student Club', leftX, cardY + 95);
 
-    // Right Footer: Mascot Box Stamp & Yellow Pill (Matches preview 1:1)
-    const mascotBoxX = cardX + cardW - 145;
-    const mascotBoxY = footerY + 14;
-    const mascotBoxSize = 64;
+    // ── 6.2 Event Headline: .NET Conf 2026 Amravati ──
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = T.ink;
+    ctx.font = `900 70px ${T.fontDisplay}`;
+    ctx.fillText('.NET Conf', leftX, cardY + 185);
 
-    ctx.save();
-    // Drop shadow
-    ctx.fillStyle = '#000000';
+    // "2026" with gradient text
+    const yearText = '2026';
+    ctx.font = `900 64px ${T.fontDisplay}`;
+    const yearW = ctx.measureText(yearText).width;
+    const yearGrad = ctx.createLinearGradient(leftX, 0, leftX + yearW, 0);
+    yearGrad.addColorStop(0, T.purple);
+    yearGrad.addColorStop(0.5, T.magenta);
+    yearGrad.addColorStop(1, T.blue);
+    ctx.fillStyle = yearGrad;
+    ctx.fillText(yearText, leftX, cardY + 256);
+
+    // "Amravati" in .NET Purple
+    ctx.fillStyle = T.purple;
+    ctx.font = `900 48px ${T.fontDisplay}`;
+    ctx.fillText('Amravati', leftX + yearW + 18, cardY + 256);
+
+    // ── 6.3 Official 5-Color Ecosystem Accent Bar ──
+    const barY = cardY + 284;
+    const barColors = [T.purple, T.blue, T.teal, T.magenta, T.gold];
+    barColors.forEach((color, idx) => {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.roundRect(leftX + idx * 28, barY, 22, 6, 3);
+      ctx.fill();
+    });
+
+    // ── 6.4 "I'M ATTENDING" Badge Pill (Theme .NET Purple with Magenta Offset) ──
+    const pillY = cardY + 375;
+    const pillText = "I'M ATTENDING";
+    ctx.font = `900 22px ${T.fontDisplay}`;
+    const pillTextW = ctx.measureText(pillText).width;
+    const pillW = pillTextW + 46;
+    const pillH = 48;
+
+    // Magenta offset shadow
+    ctx.fillStyle = T.magenta;
     ctx.beginPath();
-    ctx.roundRect(mascotBoxX + 4, mascotBoxY + 4, mascotBoxSize, mascotBoxSize, 14);
+    ctx.roundRect(leftX + 3, pillY + 3, pillW, pillH, pillH / 2);
     ctx.fill();
 
-    // Purple square box
-    ctx.fillStyle = '#512BD4';
+    // Pill body
+    ctx.fillStyle = T.purple;
     ctx.beginPath();
-    ctx.roundRect(mascotBoxX, mascotBoxY, mascotBoxSize, mascotBoxSize, 14);
+    ctx.roundRect(leftX, pillY, pillW, pillH, pillH / 2);
     ctx.fill();
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 1.5;
     ctx.strokeStyle = '#000000';
     ctx.stroke();
 
-    if (mascotImg) {
-      const pad = 6;
-      ctx.drawImage(
-        mascotImg,
-        mascotBoxX + pad,
-        mascotBoxY + pad,
-        mascotBoxSize - pad * 2,
-        mascotBoxSize - pad * 2
-      );
-    }
-
-    // Yellow Mascot Tag
-    const mTag = '.NET BOT';
-    ctx.font = 'bold 12px "JetBrains Mono", monospace';
-    const mTagW = ctx.measureText(mTag).width + 16;
-    const mTagX = cardX + cardW - 60;
-    ctx.fillStyle = '#FFDB43';
-    ctx.beginPath();
-    ctx.roundRect(mTagX - mTagW / 2, footerY + 34, mTagW, 24, 6);
-    ctx.fill();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.fillStyle = '#000000';
-    ctx.textBaseline = 'middle';
-    ctx.textAlign = 'center';
-    ctx.fillText(mTag, mTagX, footerY + 46);
-    ctx.restore();
-
-    // Bottom Rim Banner (Matches preview 1:1)
-    const rimH = 42;
-    const rimY = cardY + cardH - rimH;
-    ctx.fillStyle = '#14053A';
-    ctx.fillRect(cardX, rimY, cardW, rimH);
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 15px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('MICROSOFT STUDENT CLUB · AMRAVATI CHAPTER', centerX, rimY + rimH / 2);
+    ctx.fillText(pillText, leftX + pillW / 2, pillY + pillH / 2);
+
+    // ── 6.5 Attendee Name ──
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = T.ink;
+    const attendeeName = name.trim() || 'Attendee Name';
+    let safeName = attendeeName;
+    ctx.font = `900 52px ${T.fontDisplay}`;
+    if (ctx.measureText(safeName).width > contentMaxW) {
+      ctx.font = `900 42px ${T.fontDisplay}`;
+    }
+    if (ctx.measureText(safeName).width > contentMaxW) {
+      safeName = safeName.slice(0, 18) + '...';
+    }
+    ctx.fillText(safeName, leftX, pillY + 120);
+
+    // ── 6.6 Role / Designation (.NET Purple Accent) ──
+    ctx.fillStyle = T.purple;
+    ctx.font = `800 26px ${T.fontDisplay}`;
+    const attendeeRole = role.trim() || 'Software Engineer / Student Delegate';
+    let safeRole = attendeeRole;
+    if (ctx.measureText(safeRole).width > contentMaxW) {
+      safeRole = safeRole.slice(0, 32) + '...';
+    }
+    ctx.fillText(safeRole, leftX, pillY + 164);
+
+    // ── 6.7 College / Organization ──
+    ctx.fillStyle = T.textMuted;
+    ctx.font = `600 22px ${T.fontBody}`;
+    const attendeeCollege = college.trim() || 'PRPCEM Campus, Amravati';
+    let safeCollege = attendeeCollege;
+    if (ctx.measureText(safeCollege).width > contentMaxW) {
+      safeCollege = safeCollege.slice(0, 34) + '...';
+    }
+    ctx.fillText(safeCollege, leftX, pillY + 204);
+
+    // ── 6.8 Date & Venue (Bottom-Left) ──
+    const dateY = cardY + cardH - 105;
+    ctx.fillStyle = T.ink;
+    ctx.font = `900 32px ${T.fontDisplay}`;
+    ctx.fillText('January 2–3, 2027', leftX, dateY);
+
+    ctx.fillStyle = T.textMuted;
+    ctx.font = `700 23px ${T.fontDisplay}`;
+    ctx.fillText('Swami Vivekanand Auditorium, PRPCEM', leftX, dateY + 40);
+
+    // ── 6.9 Bottom Multi-Color Accent Bar ──
+    const lineY = cardY + cardH - 14;
+    const lineGrad = ctx.createLinearGradient(cardX, 0, cardX + cardW, 0);
+    lineGrad.addColorStop(0, T.purple);
+    lineGrad.addColorStop(0.3, T.magenta);
+    lineGrad.addColorStop(0.6, T.blue);
+    lineGrad.addColorStop(1, T.teal);
+    ctx.fillStyle = lineGrad;
+    ctx.fillRect(cardX, lineY, cardW, 6);
 
     ctx.restore(); // end card clip
     return canvas;
@@ -672,12 +351,10 @@ https://dnc.mscprpcem.tech
   const handleDownloadBadge = async () => {
     try {
       setIsDownloading(true);
-      const canvas = badgeShape === 'circular'
-        ? await renderCircularCanvas()
-        : await renderSquareCanvas();
+      const canvas = await renderSquareCanvas();
 
       const link = document.createElement('a');
-      link.download = `dnc26-${badgeShape}-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
+      link.download = `dnc26-attendee-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (err) {
@@ -687,603 +364,329 @@ https://dnc.mscprpcem.tech
     }
   };
 
-  const handleNativeShareBadge = async () => {
-    if (typeof navigator === 'undefined' || !navigator.share) {
-      handleCopyShare();
-      return;
-    }
-    try {
-      setIsNativeSharing(true);
-      const canvas = badgeShape === 'circular'
-        ? await renderCircularCanvas()
-        : await renderSquareCanvas();
+  // The inner studio 2-column layout (form + preview)
+  const renderStudioContent = () => (
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
 
-      canvas.toBlob(async (blob) => {
-        if (!blob) {
-          setIsNativeSharing(false);
-          return;
-        }
-        const file = new File(
-          [blob],
-          `dnc26-${badgeShape}-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`,
-          { type: 'image/png' }
-        );
-        const shareData = {
-          title: '.NET Conf 2026 Amravati Attendee Badge',
-          text: getSharePostText(),
-        };
+      {/* Left Column: Form Controls (Styled with theme tokens) */}
+      <div className="lg:col-span-6 bg-white border-2 border-[rgba(81,43,212,0.2)] rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#512BD4] space-y-5 text-left">
 
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          shareData.files = [file];
-        }
+        <div className="flex items-center gap-2 pb-2 border-b border-[rgba(81,43,212,0.12)]">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
+          <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
+            Delegate Details
+          </h4>
+        </div>
 
-        try {
-          await navigator.share(shareData);
-        } catch (err) {
-          if (err.name !== 'AbortError') {
-            console.warn('Native share error:', err);
-          }
-        } finally {
-          setIsNativeSharing(false);
-        }
-      }, 'image/png');
-    } catch (err) {
-      console.error('Native share error:', err);
-      setIsNativeSharing(false);
-    }
-  };
-
-  return (
-    <section id={isModal ? undefined : "attendee-badge"} className={isModal ? "py-1 px-1 w-full relative" : "py-3 sm:py-5 px-3 sm:px-6 max-w-7xl mx-auto scroll-mt-20 relative"}>
-      {!isModal && (
-        <>
-          <DncSectionFlanks
-            leftIndex="07"
-            leftTag="BADGE"
-            leftBadgeText="I'M ATTENDING!"
-            leftBadgeColor="bg-[#512BD4] text-white"
-            leftSub="CUSTOM BADGE"
-            rightIndex="1080P"
-            rightTag="SOCIAL"
-            rightBadgeText="SHARE POST"
-            rightBadgeColor="bg-[#00BDD6] text-black"
-            rightSub="INSTANT DOWNLOAD"
-          />
-          {/* Signpost Header */}
-          <DncSignpost
-            title="ATTENDEE BADGE STUDIO"
-            badge="GET YOUR BADGE"
-            theme="purple"
-          />
-        </>
-      )}
-
-      <div className={isModal ? "bg-transparent p-0 text-left" : "bg-white border-[2.5px] sm:border-[3px] border-black rounded-3xl p-4 sm:p-7 md:p-10 shadow-[5px_5px_0px_0px_#000] sm:shadow-[8px_8px_0px_0px_#000]"}>
-
-        {/* Intro (Only in standalone page section) */}
-        {!isModal && (
-          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-9">
-            <div className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-3 py-1 rounded-full border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] mb-2.5">
-              <Ticket className="w-3.5 h-3.5 text-[#512BD4]" />
-              <span>Official Conference Delegate Pass</span>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-black text-[#14053A] font-sans uppercase tracking-tight mb-2">
-              Create Your Attendee Badge
-            </h3>
-
-            <p className="text-stone-700 font-sans text-xs sm:text-sm leading-relaxed">
-              Choose your badge format (Circular Badge or Square Social Post), upload your picture, enter your details, and download or share your badge directly to social media!
-            </p>
-          </div>
-        )}
-
-        {/* 2-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-
-          {/* Left Column: Form Controls */}
-          <div className="lg:col-span-6 bg-[#FAF8FF] border-[2px] sm:border-[2.5px] border-black rounded-2xl p-4 sm:p-6 shadow-[3px_3px_0px_0px_#000] space-y-4 text-left">
-
-            {/* Badge Format Selector: Circular vs Square Social */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-mono font-bold text-black uppercase flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Ticket className="w-3.5 h-3.5 text-[#512BD4]" />
-                  <span>Choose Badge Format</span>
-                </span>
-                <span className="text-[10px] font-mono text-stone-500 font-normal">Shape</span>
-              </label>
-
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                <button
-                  type="button"
-                  onClick={() => setBadgeShape('circular')}
-                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${badgeShape === 'circular'
-                      ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] translate-x-[1px] translate-y-[1px]'
-                      : 'bg-white text-black hover:bg-stone-100 shadow-[2px_2px_0px_0px_#000]'
-                    }`}
-                >
-                  <Circle className="w-4 h-4" />
-                  <span>CIRCULAR</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setBadgeShape('square')}
-                  className={`py-2.5 px-3 rounded-xl border-[2px] border-black font-mono font-black text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${badgeShape === 'square'
-                      ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_0px_#000] translate-x-[1px] translate-y-[1px]'
-                      : 'bg-white text-black hover:bg-stone-100 shadow-[2px_2px_0px_0px_#000]'
-                    }`}
-                >
-                  <Square className="w-4 h-4" />
-                  <span>SQUARE (POST)</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Direct Photo Upload Area */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-mono font-bold text-black uppercase flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Camera className="w-3.5 h-3.5 text-[#512BD4]" />
-                  <span>Your Photo</span>
-                </span>
-                {customPhotoUrl && (
-                  <button
-                    type="button"
-                    onClick={handleRemovePhoto}
-                    className="text-[10.5px] text-red-600 hover:text-red-800 font-bold flex items-center gap-1 cursor-pointer"
-                  >
-                    <X className="w-3 h-3" />
-                    <span>Remove</span>
-                  </button>
-                )}
-              </label>
-
-              {customPhotoUrl ? (
-                <div className="flex items-center gap-3.5 p-2.5 bg-white border-[2px] border-black rounded-xl shadow-[2px_2px_0px_0px_#000]">
-                  <img
-                    src={customPhotoUrl}
-                    alt="Uploaded preview"
-                    className="w-14 h-14 rounded-full object-cover border-[2px] border-black flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1 text-emerald-700 font-mono font-bold text-xs">
-                      <Check className="w-3.5 h-3.5" />
-                      <span>Photo uploaded!</span>
-                    </div>
-                    <p className="text-[11px] text-stone-500 truncate">Looking great on your badge.</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="text-xs font-mono font-bold bg-[#EEEAFB] text-[#512BD4] px-2.5 py-1.5 rounded-lg border border-black hover:bg-[#512BD4] hover:text-white transition-colors cursor-pointer flex-shrink-0"
-                  >
-                    Change
-                  </button>
-                </div>
-              ) : (
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={handleDragOver}
-                  onDragLeave={handleDragLeave}
-                  onDrop={handleDrop}
-                  className={`border-[2px] border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${isDragging
-                      ? 'border-[#512BD4] bg-[#EEEAFB]'
-                      : 'border-black/40 bg-white hover:border-black hover:bg-stone-50'
-                    }`}
-                >
-                  <div className="w-10 h-10 rounded-full bg-[#EEEAFB] border-[1.5px] border-black flex items-center justify-center mx-auto mb-2 text-[#512BD4] shadow-[1.5px_1.5px_0px_0px_#000]">
-                    <Upload className="w-5 h-5" />
-                  </div>
-                  <p className="text-xs font-mono font-bold text-black uppercase">
-                    Upload Your Portrait Picture
-                  </p>
-                  <p className="text-[11px] text-stone-500 mt-0.5">
-                    Click to browse or drag & drop (JPG, PNG, WebP)
-                  </p>
-                </div>
-              )}
-
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handlePhotoUpload}
-                className="hidden"
-              />
-            </div>
-
-            {/* Attendee Name */}
-            <div className="space-y-1">
-              <label htmlFor="badge-name" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-[#512BD4]" />
-                <span>Your Name</span>
-              </label>
-              <input
-                id="badge-name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={26}
-                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-bold text-black bg-white focus:outline-none focus:shadow-[2px_2px_0px_0px_#512BD4]"
-              />
-            </div>
-
-            {/* Role & Presets */}
-            <div className="space-y-1.5">
-              <label htmlFor="badge-role" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-[#00BDD6]" />
-                <span>Designation / Role</span>
-              </label>
-              <input
-                id="badge-role"
-                type="text"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                maxLength={30}
-                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-bold text-black bg-white focus:outline-none focus:shadow-[2px_2px_0px_0px_#00BDD6]"
-              />
-              <div className="flex flex-wrap gap-1.5 pt-0.5">
-                {ROLE_PRESETS.map((preset) => (
-                  <button
-                    key={preset}
-                    type="button"
-                    onClick={() => setRole(preset)}
-                    className={`text-[10.5px] font-mono px-2 py-0.5 rounded-md border border-black transition-all cursor-pointer ${role === preset
-                        ? 'bg-[#512BD4] text-white font-bold shadow-[1px_1px_0px_0px_#000]'
-                        : 'bg-white text-stone-700 hover:bg-stone-100'
-                      }`}
-                  >
-                    {preset}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* College / Organization (No Set PRPCEM, No placeholder) */}
-            <div className="space-y-1">
-              <label htmlFor="badge-college" className="text-xs font-mono font-bold text-black uppercase flex items-center gap-1.5">
-                <Building2 className="w-3.5 h-3.5 text-[#D600AA]" />
-                <span>College / Organization</span>
-              </label>
-              <input
-                id="badge-college"
-                type="text"
-                value={college}
-                onChange={(e) => setCollege(e.target.value)}
-                maxLength={35}
-                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black text-sm font-sans font-bold text-black bg-white focus:outline-none focus:shadow-[2px_2px_0px_0px_#D600AA]"
-              />
-            </div>
-
-            {/* Info Badge */}
-            <div className="bg-[#EEEAFB] border border-black/20 rounded-xl p-2.5 text-[11px] font-mono text-stone-700 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#512BD4] flex-shrink-0" />
-              <span>Includes official .NET Bot mascot sticker on your badge!</span>
-            </div>
-
-          </div>
-
-          {/* Right Column: Badge Preview & Action Buttons */}
-          <div className="lg:col-span-6 flex flex-col items-center">
-
-            {/* 1. Circular Badge Preview */}
-            {badgeShape === 'circular' && (
-              <div className="relative select-none">
-
-                {/* Outer Circular Container */}
-                <div className={isModal ? "w-[260px] h-[260px] sm:w-[300px] sm:h-[300px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] relative overflow-hidden flex items-center justify-center" : "w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] sm:w-[360px] sm:h-[360px] md:w-[380px] md:h-[380px] rounded-full border-[4px] border-black bg-[#512BD4] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex items-center justify-center"}>
-
-                  {/* SVG Circular Text Ring */}
-                  <svg viewBox="0 0 400 400" className="w-full h-full absolute inset-0 pointer-events-none">
-                    <defs>
-                      <path
-                        id="badge-top-path"
-                        d="M 40,200 A 162,162 0 1,1 360,200"
-                        fill="none"
-                      />
-                      {/* Counter-clockwise path from left to right along bottom so text is upright */}
-                      <path
-                        id="badge-bottom-path"
-                        d="M 40,200 A 168,168 0 0,0 360,200"
-                        fill="none"
-                      />
-                    </defs>
-
-                    {/* Top Curved Text */}
-                    <text className="font-mono font-black text-[12px] sm:text-[12.5px] fill-white uppercase tracking-[0.22em]">
-                      <textPath href="#badge-top-path" startOffset="50%" textAnchor="middle">
-                        ★ .NET CONF 2026 · AMRAVATI ★
-                      </textPath>
-                    </text>
-
-                    {/* Bottom Curved Text (Upright Left-to-Right - Event date removed) */}
-                    <text className="font-mono font-black text-[10.5px] sm:text-[11px] fill-[#FFDB43] uppercase tracking-[0.2em]">
-                      <textPath href="#badge-bottom-path" startOffset="50%" textAnchor="middle">
-                        ★ PRPCEM CAMPUS · AMRAVATI ★
-                      </textPath>
-                    </text>
-                  </svg>
-
-                  {/* Inner Badge Disc - Whole Center Space as the Image */}
-                  <div 
-                    onClick={() => fileInputRef.current?.click()}
-                    title="Click to upload your photo"
-                    className="w-[205px] h-[205px] xs:w-[235px] xs:h-[235px] sm:w-[265px] sm:h-[265px] md:w-[280px] md:h-[280px] rounded-full border-[3px] border-black bg-[#FAF8FF] relative z-10 overflow-hidden cursor-pointer group select-none shadow-[2px_2px_0px_0px_#000]"
-                  >
-                    {customPhotoUrl ? (
-                      <>
-                        <img
-                          src={customPhotoUrl}
-                          alt={name || 'Attendee'}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white z-20">
-                          <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
-                        </div>
-                      </>
-                    ) : (
-                      <div className="w-full h-full bg-[#EEEAFB] flex flex-col items-center justify-center text-[#512BD4] p-3">
-                        <Camera className="w-7 h-7 mb-1 group-hover:scale-110 transition-transform text-[#512BD4]" />
-                        <span className="text-[8.5px] font-mono font-bold uppercase tracking-wider text-black">
-                          Click to Add Photo
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Gradient Scrim for Overlay Badge */}
-                    <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/90 via-black/50 to-transparent pointer-events-none z-10" />
-
-                    {/* Neo-Brutalist Overlay Badge Card for Name & Position */}
-                    <div className="absolute bottom-1.5 inset-x-2 z-20 bg-white border-[2px] border-black shadow-[2px_2px_0px_0px_#000] rounded-xl p-1.5 text-center flex flex-col items-center">
-                      <span className="text-[7px] sm:text-[7.5px] font-mono font-black text-black bg-[#00BDD6] px-2 py-0.2 rounded-full border border-black uppercase tracking-wider leading-none mb-0.5">
-                        OFFICIAL DELEGATE
-                      </span>
-                      <h4 className="font-sans font-black text-xs sm:text-[13px] text-black uppercase tracking-tight leading-tight max-w-[190px] truncate">
-                        {name.trim() || 'YOUR NAME'}
-                      </h4>
-                      <div className="mt-0.5 inline-block bg-[#FFDB43] text-black px-2 py-0.2 rounded-full font-mono font-bold text-[8px] sm:text-[8.5px] border border-black uppercase max-w-[180px] truncate">
-                        {role.trim() || 'DELEGATE'}
-                      </div>
-                      {college.trim() && (
-                        <p className="font-sans text-[7.5px] sm:text-[8px] text-stone-600 font-semibold max-w-[180px] truncate mt-0.5">
-                          {college.trim()}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Official .NET Mascot Seal (Replacing .NET Verified) */}
-                <div
-                  className="absolute -bottom-2 -right-2 sm:bottom-0 sm:right-0 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#512BD4] text-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] p-1 flex flex-col items-center justify-center -rotate-6 hover:rotate-0 transition-transform z-30 select-none overflow-visible"
-                  title="Official .NET Mascot Seal"
-                >
-                  <img
-                    src="/mascot/bot_frontal.png"
-                    alt=".NET Mascot"
-                    className="w-13 h-13 sm:w-16 sm:h-16 object-contain filter drop-shadow select-none -mt-2"
-                  />
-                  <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] px-2 py-0.5 rounded border border-black uppercase tracking-wider absolute -bottom-1 shadow-[1px_1px_0px_0px_#000]">
-                    .NET BOT
-                  </span>
-                </div>
-
-              </div>
-            )}
-
-            {/* 2. Square Social Badge Preview (Social Media Post Format) */}
-            {badgeShape === 'square' && (
-              <div className="relative select-none">
-
-                {/* Outer Square Container - Social Media Graphic Post */}
-                <div className={isModal ? "w-[260px] h-[320px] sm:w-[310px] sm:h-[370px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between" : "w-[280px] h-[350px] xs:w-[310px] xs:h-[375px] sm:w-[360px] sm:h-[425px] md:w-[380px] md:h-[445px] rounded-3xl border-[4px] border-black bg-[#FAF8FF] shadow-[5px_5px_0px_0px_#000] sm:shadow-[7px_7px_0px_0px_#000] relative overflow-hidden flex flex-col justify-between"}>
-
-                  {/* Header Banner - Social Media Post Style */}
-                  <div className="bg-[#512BD4] text-white border-b-[3px] border-black py-2.5 px-3 text-center">
-                    <div className="inline-block bg-[#FFDB43] text-black font-mono font-black text-[8px] sm:text-[9px] px-2.5 py-0.5 rounded-full border border-black shadow-[1px_1px_0px_0px_#000] uppercase mb-1">
-                      ★ .NET CONF 2026 · AMRAVATI ★
-                    </div>
-                    <div className="font-sans font-black text-lg sm:text-xl tracking-tight uppercase text-white leading-tight">
-                      I'M ATTENDING!
-                    </div>
-                    <div className="font-mono font-bold text-[8.5px] sm:text-[9.5px] text-[#00BDD6] tracking-wide mt-0.5 uppercase">
-                      ★ PRPCEM CAMPUS · AMRAVATI ★
-                    </div>
-                  </div>
-
-                  {/* Main Delegate Body */}
-                  <div className="flex-1 flex flex-col items-center justify-center p-3 text-center">
-
-                    {/* User Photo Frame: Social Media Rounded-Square Frame */}
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      title="Click to upload your portrait picture"
-                      className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl border-[3px] border-black bg-white shadow-[3.5px_3.5px_0px_0px_#000] overflow-hidden relative cursor-pointer group flex items-center justify-center mb-2 transition-transform hover:scale-102"
-                    >
-                      {customPhotoUrl ? (
-                        <>
-                          <img
-                            src={customPhotoUrl}
-                            alt={name || 'Attendee'}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                            <Camera className="w-5 h-5" />
-                          </div>
-                        </>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center text-[#512BD4] p-2">
-                          <Camera className="w-7 h-7 mb-1 group-hover:scale-110 transition-transform" />
-                          <span className="text-[8.5px] font-mono font-bold uppercase tracking-wider text-black">
-                            Add Photo
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Name */}
-                    <h4 className="font-sans font-black text-base sm:text-lg text-[#14053A] uppercase tracking-tight leading-tight max-w-[240px] truncate">
-                      {name.trim() || 'YOUR NAME'}
-                    </h4>
-
-                    {/* Role Pill */}
-                    <div className="mt-1 inline-block bg-[#FFDB43] text-black border border-black px-2.5 py-0.5 rounded-full font-mono font-bold text-[9.5px] sm:text-[10px] shadow-[1px_1px_0px_0px_#000] max-w-[220px] truncate uppercase">
-                      {role.trim() || 'DELEGATE'}
-                    </div>
-
-                    {/* College (Only if typed) */}
-                    {college.trim() && (
-                      <p className="font-sans text-[10px] sm:text-[11px] font-semibold text-stone-600 mt-1 max-w-[230px] truncate">
-                        {college.trim()}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Clean Delegate Info & Mascot Stamp (Social Footer) */}
-                  <div className="bg-white px-3 py-1.5 flex items-center justify-between border-t-2 border-black/10">
-                    <div className="flex flex-col text-left">
-                      <span className="font-mono text-[8.5px] sm:text-[9.5px] text-[#512BD4] font-black tracking-tight">
-                        #DotNetConf2026
-                      </span>
-                      <span className="font-mono text-[7px] sm:text-[7.5px] text-stone-500 font-bold">
-                        dnc.mscprpcem.tech
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#512BD4] border-[1.5px] border-black flex items-center justify-center shadow-[1px_1px_0px_0px_#000] select-none p-0.5">
-                        <img
-                          src="/mascot/bot_frontal.png"
-                          alt=".NET Mascot"
-                          className="w-full h-full object-contain select-none"
-                        />
-                      </div>
-                      <span className="bg-[#FFDB43] text-black font-mono font-black text-[7.5px] sm:text-[8px] px-1.5 py-0.5 rounded border border-black uppercase">
-                        .NET BOT
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Bottom Rim Banner */}
-                  <div className="bg-[#14053A] text-white py-1 px-2 text-center font-mono font-bold text-[8px] sm:text-[9px] uppercase tracking-wider">
-                    MICROSOFT STUDENT CLUB · AMRAVATI CHAPTER
-                  </div>
-
-                </div>
-
-              </div>
-            )}
-
-            {/* Action Buttons: Download & Direct Social Sharing */}
-            <div className="w-full max-w-[320px] sm:max-w-[370px] space-y-3 mt-5">
-
-              {/* Primary Download Button */}
+        {/* Direct Photo Upload Area */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              <Camera className="w-3.5 h-3.5 text-[#512BD4]" />
+              <span>Portrait Picture</span>
+            </span>
+            {customPhotoUrl && (
               <button
                 type="button"
-                onClick={handleDownloadBadge}
-                disabled={isDownloading}
-                className="w-full bg-[#00BDD6] hover:bg-[#00A3B8] text-black font-mono font-black text-xs sm:text-sm py-3 px-4 rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                onClick={handleRemovePhoto}
+                className="text-[11px] text-[#F65163] hover:text-red-800 font-bold flex items-center gap-1 cursor-pointer"
               >
-                <Download className="w-4 h-4" />
-                <span>
-                  {isDownloading
-                    ? `SAVING ${badgeShape.toUpperCase()} BADGE...`
-                    : `DOWNLOAD ${badgeShape === 'circular' ? 'CIRCULAR' : 'SQUARE'} BADGE (PNG)`}
-                </span>
+                <X className="w-3 h-3" />
+                <span>Remove Photo</span>
               </button>
+            )}
+          </label>
 
-              {/* Native Mobile Share Button (Instant Share to WhatsApp, Stories, X, Gallery) */}
-              {typeof navigator !== 'undefined' && typeof navigator.share === 'function' && (
-                <button
-                  type="button"
-                  onClick={handleNativeShareBadge}
-                  disabled={isNativeSharing}
-                  className="w-full bg-[#FFD13B] hover:bg-[#ffc81a] text-black font-mono font-black text-xs sm:text-sm py-2.5 px-4 rounded-2xl border-[2.5px] border-black shadow-[3px_3px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
-                  title="Share badge image directly via your device's apps"
-                >
-                  <Share2 className="w-4 h-4" />
-                  <span>
-                    {isNativeSharing ? 'OPENING SHARE SHEET...' : 'SHARE BADGE IMAGE (MOBILE)'}
-                  </span>
-                </button>
-              )}
-
-              {/* Direct Social Media Sharing Panel */}
-              <div className="bg-[#FAF8FF] border-[2px] border-black rounded-2xl p-3 shadow-[2.5px_2.5px_0px_0px_#000] space-y-2.5">
-                <div className="flex items-center justify-between px-1">
-                  <span className="text-[11px] font-mono font-black text-black uppercase flex items-center gap-1.5">
-                    <Share2 className="w-3.5 h-3.5 text-[#512BD4]" />
-                    <span>Share On Social Media</span>
-                  </span>
-                  <span className="text-[10px] font-mono text-stone-500 font-bold">1-Click</span>
+          {customPhotoUrl ? (
+            <div className="flex items-center gap-3.5 p-3 bg-[#FAF8FF] border-2 border-[rgba(81,43,212,0.2)] rounded-xl shadow-[2px_2px_0px_0px_#512BD4]">
+              <img
+                src={customPhotoUrl}
+                alt="Uploaded preview"
+                className="w-14 h-14 rounded-xl object-cover border-2 border-[rgba(81,43,212,0.3)] flex-shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1 text-emerald-700 font-mono font-bold text-xs">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Photo Uploaded</span>
                 </div>
+                <p className="text-[11px] text-[#5C5577] truncate mt-0.5">
+                  Blended seamlessly between speed capsules.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="text-xs font-mono font-bold bg-[#EEE7FB] text-[#512BD4] px-3 py-1.5 rounded-lg border border-[rgba(81,43,212,0.25)] hover:bg-[#512BD4] hover:text-white transition-colors cursor-pointer flex-shrink-0"
+              >
+                Change
+              </button>
+            </div>
+          ) : (
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-all ${isDragging
+                  ? 'border-[#512BD4] bg-[#EEE7FB]'
+                  : 'border-[rgba(81,43,212,0.3)] bg-[#FAF8FF] hover:border-[#512BD4] hover:bg-[#F6F3FC]'
+                }`}
+            >
+              <div className="w-11 h-11 rounded-xl bg-[#EEE7FB] border border-[rgba(81,43,212,0.2)] flex items-center justify-center mx-auto mb-2.5 text-[#512BD4] shadow-[2px_2px_0px_0px_#512BD4]">
+                <Upload className="w-5 h-5" />
+              </div>
+              <p className="text-xs font-mono font-bold text-[#120838] uppercase">
+                Upload Your Portrait Picture
+              </p>
+              <p className="text-[11px] text-[#5C5577] mt-1">
+                Click to browse or drag & drop (JPG, PNG, WebP)
+              </p>
+            </div>
+          )}
 
-                {/* Social Share Buttons: WhatsApp, Instagram, LinkedIn only */}
-                <div className="grid grid-cols-3 gap-2">
-                  {/* WhatsApp */}
-                  <button
-                    type="button"
-                    onClick={handleShareWhatsApp}
-                    className="py-2.5 px-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Share on WhatsApp"
-                  >
-                    <WhatsAppIcon className="w-4 h-4 fill-white flex-shrink-0" />
-                    <span>WhatsApp</span>
-                  </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoUpload}
+            className="hidden"
+          />
+        </div>
 
-                  {/* Instagram */}
-                  <button
-                    type="button"
-                    onClick={handleShareInstagram}
-                    className="py-2.5 px-2 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-90 text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Share on Instagram (Copies caption & opens Instagram)"
-                  >
-                    <InstagramIcon className="w-4 h-4 fill-white flex-shrink-0" />
-                    <span>Instagram</span>
-                  </button>
+        {/* Attendee Name */}
+        <div className="space-y-1.5">
+          <label htmlFor="badge-name" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
+            <User className="w-3.5 h-3.5 text-[#512BD4]" />
+            <span>Full Name</span>
+          </label>
+          <input
+            id="badge-name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            maxLength={26}
+            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#512BD4] focus:shadow-[3px_3px_0px_0px_#512BD4] transition-all"
+          />
+        </div>
 
-                  {/* LinkedIn */}
-                  <button
-                    type="button"
-                    onClick={handleShareLinkedIn}
-                    className="py-2.5 px-2 bg-[#0A66C2] hover:bg-[#084e96] text-white font-mono font-bold text-xs rounded-xl border-[1.5px] border-black shadow-[2px_2px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    title="Share on LinkedIn"
-                  >
-                    <LinkedInIcon className="w-4 h-4 fill-white flex-shrink-0" />
-                    <span>LinkedIn</span>
-                  </button>
-                </div>
+        {/* Role / Designation */}
+        <div className="space-y-1.5">
+          <label htmlFor="badge-role" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
+            <Briefcase className="w-3.5 h-3.5 text-[#D600AA]" />
+            <span>Role / Designation</span>
+          </label>
+          <input
+            id="badge-role"
+            type="text"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            maxLength={30}
+            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#D600AA] focus:shadow-[3px_3px_0px_0px_#D600AA] transition-all"
+          />
+        </div>
 
-                {/* Copy Text Button */}
-                <button
-                  type="button"
-                  onClick={handleCopyShare}
-                  className="w-full py-2 px-3 bg-white hover:bg-stone-50 text-stone-800 font-mono font-bold text-[11px] rounded-xl border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                  title="Copy formatted post text to clipboard"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-700 stroke-[2.5]" />
-                      <span className="text-emerald-700">Copied Post Text to Clipboard!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="w-3.5 h-3.5 text-[#512BD4]" />
-                      <span>Copy Social Post Text</span>
-                    </>
-                  )}
-                </button>
+        {/* College / Organization */}
+        <div className="space-y-1.5">
+          <label htmlFor="badge-college" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
+            <Building2 className="w-3.5 h-3.5 text-[#0B6CFF]" />
+            <span>College / Organization</span>
+          </label>
+          <input
+            id="badge-college"
+            type="text"
+            value={college}
+            onChange={(e) => setCollege(e.target.value)}
+            maxLength={35}
+            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#0B6CFF] focus:shadow-[3px_3px_0px_0px_#0B6CFF] transition-all"
+          />
+        </div>
+
+      </div>
+
+      {/* Right Column: Square Badge Preview & Action Button */}
+      <div className="lg:col-span-6 flex flex-col items-center">
+
+        <div className="w-full flex items-center gap-2 pb-2 mb-4 border-b border-[rgba(81,43,212,0.12)]">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#0B6CFF]"></span>
+          <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
+            Badge Preview
+          </h4>
+        </div>
+
+        {/* Square Social Badge Preview (1:1 Aspect Ratio) */}
+        <div className="relative select-none flex justify-center w-full">
+
+          {/* Outer 1:1 Square Card (Signature Neo-Brutalist Frame) */}
+          <div className={isModal
+            ? "w-[300px] xs:w-[330px] sm:w-[370px] aspect-square rounded-3xl border-[3px] border-black bg-gradient-to-b from-white via-[#FAF8FF] to-[#F5F0FF] shadow-[6px_6px_0px_0px_#120838] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 text-left"
+            : "w-[320px] xs:w-[360px] sm:w-[410px] aspect-square rounded-3xl border-[3px] border-black bg-gradient-to-b from-white via-[#FAF8FF] to-[#F5F0FF] shadow-[6px_6px_0px_0px_#120838] relative overflow-hidden flex flex-col justify-between p-5 sm:p-7 text-left"
+          }>
+
+            {/* Right-Side Angled Speed Capsules (Framing the Photo / Mascot) */}
+            {/* Upper Capsule: peeks out above right shoulder */}
+            <div className="absolute right-3 sm:right-6 top-3 sm:top-5 w-12 sm:w-16 h-48 sm:h-60 rounded-full bg-gradient-to-b from-[#512BD4] to-[#0B6CFF] rotate-[34deg] pointer-events-none select-none opacity-95"></div>
+            {/* Lower Capsule: peeks out below left side, parallel */}
+            <div className="absolute right-14 sm:right-20 bottom-3 sm:bottom-5 w-11 sm:w-15 h-44 sm:h-54 rounded-full bg-gradient-to-b from-[#7B5CE5] to-[#D600AA] rotate-[34deg] pointer-events-none select-none opacity-95"></div>
+
+            {/* Top Row: Brand Lockup (Host Club Name — No redundant icon) */}
+            <div className="relative z-10 w-full mb-1 sm:mb-1.5 flex items-center">
+              <span className="font-sans font-extrabold text-xs sm:text-sm text-[#512BD4] tracking-wide whitespace-nowrap overflow-visible">
+                Microsoft Student Club
+              </span>
+            </div>
+
+            {/* Event Title: .NET Conf 2026 Amravati */}
+            <div className="relative z-10 max-w-[54%]">
+              <h3 className="font-sans font-black text-lg sm:text-2xl md:text-3xl text-[#120838] leading-tight">
+                .NET Conf
+              </h3>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-sans font-black text-base sm:text-xl md:text-2xl leading-tight bg-gradient-to-r from-[#512BD4] via-[#D600AA] to-[#0B6CFF] bg-clip-text text-transparent">
+                  2026
+                </span>
+                <span className="font-sans font-black text-sm sm:text-lg md:text-xl text-[#512BD4] leading-tight">
+                  Amravati
+                </span>
               </div>
 
+              {/* Official 5-Color .NET Ecosystem Accent Bar */}
+              <div className="flex items-center gap-1 my-1 sm:my-1.5">
+                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#512BD4]"></span>
+                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#0B6CFF]"></span>
+                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#28C2D1]"></span>
+                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#D600AA]"></span>
+                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#F7B548]"></span>
+              </div>
             </div>
+
+            {/* Middle Row: "I'M ATTENDING" Pill & Attendee Info */}
+            <div className="relative z-10 my-auto max-w-[54%] pr-1">
+              <div className="inline-block bg-[#512BD4] text-white font-sans font-black text-[9px] sm:text-xs px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-[1.5px_1.5px_0px_0px_#D600AA] border border-black mb-1 sm:mb-1.5 select-none tracking-wide">
+                I'M ATTENDING
+              </div>
+
+              <h2 className="font-sans font-black text-sm sm:text-lg md:text-xl text-[#120838] leading-tight tracking-tight break-words">
+                {name.trim() || 'Attendee Name'}
+              </h2>
+
+              <p className="font-sans text-[10.5px] sm:text-xs font-bold text-[#512BD4] leading-snug mt-0.5 break-words">
+                {role.trim() || 'Software Engineer / Student Delegate'}
+              </p>
+
+              <p className="font-sans text-[9.5px] sm:text-[11px] text-[#5C5577] leading-snug break-words">
+                {college.trim() || 'PRPCEM Amravati'}
+              </p>
+            </div>
+
+            {/* Right-Side Attendee Portrait (NESTLED PROUDLY IN BETWEEN THE TWO CAPSULES) */}
+            <div className="absolute right-0 sm:right-2 bottom-0 w-36 xs:w-42 sm:w-48 h-48 sm:h-56 z-20 flex items-end justify-center select-none pointer-events-none">
+              {customPhotoUrl ? (
+                <div className="relative w-full h-full flex items-end justify-center">
+                  <img
+                    src={customPhotoUrl}
+                    alt={name || 'Attendee'}
+                    className="w-full h-full object-cover object-top"
+                    style={{
+                      maskImage: 'linear-gradient(to bottom, black 0%, black 65%, transparent 100%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 65%, transparent 100%)',
+                    }}
+                  />
+                </div>
+              ) : (
+                <div className="relative w-full h-full flex flex-col items-center justify-end pb-1">
+                  <img
+                    src="/mascot/bot_frontal.png"
+                    alt=".NET Bot Mascot"
+                    className="w-28 xs:w-32 sm:w-40 h-28 xs:h-32 sm:h-40 object-contain filter drop-shadow-[0_12px_16px_rgba(18,8,56,0.3)]"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Row: Date & Venue */}
+            <div className="relative z-10 pt-1">
+              <p className="font-sans font-black text-xs sm:text-sm md:text-base text-[#120838] leading-tight">
+                January 2–3, 2027
+              </p>
+              <p className="font-sans font-semibold text-[10px] sm:text-[11px] md:text-xs text-[#5C5577] leading-tight mt-0.5">
+                Swami Vivekanand Auditorium, PRPCEM
+              </p>
+            </div>
+
+            {/* Bottom Multi-Color Accent Hairline */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#512BD4] via-[#D600AA] to-[#0B6CFF]"></div>
 
           </div>
 
         </div>
 
+        {/* Action Button: Download Attendee Badge */}
+        <div className="w-full max-w-[320px] sm:max-w-[410px] mt-6">
+          <button
+            type="button"
+            onClick={handleDownloadBadge}
+            disabled={isDownloading}
+            className="btn btn--primary btn--lg w-full cursor-pointer flex items-center justify-center gap-2"
+          >
+            <Download className="w-5 h-5" />
+            <span>
+              {isDownloading ? 'DOWNLOADING...' : 'DOWNLOAD'}
+            </span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  );
+
+  // If inside modal
+  if (isModal) {
+    return (
+      <div className="p-1 w-full relative text-left">
+        {renderStudioContent()}
+      </div>
+    );
+  }
+
+  // If inside standalone page (/badge)
+  if (isStandalonePage) {
+    return (
+      <div className="w-full">
+        {renderStudioContent()}
+      </div>
+    );
+  }
+
+  // Default: Embedded in main landing page flow at #attendee-badge (matching Tracks, Speakers, CFP, Tickets)
+  return (
+    <section className="section band--purple" id="attendee-badge" style={{ scrollMarginTop: '80px' }}>
+      <div className="wrap">
+        <div className="sechead sechead--center">
+          <p className="eyebrow" style={{ justifyContent: 'center' }}>
+            Official Delegate Pass · Badge Studio
+          </p>
+          <h2 className="h-sec">
+            Create Your<br />Attendee Badge.
+          </h2>
+          <p className="lede" style={{ marginInline: 'auto' }}>
+            Personalize your official .NET Conf 2026 Amravati delegate pass, upload your portrait, and download your high-resolution 1080×1080 HD square badge to share on LinkedIn &amp; X!
+          </p>
+        </div>
+
+        {/* Themed Studio Container */}
+        <div
+          className="sticker"
+          style={{
+            padding: 'clamp(1.5rem, 3.5vw, 2.75rem)',
+            background: '#FFFFFF',
+            borderColor: 'var(--border-light)',
+            boxShadow: '6px 6px 0 var(--purple)',
+            borderRadius: '16px',
+          }}
+        >
+          {renderStudioContent()}
+        </div>
       </div>
     </section>
   );

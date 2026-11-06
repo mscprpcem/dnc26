@@ -2,15 +2,15 @@ export const eventData = {
   name: '.NET Conf',
   edition: 'Amravati',
   year: '2026',
-  dateFormatted: 'December 26, 2026',
-  displayDate: 'December 26, 2026',
-  duration: 'Full-Day Conference',
+  dateFormatted: 'January 2–3, 2027',
+  displayDate: 'January 2–3, 2027',
+  duration: '2-Day Conference',
   timeFormatted: '09:00 AM – 06:00 PM IST',
   launchVersion: '.NET 11',
   poweredByVersion: '.NET 10.0.11',
   tagline: 'Be a force for good.',
   heroSubtitle:
-    'P. R. Pote Patil College of Engineering and Management (PRPCEM), Amravati',
+    'Swami Vivekanand Auditorium, PRPCEM, Amravati',
   
   organizer: {
     name: 'Microsoft Student Club (MSC)',
@@ -24,7 +24,7 @@ export const eventData = {
     city: 'Amravati',
     state: 'Maharashtra',
     country: 'India',
-    venueName: 'P. R. Pote Patil College of Engineering and Management (PRPCEM)',
+    venueName: 'Swami Vivekanand Auditorium, PRPCEM',
     address: 'Pote Estate, Kathora Road, Amravati, Maharashtra 444602',
     mapUrl: 'https://www.google.com/maps/place/P.+R.+Pote+Patil+College+of+Engineering+and+Management,+Amravati',
     embedMapUrl:
@@ -32,10 +32,13 @@ export const eventData = {
   },
 
   contactEmail: 'dotnetconfamt@prpotepatilengg.ac.in',
+  contactPhone: '+91 93599 82959',
+  groupRegistrationPhone: '9359982959',
 
   socialLinks: {
     website: 'https://www.mscprpcem.tech',
     whatsapp: 'https://chat.whatsapp.com/EPFRDsWd057DBqYS5bpK67',
+    groupWhatsApp: 'https://wa.me/919359982959?text=Hi%20MSC%20PRPCEM!%20We%27re%20a%20group%20planning%20to%20attend%20.NET%20Conf%202026.',
     linkedin: 'https://www.linkedin.com/company/mscprpcem',
     linktree: 'https://linktr.ee/mscprpcem',
     github: 'https://github.com/mscprpcem',

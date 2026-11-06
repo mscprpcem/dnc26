@@ -1205,9 +1205,9 @@ function sendDelegateConfirmationEmail(
       '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;width:150px;">Summit Event</td>' +
       '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:700;font-size:13px;">' + cleanEvent + '</td></tr>' +
       '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Event Date</td>' +
-      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#512bd4;font-weight:700;font-size:13px;">Saturday, 26 December 2026</td></tr>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#512bd4;font-weight:700;font-size:13px;">Saturday & Sunday, 2–3 January 2027</td></tr>' +
       '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Timing</td>' +
-      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">09:00 AM – 06:00 PM IST (Full Day)</td></tr>' +
+      '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">09:00 AM – 06:00 PM IST (2-Day Summit)</td></tr>' +
       '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Campus Venue</td>' +
       '<td class="email-summary-val" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600;font-size:13px;">P. R. Pote Patil College of Engineering and Management (PRPCEM), Pote Estate, Kathora Road, Amravati, Maharashtra 444602</td></tr>' +
       '<tr><td class="email-summary-label" style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#64748b;font-size:13px;">Delegate Name</td>' +
