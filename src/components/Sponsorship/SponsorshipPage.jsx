@@ -1242,7 +1242,6 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder="e.g. Acme Cloud Corp"
                         className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
                       />
                     </div>
@@ -1256,7 +1255,6 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
-                        placeholder="e.g. Rahul Sharma"
                         className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
                       />
                     </div>
@@ -1272,7 +1270,6 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={workEmail}
                         onChange={(e) => setWorkEmail(e.target.value)}
-                        placeholder="rahul@company.com"
                         className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
                       />
                     </div>
@@ -1304,7 +1301,6 @@ export const SponsorshipPage = ({ onBack }) => {
                       rows={3}
                       value={inquiryNotes}
                       onChange={(e) => setInquiryNotes(e.target.value)}
-                      placeholder="Tell us about your developer goals, expected booth footprint, or presentation topics..."
                       className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg p-3 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
                     />
                   </div>
@@ -1341,9 +1337,12 @@ export const SponsorshipPage = ({ onBack }) => {
                       <Mail className="w-4 h-4 text-[#512BD4] shrink-0 mt-0.5" />
                       <div className="flex-1 overflow-hidden">
                         <div className="font-bold text-[#120838]">Official Email</div>
-                        <div className="font-mono text-[11px] text-stone-700 truncate select-all">
+                        <a
+                          href="mailto:dotnetconfamt@prpotepatilengg.ac.in"
+                          className="font-mono text-[11px] text-[#512BD4] hover:underline font-bold truncate block"
+                        >
                           dotnetconfamt@prpotepatilengg.ac.in
-                        </div>
+                        </a>
                       </div>
                       <button
                         type="button"

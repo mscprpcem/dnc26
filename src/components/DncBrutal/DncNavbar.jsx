@@ -83,9 +83,10 @@ export const DncNavbar = ({ onOpenRegister }) => {
 
           {/* CTA & Actions */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 ml-auto lg:ml-0 shrink-0">
+            {/* CTA & Actions — Hidden on phone screen per design request, accessible via burger menu */}
             <button
               type="button"
-              className="btn btn--primary btn--sm nav__cta shrink-0 cursor-pointer"
+              className="btn btn--primary btn--sm nav__cta hidden sm:inline-flex shrink-0 cursor-pointer"
               onClick={() => {
                 if (onOpenRegister) {
                   onOpenRegister();
@@ -95,8 +96,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
                 }
               }}
             >
-              <span className="hidden sm:inline">Register Interest</span>
-              <span className="sm:hidden text-xs">Register</span>
+              <span>Register Interest</span>
               <svg className="btn__arrow shrink-0" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#i-arrow" />
               </svg>

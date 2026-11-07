@@ -17,6 +17,10 @@ import {
   Minus,
   HelpCircle,
   Sparkles,
+  GraduationCap,
+  Code2,
+  Microscope,
+  BookOpen,
 } from 'lucide-react';
 import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
 import { sendInterestSubmission } from '../../utils/webhookApi.js';
@@ -41,13 +45,41 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
   const roleDropdownRef = useRef(null);
 
   const roleOptions = [
-    { value: 'student_prpcem', label: 'Student @ PRPCEM (Host Campus)', badge: 'PRPCEM', badgeBg: 'bg-[#512BD4] text-white' },
-    { value: 'student_other', label: 'Student (Other College / University)', badge: 'Student', badgeBg: 'bg-[#00E5FF] text-black' },
-    { value: 'developer', label: 'Software Engineer / Full-Stack Developer', badge: 'Engineer', badgeBg: 'bg-[#16A34A] text-white' },
-    { value: 'ai_engineer', label: 'AI Engineer / ML & LLM Practitioner', badge: 'AI/ML', badgeBg: 'bg-[#D600AA] text-white' },
-    { value: 'devops_cloud', label: 'Cloud Architect / DevOps / SRE', badge: 'Cloud/DevOps', badgeBg: 'bg-[#0284C7] text-white' },
-    { value: 'faculty', label: 'Faculty / Educator / Academician', badge: 'Faculty', badgeBg: 'bg-[#9333EA] text-white' },
-    { value: 'other', label: 'Tech Enthusiast / Open Source Contributor', badge: 'Community', badgeBg: 'bg-[#FFD13B] text-black' },
+    {
+      value: 'Student',
+      label: 'Student',
+      subtitle: 'College / University',
+      icon: GraduationCap,
+      badgeBg: 'bg-[#00E5FF] text-black',
+    },
+    {
+      value: 'Developer',
+      label: 'Developer',
+      subtitle: 'Software & Cloud',
+      icon: Code2,
+      badgeBg: 'bg-[#512BD4] text-white',
+    },
+    {
+      value: 'Professional',
+      label: 'Professional',
+      subtitle: 'Industry & IT',
+      icon: Briefcase,
+      badgeBg: 'bg-[#16A34A] text-white',
+    },
+    {
+      value: 'Researcher',
+      label: 'Researcher',
+      subtitle: 'Academic & R&D',
+      icon: Microscope,
+      badgeBg: 'bg-[#D600AA] text-white',
+    },
+    {
+      value: 'K-12',
+      label: 'K-12',
+      subtitle: 'School Student',
+      icon: BookOpen,
+      badgeBg: 'bg-[#FFD13B] text-black',
+    },
   ];
 
   useEffect(() => {
@@ -67,7 +99,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
     };
   }, []);
 
-  const selectedRole = roleOptions.find((r) => r.value === formData.role);
+  const selectedRole = roleOptions.find((r) => r.value.toLowerCase() === (formData.role || '').toLowerCase()) || roleOptions.find((r) => r.value === formData.role);
 
   const interestTopics = [
     { id: 'Generative AI & Agents', label: 'Generative AI & Agents', bg: 'bg-[#FCE7F3] text-[#D600AA] border-pink-200' },
@@ -121,24 +153,10 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
     return (
       <div className="w-full text-left">
         {/* Modal Header */}
-        <div className="pr-10 mb-4 sm:mb-5">
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="inline-flex items-center gap-1.5 bg-[#EEEAFB] text-[#512BD4] text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-black shadow-[1.5px_1.5px_0px_#000] uppercase">
-              <Calendar className="w-3.5 h-3.5" />
-              <span>.NET CONF 2026 • AMRAVATI</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold px-2.5 py-1 rounded-lg bg-[#DCFCE7] text-[#16A34A] border-[1.5px] border-black shadow-[1.5px_1.5px_0px_#000] uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#16A34A]" />
-              <span>PRIORITY ACCESS</span>
-            </span>
-          </div>
-
-          <h2 id="interest-modal-title" className="text-2xl sm:text-3xl font-black font-sans uppercase tracking-tight text-[#120838] leading-tight mt-1">
+        <div className="pr-10 mb-3 sm:mb-4">
+          <h2 id="interest-modal-title" className="text-xl sm:text-2xl font-black font-sans uppercase tracking-tight text-[#120838] leading-tight">
             Register Your <span className="text-[#512BD4]">Interest</span>
           </h2>
-          <p className="text-stone-600 font-sans text-xs sm:text-sm mt-1 leading-relaxed">
-            Get priority delegate announcements across Generative AI, GitHub Copilot &amp; DevOps, Azure Cloud, and Modern .NET tracks.
-          </p>
         </div>
 
         {isSubmitted ? (
@@ -195,15 +213,15 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
             )}
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-3.5">
+          <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
             {errorMessage && (
-              <div className="p-3 bg-red-50 border-2 border-red-500 rounded-xl text-xs font-mono text-red-700">
+              <div className="p-2.5 bg-red-50 border-2 border-red-500 rounded-xl text-xs font-mono text-red-700">
                 {errorMessage}
               </div>
             )}
 
             {/* Row 1: Full name & Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <div className="space-y-1">
                 <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
                   <User className="w-3.5 h-3.5 text-[#512BD4]" />
@@ -212,10 +230,9 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Alex Morgan"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                  className="w-full px-3 py-2 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
                 />
               </div>
 
@@ -227,33 +244,31 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 <input
                   type="email"
                   required
-                  placeholder="alex@domain.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                  className="w-full px-3 py-2 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
                 />
               </div>
             </div>
 
             {/* Row 2: Mobile number & Custom Role Dropdown */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               <div className="space-y-1">
                 <label className="text-xs font-mono font-bold text-[#120838] uppercase tracking-wide flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-[#512BD4]" />
                   <span>Mobile number *</span>
                 </label>
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-2 rounded-xl border-2 border-black bg-[#FFD13B] text-black font-mono text-xs font-black shadow-[1.5px_1.5px_0px_#000] shrink-0 select-none flex items-center justify-center">
+                  <span className="px-2.5 py-2 rounded-xl border-2 border-black bg-[#FFD13B] text-black font-mono text-xs font-black shadow-[1.5px_1.5px_0px_#000] shrink-0 select-none flex items-center justify-center">
                     +91
                   </span>
                   <input
                     type="tel"
                     required
-                    placeholder="9876543210"
                     maxLength={10}
                     value={formData.phone}
                     onChange={(e) => handlePhoneChange(e.target.value)}
-                    className="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                    className="flex-1 min-w-0 px-3 py-2 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
                   />
                 </div>
               </div>
@@ -270,7 +285,7 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                   type="button"
                   id="dnc-modal-role-dropdown-btn"
                   onClick={() => setIsRoleOpen(!isRoleOpen)}
-                  className={`w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans flex items-center justify-between transition-all cursor-pointer hover:bg-stone-50 ${
+                  className={`w-full px-3 py-2 rounded-xl border-2 border-black bg-white text-sm font-sans flex items-center justify-between transition-all cursor-pointer hover:bg-stone-50 ${
                     isRoleOpen ? 'ring-2 ring-[#512BD4]/30 border-[#512BD4] bg-[#FAF8FF]' : ''
                   }`}
                   aria-haspopup="listbox"
@@ -278,18 +293,19 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 >
                   {selectedRole ? (
                     <div className="flex items-center gap-2 truncate">
-                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 shadow-[1px_1px_0px_0px_#000] ${selectedRole.badgeBg}`}>
-                        {selectedRole.badge}
-                      </span>
-                      <span className="font-bold text-black truncate">{selectedRole.label}</span>
+                      <div className={`w-6 h-6 rounded-md border-[1.5px] border-black flex items-center justify-center shrink-0 shadow-[1px_1px_0px_#000] ${selectedRole.badgeBg}`}>
+                        <selectedRole.icon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-bold text-black text-xs sm:text-sm">{selectedRole.label}</span>
+                      <span className="text-[11px] text-stone-500 font-normal">({selectedRole.subtitle})</span>
                     </div>
                   ) : (
-                    <span className="text-stone-400 font-normal">Select your role...</span>
+                    <span className="text-stone-400 font-normal">Select role...</span>
                   )}
                   <ChevronDown
                     className={`w-4 h-4 text-black transition-transform duration-200 shrink-0 ${
-                      isRoleOpen ? 'rotate-180 text-[#512BD4]' : ''
-                    }`}
+                    isRoleOpen ? 'rotate-180 text-[#512BD4]' : ''
+                  }`}
                   />
                 </button>
 
@@ -305,10 +321,11 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 {isRoleOpen && (
                   <div 
                     role="listbox"
-                    className="absolute z-50 left-0 right-0 top-full mt-1.5 bg-white rounded-2xl border-2 border-black shadow-[4px_4px_0px_0px_#000] p-1.5 space-y-1 max-h-56 overflow-y-auto"
+                    className="absolute z-50 left-0 sm:left-auto sm:right-0 top-full mt-1.5 w-full sm:w-[320px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl border-2 border-black shadow-[4px_4px_0px_0px_#000] p-1.5 space-y-1 max-h-60 overflow-y-auto no-scrollbar"
                   >
                     {roleOptions.map((opt) => {
                       const isSelected = formData.role === opt.value;
+                      const IconComponent = opt.icon;
                       return (
                         <button
                           key={opt.value}
@@ -319,17 +336,20 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                             setFormData({ ...formData, role: opt.value });
                             setIsRoleOpen(false);
                           }}
-                          className={`w-full text-left px-3 py-2 rounded-xl text-xs sm:text-sm font-sans flex items-center justify-between transition-all cursor-pointer ${
+                          className={`w-full text-left px-2.5 py-2 rounded-xl font-sans flex items-center justify-between gap-2 transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-[#EEEAFB] text-[#512BD4] font-black border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000]'
                               : 'text-black hover:bg-[#FAF8FF] hover:translate-x-1 font-semibold'
                           }`}
                         >
-                          <div className="flex items-center gap-2 truncate">
-                            <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 ${opt.badgeBg}`}>
-                              {opt.badge}
-                            </span>
-                            <span className="truncate">{opt.label}</span>
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <div className={`w-7 h-7 rounded-lg border-[1.5px] border-black flex items-center justify-center shrink-0 shadow-[1px_1px_0px_#000] ${opt.badgeBg}`}>
+                              <IconComponent className="w-3.5 h-3.5" />
+                            </div>
+                            <div className="flex flex-col text-left leading-tight">
+                              <span className="font-bold text-xs sm:text-sm text-black">{opt.label}</span>
+                              <span className="text-[11px] text-stone-500 font-normal">{opt.subtitle}</span>
+                            </div>
                           </div>
                           {isSelected && <Check className="w-4 h-4 text-[#512BD4] shrink-0 stroke-[3]" />}
                         </button>
@@ -349,10 +369,9 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
               <input
                 type="text"
                 required
-                placeholder="e.g. PRPCEM Amravati or Company name"
                 value={formData.college}
                 onChange={(e) => setFormData({ ...formData, college: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 placeholder:text-stone-400 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
+                className="w-full px-3 py-2 rounded-xl border-2 border-black bg-white text-sm font-sans text-stone-900 focus:outline-none focus:border-[#512BD4] focus:ring-2 focus:ring-[#512BD4]/20 transition-all"
               />
             </div>
 
@@ -404,11 +423,11 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
             </div>
 
             {/* Row 6: Submit Button */}
-            <div className="pt-1.5">
+            <div className="pt-1">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 px-6 rounded-xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm uppercase tracking-wider border-[2.5px] border-black shadow-[4px_4px_0px_#120838] hover:shadow-[2px_2px_0px_#120838] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                className="w-full py-2.5 sm:py-3 px-5 rounded-xl bg-[#512BD4] hover:bg-[#4322B0] text-white font-mono font-black text-sm uppercase tracking-wider border-[2.5px] border-black shadow-[4px_4px_0px_#120838] hover:shadow-[2px_2px_0px_#120838] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
               >
                 {isSubmitting ? (
                   <>
@@ -422,12 +441,6 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                   </>
                 )}
               </button>
-            </div>
-
-            {/* Subtext */}
-            <div className="flex items-center justify-center gap-1.5 text-[11px] text-stone-500 font-sans text-center pt-0.5">
-              <Info className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-              <span>Priority access to delegate passes · No spam</span>
             </div>
           </form>
         )}
@@ -446,23 +459,10 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
 
       {/* Main Neo-Brutalist Form Card */}
       <div className="bg-white border-[2.5px] sm:border-[3px] border-black rounded-xl p-5 sm:p-8 md:p-10 shadow-[6px_6px_0px_0px_#000] w-full max-w-4xl mx-auto">
-        {/* Top Center Pill */}
-        <div className="flex justify-center mb-3">
-          <div className="inline-flex items-center gap-2 bg-[#FAF8FF] text-[#512BD4] font-mono font-bold text-[11px] sm:text-xs px-4 py-1.5 rounded-md border-[1.5px] border-black shadow-[1.5px_1.5px_0px_0px_#000]">
-            <Calendar className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>.NET CONF 2026 • AMRAVATI</span>
-          </div>
-        </div>
-
         {/* Main Headline */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-sans uppercase tracking-tight text-black text-center mb-2 leading-tight">
-          Be Part of the <span className="text-[#512BD4]">Developer Community</span>
+          Register Your <span className="text-[#512BD4]">Interest</span>
         </h2>
-
-        {/* Subtitle */}
-        <p className="text-stone-600 font-sans text-xs sm:text-sm text-center max-w-xl mx-auto leading-relaxed mb-8">
-          Get event updates, speaker announcements, and priority registration across AI, GitHub Copilot, DevOps, Cloud, and .NET tracks.
-        </p>
 
         {isSubmitted ? (
           <div className="bg-[#FAF8FF] border-[2px] border-black rounded-2xl p-6 sm:p-8 text-center shadow-[3px_3px_0px_0px_#000]">
@@ -494,10 +494,9 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 <input
                   type="text"
                   required
-                  placeholder="Enter your full name"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
                 />
               </div>
 
@@ -509,10 +508,9 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 <input
                   type="email"
                   required
-                  placeholder="Enter your email address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
                 />
               </div>
             </div>
@@ -531,10 +529,10 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                   <input
                     type="tel"
                     required
-                    placeholder="Enter your mobile number"
+                    maxLength={10}
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
                   />
                 </div>
               </div>
@@ -559,13 +557,14 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 >
                   {selectedRole ? (
                     <div className="flex items-center gap-2 truncate">
-                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 shadow-[1px_1px_0px_0px_#000] ${selectedRole.badgeBg}`}>
-                        {selectedRole.badge}
-                      </span>
-                      <span className="font-bold text-black truncate">{selectedRole.label}</span>
+                      <div className={`w-6 h-6 rounded-md border-[1.5px] border-black flex items-center justify-center shrink-0 shadow-[1px_1px_0px_#000] ${selectedRole.badgeBg}`}>
+                        <selectedRole.icon className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-bold text-black text-xs sm:text-sm">{selectedRole.label}</span>
+                      <span className="text-[11px] text-stone-500 font-normal">({selectedRole.subtitle})</span>
                     </div>
                   ) : (
-                    <span className="text-stone-400 font-normal">Select your role...</span>
+                    <span className="text-stone-400 font-normal">Select role...</span>
                   )}
                   <ChevronDown
                     className={`w-4 h-4 text-black transition-transform duration-200 shrink-0 ${
@@ -586,10 +585,11 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                 {isRoleOpen && (
                   <div 
                     role="listbox"
-                    className="absolute z-50 left-0 right-0 top-full mt-1.5 bg-white rounded-2xl border-[2.5px] border-black shadow-[5px_5px_0px_0px_#000] p-1.5 space-y-1 max-h-64 overflow-y-auto"
+                    className="absolute z-50 left-0 sm:left-auto sm:right-0 top-full mt-1.5 w-full sm:w-[320px] max-w-[calc(100vw-2rem)] bg-white rounded-2xl border-[2.5px] border-black shadow-[5px_5px_0px_0px_#000] p-1.5 space-y-1 max-h-64 overflow-y-auto no-scrollbar"
                   >
                     {roleOptions.map((opt) => {
                       const isSelected = formData.role === opt.value;
+                      const IconComponent = opt.icon;
                       return (
                         <button
                           key={opt.value}
@@ -600,17 +600,20 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
                             setFormData({ ...formData, role: opt.value });
                             setIsRoleOpen(false);
                           }}
-                          className={`w-full text-left px-3 py-2 rounded-xl text-xs sm:text-sm font-sans flex items-center justify-between transition-all cursor-pointer ${
+                          className={`w-full text-left px-2.5 py-2 rounded-xl font-sans flex items-center justify-between gap-2 transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-[#EEEAFB] text-[#512BD4] font-black border-[1.5px] border-black shadow-[1px_1px_0px_0px_#000]'
                               : 'text-black hover:bg-[#FAF8FF] hover:translate-x-1 font-semibold'
                           }`}
                         >
-                          <div className="flex items-center gap-2 truncate">
-                            <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-md border-[1.5px] border-black shrink-0 ${opt.badgeBg}`}>
-                              {opt.badge}
-                            </span>
-                            <span className="truncate">{opt.label}</span>
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <div className={`w-7 h-7 rounded-lg border-[1.5px] border-black flex items-center justify-center shrink-0 shadow-[1px_1px_0px_#000] ${opt.badgeBg}`}>
+                              <IconComponent className="w-3.5 h-3.5" />
+                            </div>
+                            <div className="flex flex-col text-left leading-tight">
+                              <span className="font-bold text-xs sm:text-sm text-black">{opt.label}</span>
+                              <span className="text-[11px] text-stone-500 font-normal">{opt.subtitle}</span>
+                            </div>
                           </div>
                           {isSelected && <Check className="w-4 h-4 text-[#512BD4] shrink-0 stroke-[3]" />}
                         </button>
@@ -630,10 +633,9 @@ export const DncInterestForm = ({ isModal = false, onClose, onOpenBadge }) => {
               <input
                 type="text"
                 required
-                placeholder="Enter your college or organisation name"
                 value={formData.college}
                 onChange={(e) => setFormData({ ...formData, college: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
+                className="w-full px-3.5 py-2.5 rounded-xl border-[2px] border-black bg-white text-sm font-sans text-black focus:outline-none focus:ring-2 focus:ring-[#512BD4] shadow-[2px_2px_0px_0px_#000] transition-all"
               />
             </div>
 

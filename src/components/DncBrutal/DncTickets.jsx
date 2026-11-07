@@ -39,6 +39,15 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
       status: 'Register Interest',
       color: 'var(--gold, #FFE89E)',
     },
+    {
+      name: 'K-12 Pass',
+      tier: 'K-12',
+      type: 'Special Track',
+      tagline: 'For school students & young coders.',
+      blurb: 'Dedicated pass for school students (Grades 1–12) and educators. Includes keynote auditorium access, guided AI tech demos, and participation certificate.',
+      status: 'Register Interest',
+      color: 'var(--magenta, #D600AA)',
+    },
   ];
 
   return (

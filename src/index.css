@@ -272,6 +272,19 @@ h1, h2, h3, h4, h5, h6 {
   background: #9780E5;
 }
 
+/* Complete scrollbar hiding utility */
+.no-scrollbar,
+.custom-modal-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.no-scrollbar::-webkit-scrollbar,
+.custom-modal-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 /* ==========================================================================
    Hero Section Fluid Scaling & Multi-Breakpoint Media Queries
    ========================================================================== */

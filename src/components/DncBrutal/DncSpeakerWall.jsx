@@ -2,14 +2,14 @@ import React from 'react';
 
 export const DncSpeakerWall = () => {
   const speakerCards = [
-    { id: 1, no: '01', color: '#512BD4', bgGlow: 'from-[#512BD4]/15 via-[#FAF8FF] to-white' },
-    { id: 2, no: '02', color: '#00B4D8', bgGlow: 'from-[#00B4D8]/15 via-[#FAF8FF] to-white' },
-    { id: 3, no: '03', color: '#E0199E', bgGlow: 'from-[#E0199E]/15 via-[#FAF8FF] to-white' },
-    { id: 4, no: '04', color: '#D97706', bgGlow: 'from-[#FFE89E]/25 via-[#FAF8FF] to-white' },
-    { id: 5, no: '05', color: '#0284C7', bgGlow: 'from-[#00F0FF]/15 via-[#FAF8FF] to-white' },
-    { id: 6, no: '06', color: '#16A34A', bgGlow: 'from-[#DCFCE7]/30 via-[#FAF8FF] to-white' },
-    { id: 7, no: '07', color: '#7C3AED', bgGlow: 'from-[#7C3AED]/15 via-[#FAF8FF] to-white' },
-    { id: 8, no: '08', color: '#D600AA', bgGlow: 'from-[#FFEBF7]/30 via-[#FAF8FF] to-white' },
+    { id: 1, no: '01', color: '#512BD4', bgGlow: 'from-[#EDE9FE] via-[#F5F3FF] to-[#DDD6FE]' },
+    { id: 2, no: '02', color: '#00B4D8', bgGlow: 'from-[#E0F2FE] via-[#F0F9FF] to-[#BAE6FD]' },
+    { id: 3, no: '03', color: '#E0199E', bgGlow: 'from-[#FCE7F3] via-[#FFF1F2] to-[#FBCFE8]' },
+    { id: 4, no: '04', color: '#D97706', bgGlow: 'from-[#FEF3C7] via-[#FFFBEB] to-[#FDE68A]' },
+    { id: 5, no: '05', color: '#0284C7', bgGlow: 'from-[#CFFAFE] via-[#ECFEFF] to-[#A5F3FC]' },
+    { id: 6, no: '06', color: '#16A34A', bgGlow: 'from-[#DCFCE7] via-[#F0FDF4] to-[#BBF7D0]' },
+    { id: 7, no: '07', color: '#7C3AED', bgGlow: 'from-[#F3E8FF] via-[#FAF5FF] to-[#E9D5FF]' },
+    { id: 8, no: '08', color: '#D600AA', bgGlow: 'from-[#FCE7F3] via-[#FAF5FF] to-[#DDD6FE]' },
   ];
 
   return (
@@ -30,7 +30,7 @@ export const DncSpeakerWall = () => {
           {speakerCards.map((speaker) => (
             <div
               key={speaker.id}
-              className="group relative bg-white border-[2.5px] border-black rounded-2xl p-5 shadow-[4px_4px_0px_#120838] hover:shadow-[6px_6px_0px_#512BD4] hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden text-center"
+              className="group relative bg-white border-[2.5px] border-black rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#120838] hover:shadow-[6px_6px_0px_#512BD4] hover:-translate-y-1 transition-all flex flex-col justify-between overflow-hidden text-center"
             >
               {/* Top Card Badge */}
               <div className="flex items-center justify-between gap-2 mb-3">
@@ -60,6 +60,13 @@ export const DncSpeakerWall = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* And many more normal text */}
+        <div className="text-center mt-6 sm:mt-8">
+          <p className="font-sans font-bold text-base sm:text-lg text-stone-700">
+            ...and many more
+          </p>
         </div>
       </div>
     </section>

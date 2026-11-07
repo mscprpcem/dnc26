@@ -34,7 +34,18 @@ export const DncFAQ = () => {
     },
     {
       q: 'How can I submit a talk proposal or become a sponsor?',
-      a: 'Our Call for Speakers is open on Sessionize for 40-minute deep dives and 20-minute lightning sessions. For sponsorship opportunities, download our deck from the Partners section or email us at dotnetconfamt@prpotepatilengg.ac.in.',
+      a: (
+        <>
+          Our Call for Speakers is open on Sessionize for 40-minute deep dives and 20-minute lightning sessions. For sponsorship opportunities, download our deck from the Partners section or email us at{' '}
+          <a
+            href="mailto:dotnetconfamt@prpotepatilengg.ac.in"
+            className="text-[#512BD4] font-bold underline hover:text-[#4122AA] transition-colors"
+          >
+            dotnetconfamt@prpotepatilengg.ac.in
+          </a>
+          .
+        </>
+      ),
     },
   ];
 

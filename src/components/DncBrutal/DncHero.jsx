@@ -51,8 +51,10 @@ export const DncHero = ({ onOpenRegister }) => {
         {/* Main Title Lockup */}
         <div className="hero__lockup">
           <h1 className="hero__title">
-            <span className="hero__title-net">.NET Conf</span>{' '}
-            <span className="hero__title-gradient">2026</span>{' '}
+            <span className="hero__title-lead">
+              <span className="hero__title-net">.NET Conf</span>{' '}
+              <span className="hero__title-gradient">2026</span>
+            </span>{' '}
             <span className="hero__title-city">Amravati</span>
           </h1>
           <p className="hero__subtitle">

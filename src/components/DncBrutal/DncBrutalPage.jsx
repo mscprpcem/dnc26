@@ -183,7 +183,10 @@ export const DncBrutalPage = () => {
           role="dialog"
           aria-modal="true"
         >
-          <div className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto overscroll-contain custom-modal-scrollbar no-scrollbar">
+          <div 
+            className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-4 sm:p-5.5 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto overscroll-contain custom-modal-scrollbar no-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             <button
               onClick={() => setActiveModal(null)}
               className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"
