@@ -2,14 +2,14 @@ import React from 'react';
 
 export const DncSpeakerWall = () => {
   const speakerCards = [
-    { id: 1, no: '01', color: '#512BD4', bgGlow: 'from-[#EDE9FE] via-[#F5F3FF] to-[#DDD6FE]' },
-    { id: 2, no: '02', color: '#00B4D8', bgGlow: 'from-[#E0F2FE] via-[#F0F9FF] to-[#BAE6FD]' },
-    { id: 3, no: '03', color: '#E0199E', bgGlow: 'from-[#FCE7F3] via-[#FFF1F2] to-[#FBCFE8]' },
-    { id: 4, no: '04', color: '#D97706', bgGlow: 'from-[#FEF3C7] via-[#FFFBEB] to-[#FDE68A]' },
-    { id: 5, no: '05', color: '#0284C7', bgGlow: 'from-[#CFFAFE] via-[#ECFEFF] to-[#A5F3FC]' },
-    { id: 6, no: '06', color: '#16A34A', bgGlow: 'from-[#DCFCE7] via-[#F0FDF4] to-[#BBF7D0]' },
-    { id: 7, no: '07', color: '#7C3AED', bgGlow: 'from-[#F3E8FF] via-[#FAF5FF] to-[#E9D5FF]' },
-    { id: 8, no: '08', color: '#D600AA', bgGlow: 'from-[#FCE7F3] via-[#FAF5FF] to-[#DDD6FE]' },
+    { id: 1, no: '01', color: '#512BD4', gradient: 'linear-gradient(180deg, #EDE9FE 0%, #DDD6FE 100%)' },
+    { id: 2, no: '02', color: '#00B4D8', gradient: 'linear-gradient(180deg, #E0F2FE 0%, #BAE6FD 100%)' },
+    { id: 3, no: '03', color: '#E0199E', gradient: 'linear-gradient(180deg, #FCE7F3 0%, #FBCFE8 100%)' },
+    { id: 4, no: '04', color: '#D97706', gradient: 'linear-gradient(180deg, #FEF3C7 0%, #FDE68A 100%)' },
+    { id: 5, no: '05', color: '#0284C7', gradient: 'linear-gradient(180deg, #CFFAFE 0%, #A5F3FC 100%)' },
+    { id: 6, no: '06', color: '#16A34A', gradient: 'linear-gradient(180deg, #DCFCE7 0%, #BBF7D0 100%)' },
+    { id: 7, no: '07', color: '#7C3AED', gradient: 'linear-gradient(180deg, #F3E8FF 0%, #E9D5FF 100%)' },
+    { id: 8, no: '08', color: '#D600AA', gradient: 'linear-gradient(180deg, #FDF4FF 0%, #F0ABFC 100%)' },
   ];
 
   return (
@@ -43,7 +43,10 @@ export const DncSpeakerWall = () => {
               </div>
 
               {/* Big Bot Head Showcase Container */}
-              <div className={`relative w-full h-48 sm:h-52 rounded-xl border-2 border-black bg-gradient-to-b ${speaker.bgGlow} flex items-center justify-center p-2 mb-3.5 overflow-hidden group-hover:border-[#512BD4] transition-colors`}>
+              <div
+                className="relative w-full h-48 sm:h-52 rounded-xl border-2 border-black flex items-center justify-center p-2 mb-3.5 overflow-hidden group-hover:border-[#512BD4] transition-colors"
+                style={{ background: speaker.gradient }}
+              >
                 <img
                   src="/assets/dotnet-bot-head.png"
                   alt=".NET Bot Speaker Mascot"
