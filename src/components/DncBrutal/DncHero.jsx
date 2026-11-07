@@ -157,7 +157,7 @@ export const DncHero = ({ onOpenRegister }) => {
                 <svg viewBox="0 0 32 32"><use href="#i-mic" /></svg>
               </span>
               <b>Call for speakers</b>
-              <span>Open now on Sessionize. Any track, any level.</span>
+              <span>Open now on Sessionize. All topics &amp; experience levels welcome.</span>
               <a href="https://sessionize.com/dnc26/" target="_blank" rel="noopener noreferrer">Submit proposal →</a>
             </li>
             <li className="road__stop">

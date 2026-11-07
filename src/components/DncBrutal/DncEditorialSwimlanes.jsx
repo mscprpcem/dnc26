@@ -126,7 +126,7 @@ export const DncEditorialSwimlanes = () => {
                 </svg>
               </span>
               <span>
-                <span className="arc__t">04 · Hallway Track, Swag &amp; Community</span>
+                <span className="arc__t">04 · Networking, Swag &amp; Community</span>
                 <span className="arc__d">Official delegate kits, verified credentials, catered lunch, and lasting peer connections.</span>
               </span>
             </div>

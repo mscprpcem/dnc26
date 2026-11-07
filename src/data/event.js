@@ -155,7 +155,7 @@ export const eventData = {
   stats: [
     { label: 'Expected Delegates', value: '600+', subtext: 'AI Builders, Engineers & Students' },
     { label: 'Technical Sessions', value: '12+', subtext: 'Keynotes, DevOps Labs & AI Demos' },
-    { label: 'Ecosystem Tracks', value: '4 Pillars', subtext: 'AI · GitHub · Cloud · .NET' },
+    { label: 'Summit Themes', value: '4 Pillars', subtext: 'AI · GitHub · Cloud · .NET' },
     { label: 'Verified Credential', value: '100%', subtext: 'Official Certificate for Delegates' },
   ],
 
@@ -171,8 +171,8 @@ export const eventData = {
       id: 'faq-2',
       q: 'Who should attend the conference?',
       question: 'Who should attend the conference?',
-      a: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are tracks tailored for you.',
-      answer: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are tracks tailored for you.',
+      a: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are sessions tailored for you.',
+      answer: 'The summit is built for the entire developer community! Whether you are an AI practitioner building with LLMs & agents, a DevOps engineer automating deployment pipelines, a cloud architect designing on Azure, a student writing your first lines of code, or a seasoned full-stack engineer, there are sessions tailored for you.',
     },
     {
       id: 'faq-3',

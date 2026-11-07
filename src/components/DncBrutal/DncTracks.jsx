@@ -2,7 +2,8 @@ import React from 'react';
 
 export const DncTracks = () => {
   return (
-    <section className="section band--sky tracks" id="tracks" style={{ scrollMarginTop: '80px' }}>
+    <section className="section band--sky tracks" id="themes" style={{ scrollMarginTop: '80px' }}>
+      <span id="tracks" style={{ display: 'block', position: 'relative', top: '-80px', visibility: 'hidden' }}></span>
       <div className="wrap">
         <div className="sechead sechead--center">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>
@@ -12,7 +13,7 @@ export const DncTracks = () => {
             Themes &amp; Key Pillars
           </h2>
           <p className="lede" style={{ marginInline: 'auto' }}>
-            Four core pillars spanning Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Microsoft Azure Cloud, and Modern .NET 11.
+            Core technical pillars spanning Generative AI &amp; Autonomous Agents, GitHub Copilot &amp; DevOps, Microsoft Azure Cloud, and Modern .NET 11 across two days on a single stage.
           </p>
         </div>
 
@@ -23,7 +24,7 @@ export const DncTracks = () => {
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl border-2 border-black bg-[#FAF8FF] text-[#512BD4] shadow-[2px_2px_0px_#120838] mb-6">
               <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
               <span className="font-mono text-xs sm:text-sm font-black uppercase tracking-wider">
-                Curating Across 4 Pillars
+                Single-Stage · 2-Day Agenda
               </span>
             </div>
 
@@ -42,7 +43,7 @@ export const DncTracks = () => {
               Summit Agenda In Preparation
             </h3>
             <p className="font-sans text-sm sm:text-base text-stone-600 max-w-lg mx-auto leading-relaxed mb-8">
-              Deep dives being curated across <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps CI/CD</strong>, <strong>Azure Cloud-Native Architecture</strong>, and <strong>Modern .NET 11</strong>. Full schedule dropping soon!
+              Keynotes and technical sessions being curated across <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps CI/CD</strong>, <strong>Azure Cloud-Native Architecture</strong>, and <strong>Modern .NET 11</strong>. Full schedule dropping soon!
             </p>
 
             {/* Simple Action */}

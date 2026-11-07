@@ -110,7 +110,7 @@ export const DncBrutalPage = () => {
         {/* 3. About Section with Conversational Prose & The Arc of the Day */}
         <DncEditorialSwimlanes />
 
-        {/* 4. Tracks & Themes Section (Revealing Soon) */}
+        {/* 4. Themes & Key Pillars Section */}
         <DncTracks />
 
         {/* 5. Speaker Wall (8-10 Speakers Roster) */}

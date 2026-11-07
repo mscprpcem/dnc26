@@ -28,7 +28,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
 
   const navLinks = [
     { label: 'About', href: '#about' },
-    { label: 'Tracks', href: '#tracks' },
+    { label: 'Themes', href: '#themes' },
     { label: 'Speakers', href: '#speakers' },
     { label: 'Tickets', href: '#tickets' },
     { label: 'Schedule', href: '#schedule' },

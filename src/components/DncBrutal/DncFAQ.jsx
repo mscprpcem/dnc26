@@ -13,8 +13,8 @@ export const DncFAQ = () => {
       a: 'It covers the entire Microsoft developer ecosystem! We feature dedicated keynote sessions, technical presentations, and hands-on code labs on Generative AI & LLMs, GitHub Copilot productivity, CI/CD automation with GitHub Actions, and scalable Azure cloud systems alongside modern C# 14 and .NET 11.',
     },
     {
-      q: 'What are the main conference tracks and themes?',
-      a: 'The summit is built upon four interconnected pillars: (1) Generative AI & Autonomous Agents, (2) GitHub Copilot, DevOps & Automation, (3) Microsoft Azure Cloud Architecture, and (4) Modern .NET 11 & High-Performance C#.',
+      q: 'What are the main conference themes and focus areas?',
+      a: 'The single-stage summit is built upon four interconnected technical pillars across two days: (1) Generative AI & Autonomous Agents, (2) GitHub Copilot, DevOps & Automation, (3) Microsoft Azure Cloud Architecture, and (4) Modern .NET 11 & High-Performance C#.',
     },
     {
       q: "What is included with my delegate pass?",

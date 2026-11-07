@@ -71,7 +71,7 @@ export const DncFooter = () => {
             <h4>Quick Navigation</h4>
             <div className="foot__nav">
               <a href="#about" onClick={(e) => handleScrollTo(e, 'about')}>About the Summit</a>
-              <a href="#tracks" onClick={(e) => handleScrollTo(e, 'tracks')}>Tracks &amp; Themes</a>
+              <a href="#themes" onClick={(e) => handleScrollTo(e, 'themes')}>Summit Themes</a>
               <a href="#speakers" onClick={(e) => handleScrollTo(e, 'speakers')}>Call for Speakers</a>
               <a href="#tickets" onClick={(e) => handleScrollTo(e, 'tickets')}>Delegate Passes (Soon)</a>
               <a href="/badge">Attendee Badge Studio</a>
