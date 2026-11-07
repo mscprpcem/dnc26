@@ -10,6 +10,7 @@ import DncSpeakerWall from './DncSpeakerWall.jsx';
 import DncCFP from './DncCFP.jsx';
 import DncTickets from './DncTickets.jsx';
 import DncExpect from './DncExpect.jsx';
+import DncExperienceZones from './DncExperienceZones.jsx';
 import DncPastHighlights from './DncPastHighlights.jsx';
 import DncAgenda from './DncAgenda.jsx';
 import DncCommunity from './DncCommunity.jsx';
@@ -134,6 +135,9 @@ export const DncBrutalPage = () => {
 
         {/* 8. What to Expect Feature Cards */}
         <DncExpect />
+
+        {/* 8.5. Campus Experience Zones & Interactive Booths */}
+        <DncExperienceZones />
 
         {/* 9. Past Conference Retrospective Highlights Film Card */}
         <DncPastHighlights />

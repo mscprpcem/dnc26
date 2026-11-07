@@ -4,117 +4,100 @@ import { Calendar } from 'lucide-react';
 export const DncAgenda = () => {
   const [activeDay, setActiveDay] = useState(1);
 
-  const scheduleData = {
-    1: {
-      dayLabel: 'Day 1',
-      date: 'Saturday, January 2, 2027',
-      focus: 'Opening Keynotes, Generative AI, Cloud Architecture & Developer Ecosystem',
-      items: [
-        {
-          time: '08:30',
-          title: 'Gates open · Registration & Morning Coffee',
-          desc: 'Doors open, badges, delegate kits, and morning coffee at the auditorium foyer.',
-          isConfirmed: true,
-        },
-        {
-          time: '09:30',
-          title: 'Grand Opening Keynote · The Future of AI & Modern .NET',
-          desc: 'Summit opening address, Microsoft ecosystem keynote, and architectural vision for .NET 11 and intelligent cloud applications.',
-          isConfirmed: true,
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '76%',
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '54%',
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '82%',
-        },
-        {
-          time: '13:00',
-          title: 'Delegate Buffet Lunch & Community Networking',
-          desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
-          isConfirmed: true,
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '66%',
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '50%',
-        },
-        {
-          time: '17:30',
-          title: 'Day 1 Closing Keynote · Highlights & Evening Wrap-up',
-          desc: 'Day 1 session recap, speaker panel reflections, and preview of Day 2 hands-on workshops.',
-          isConfirmed: true,
-        },
-      ],
-    },
-    2: {
-      dayLabel: 'Day 2',
-      date: 'Sunday, January 3, 2027',
-      focus: 'Deep-Dive Sessions, GitHub Copilot, Hands-on Demos & Grand Valedictory',
-      items: [
-        {
-          time: '09:00',
-          title: 'Day 2 Doors Open · Morning Breakfast & Connect',
-          desc: 'Day 2 entry, morning high-tea, and informal discussions with Microsoft MVPs and speakers.',
-          isConfirmed: true,
-        },
-        {
-          time: '09:45',
-          title: 'Day 2 Keynote · Autonomous Agents & Cloud DevOps',
-          desc: 'Deep-dive session into Semantic Kernel agent orchestration, GitHub Actions CI/CD automation, and scalable Azure systems.',
-          isConfirmed: true,
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '72%',
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '58%',
-        },
-        {
-          time: '13:00',
-          title: 'Delegate Buffet Lunch & Mentor Roundtables',
-          desc: 'Catered auditorium lunch, project showcase, and student-mentor networking roundtables.',
-          isConfirmed: true,
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '68%',
-        },
-        {
-          time: '-- : --',
-          isConfirmed: false,
-          barWidth: '48%',
-        },
-        {
-          time: '17:00',
-          title: 'Grand Valedictory Ceremony · Swag Kit & Community Photo',
-          desc: 'Official participation certificates, student awards, exclusive collectibles distribution, and the community group photograph.',
-          isConfirmed: true,
-        },
-      ],
-    },
+  const scheduleDays = {
+    1: [
+      {
+        time: '08:30',
+        title: 'Gates open · Registration & Morning Coffee',
+        desc: 'Doors open, badges, and delegate check-in at the foyer.',
+        isConfirmed: true,
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '76%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '54%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '82%',
+      },
+      {
+        time: '13:00',
+        title: 'Delegate Buffet Lunch & Networking',
+        desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
+        isConfirmed: true,
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '66%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '50%',
+      },
+      {
+        time: '17:30',
+        title: 'Day 1 Closing · Wrap-up & Networking',
+        desc: 'Day 1 session recap, community discussions, and preview for Day 2.',
+        isConfirmed: true,
+      },
+    ],
+    2: [
+      {
+        time: '09:00',
+        title: 'Day 2 Doors Open · Morning Coffee',
+        desc: 'Doors open, morning coffee, and delegate check-in at the foyer.',
+        isConfirmed: true,
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '72%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '58%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '80%',
+      },
+      {
+        time: '13:00',
+        title: 'Delegate Buffet Lunch & Networking',
+        desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
+        isConfirmed: true,
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '64%',
+      },
+      {
+        time: '-- : --',
+        isConfirmed: false,
+        barWidth: '52%',
+      },
+      {
+        time: '17:00',
+        title: 'Closing Ceremony · Swag & Group Photo',
+        desc: 'Certificates of participation, exclusive collectibles, and community group photo.',
+        isConfirmed: true,
+      },
+    ],
   };
 
-  const currentSchedule = scheduleData[activeDay];
+  const currentItems = scheduleDays[activeDay];
 
   return (
     <section className="section band--paper2" id="schedule" style={{ scrollMarginTop: '80px' }}>
@@ -130,57 +113,41 @@ export const DncAgenda = () => {
             </h2>
           </div>
           <p className="lede">
-            Curated across Generative AI, GitHub Copilot, Azure Cloud, and Modern .NET on the main stage. Check-in, Lunch, and Ceremonies confirmed for both days &mdash; keynote &amp; technical sessions releasing soon.
+            Curated across Generative AI, GitHub Copilot, Azure Cloud, and Modern .NET on the main stage. Check-in, Lunch, and Closing Ceremony confirmed &mdash; keynote &amp; technical sessions releasing soon.
           </p>
         </div>
 
-        {/* 2-Day Interactive Tab Selector */}
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <button
-            type="button"
-            onClick={() => setActiveDay(1)}
-            className={`px-5 py-2.5 rounded-xl font-sans font-black text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 ${
-              activeDay === 1
-                ? 'bg-[#512BD4] text-white border-[2.5px] border-black shadow-[4px_4px_0px_#120838] -translate-y-0.5'
-                : 'bg-white text-stone-800 border-[2px] border-black shadow-[2px_2px_0px_#120838] hover:bg-[#FAF8FF]'
-            }`}
-          >
-            <span className={`w-2.5 h-2.5 rounded-full ${activeDay === 1 ? 'bg-[#00F0FF]' : 'bg-stone-400'}`}></span>
-            <span>Day 1 · Saturday, Jan 2</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveDay(2)}
-            className={`px-5 py-2.5 rounded-xl font-sans font-black text-sm sm:text-base transition-all cursor-pointer flex items-center gap-2.5 ${
-              activeDay === 2
-                ? 'bg-[#512BD4] text-white border-[2.5px] border-black shadow-[4px_4px_0px_#120838] -translate-y-0.5'
-                : 'bg-white text-stone-800 border-[2px] border-black shadow-[2px_2px_0px_#120838] hover:bg-[#FAF8FF]'
-            }`}
-          >
-            <span className={`w-2.5 h-2.5 rounded-full ${activeDay === 2 ? 'bg-[#E0199E]' : 'bg-stone-400'}`}></span>
-            <span>Day 2 · Sunday, Jan 3</span>
-          </button>
-        </div>
-
-        {/* Day Context Pill */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 bg-[#FAF8FF] border-2 border-black rounded-xl mb-6 shadow-[2px_2px_0px_#120838]">
-          <div className="flex items-center gap-2.5">
-            <span className="font-mono text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-[#512BD4] text-white">
-              {currentSchedule.dayLabel}
-            </span>
-            <span className="font-sans font-bold text-sm sm:text-base text-[#120838]">
-              {currentSchedule.date}
-            </span>
+        {/* Day 1 to 2 Switch Control */}
+        <div className="mb-6">
+          <div className="inline-flex p-1.5 bg-white border-[2.5px] border-black rounded-full shadow-[4px_4px_0px_#120838] select-none">
+            <button
+              type="button"
+              onClick={() => setActiveDay(1)}
+              className={`px-6 sm:px-8 py-2 rounded-full font-mono text-xs sm:text-sm font-black transition-all cursor-pointer ${
+                activeDay === 1
+                  ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_#120838]'
+                  : 'bg-transparent text-stone-700 hover:text-black'
+              }`}
+            >
+              Day 1
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveDay(2)}
+              className={`px-6 sm:px-8 py-2 rounded-full font-mono text-xs sm:text-sm font-black transition-all cursor-pointer ${
+                activeDay === 2
+                  ? 'bg-[#512BD4] text-white shadow-[2px_2px_0px_#120838]'
+                  : 'bg-transparent text-stone-700 hover:text-black'
+              }`}
+            >
+              Day 2
+            </button>
           </div>
-          <span className="font-sans text-xs sm:text-sm text-stone-600 font-medium">
-            {currentSchedule.focus}
-          </span>
         </div>
 
-        {/* Timeline Board matching exact design */}
+        {/* Timeline Board */}
         <div className="timeline-board">
-          {currentSchedule.items.map((item, idx) => (
+          {currentItems.map((item, idx) => (
             <div key={idx} className="timeline-row">
               {/* Left Column: Time */}
               <div className={`timeline-time ${!item.isConfirmed ? 'is-placeholder' : ''}`}>

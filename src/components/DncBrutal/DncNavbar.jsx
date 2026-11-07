@@ -30,6 +30,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
     { label: 'About', href: '#about' },
     { label: 'Themes', href: '#themes' },
     { label: 'Speakers', href: '#speakers' },
+    { label: 'Booths & Zones', href: '#zones' },
     { label: 'Tickets', href: '#tickets' },
     { label: 'Schedule', href: '#schedule' },
     { label: 'Sponsorship', href: '#sponsors' },
