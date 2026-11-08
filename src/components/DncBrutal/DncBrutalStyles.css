@@ -2364,6 +2364,93 @@ svg.warli {
   line-height: 1.6;
 }
 
+/* ---------- 15.5 EXPERIENCE ZONES FLIP CARDS ---------------- */
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+  width: 100%;
+}
+
+.zone-flip {
+  perspective: 1000px;
+  height: 290px;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  user-select: none;
+}
+
+.zone-flip__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.zone-flip:hover .zone-flip__inner,
+.zone-flip:focus-visible .zone-flip__inner,
+.zone-flip.is-flipped .zone-flip__inner {
+  transform: rotateY(180deg);
+}
+
+.zone-flip__front,
+.zone-flip__back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 2.5px solid #000000;
+  border-radius: 1rem;
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.zone-flip__front {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 0px #120838;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.zone-flip:hover .zone-flip__front {
+  box-shadow: 6px 6px 0px #512BD4;
+}
+
+.zone-flip__back {
+  transform: rotateY(180deg);
+  box-shadow: 4px 4px 0px #120838;
+  background: #FAF8FF;
+}
+
+@media (max-width: 1024px) {
+  .zones-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .zone-flip {
+    height: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .zones-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .zone-flip {
+    height: 250px;
+  }
+}
+
 /* ---------- 16. PAST RECAP FULL-SPACE PHOTO MASONRY GALLERY ---------- */
 .highlights-gallery {
   column-count: 3;
