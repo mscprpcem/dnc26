@@ -28,13 +28,10 @@ export const DncNavbar = ({ onOpenRegister }) => {
 
   const navLinks = [
     { label: 'About', href: '#about' },
-    { label: 'Themes', href: '#themes' },
     { label: 'Speakers', href: '#speakers' },
-    { label: 'Booths & Zones', href: '#zones' },
     { label: 'Tickets', href: '#tickets' },
     { label: 'Schedule', href: '#schedule' },
     { label: 'Sponsorship', href: '#sponsors' },
-    { label: 'FAQ', href: '#faq' },
   ];
 
   const handleLinkClick = (e, href) => {
@@ -140,7 +137,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
         <div className="sheet__foot">
           <button
             type="button"
-            className="btn btn--primary btn--lg w-full cursor-pointer mb-2"
+            className="btn btn--primary btn--lg w-full cursor-pointer"
             onClick={() => {
               setIsSheetOpen(false);
               if (onOpenRegister) {
@@ -156,9 +153,6 @@ export const DncNavbar = ({ onOpenRegister }) => {
               <use href="#i-arrow" />
             </svg>
           </button>
-          <p className="eyebrow" style={{ justifyContent: 'center', textAlign: 'center' }}>
-            Saturday &amp; Sunday | 2–3 January 2027 | Swami Vivekanand Auditorium, PRPCEM, Amravati
-          </p>
         </div>
       </div>
     </>
