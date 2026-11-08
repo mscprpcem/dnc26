@@ -295,6 +295,26 @@ export const DncSponsors = () => {
                 <span className="sponsor-tooltip">Global AI Amravati</span>
               </div>
 
+              {/* OpenSearch User Group Amravati */}
+              <a
+                href="https://www.meetup.com/opensearch-project-amravati/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sponsor-tile sponsor-tile--wide hover:border-[#005EB8]"
+                title="OpenSearch User Group Amravati"
+                aria-label="OpenSearch User Group Amravati"
+                data-sponsor-name="OpenSearch User Group Amravati"
+              >
+                <img
+                  src="/logos/opensearch-user-group-amravati.png"
+                  alt="OpenSearch User Group Amravati"
+                  className="sponsor-tile-img sponsor-tile-img--wide"
+                  style={{ maxHeight: '58px', height: '54px' }}
+                  loading="lazy"
+                />
+                <span className="sponsor-tooltip">OpenSearch User Group Amravati</span>
+              </a>
+
               {/* Microsoft Student Club PRPCEM */}
               <a
                 href="https://www.mscprpcem.tech"
