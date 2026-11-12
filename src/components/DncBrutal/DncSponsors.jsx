@@ -315,6 +315,26 @@ export const DncSponsors = () => {
                 <span className="sponsor-tooltip">OpenSearch User Group Amravati</span>
               </a>
 
+              {/* Databricks User Group Amravati */}
+              <a
+                href="https://usergroups.databricks.com/amravati-databricks-user-group/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sponsor-tile sponsor-tile--wide hover:border-[#FF3621]"
+                title="Databricks User Group Amravati"
+                aria-label="Databricks User Group Amravati"
+                data-sponsor-name="Databricks User Group Amravati"
+              >
+                <img
+                  src="/logos/databricks-user-group-amravati.png"
+                  alt="Databricks User Group Amravati"
+                  className="sponsor-tile-img sponsor-tile-img--wide"
+                  style={{ maxHeight: '58px', height: '54px' }}
+                  loading="lazy"
+                />
+                <span className="sponsor-tooltip">Databricks User Group Amravati</span>
+              </a>
+
               {/* Microsoft Student Club PRPCEM */}
               <a
                 href="https://www.mscprpcem.tech"
