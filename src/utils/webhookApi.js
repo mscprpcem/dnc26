@@ -2,7 +2,7 @@
 // Submits delegate interest directly to Google Sheets via Code.gs
 
 export const DEFAULT_WEBHOOK_URL =
-  "";
+  "https://script.google.com/macros/s/AKfycbzwznl8Md1aTVfT1rZsRx2YnfNrcBC7TXAH6V_arhmOqKNiyXRCJEZphk5m6Xor0eXPAg/exec";
 
 /**
  * Get active Webhook URL (checks VITE_WEBHOOK_URL env, then fallback to default)

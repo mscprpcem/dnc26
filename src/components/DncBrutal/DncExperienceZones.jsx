@@ -48,7 +48,7 @@ const experienceZones = [
     accentBorder: '#D97706',
     badgeText: '#B45309',
     cardBackBg: '#FFFDF5',
-    description: 'Packt team booth for knowledge zone.',
+    description: 'Interactive developer knowledge and book zone featuring modern .NET, cloud architecture, and AI engineering resources.',
   },
 ];
 

@@ -9,7 +9,7 @@ export const DncTicker = () => {
     { label: 'Semantic Kernel & Azure OpenAI', color: 'var(--magenta)' },
     { label: 'Modern .NET 11 & C# 14', color: 'var(--purple)' },
     { label: 'Cloud Microservices & .NET Aspire', color: 'var(--teal)' },
-    { label: '500+ Engineers at PRPCEM Amravati', color: 'var(--gold)' },
+    { label: '600+ Engineers at PRPCEM Amravati', color: 'var(--gold)' },
   ];
 
   return (

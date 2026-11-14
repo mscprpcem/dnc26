@@ -12,7 +12,7 @@ export const DncExpect = () => {
       icon: '#i-chat',
       color: 'rgba(224, 25, 158, 0.25)',
       title: 'Where conversations become collaborations',
-      desc: 'Meet over 500+ passionate engineers, AI builders, DevOps practitioners, and open-source contributors from across Central India in the hallway track.',
+      desc: 'Meet over 600+ passionate engineers, AI builders, DevOps practitioners, and open-source contributors from across Central India in the hallway track.',
     },
     {
       icon: '#i-hands',

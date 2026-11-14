@@ -507,7 +507,7 @@ export const SponsorshipPage = ({ onBack }) => {
     },
     {
       q: 'When is the deadline to confirm our sponsorship commitment?',
-      a: 'To guarantee inclusion on printed conference collaterals (such as physical lanyards, stage backdrops, attendee kits, and t-shirts), sponsorship agreements should be confirmed at least 4 weeks prior to the event date (November 28, 2026). Digital-only packages can be onboarded up to 10 days before the conference.',
+      a: 'To guarantee inclusion on printed conference collaterals (such as physical lanyards, stage backdrops, attendee kits, and t-shirts), sponsorship agreements should be confirmed at least 4 weeks prior to the event dates of January 2–3, 2027 (by December 4, 2026). Digital-only packages can be onboarded up to 10 days before the conference.',
     },
     {
       q: 'What facilities are provided in the exhibition booth space?',
@@ -587,28 +587,29 @@ export const SponsorshipPage = ({ onBack }) => {
   };
 
   return (
-    <div className="dnc-fest-canvas min-h-screen text-[#120838] font-sans selection:bg-[#512BD4] selection:text-white">
+    <div className="dnc-fest-canvas sponsorship-page min-h-screen text-[#120838] font-sans selection:bg-[#512BD4] selection:text-white">
       {/* 0. Paper Grain Overlay & Sprites */}
       <div className="grain-overlay" aria-hidden="true"></div>
       <DncWarliSprites />
 
       {/* 1. TOP BAR — Clean Back-to-Page Button (Navbar Removed as Requested) */}
-      <div className="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b-2 border-black/10 px-4 sm:px-6 lg:px-10 py-3">
-        <div className="w-full max-w-[1440px] mx-auto flex items-center justify-between gap-4">
+      <div className="sponsorship-topbar sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b-2 border-black/10 px-3 sm:px-6 lg:px-10 py-2.5 sm:py-3">
+        <div className="w-full max-w-[1440px] mx-auto flex items-center justify-between gap-2 sm:gap-4">
           <button
             type="button"
             onClick={handleGoBack}
-            className="btn btn--gold btn--sm cursor-pointer inline-flex items-center gap-2"
+            className="btn btn--gold btn--sm cursor-pointer inline-flex items-center gap-1.5 sm:gap-2 sponsorship-btn-back"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to .NET Conf 2026</span>
+            <ArrowLeft className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline">Back to .NET Conf 2026</span>
+            <span className="sm:hidden font-mono font-bold">Back</span>
           </button>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             <button
               type="button"
               onClick={handleShare}
-              className="btn btn--ghost btn--sm cursor-pointer"
+              className="btn btn--ghost btn--sm cursor-pointer sponsorship-btn-share"
               title="Share"
             >
               {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
@@ -618,10 +619,11 @@ export const SponsorshipPage = ({ onBack }) => {
             <button
               type="button"
               onClick={() => scrollToInquiry()}
-              className="btn btn--primary btn--sm cursor-pointer"
+              className="btn btn--primary btn--sm cursor-pointer sponsorship-btn-inquire"
             >
-              <span>Inquire for Sponsorship</span>
-              <svg className="btn__arrow" width="14" height="14" aria-hidden="true">
+              <span className="hidden sm:inline">Inquire for Sponsorship</span>
+              <span className="sm:hidden font-mono font-bold">Inquire</span>
+              <svg className="btn__arrow shrink-0" width="14" height="14" aria-hidden="true">
                 <use href="#i-arrow" />
               </svg>
             </button>
@@ -633,7 +635,7 @@ export const SponsorshipPage = ({ onBack }) => {
       <main id="main">
 
         {/* HERO SECTION — Full Space & Proper Theme */}
-        <section className="section band--gradient-space" id="overview" style={{ paddingTop: 'clamp(2.5rem, 5vw, 4rem)', paddingBottom: '3rem' }}>
+        <section className="section band--gradient-space sponsorship-hero" id="overview" style={{ paddingTop: 'clamp(2rem, 4vw, 3.5rem)', paddingBottom: '2.5rem' }}>
           <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
             
             <div className="sechead sechead--split" style={{ alignItems: 'flex-start' }}>
@@ -644,23 +646,29 @@ export const SponsorshipPage = ({ onBack }) => {
                   <span style={{ color: 'var(--purple)' }}>Amravati Edition</span>
                 </h1>
               </div>
-              <p className="lede">
-                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday &amp; Sunday, January 2–3, 2027.
+              <p className="lede [text-wrap:balance]">
+                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday &amp; Sunday, January&nbsp;2–3,&nbsp;2027.
               </p>
             </div>
 
             {/* Quick CTAs Row */}
-            <div className="flex flex-wrap items-center gap-3 mt-4 pt-2">
-              <a href="#tiers" className="btn btn--primary btn--sm">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mt-5 pt-1 sponsorship-hero-ctas">
+              <a
+                href="#tiers"
+                className="btn btn--primary btn--sm w-full sm:w-auto justify-center"
+              >
                 <span>Explore 5 Sponsor Tiers</span>
-                <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
+                <svg className="btn__arrow shrink-0" width="16" height="16" aria-hidden="true">
                   <use href="#i-arrow" />
                 </svg>
               </a>
 
-              <a href="#matrix" className="btn btn--gold btn--sm">
+              <a
+                href="#matrix"
+                className="btn btn--gold btn--sm w-full sm:w-auto justify-center"
+              >
                 <span>View Full Deliverables Matrix</span>
-                <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
+                <svg className="btn__arrow shrink-0" width="16" height="16" aria-hidden="true">
                   <use href="#i-arrow" />
                 </svg>
               </a>
@@ -668,9 +676,9 @@ export const SponsorshipPage = ({ onBack }) => {
               <button
                 type="button"
                 onClick={() => scrollToInquiry()}
-                className="btn btn--ghost btn--sm cursor-pointer"
+                className="btn btn--ghost btn--sm cursor-pointer w-full sm:w-auto justify-center"
               >
-                <Mail className="w-4 h-4 text-[#512BD4]" />
+                <Mail className="w-4 h-4 text-[#512BD4] shrink-0" />
                 <span>Contact Sponsorship Committee</span>
               </button>
 
@@ -688,36 +696,36 @@ export const SponsorshipPage = ({ onBack }) => {
             </div>
 
             {/* Conference Key Impact Metrics Strip — Tech Developers & Ecosystem */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-              <div className="slot-card" style={{ minHeight: 'auto', padding: '1rem 1.25rem', width: '100%', justifyContent: 'flex-start' }}>
-                <span className="font-mono text-3xl font-black text-[#512BD4]">600+</span>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 mt-6 sm:mt-8 sponsorship-metrics-grid">
+              <div className="slot-card sponsorship-metric-card" style={{ minHeight: 'auto', padding: '0.85rem 1rem', width: '100%', justifyContent: 'flex-start' }}>
+                <span className="font-mono text-2xl sm:text-3xl font-black text-[#512BD4]">600+</span>
                 <div className="flex flex-col text-left">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#120838]">Tech Developers</span>
-                  <span className="font-mono text-[10px] text-stone-500">AI, Cloud &amp; Full-Stack Coders</span>
+                  <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#120838]">Tech Developers</span>
+                  <span className="font-mono text-[9.5px] sm:text-[10px] text-stone-500">AI, Cloud &amp; Full-Stack Coders</span>
                 </div>
               </div>
 
-              <div className="slot-card" style={{ minHeight: 'auto', padding: '1rem 1.25rem', width: '100%', justifyContent: 'flex-start' }}>
-                <span className="font-mono text-3xl font-black text-[#D97706]">15+</span>
+              <div className="slot-card sponsorship-metric-card" style={{ minHeight: 'auto', padding: '0.85rem 1rem', width: '100%', justifyContent: 'flex-start' }}>
+                <span className="font-mono text-2xl sm:text-3xl font-black text-[#D97706]">15+</span>
                 <div className="flex flex-col text-left">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#120838]">Campuses &amp; Chapters</span>
-                  <span className="font-mono text-[10px] text-stone-500">Vidarbha &amp; Central India</span>
+                  <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#120838]">Campuses &amp; Chapters</span>
+                  <span className="font-mono text-[9.5px] sm:text-[10px] text-stone-500">Vidarbha &amp; Central India</span>
                 </div>
               </div>
 
-              <div className="slot-card" style={{ minHeight: 'auto', padding: '1rem 1.25rem', width: '100%', justifyContent: 'flex-start' }}>
-                <span className="font-mono text-3xl font-black text-[#059669]">50K+</span>
+              <div className="slot-card sponsorship-metric-card" style={{ minHeight: 'auto', padding: '0.85rem 1rem', width: '100%', justifyContent: 'flex-start' }}>
+                <span className="font-mono text-2xl sm:text-3xl font-black text-[#059669]">50K+</span>
                 <div className="flex flex-col text-left">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#120838]">Community Reach</span>
-                  <span className="font-mono text-[10px] text-stone-500">LinkedIn, WhatsApp &amp; YouTube</span>
+                  <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#120838]">Community Reach</span>
+                  <span className="font-mono text-[9.5px] sm:text-[10px] text-stone-500">LinkedIn, WhatsApp &amp; YouTube</span>
                 </div>
               </div>
 
-              <div className="slot-card" style={{ minHeight: 'auto', padding: '1rem 1.25rem', width: '100%', justifyContent: 'flex-start' }}>
-                <span className="font-mono text-3xl font-black text-[#E0199E]">4 Pillars</span>
+              <div className="slot-card sponsorship-metric-card" style={{ minHeight: 'auto', padding: '0.85rem 1rem', width: '100%', justifyContent: 'flex-start' }}>
+                <span className="font-mono text-2xl sm:text-3xl font-black text-[#E0199E]">4 Pillars</span>
                 <div className="flex flex-col text-left">
-                  <span className="font-sans font-bold text-xs uppercase tracking-wider text-[#120838]">Tech Ecosystem</span>
-                  <span className="font-mono text-[10px] text-stone-500">AI, Cloud, DevOps &amp; .NET</span>
+                  <span className="font-sans font-bold text-[11px] sm:text-xs uppercase tracking-wider text-[#120838]">Tech Ecosystem</span>
+                  <span className="font-mono text-[9.5px] sm:text-[10px] text-stone-500">AI, Cloud, DevOps &amp; .NET</span>
                 </div>
               </div>
             </div>
@@ -740,13 +748,13 @@ export const SponsorshipPage = ({ onBack }) => {
             </div>
 
             {/* 5-Column Grid utilizing full space */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4 mt-6 sponsorship-tiers-grid">
               {TIERS.map((tier) => {
                 const isSelected = highlightedTier === tier.id;
                 return (
                   <div
                     key={tier.id}
-                    className={`sticker sticker--hover flex flex-col justify-between overflow-hidden transition-all ${
+                    className={`sticker sticker--hover sponsorship-tier-card flex flex-col justify-between overflow-hidden transition-all ${
                       isSelected ? 'ring-3 ring-[#512BD4]' : ''
                     } ${tier.theme.headerAccent}`}
                     style={{
@@ -846,14 +854,14 @@ export const SponsorshipPage = ({ onBack }) => {
             </div>
 
             {/* Filter Tabs & Column Highlighters */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mt-4 mb-4">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 mt-4 mb-4 sponsorship-matrix-controls">
               
               {/* Category Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 p-1 bg-white rounded-lg border border-black/30 shadow-[2px_2px_0px_#120838]">
+              <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 p-1 bg-white rounded-lg border border-black/30 shadow-[2px_2px_0px_#120838] sponsorship-category-pills">
                 <button
                   type="button"
                   onClick={() => setActiveCategory('all')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'all'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -864,7 +872,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 <button
                   type="button"
                   onClick={() => setActiveCategory('stage')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'stage'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -875,7 +883,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 <button
                   type="button"
                   onClick={() => setActiveCategory('booth')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'booth'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -886,7 +894,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 <button
                   type="button"
                   onClick={() => setActiveCategory('talent')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'talent'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -897,7 +905,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 <button
                   type="button"
                   onClick={() => setActiveCategory('branding')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'branding'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -908,7 +916,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 <button
                   type="button"
                   onClick={() => setActiveCategory('passes')}
-                  className={`px-3 py-1.5 rounded font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded font-mono text-[11px] sm:text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === 'passes'
                       ? 'bg-[#512BD4] text-white shadow-[1px_1px_0px_#000]'
                       : 'text-stone-700 hover:bg-stone-100'
@@ -919,8 +927,8 @@ export const SponsorshipPage = ({ onBack }) => {
               </div>
 
               {/* Column Highlight Pills */}
-              <div className="flex flex-wrap items-center gap-1.5">
-                <span className="font-mono text-xs text-stone-500 font-bold uppercase">
+              <div className="flex flex-wrap items-center gap-1 sm:gap-1.5 sponsorship-trace-pills">
+                <span className="font-mono text-[11px] sm:text-xs text-stone-500 font-bold uppercase">
                   Trace Tier:
                 </span>
                 {TIERS.map((tier) => (
@@ -928,7 +936,7 @@ export const SponsorshipPage = ({ onBack }) => {
                     key={tier.id}
                     type="button"
                     onClick={() => setHighlightedTier(highlightedTier === tier.id ? null : tier.id)}
-                    className={`px-2.5 py-1 rounded font-mono text-xs font-bold border transition-all cursor-pointer ${
+                    className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded font-mono text-[11px] sm:text-xs font-bold border transition-all cursor-pointer ${
                       highlightedTier === tier.id
                         ? `${tier.theme.badgeBg} ${tier.theme.badgeText} border-black shadow-[2px_2px_0px_#120838]`
                         : 'bg-white text-stone-700 border-stone-300 hover:bg-stone-100'
@@ -941,7 +949,7 @@ export const SponsorshipPage = ({ onBack }) => {
                   <button
                     type="button"
                     onClick={() => setHighlightedTier(null)}
-                    className="font-mono text-xs text-stone-500 hover:text-black underline ml-2 cursor-pointer"
+                    className="font-mono text-xs text-stone-500 hover:text-black underline ml-1 cursor-pointer"
                   >
                     Reset
                   </button>
@@ -951,19 +959,26 @@ export const SponsorshipPage = ({ onBack }) => {
             </div>
 
             {/* Matrix Table with Wide Layout & High Contrast */}
-            <div className="sticker overflow-hidden" style={{ background: '#FFFFFF', padding: 0 }}>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse min-w-[840px]">
+            <div className="sticker overflow-hidden sponsorship-matrix-wrapper" style={{ background: '#FFFFFF', padding: 0 }}>
+              {/* Mobile Horizontal Scroll Indicator Banner */}
+              <div className="md:hidden flex items-center justify-between px-3 py-2 bg-[#FAF8FF] border-b border-black/15 font-mono text-[11px] text-[#512BD4]">
+                <span className="font-bold flex items-center gap-1.5">
+                  <span>👈</span> Swipe horizontally to view all 5 tiers <span>👉</span>
+                </span>
+                <span className="text-[10px] text-stone-500 font-semibold uppercase">5 Tiers</span>
+              </div>
+              <div className="overflow-x-auto sponsorship-matrix-scroll">
+                <table className="w-full text-left border-collapse min-w-[780px] sm:min-w-[840px] sponsorship-matrix-table">
                   <thead>
                     <tr className="bg-[#120838] text-white font-mono text-xs border-b-2 border-black">
-                      <th className="p-4 w-[28%] font-black uppercase tracking-wider border-r border-white/20">
+                      <th className="matrix-col-benefit p-3 sm:p-4 w-[28%] font-black uppercase tracking-wider border-r border-white/20">
                         Deliverable &amp; Benefit Item
                       </th>
 
                       {/* Title Header */}
                       <th
                         onClick={() => setHighlightedTier('title')}
-                        className={`p-3 text-center font-black uppercase tracking-wider border-r border-white/20 cursor-pointer transition-colors w-[14.4%] ${
+                        className={`p-2.5 sm:p-3 text-center font-black uppercase tracking-wider border-r border-white/20 cursor-pointer transition-colors w-[14.4%] ${
                           highlightedTier === 'title' ? 'bg-[#D97706] text-white' : 'hover:bg-[#200E58]'
                         }`}
                       >
@@ -1049,7 +1064,7 @@ export const SponsorshipPage = ({ onBack }) => {
                               } hover:bg-[#FAF8FF]`}
                             >
                               {/* Benefit Title & Description */}
-                              <td className="p-3 sm:p-3.5 border-r border-stone-200">
+                              <td className="matrix-col-benefit p-2.5 sm:p-3.5 border-r border-stone-200">
                                 <div className="font-sans font-bold text-xs sm:text-sm text-[#120838]">
                                   {item.name}
                                 </div>
@@ -1134,13 +1149,13 @@ export const SponsorshipPage = ({ onBack }) => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4 mt-6 sponsorship-addons-grid">
               {ADD_ONS.map((addon, idx) => {
                 const IconComp = addon.icon;
                 return (
                   <div
                     key={idx}
-                    className="sticker sticker--hover flex flex-col justify-between"
+                    className="sticker sticker--hover flex flex-col justify-between sponsorship-addon-card"
                     style={{ background: '#FFFFFF', padding: '1.25rem' }}
                   >
                     <div>
@@ -1185,13 +1200,13 @@ export const SponsorshipPage = ({ onBack }) => {
         </section>
 
         {/* 6. SPONSORSHIP INQUIRY FORM & CONTACT DESK */}
-        <section className="section band--paper2" id="inquire-form">
+        <section className="section band--paper2 sponsorship-inquiry-section" id="inquire-form">
           <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
               
               {/* Form Card (7 Cols) */}
-              <div className="lg:col-span-7 sticker" style={{ background: '#FFFFFF', padding: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+              <div className="lg:col-span-7 sticker sponsorship-form-card" style={{ background: '#FFFFFF', padding: 'clamp(1.25rem, 3vw, 2.5rem)' }}>
                 <p className="eyebrow" style={{ marginBottom: '.5rem' }}>Direct Sponsorship Inquiry</p>
                 <h2 className="h-sub" style={{ fontSize: '1.6rem', marginBottom: '.5rem' }}>
                   Connect with the Sponsorship Desk
@@ -1354,9 +1369,9 @@ export const SponsorshipPage = ({ onBack }) => {
               </div>
 
               {/* Committee Contact Desk (5 Cols) */}
-              <div className="lg:col-span-5 space-y-4">
+              <div className="lg:col-span-5 space-y-4 sponsorship-committee-wrap">
                 
-                <div className="sticker" style={{ background: '#FFE89E', padding: '1.75rem', borderColor: '#120838' }}>
+                <div className="sticker sponsorship-committee-card" style={{ background: '#FFE89E', padding: 'clamp(1.25rem, 2.5vw, 1.75rem)', borderColor: '#120838' }}>
                   <p className="eyebrow" style={{ color: '#120838', marginBottom: '.35rem' }}>
                     Institutional Host
                   </p>
@@ -1434,7 +1449,7 @@ export const SponsorshipPage = ({ onBack }) => {
                 </div>
 
                 {/* PDF Deck Request Card */}
-                <div className="sticker flex items-center justify-between gap-4" style={{ background: '#FFFFFF', padding: '1.25rem' }}>
+                <div className="sticker flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 sponsorship-pdf-card" style={{ background: '#FFFFFF', padding: '1.25rem' }}>
                   <div>
                     <h4 className="font-sans font-bold text-sm text-[#120838]">
                       Need the Printable PDF Deck?
@@ -1445,7 +1460,7 @@ export const SponsorshipPage = ({ onBack }) => {
                   </div>
                   <a
                     href="mailto:dotnetconfamt@prpotepatilengg.ac.in?subject=Request%20PDF%20Sponsorship%20Deck%20-%20.NET%20Conf%202026"
-                    className="btn btn--primary btn--sm cursor-pointer shrink-0"
+                    className="btn btn--primary btn--sm cursor-pointer shrink-0 w-full sm:w-auto justify-center"
                     title="Request PDF Deck"
                   >
                     <Download className="w-4 h-4" />
