@@ -31,16 +31,37 @@ export const DncNavbar = ({ onOpenRegister }) => {
     { label: 'Speakers', href: '#speakers' },
     { label: 'Tickets', href: '#tickets' },
     { label: 'Schedule', href: '#schedule' },
-    { label: 'Sponsorship', href: '#sponsors' },
+    { label: 'Sponsors', href: '#sponsors' },
   ];
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
-    setIsSheetOpen(false);
+
+    // 1. Immediately release mobile sheet scroll lock
+    if (isSheetOpen) {
+      setIsSheetOpen(false);
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
+    // 2. Scroll to top / home
+    if (href === '#top' || href === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // 3. In-page smooth scroll on the same page with exact 80px fixed navbar clearance
     const target = href.replace('#', '');
     const el = document.getElementById(target);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const navOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = Math.max(0, elementPosition - navOffset);
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
     }
   };
 

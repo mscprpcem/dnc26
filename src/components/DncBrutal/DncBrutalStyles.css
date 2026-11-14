@@ -185,6 +185,12 @@
   position: relative;
   padding-block: var(--section-y);
   z-index: var(--z-base);
+  scroll-margin-top: 80px;
+}
+
+section[id],
+main > [id] {
+  scroll-margin-top: 80px;
 }
 
 .band--paper2 {

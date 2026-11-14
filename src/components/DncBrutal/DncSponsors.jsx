@@ -6,10 +6,10 @@ export const DncSponsors = () => {
       <div className="wrap">
         <div className="sechead sechead--split">
           <div>
-            <p className="eyebrow">Ecosystem, Tools &amp; Sponsorship</p>
+            <p className="eyebrow">Conference Sponsors &amp; Partners</p>
             <h2 className="h-sec">
-              Not Just .NET.<br />
-              AI, GitHub, Cloud &amp; Tools.
+              Our Conf Sponsors &amp;<br />
+              Ecosystem Partners.
             </h2>
           </div>
           <p className="lede">

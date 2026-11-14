@@ -100,8 +100,6 @@ export const DncBrutalPage = () => {
 
       {/* Main Page Flow — Exact Structure and Aesthetics of DevFest Nashik 2026 */}
       <main id="main">
-        <span id="top"></span>
-
         {/* 1. Hero Section with Illustrated Sky, Countdown, and Road to Conf */}
         <DncHero onOpenRegister={() => setActiveModal('register')} />
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const DncEditorialSwimlanes = () => {
   return (
-    <section className="section band--sun" id="about">
+    <section className="section band--sun" id="about" style={{ scrollMarginTop: '80px' }}>
       {/* Subtle organic confetti dots in user theme colors */}
       <div className="confetti" aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
         <span style={{ position: 'absolute', top: '9%', left: '4%', width: '13px', height: '13px', borderRadius: '50%', background: 'var(--blue, #00B4D8)', opacity: 0.6 }}></span>

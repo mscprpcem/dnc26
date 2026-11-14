@@ -51,7 +51,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
   ];
 
   return (
-    <section className="section" id="tickets">
+    <section className="section" id="tickets" style={{ scrollMarginTop: '80px' }}>
       <div className="wrap">
         <div className="sechead sechead--center">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>
