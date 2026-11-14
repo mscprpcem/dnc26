@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../DncBrutal/DncBrutalStyles.css';
 import DncWarliSprites from '../DncBrutal/DncWarliSprites.jsx';
 import DncFooter from '../DncBrutal/DncFooter.jsx';
@@ -43,8 +43,20 @@ export const SponsorshipPage = ({ onBack }) => {
   const [companyName, setCompanyName] = useState('');
   const [contactName, setContactName] = useState('');
   const [workEmail, setWorkEmail] = useState('');
-  const [selectedTier, setSelectedTier] = useState('PLATINUM SPONSOR (₹1,25,000)');
+  const [selectedTier, setSelectedTier] = useState('PLATINUM SPONSOR (₹1,00,000)');
+  const [isTierDropdownOpen, setIsTierDropdownOpen] = useState(false);
   const [inquiryNotes, setInquiryNotes] = useState('');
+  const tierDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (tierDropdownRef.current && !tierDropdownRef.current.contains(event.target)) {
+        setIsTierDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -138,10 +150,11 @@ export const SponsorshipPage = ({ onBack }) => {
       tagline: 'Supreme Brand Eminence & Co-Host Privileges',
       perksSummary: [
         '30-min Headline Keynote speaking slot',
-        'Mega 20×10 ft Exhibition Stall (Center Foyer)',
+        'Exhibition Booth Space',
         'Direct Tech Developer & Community Reach',
-        '10 VIP All-Access Delegate Passes',
-        'Prominent Logo on Badges, Lanyards & Stage Backdrop',
+        '8 VIP All-Access Delegate Passes',
+        '10 Dedicated Multi-Channel Social Spotlights',
+        'Exclusive Logo on Attendee Neck Lanyards',
       ],
       isPopular: false,
       isExclusive: true,
@@ -149,9 +162,9 @@ export const SponsorshipPage = ({ onBack }) => {
     {
       id: 'platinum',
       name: 'PLATINUM',
-      fullName: 'PLATINUM SPONSOR (₹1,25,000)',
-      investment: '₹1,25,000',
-      usd: '~$1,500 USD',
+      fullName: 'PLATINUM SPONSOR (₹1,00,000)',
+      investment: '₹1,00,000',
+      usd: '~$1,200 USD',
       slots: 'Max 3 Slots',
       theme: {
         dotBg: 'bg-[#512BD4]',
@@ -165,10 +178,11 @@ export const SponsorshipPage = ({ onBack }) => {
       tagline: 'High-Impact Technology Showcase & Developer Reach',
       perksSummary: [
         '15-min Main Stage Tech Keynote / Demo',
-        'Prime 10×10 ft Exhibition Booth',
+        'Exhibition Booth Space',
         'Direct Tech Developer Networking Access',
-        '6 VIP All-Access Delegate Passes',
-        '4 Dedicated Multi-Channel Social Spotlights',
+        '4 VIP All-Access Delegate Passes',
+        '6 Dedicated Multi-Channel Social Spotlights',
+        'Prominent Logo on Attendee ID Badges',
       ],
       isPopular: true,
       isExclusive: false,
@@ -176,9 +190,9 @@ export const SponsorshipPage = ({ onBack }) => {
     {
       id: 'gold',
       name: 'GOLD',
-      fullName: 'GOLD SPONSOR (₹75,000)',
-      investment: '₹75,000',
-      usd: '~$900 USD',
+      fullName: 'GOLD SPONSOR (₹50,000)',
+      investment: '₹50,000',
+      usd: '~$600 USD',
       slots: 'Max 5 Slots',
       theme: {
         dotBg: 'bg-[#D97706]',
@@ -192,10 +206,11 @@ export const SponsorshipPage = ({ onBack }) => {
       tagline: 'Prime Developer Brand & Campus Visibility',
       perksSummary: [
         '5-min Lightning Tech Pitch / Introduction',
-        '8×8 ft Product Showcase Demo Stall',
+        'Exhibition Booth Space',
         'Developer Community Networking Channel',
-        '4 VIP All-Access Passes',
-        'Logo on Attendee Badges & Screen Loops',
+        '2 VIP All-Access Passes',
+        '4 Dedicated Multi-Channel Social Spotlights',
+        'Logo on Stage Screen Loops & Intermissions',
       ],
       isPopular: false,
       isExclusive: false,
@@ -203,9 +218,9 @@ export const SponsorshipPage = ({ onBack }) => {
     {
       id: 'silver',
       name: 'SILVER',
-      fullName: 'SILVER SPONSOR (₹40,000)',
-      investment: '₹40,000',
-      usd: '~$480 USD',
+      fullName: 'SILVER SPONSOR (₹25,000)',
+      investment: '₹25,000',
+      usd: '~$300 USD',
       slots: 'Open Slots',
       theme: {
         dotBg: 'bg-[#475569]',
@@ -218,11 +233,10 @@ export const SponsorshipPage = ({ onBack }) => {
       targetAudience: 'Startups, Consultancies & Tech Agencies',
       tagline: 'Startup Innovation & On-Ground Presence',
       perksSummary: [
-        'High-Top Kiosk / Demo Table Space',
-        'Promotional Collateral in Attendee Kits',
-        '2 VIP Delegate Passes',
+        'Exhibition Booth Space',
+        '1 VIP Delegate Pass',
+        '2 Dedicated Multi-Channel Social Spotlights',
         'Logo on Website & Event Guide',
-        'Social Media Group Feature',
       ],
       isPopular: false,
       isExclusive: false,
@@ -245,9 +259,7 @@ export const SponsorshipPage = ({ onBack }) => {
       targetAudience: 'Student Clubs, Developer Chapters & Dev Communities',
       tagline: 'Community Cross-Promotion & Outreach',
       perksSummary: [
-        'Shared Community Booth in Tech Zone',
         'Logo on Website & Community Slides',
-        '2 Community Passes for Leadership',
         'Cross-Promotion to Tech Developers',
         'Stage Mentions during Valedictory',
       ],
@@ -256,7 +268,7 @@ export const SponsorshipPage = ({ onBack }) => {
     },
   ];
 
-  // Benefits Comparison Table Data (5 Categories, 24 Deliverables)
+  // Benefits Comparison Table Data (5 Categories, 15 Deliverables)
   const BENEFITS_DATA = [
     // 1. Stage & Speaking
     {
@@ -291,15 +303,6 @@ export const SponsorshipPage = ({ onBack }) => {
           silver: { type: 'none' },
           community: { type: 'none' },
         },
-        {
-          name: 'Emcee Verbal Announcements',
-          desc: 'Audible thank-you mentions by host emcees at major conference transitions.',
-          title: { type: 'check', text: 'Every Transition' },
-          platinum: { type: 'check', text: 'Opening & Closing' },
-          gold: { type: 'check', text: 'Opening Ceremony' },
-          silver: { type: 'text', text: 'Closing Slides' },
-          community: { type: 'text', text: 'Community Slides' },
-        },
       ],
     },
     // 2. Booth & Exhibition
@@ -309,30 +312,12 @@ export const SponsorshipPage = ({ onBack }) => {
       icon: Layers,
       items: [
         {
-          name: 'Physical Exhibition Space & Stall',
-          desc: 'Dedicated physical footprint in the PRPCEM Engineering Exhibition Pavilion.',
-          title: { type: 'highlight', text: 'Mega 20×10 ft (Foyer)' },
-          platinum: { type: 'highlight', text: 'Prime 10×10 ft Booth' },
-          gold: { type: 'highlight', text: 'Standard 8×8 ft Stall' },
-          silver: { type: 'text', text: 'High-Top Demo Table' },
-          community: { type: 'text', text: 'Shared Desk' },
-        },
-        {
-          name: 'Dedicated Private Interview & Discussion Room',
-          desc: 'Private quiet room on campus for 1-on-1 developer discussions and screening.',
-          title: { type: 'check', text: 'Exclusive Room' },
-          platinum: { type: 'check', text: 'Shared Lounge Access' },
-          gold: { type: 'text', text: 'On-Demand Access' },
-          silver: { type: 'none' },
-          community: { type: 'none' },
-        },
-        {
-          name: 'Product Tech Demo / Sandbox Station',
-          desc: 'Interactive kiosk area for developers to test your APIs, SDKs, or cloud services.',
-          title: { type: 'check', text: 'Custom Playground' },
-          platinum: { type: 'check', text: 'Dedicated Station' },
-          gold: { type: 'text', text: 'Booth-only Demo' },
-          silver: { type: 'text', text: 'Booth-only Demo' },
+          name: 'Exhibition Booth Space',
+          desc: 'Dedicated physical booth footprint at PRPCEM venue.',
+          title: { type: 'check', text: 'Booth' },
+          platinum: { type: 'check', text: 'Booth' },
+          gold: { type: 'check', text: 'Booth' },
+          silver: { type: 'check', text: 'Booth' },
           community: { type: 'none' },
         },
         {
@@ -343,15 +328,6 @@ export const SponsorshipPage = ({ onBack }) => {
           gold: { type: 'text', text: '2 Standees' },
           silver: { type: 'text', text: '1 Standee' },
           community: { type: 'text', text: 'Shared Banner' },
-        },
-        {
-          name: 'High-Power Electrical & Wi-Fi LAN',
-          desc: 'Dedicated electrical circuit, high-speed campus LAN/Wi-Fi, and monitor mounts.',
-          title: { type: 'check', text: 'Dedicated Dual Line' },
-          platinum: { type: 'check', text: 'Dedicated Line' },
-          gold: { type: 'check', text: 'Standard Strip' },
-          silver: { type: 'check', text: 'Standard Strip' },
-          community: { type: 'text', text: 'Shared Power' },
         },
       ],
     },
@@ -371,31 +347,13 @@ export const SponsorshipPage = ({ onBack }) => {
           community: { type: 'none' },
         },
         {
-          name: 'Developer Announcements & Career Listings',
-          desc: 'Feature your developer opportunities and community announcements in the official conference bulletin.',
-          title: { type: 'highlight', text: 'Unlimited Postings' },
-          platinum: { type: 'highlight', text: 'Up to 6 Postings' },
-          gold: { type: 'text', text: 'Up to 3 Postings' },
-          silver: { type: 'text', text: '1 Posting' },
-          community: { type: 'none' },
-        },
-        {
-          name: 'Hackathon / Code Challenge Track Sponsor',
-          desc: 'Opportunity to set a proprietary problem statement and reward hackathon winners.',
+          name: 'Engagement & Code Challenges',
+          desc: 'Opportunity to set proprietary problem statements and reward challenge winners.',
           title: { type: 'check', text: 'Exclusive Track' },
           platinum: { type: 'check', text: 'Category Sponsor' },
           gold: { type: 'text', text: 'Co-Sponsor' },
           silver: { type: 'none' },
           community: { type: 'none' },
-        },
-        {
-          name: 'Swag Bag Inserts & Promotional Collateral',
-          desc: 'Include physical flyers, company stickers, branded pens, or hardware in delegate kits.',
-          title: { type: 'check', text: 'Custom Bag Item' },
-          platinum: { type: 'check', text: 'Swag Bag Insert' },
-          gold: { type: 'check', text: 'Swag Bag Insert' },
-          silver: { type: 'text', text: 'Registration Table' },
-          community: { type: 'text', text: 'Sticker Swap' },
         },
       ],
     },
@@ -417,18 +375,18 @@ export const SponsorshipPage = ({ onBack }) => {
         {
           name: 'Social Media Dedicated Spotlights',
           desc: 'Custom-crafted announcement graphics and write-ups across LinkedIn, WhatsApp & YouTube.',
-          title: { type: 'highlight', text: '6+ Posts + Video' },
-          platinum: { type: 'highlight', text: '4 Dedicated Posts' },
-          gold: { type: 'text', text: '2 Dedicated Posts' },
-          silver: { type: 'text', text: '1 Group Post' },
+          title: { type: 'highlight', text: '10 Dedicated Posts' },
+          platinum: { type: 'highlight', text: '6 Dedicated Posts' },
+          gold: { type: 'highlight', text: '4 Dedicated Posts' },
+          silver: { type: 'text', text: '2 Dedicated Posts' },
           community: { type: 'text', text: '1 Shoutout' },
         },
         {
           name: 'Attendee ID Badges & Lanyards Branding',
           desc: 'Prominent branding on physical ID badges and neck lanyards worn by all 600+ delegates.',
-          title: { type: 'highlight', text: 'Front & Center on All' },
-          platinum: { type: 'highlight', text: 'Prominent on Back' },
-          gold: { type: 'text', text: 'Logo on Badge Back' },
+          title: { type: 'highlight', text: 'On Lanyard' },
+          platinum: { type: 'highlight', text: 'On ID Card' },
+          gold: { type: 'none' },
           silver: { type: 'none' },
           community: { type: 'none' },
         },
@@ -440,15 +398,6 @@ export const SponsorshipPage = ({ onBack }) => {
           gold: { type: 'text', text: 'Intermission Loop' },
           silver: { type: 'text', text: 'Intermission Loop' },
           community: { type: 'text', text: 'Community Loop' },
-        },
-        {
-          name: 'Live Stream Overlays & Recorded Talks',
-          desc: 'Lower-third graphic overlays and video description links on recorded technical talks.',
-          title: { type: 'check', text: 'Permanent Lower-Third' },
-          platinum: { type: 'check', text: 'Intro/Outro Cards' },
-          gold: { type: 'text', text: 'Description Link' },
-          silver: { type: 'text', text: 'Credits Mention' },
-          community: { type: 'text', text: 'Credits Mention' },
         },
         {
           name: 'Post-Conference Cinematic Recap Film',
@@ -470,19 +419,10 @@ export const SponsorshipPage = ({ onBack }) => {
         {
           name: 'VIP Delegate & All-Access Passes',
           desc: 'Full-day access to all keynote sessions, workshops, networking feasts, and conference kits.',
-          title: { type: 'highlight', text: '10 VIP Passes' },
-          platinum: { type: 'highlight', text: '6 VIP Passes' },
-          gold: { type: 'highlight', text: '4 VIP Passes' },
-          silver: { type: 'text', text: '2 VIP Passes' },
-          community: { type: 'text', text: '2 Community Passes' },
-        },
-        {
-          name: 'Speakers & Leadership Dinner Seats',
-          desc: 'Exclusive private evening dinner with keynote speakers, Microsoft MVPs, and college leaders.',
-          title: { type: 'highlight', text: '4 Dinner Invites' },
-          platinum: { type: 'highlight', text: '2 Dinner Invites' },
-          gold: { type: 'text', text: '1 Dinner Invite' },
-          silver: { type: 'none' },
+          title: { type: 'highlight', text: '8 VIP Passes' },
+          platinum: { type: 'highlight', text: '4 VIP Passes' },
+          gold: { type: 'highlight', text: '2 VIP Passes' },
+          silver: { type: 'text', text: '1 VIP Pass' },
           community: { type: 'none' },
         },
         {
@@ -507,16 +447,8 @@ export const SponsorshipPage = ({ onBack }) => {
     },
   ];
 
-  // Specialty Add-ons
+  // Specialty Add-ons (Ordered by Price: ₹50,000 -> ₹25,000)
   const ADD_ONS = [
-    {
-      title: 'Official Badges & Lanyards Partner',
-      price: '₹35,000',
-      desc: 'Exclusive logo print on all 600+ physical satin lanyards and laminated attendee passes.',
-      icon: Ticket,
-      badge: 'High Visibility',
-      badgeClass: 'bg-[#EDE9FE] text-[#512BD4]',
-    },
     {
       title: 'Developer Lunch & Feast Sponsor',
       price: '₹50,000',
@@ -526,9 +458,25 @@ export const SponsorshipPage = ({ onBack }) => {
       badgeClass: 'bg-[#FEF3C7] text-[#92400E]',
     },
     {
-      title: 'Hackathon & Code Sprint Challenge',
+      title: 'Official T-Shirt & Swag Partner',
+      price: '₹45,000',
+      desc: 'Prominent sleeve or back logo on high-quality conference t-shirts given to attendees and staff.',
+      icon: Briefcase,
+      badge: 'Lasting Brand',
+      badgeClass: 'bg-blue-50 text-blue-800',
+    },
+    {
+      title: 'Official Badges & Lanyards Partner',
+      price: '₹35,000',
+      desc: 'Exclusive logo print on all 600+ physical satin lanyards and laminated attendee passes.',
+      icon: Ticket,
+      badge: 'High Visibility',
+      badgeClass: 'bg-[#EDE9FE] text-[#512BD4]',
+    },
+    {
+      title: 'Technical Quiz & Code Sprint Challenge',
       price: '₹30,000',
-      desc: 'Exclusive naming rights for the campus hackathon with proprietary API / SDK judging rights.',
+      desc: 'Exclusive naming rights for the technical quiz and code sprint with proprietary challenge judging rights.',
       icon: Award,
       badge: 'Tech Developers',
       badgeClass: 'bg-emerald-50 text-emerald-800',
@@ -540,14 +488,6 @@ export const SponsorshipPage = ({ onBack }) => {
       icon: Sparkles,
       badge: 'Great Footfall',
       badgeClass: 'bg-pink-50 text-pink-800',
-    },
-    {
-      title: 'Official T-Shirt & Swag Partner',
-      price: '₹45,000',
-      desc: 'Prominent sleeve or back logo on high-quality conference t-shirts given to attendees and staff.',
-      icon: Briefcase,
-      badge: 'Lasting Brand',
-      badgeClass: 'bg-blue-50 text-blue-800',
     },
   ];
 
@@ -578,6 +518,35 @@ export const SponsorshipPage = ({ onBack }) => {
       a: 'Sponsors have direct access to conference networking zones, booth tech demo spaces, hands-on workshop tracks, and community interaction channels to engage with tech developers and builders throughout the day.',
     },
   ];
+
+  // Sponsorship Options for Inquiry Dropdown
+  const SPONSORSHIP_OPTIONS = [
+    {
+      group: 'Main Sponsorship Packages',
+      items: [
+        { value: 'TITLE SPONSOR (₹2,00,000)', label: 'TITLE SPONSOR', price: '₹2,00,000', badgeClass: 'bg-[#FFE89E] text-[#120838]' },
+        { value: 'PLATINUM SPONSOR (₹1,00,000)', label: 'PLATINUM SPONSOR', price: '₹1,00,000', badgeClass: 'bg-[#EDE9FE] text-[#512BD4]' },
+        { value: 'GOLD SPONSOR (₹50,000)', label: 'GOLD SPONSOR', price: '₹50,000', badgeClass: 'bg-[#FEF3C7] text-[#92400E]' },
+        { value: 'SILVER SPONSOR (₹25,000)', label: 'SILVER SPONSOR', price: '₹25,000', badgeClass: 'bg-[#F1F5F9] text-[#334155]' },
+        { value: 'Community & Ecosystem Partner', label: 'Community & Ecosystem Partner', price: 'In-Kind', badgeClass: 'bg-[#E0F2FE] text-[#0369A1]' },
+      ],
+    },
+    {
+      group: 'Specialty Add-Ons & Custom',
+      items: [
+        { value: 'Add-On: Developer Lunch & Feast Sponsor (₹50,000)', label: 'Developer Lunch & Feast Sponsor', price: '₹50,000', badgeClass: 'bg-[#FEF3C7] text-[#92400E]' },
+        { value: 'Add-On: Official T-Shirt & Swag Partner (₹45,000)', label: 'Official T-Shirt & Swag Partner', price: '₹45,000', badgeClass: 'bg-blue-50 text-blue-800' },
+        { value: 'Add-On: Official Badges & Lanyards Partner (₹35,000)', label: 'Official Badges & Lanyards Partner', price: '₹35,000', badgeClass: 'bg-[#EDE9FE] text-[#512BD4]' },
+        { value: 'Add-On: Technical Quiz & Code Sprint Challenge (₹30,000)', label: 'Technical Quiz & Code Sprint Challenge', price: '₹30,000', badgeClass: 'bg-emerald-50 text-emerald-800' },
+        { value: 'Add-On: Community Coffee & Barista Lounge (₹25,000)', label: 'Community Coffee & Barista Lounge', price: '₹25,000', badgeClass: 'bg-pink-50 text-pink-800' },
+        { value: 'Specialty Add-on / Custom Package', label: 'Specialty Add-on / Custom Package', price: 'Custom', badgeClass: 'bg-purple-50 text-[#512BD4]' },
+      ],
+    },
+  ];
+
+  const selectedTierOption = SPONSORSHIP_OPTIONS.flatMap((g) => g.items).find(
+    (opt) => opt.value === selectedTier
+  );
 
   // Filtered benefits based on active tab
   const filteredCategories =
@@ -868,11 +837,11 @@ export const SponsorshipPage = ({ onBack }) => {
             
             <div className="sechead sechead--split" style={{ alignItems: 'flex-start' }}>
               <div>
-                <p className="eyebrow">Deliverables Matrix · 24 Benefits</p>
+                <p className="eyebrow">Deliverables Matrix · 15 Benefits</p>
                 <h2 className="h-sec">Tier vs. Benefits Comparison</h2>
               </div>
               <p className="lede">
-                Full side-by-side verification: keynote time, workshop stages, physical booth sizes, developer reach, and delegate passes.
+                Full side-by-side verification: keynote time, workshop stages, physical booth, developer reach, and delegate passes.
               </p>
             </div>
 
@@ -890,7 +859,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  ALL PERKS (24)
+                  ALL PERKS (15)
                 </button>
                 <button
                   type="button"
@@ -901,7 +870,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  STAGE (4)
+                  STAGE (3)
                 </button>
                 <button
                   type="button"
@@ -912,7 +881,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  BOOTH (5)
+                  BOOTH (2)
                 </button>
                 <button
                   type="button"
@@ -923,7 +892,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  TECH DEVELOPERS (4)
+                  TECH DEVELOPERS (2)
                 </button>
                 <button
                   type="button"
@@ -934,7 +903,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  BRANDING (6)
+                  BRANDING (5)
                 </button>
                 <button
                   type="button"
@@ -945,7 +914,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       : 'text-stone-700 hover:bg-stone-100'
                   }`}
                 >
-                  PASSES &amp; VIP (5)
+                  PASSES &amp; VIP (3)
                 </button>
               </div>
 
@@ -1012,7 +981,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       >
                         <div className="text-[10px] text-white/70">★ Popular</div>
                         PLATINUM
-                        <div className="text-[11px] font-bold text-white">₹1,25,000</div>
+                        <div className="text-[11px] font-bold text-white">₹1,00,000</div>
                       </th>
 
                       {/* Gold Header */}
@@ -1024,7 +993,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       >
                         <div className="text-[10px] text-white/70">Mid-Sized</div>
                         GOLD
-                        <div className="text-[11px] font-bold text-white">₹75,000</div>
+                        <div className="text-[11px] font-bold text-white">₹50,000</div>
                       </th>
 
                       {/* Silver Header */}
@@ -1036,7 +1005,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       >
                         <div className="text-[10px] text-white/70">Startup</div>
                         SILVER
-                        <div className="text-[11px] font-bold text-white">₹40,000</div>
+                        <div className="text-[11px] font-bold text-white">₹25,000</div>
                       </th>
 
                       {/* Community Header */}
@@ -1242,7 +1211,7 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
+                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
                       />
                     </div>
 
@@ -1255,7 +1224,7 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={contactName}
                         onChange={(e) => setContactName(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
+                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
                       />
                     </div>
                   </div>
@@ -1270,26 +1239,92 @@ export const SponsorshipPage = ({ onBack }) => {
                         required
                         value={workEmail}
                         onChange={(e) => setWorkEmail(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
+                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
                       />
                     </div>
 
-                    <div>
+                    <div className="relative" ref={tierDropdownRef}>
                       <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
                         Selected Package / Tier
                       </label>
-                      <select
-                        value={selectedTier}
-                        onChange={(e) => setSelectedTier(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
+                      <button
+                        type="button"
+                        onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
+                        aria-haspopup="listbox"
+                        aria-expanded={isTierDropdownOpen}
+                        className={`w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans flex items-center justify-between text-[#120838] font-bold transition-all cursor-pointer ${
+                          isTierDropdownOpen
+                            ? 'ring-2 ring-[#512BD4] border-[#512BD4] bg-white shadow-[2px_2px_0px_#512BD4]'
+                            : 'hover:border-[#512BD4] hover:bg-white'
+                        }`}
                       >
-                        <option value="TITLE SPONSOR (₹2,00,000)">TITLE SPONSOR (₹2,00,000)</option>
-                        <option value="PLATINUM SPONSOR (₹1,25,000)">PLATINUM SPONSOR (₹1,25,000)</option>
-                        <option value="GOLD SPONSOR (₹75,000)">GOLD SPONSOR (₹75,000)</option>
-                        <option value="SILVER SPONSOR (₹40,000)">SILVER SPONSOR (₹40,000)</option>
-                        <option value="Specialty Add-on / Custom Package">Specialty Add-on / Custom Package</option>
-                        <option value="Community & Ecosystem Partner">Community &amp; Ecosystem Partner</option>
-                      </select>
+                        <div className="flex items-center gap-2 min-w-0 pr-2">
+                          <span className="truncate text-sm font-bold text-[#120838]">
+                            {selectedTierOption ? selectedTierOption.label : selectedTier}
+                          </span>
+                          {selectedTierOption && (
+                            <span
+                              className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-black/15 shrink-0 ${selectedTierOption.badgeClass}`}
+                            >
+                              {selectedTierOption.price}
+                            </span>
+                          )}
+                        </div>
+                        <ChevronDown
+                          className={`w-4 h-4 text-[#120838] transition-transform duration-200 shrink-0 ${
+                            isTierDropdownOpen ? 'rotate-180 text-[#512BD4]' : ''
+                          }`}
+                        />
+                      </button>
+
+                      {isTierDropdownOpen && (
+                        <div
+                          role="listbox"
+                          className="absolute z-50 left-0 right-0 top-[calc(100%+6px)] bg-white rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_#120838] p-2 space-y-2 max-h-72 overflow-y-auto"
+                        >
+                          {SPONSORSHIP_OPTIONS.map((group, gIdx) => (
+                            <div key={gIdx} className="space-y-1">
+                              <p className="font-mono text-[10px] font-black uppercase tracking-wider text-[#512BD4] px-2 pt-1 pb-0.5">
+                                {group.group}
+                              </p>
+                              {group.items.map((opt) => {
+                                const isSelected = selectedTier === opt.value;
+                                return (
+                                  <button
+                                    key={opt.value}
+                                    type="button"
+                                    role="option"
+                                    aria-selected={isSelected}
+                                    onClick={() => {
+                                      setSelectedTier(opt.value);
+                                      setIsTierDropdownOpen(false);
+                                    }}
+                                    className={`w-full text-left px-2.5 py-2 rounded-lg font-sans flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                                      isSelected
+                                        ? 'bg-[#EDE9FE] text-[#512BD4] font-bold border-2 border-[#512BD4]'
+                                        : 'text-[#120838] font-semibold hover:bg-[#FAF8FF] hover:text-[#512BD4] border-2 border-transparent'
+                                    }`}
+                                  >
+                                    <div className="flex items-center gap-2 min-w-0">
+                                      {isSelected ? (
+                                        <Check className="w-4 h-4 text-[#512BD4] shrink-0" />
+                                      ) : (
+                                        <div className="w-4 h-4 shrink-0" />
+                                      )}
+                                      <span className="text-xs sm:text-sm truncate font-bold">{opt.label}</span>
+                                    </div>
+                                    <span
+                                      className={`text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded border border-black/15 shrink-0 ${opt.badgeClass}`}
+                                    >
+                                      {opt.price}
+                                    </span>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -1301,7 +1336,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       rows={3}
                       value={inquiryNotes}
                       onChange={(e) => setInquiryNotes(e.target.value)}
-                      className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg p-3 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-[#512BD4]"
+                      className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg p-3 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
                     />
                   </div>
 

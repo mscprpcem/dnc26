@@ -97,7 +97,7 @@
         "guid": "track-workshop-supporter",
         "status": "active",
         "name": "Global AI & Cloud Workshop Supporter",
-        "description": "Sponsors hands-on AI code labs, hackathons, and multi-track workshops connecting regional developers with global tech ecosystems.",
+        "description": "Sponsors hands-on AI code labs, technical quizzes, code sprints, and workshops connecting regional developers with global tech ecosystems.",
         "amount": 25000,
         "currency": "INR",
         "frequency": "one-time",

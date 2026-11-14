@@ -97,7 +97,7 @@ export const eventData = {
       {
         url: 'https://mscprpcem.blob.core.windows.net/general/event10.jpg',
         title: 'Valedictory & Awards Distribution',
-        caption: 'Honoring hackathon champions, technical quiz winners, and community contributors with trophies.',
+        caption: 'Honoring code sprint champions, technical quiz winners, and community contributors with trophies.',
         tag: 'Valedictory & Awards',
       },
       {
