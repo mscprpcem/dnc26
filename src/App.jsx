@@ -6,6 +6,9 @@ import { SchedulePage } from './components/Schedule/SchedulePage.jsx';
 import { SponsorshipPage } from './components/Sponsorship/SponsorshipPage.jsx';
 import { AttendeeBadgePage } from './components/AttendeeBadge/AttendeeBadgePage.jsx';
 import { NotFoundPage } from './components/NotFound/NotFoundPage.jsx';
+import { BloomExperience } from './components/Bloom/BloomExperience.jsx';
+import { BloomShareView } from './components/Bloom/BloomShareView.jsx';
+import { BloomAdminDashboard } from './components/Bloom/BloomAdminDashboard.jsx';
 import { isKnownRoute, normalizePath, scrollToSection } from './utils/sectionRouter.js';
 
 export const App = () => {
@@ -20,6 +23,18 @@ export const App = () => {
 
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
+
+      // Bloom Your Future routes
+      if (path.startsWith('/bloom/admin') || search.includes('view=bloom-admin') || hash.includes('bloom-admin')) {
+        return 'bloom-admin';
+      }
+      if (path.startsWith('/bloom/view') || path.startsWith('/bloom/c') || search.includes('view=bloom-share') || search.includes('view=bloom-view')) {
+        return 'bloom-share';
+      }
+      if (path === '/bloom' || path === '/bloom/kiosk' || path.startsWith('/bloom') || hash.includes('bloom') || search.includes('view=bloom')) {
+        return 'bloom';
+      }
+
       if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         return 'coc';
       }
@@ -51,7 +66,15 @@ export const App = () => {
 
       const hash = window.location.hash.toLowerCase();
       const search = window.location.search.toLowerCase();
-      if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
+
+      // Bloom Your Future routes
+      if (path.startsWith('/bloom/admin') || search.includes('view=bloom-admin') || hash.includes('bloom-admin')) {
+        setCurrentView('bloom-admin');
+      } else if (path.startsWith('/bloom/view') || path.startsWith('/bloom/c') || search.includes('view=bloom-share') || search.includes('view=bloom-view')) {
+        setCurrentView('bloom-share');
+      } else if (path === '/bloom' || path === '/bloom/kiosk' || path.startsWith('/bloom') || hash.includes('bloom') || search.includes('view=bloom')) {
+        setCurrentView('bloom');
+      } else if (search.includes('view=coc') || hash.includes('coc') || hash.includes('code-of-conduct') || path.includes('code-of-conduct')) {
         setCurrentView('coc');
       } else if (search.includes('view=privacy') || hash.includes('privacy') || path.includes('privacy')) {
         setCurrentView('privacy');
@@ -85,6 +108,16 @@ export const App = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Helper to extract attendee id from path or query
+  const getShareAttendeeId = () => {
+    if (typeof window === 'undefined') return 'demo';
+    const path = window.location.pathname;
+    const match = path.match(/\/bloom\/(?:view|c)\/([^/?#]+)/i);
+    if (match && match[1]) return match[1];
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id') || 'demo';
+  };
+
   // 0. 404 / Not Found Interstitial Page
   if (currentView === 'not-found') {
     return (
@@ -96,6 +129,32 @@ export const App = () => {
             scrollToSection(target);
           }, 150);
         }}
+      />
+    );
+  }
+
+  // Bloom: Interactive Kiosk Experience
+  if (currentView === 'bloom') {
+    return <BloomExperience onExitToConference={switchToDncBrutal} />;
+  }
+
+  // Bloom: Shareable Attendee Creation View
+  if (currentView === 'bloom-share') {
+    return (
+      <BloomShareView 
+        attendeeId={getShareAttendeeId()} 
+        onGoToConf={switchToDncBrutal} 
+      />
+    );
+  }
+
+  // Bloom: Admin Management Dashboard
+  if (currentView === 'bloom-admin') {
+    return (
+      <BloomAdminDashboard 
+        onExitToKiosk={() => {
+          window.location.pathname = '/bloom';
+        }} 
       />
     );
   }

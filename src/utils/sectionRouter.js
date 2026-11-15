@@ -60,6 +60,11 @@ export const PATH_TO_ID = {
   '/speakerwall': 'schedule',
   '/sessionize': 'schedule',
   '/brutal': 'top',
+  '/bloom': 'bloom',
+  '/bloom/kiosk': 'bloom',
+  '/bloom-future': 'bloom',
+  '/bloom/admin': 'bloom-admin',
+  '/bloom-admin': 'bloom-admin',
 };
 
 export const ID_TO_PATH = {
@@ -100,6 +105,7 @@ export const isKnownRoute = (p) => {
   const clean = normalizePath(p);
   if (clean === '/' || clean === '') return true;
   if (PATH_TO_ID[clean]) return true;
+  if (clean.startsWith('/bloom/view') || clean.startsWith('/bloom/c') || clean.startsWith('/bloom')) return true;
   // Ignore static assets / files that have extensions (e.g. .html, .ics, .png, etc.)
   if (/\.[a-z0-9]+$/i.test(clean)) return true;
   return false;

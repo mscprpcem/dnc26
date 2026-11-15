@@ -1,0 +1,293 @@
+/* ============================================================
+   BLOOM YOUR FUTURE — .NET CONF AMRAVATI
+   Premium Interactive Generative Art Experience
+   Dark Botanical Cinematic Styles
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --bloom-bg-deep: #030705;
+  --bloom-bg-surface: #07120B;
+  --bloom-bg-card: rgba(10, 24, 16, 0.75);
+  --bloom-border: rgba(52, 211, 153, 0.22);
+  --bloom-border-subtle: rgba(255, 255, 255, 0.08);
+  --bloom-emerald: #10B981;
+  --bloom-emerald-glow: #34D399;
+  --bloom-gold: #FBBF24;
+  --bloom-gold-glow: #FDE68A;
+  --bloom-purple: #8B5CF6;
+  --bloom-coral: #F43F5E;
+  --bloom-text-main: #F3F4F6;
+  --bloom-text-muted: #9CA3AF;
+  --bloom-font-serif: 'Cinzel', serif, Georgia;
+  --bloom-font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --bloom-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base Fullscreen Kiosk Canvas */
+.bloom-kiosk-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: var(--bloom-bg-deep);
+  color: var(--bloom-text-main);
+  font-family: var(--bloom-font-sans);
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+/* Subtle Vignette & Botanical Gradient Backdrop */
+.bloom-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, transparent 35%, rgba(2, 5, 3, 0.75) 85%, #010402 100%);
+  z-index: 5;
+}
+
+.bloom-glow-radial {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65vw;
+  height: 65vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(139, 92, 246, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+  z-index: 2;
+  animation: bloomPulseGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes bloomPulseGlow {
+  0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+/* Three.js Canvas Layer */
+.bloom-webgl-canvas-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Glassmorphism Card Overlay */
+.bloom-glass-card {
+  background: var(--bloom-bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--bloom-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(16, 185, 129, 0.08);
+  border-radius: 20px;
+}
+
+/* Typography Classes */
+.bloom-title-serif {
+  font-family: var(--bloom-font-serif);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.bloom-gold-gradient-text {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FDE68A 45%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bloom-emerald-gradient-text {
+  background: linear-gradient(135deg, #ECFDF5 0%, #6EE7B7 50%, #10B981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bloom-purple-gradient-text {
+  background: linear-gradient(135deg, #F5F3FF 0%, #C4B5FD 50%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary Glass Button */
+.bloom-btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+  color: #022013;
+  font-family: var(--bloom-font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.bloom-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 32px rgba(16, 185, 129, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #047857 0%, #059669 50%, #10B981 100%);
+  color: #FFFFFF;
+}
+
+.bloom-btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.bloom-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #E5E7EB;
+  font-family: var(--bloom-font-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+}
+
+.bloom-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Glowing Pulsing Interactive Seed (Screen 3) */
+.bloom-seed-trigger {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 35%, #FDE68A 0%, #F59E0B 50%, #78350F 100%);
+  box-shadow: 0 0 35px #F59E0B, 0 0 65px rgba(245, 158, 11, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: seedPulseAura 2.2s infinite ease-in-out;
+}
+
+.bloom-seed-trigger:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 50px #F59E0B, 0 0 85px rgba(245, 158, 11, 0.6);
+}
+
+@keyframes seedPulseAura {
+  0% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6), 0 0 50px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(245, 158, 11, 0.85), 0 0 75px rgba(16, 185, 129, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6), 0 0 50px rgba(16, 185, 129, 0.3);
+  }
+}
+
+/* Growth Stages Live Pill */
+.bloom-stage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(5, 150, 105, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #A7F3D0;
+  font-family: var(--bloom-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+/* Form Input Styling */
+.bloom-input {
+  width: 100%;
+  background: rgba(4, 12, 7, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  color: #FFFFFF;
+  font-family: var(--bloom-font-sans);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.bloom-input:focus {
+  border-color: var(--bloom-emerald);
+  background: rgba(6, 18, 11, 0.9);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.bloom-input::placeholder {
+  color: rgba(156, 163, 175, 0.5);
+}
+
+/* Kiosk Inactivity Reset Bar */
+.bloom-kiosk-timer-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10B981, #F59E0B, #8B5CF6);
+  z-index: 100;
+  transform-origin: left;
+  transition: transform 1s linear;
+}
+
+/* Admin Dashboard Table */
+.bloom-admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.85rem;
+}
+
+.bloom-admin-table th {
+  background: rgba(15, 23, 42, 0.6);
+  color: #94A3B8;
+  font-family: var(--bloom-font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bloom-admin-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #E2E8F0;
+}
+
+.bloom-admin-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+

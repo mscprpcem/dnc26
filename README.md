@@ -229,6 +229,50 @@ The priority registration workflow connects directly to a Google Apps Script web
 
 ---
 
+## 🌸 Bloom Your Future — Interactive Generative Art Kiosk
+
+**"Every great idea starts with a seed."**
+
+A premium, laptop-based generative digital art installation engineered for .NET Conf Amravati. Attendees step up to dedicated laptops at the summit, plant a virtual digital seed, watch a personalized procedural 3D flower bloom in real-time, and receive their personalized creation video in their inbox.
+
+### ✨ Key Capabilities
+1. **Procedural 3D Botanical Engine**:
+   - Built with **Three.js** and WebGL.
+   - Deterministic mathematical seeding from `name + email`: every attendee receives a truly unique flower (Cosmic Orchid, Ethereal Lotus, Solar Chrysanthemum, Bioluminescent Azure, Celestial Dahlia, Emerald Aurora) that is 100% reproducible.
+   - 12 organic animation stages: seed dormancy, soil entry, underground root branching, green shoot emergence, stem growth, leaf unfurling, bud swelling, petal whorl cascades, and glowing stardust luminescence.
+   - Subtle interactive mouse parallax & Web Audio API organic crystal chimes.
+   - Graceful 2D Canvas fallback for hardware with restricted WebGL contexts.
+2. **5-Screen Attendee Kiosk Flow**:
+   - **Screen 1 (Welcome)**: Immersive ambient background, conference branding, "Begin Your Experience".
+   - **Screen 2 (Registration)**: Input validation, duplicate protection, zero public exposure of personal data.
+   - **Screen 3 (Planting)**: Interactive glowing seed touch prompt, live stage progression indicator.
+   - **Screen 4 (Final Reveal)**: Attendee personalized title, conference branding, "Replay Animation", dynamic mobile QR Code pass.
+   - **Screen 5 (Completion)**: Delivery confirmation, automated 15-second kiosk countdown, and automated memory wipe for privacy.
+3. **Asynchronous Video Generation & Email Delivery**:
+   - Non-blocking background worker queue (`server/services/queueService.js`).
+   - Generates 1080p 16:9 MP4 personalized creation videos.
+   - Dispatches branded responsive emails via **Resend** or **SendGrid** (with automated local preview mode for offline dev).
+4. **Protected Admin Management Console**:
+   - Real-time KPI counters: Total Participants, Blooms Finished, Videos Generated, Emails Delivered, Failed Jobs.
+   - Searchable, filterable attendee table with retry triggers for individual video and email jobs.
+   - One-click participant record export to CSV.
+   - Password authentication.
+
+### 🚀 Running Bloom Your Future
+```bash
+# Terminal 1: Run Vite Frontend
+npm run dev
+
+# Terminal 2: Run Backend REST API & Async Workers
+npm run server
+```
+
+- **Interactive Attendee Kiosk**: [http://localhost:5173/bloom](http://localhost:5173/bloom) (or fullscreen kiosk `/bloom/kiosk`)
+- **Admin Management Console**: [http://localhost:5173/bloom/admin](http://localhost:5173/bloom/admin) (Default password: `dotnetconf2026`)
+- **Attendee Mobile Viewer**: [http://localhost:5173/bloom/view/:id](http://localhost:5173/bloom/view/:id)
+
+---
+
 ## 🎨 Design System & Palette
 
 The visual identity combines modern high-energy tech palettes with neo-brutalist structural geometry:
