@@ -13,7 +13,7 @@ export const SESSIONIZE_DEFAULT_EVENT_ID = '2dfwfued';
  * @param {string} id
  * @returns {string}
  */
-export function normalizeSessionizeEventId(id) {
+function normalizeSessionizeEventId(id) {
   if (!id) return SESSIONIZE_DEFAULT_EVENT_ID;
   const clean = String(id).trim();
   // Map known organizer alias to the active event id
@@ -40,16 +40,6 @@ export function getSessionizeViewUrl(viewKey, eventId = SESSIONIZE_DEFAULT_EVENT
   const viewName = viewMap[viewKey] || 'GridSmart';
   return `https://sessionize.com/api/v2/${normalizedId}/view/${viewName}`;
 }
-
-/**
- * Styled HTML endpoints for .NET Conf 2026 Amravati
- */
-export const SESSIONIZE_ENDPOINTS = {
-  gridSmart: getSessionizeViewUrl('gridSmart'),
-  sessions: getSessionizeViewUrl('sessions'),
-  speakers: getSessionizeViewUrl('speakers'),
-  speakerWall: getSessionizeViewUrl('speakerWall'),
-};
 
 /**
  * View navigation tabs metadata
@@ -85,7 +75,6 @@ export const SESSIONIZE_VIEWS = [
  * Direct public Call for Speakers (CFP) URL for .NET Conf 2026 Amravati on Sessionize
  */
 export const SESSIONIZE_PUBLIC_URL = 'https://sessionize.com/dnc26/';
-export const SESSIONIZE_CFP_URL = 'https://sessionize.com/dnc26/';
 
 /**
  * Generates an isolated HTML document for the iframe embed.
@@ -305,7 +294,7 @@ function escapeHtml(str) {
  * @param {string} html
  * @returns {boolean}
  */
-export function isScheduleEmpty(html) {
+function isScheduleEmpty(html) {
   if (!html || typeof html !== 'string') return true;
   const lower = html.toLowerCase();
   
@@ -352,8 +341,6 @@ export function isScheduleEmpty(html) {
 
   return false;
 }
-
-export const isScheduleTba = isScheduleEmpty;
 
 /**
  * Tests endpoint connectivity and retrieves HTML markup with lightweight caching

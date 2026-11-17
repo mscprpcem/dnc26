@@ -215,6 +215,25 @@ export const DncSponsors = () => {
                 <span className="sponsor-tooltip">Microsoft Azure</span>
               </a>
 
+              {/* Packt */}
+              <a
+                href="https://www.packtpub.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sponsor-tile hover:border-[#F37143]"
+                title="Packt"
+                aria-label="Packt Publishing"
+                data-sponsor-name="Packt"
+              >
+                <img
+                  src="/logos/packt-logo.png"
+                  alt="Packt"
+                  className="sponsor-tile-img"
+                  loading="lazy"
+                />
+                <span className="sponsor-tooltip">Packt</span>
+              </a>
+
               {/* .xyz */}
               <a
                 href="https://gen.xyz/"

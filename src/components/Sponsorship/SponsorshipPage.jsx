@@ -19,16 +19,12 @@ import {
   Download,
   Copy,
   Briefcase,
-  Star,
   Layers,
   Megaphone,
   Coffee,
   Ticket,
-  Send,
-  HelpCircle,
   Eye,
   CheckCircle2,
-  Zap,
   Target
 } from 'lucide-react';
 

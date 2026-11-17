@@ -8,8 +8,6 @@ import {
   Upload,
   Camera,
   X,
-  Ticket,
-  Sparkles,
 } from 'lucide-react';
 
 export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) => {
