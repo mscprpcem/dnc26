@@ -67,7 +67,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
         </div>
 
         {/* Modal Notice Ribbon */}
-        <div className="bg-[#FAF5FF] border-b-2 border-black/15 px-4 py-2 flex items-center justify-between text-[11px] sm:text-xs font-mono text-[#512BD4] shrink-0">
+        <div className="bg-[#FAF5FF] border-b-2 border-black/15 px-3.5 py-2 sm:px-5 flex flex-wrap items-center justify-between text-[11px] sm:text-xs font-mono text-[#512BD4] shrink-0 gap-2">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>Early Bird, Regular &amp; VIP passes live on KonfHub (PRPCEM Amravati)</span>
@@ -76,10 +76,9 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
             href={KONFHUB_EVENT_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="sm:hidden font-bold underline flex items-center gap-1"
+            className="font-bold underline text-[#512BD4] hover:text-[#120838] flex items-center gap-1 ml-auto"
           >
-            <span>Open Tab</span>
-            <ExternalLink className="w-3 h-3" />
+            <span>Pay on official KonfHub tab ↗</span>
           </a>
         </div>
 
@@ -125,7 +124,8 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
                 setIsLoading(false);
                 setIframeError(true);
               }}
-              allow="payment; camera; microphone"
+              allow="payment *; payment; publickey-credentials-get *; clipboard-write *; fullscreen *"
+              allowPaymentRequest={true}
               loading="eager"
             />
           )}
