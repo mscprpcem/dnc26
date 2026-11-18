@@ -20,18 +20,21 @@ import DncRegisterCTA from './DncRegisterCTA.jsx';
 import DncFooter from './DncFooter.jsx';
 import DncAttendeeBadge from './DncAttendeeBadge.jsx';
 import DncInterestForm from './DncInterestForm.jsx';
+import KonfhubCheckoutModal from './KonfhubCheckoutModal.jsx';
 import { ArrowUp, X } from 'lucide-react';
 
 export const DncBrutalPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [selectedCheckoutTicket, setSelectedCheckoutTicket] = useState(null);
   const [activeModal, setActiveModal] = useState(() => {
     if (typeof window !== 'undefined') {
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (search.includes('modal=register') || hash.includes('register')) return 'register';
+      if (search.includes('modal=checkout') || search.includes('modal=tickets')) return 'checkout';
+      if (search.includes('modal=register') || hash.includes('register')) return 'checkout';
     }
     return null;
-  }); // 'register' | null
+  }); // 'register' | 'checkout' | null
 
   useEffect(() => {
     document.title = ".NET Conf 2026 Amravati";
@@ -96,12 +99,12 @@ export const DncBrutalPage = () => {
       <DncWarliSprites />
 
       {/* Floating Navigation */}
-      <DncNavbar onOpenRegister={() => setActiveModal('register')} />
+      <DncNavbar onOpenRegister={() => setActiveModal('checkout')} />
 
       {/* Main Page Flow — Exact Structure and Aesthetics of DevFest Nashik 2026 */}
       <main id="main">
         {/* 1. Hero Section with Illustrated Sky, Countdown, and Road to Conf */}
-        <DncHero onOpenRegister={() => setActiveModal('register')} />
+        <DncHero onOpenRegister={() => setActiveModal('checkout')} />
 
         {/* 2. Horizontal Infinite Marquee Ticker */}
         <DncTicker />
@@ -128,7 +131,11 @@ export const DncBrutalPage = () => {
               window.location.href = '/badge';
             }
           }}
-          onOpenRegister={() => setActiveModal('register')}
+          onOpenRegister={() => setActiveModal('checkout')}
+          onOpenCheckout={(ticketId) => {
+            setSelectedCheckoutTicket(ticketId);
+            setActiveModal('checkout');
+          }}
         />
 
         {/* 8. What to Expect Feature Cards */}
@@ -157,7 +164,7 @@ export const DncBrutalPage = () => {
 
         {/* 15. Final Grand Ticket Call to Action with Dancing Figures */}
         <DncRegisterCTA
-          onOpenRegister={() => setActiveModal('register')}
+          onOpenRegister={() => setActiveModal('checkout')}
         />
       </main>
 
@@ -174,6 +181,16 @@ export const DncBrutalPage = () => {
           <ArrowUp className="w-5 h-5 stroke-[2.5]" />
         </button>
       )}
+
+      {/* KonfHub Seamless In-Site Ticket Checkout Modal */}
+      <KonfhubCheckoutModal
+        isOpen={activeModal === 'checkout'}
+        onClose={() => {
+          setActiveModal(null);
+          setSelectedCheckoutTicket(null);
+        }}
+        selectedTicketId={selectedCheckoutTicket}
+      />
 
       {/* Interactive Modal: Priority Interest Registration Form */}
       {activeModal === 'register' && (

@@ -642,16 +642,16 @@ export const SponsorshipPage = ({ onBack }) => {
                   <span style={{ color: 'var(--purple)' }}>Amravati Edition</span>
                 </h1>
               </div>
-              <p className="lede [text-wrap:balance]">
-                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday &amp; Sunday, January&nbsp;2–3,&nbsp;2027.
+              <p className="lede [text-wrap:pretty]">
+                Unite with Central India&apos;s largest Microsoft developer summit. Connect directly with <strong>600+ tech developers, engineers, AI builders, and cloud practitioners</strong> at PRPCEM Amravati on Saturday &amp; Sunday, <span className="whitespace-nowrap">January&nbsp;2–3,&nbsp;2027.</span>
               </p>
             </div>
 
             {/* Quick CTAs Row */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mt-5 pt-1 sponsorship-hero-ctas">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-stretch lg:items-center gap-2.5 sm:gap-3 mt-5 pt-1 sponsorship-hero-ctas">
               <a
                 href="#tiers"
-                className="btn btn--primary btn--sm w-full sm:w-auto justify-center"
+                className="btn btn--primary btn--sm w-full sm:w-auto justify-center text-center"
               >
                 <span>Explore 5 Sponsor Tiers</span>
                 <svg className="btn__arrow shrink-0" width="16" height="16" aria-hidden="true">
@@ -661,7 +661,7 @@ export const SponsorshipPage = ({ onBack }) => {
 
               <a
                 href="#matrix"
-                className="btn btn--gold btn--sm w-full sm:w-auto justify-center"
+                className="btn btn--gold btn--sm w-full sm:w-auto justify-center text-center"
               >
                 <span>View Full Deliverables Matrix</span>
                 <svg className="btn__arrow shrink-0" width="16" height="16" aria-hidden="true">
@@ -672,7 +672,7 @@ export const SponsorshipPage = ({ onBack }) => {
               <button
                 type="button"
                 onClick={() => scrollToInquiry()}
-                className="btn btn--ghost btn--sm cursor-pointer w-full sm:w-auto justify-center"
+                className="btn btn--ghost btn--sm cursor-pointer w-full sm:w-auto justify-center text-center"
               >
                 <Mail className="w-4 h-4 text-[#512BD4] shrink-0" />
                 <span>Contact Sponsorship Committee</span>

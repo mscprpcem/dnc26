@@ -106,7 +106,7 @@ export const DncHero = ({ onOpenRegister }) => {
             className="btn btn--primary btn--lg cursor-pointer"
             onClick={onOpenRegister || ((e) => handleSmoothScroll(e, 'tickets'))}
           >
-            <span>Register Interest</span>
+            <span>Get Tickets (KonfHub)</span>
             <svg className="btn__arrow" width="18" height="18" aria-hidden="true">
               <use href="#i-arrow" />
             </svg>

@@ -115,7 +115,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
                 }
               }}
             >
-              <span>Register Interest</span>
+              <span>Get Tickets</span>
               <svg className="btn__arrow shrink-0" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <use href="#i-arrow" />
               </svg>
@@ -169,7 +169,7 @@ export const DncNavbar = ({ onOpenRegister }) => {
               }
             }}
           >
-            <span>Register Interest</span>
+            <span>Get Tickets</span>
             <svg className="btn__arrow" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
               <use href="#i-arrow" />
             </svg>

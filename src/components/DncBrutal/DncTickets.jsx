@@ -1,118 +1,149 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { WhatsAppIcon } from '../ui/SocialIcons.jsx';
+import { 
+  DEFAULT_KONFHUB_TIERS, 
+  fetchKonfhubTickets, 
+  KONFHUB_EVENT_URL 
+} from '../../utils/konfhubApi.js';
+import { Check, Sparkles, Ticket } from 'lucide-react';
 
-export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
-  const fares = [
-    {
-      name: 'Early Bird',
-      tier: 'Early',
-      type: 'Phase 01',
-      tagline: 'For fast-action community builders.',
-      blurb: 'First access to technical stages (AI, DevOps, Cloud & .NET), hands-on code labs, official delegate kit, and catered lunch.',
-      status: 'Register Interest',
-      color: 'var(--teal, #00F0FF)',
-    },
-    {
-      name: 'Normal Pass',
-      tier: 'Normal',
-      type: 'Phase 02',
-      tagline: 'Standard conference pass.',
-      blurb: 'Full-day summit pass covering Generative AI keynotes, technical sessions, speaker networking, and participation credentials.',
-      status: 'Register Interest',
-      color: 'var(--blue, #00B4D8)',
-    },
-    {
-      name: 'Late Bird',
-      tier: 'Late',
-      type: 'Phase 03',
-      tagline: 'Final regular registrations.',
-      blurb: 'Released after standard phase closes. Includes full summit access, auditorium seating, and delegate networking lunch.',
-      status: 'Register Interest',
-      color: 'var(--purple, #512BD4)',
-    },
-    {
-      name: 'Tatkal Pass',
-      tier: 'Tatkal',
-      type: 'Phase 04',
-      tagline: 'Last-minute emergency rush.',
-      blurb: 'Limited quota passes opened right before summit day for last-minute attendees and traveling developers.',
-      status: 'Register Interest',
-      color: 'var(--gold, #FFE89E)',
-    },
-    {
-      name: 'K-12 Pass',
-      tier: 'K-12',
-      type: 'Special Pass',
-      tagline: 'For school students & young coders.',
-      blurb: 'Dedicated pass for school students (Grades 1–12) and educators. Includes keynote auditorium access, guided AI tech demos, and participation certificate.',
-      status: 'Register Interest',
-      color: 'var(--magenta, #D600AA)',
-    },
-  ];
+export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
+  const [tiers, setTiers] = useState(DEFAULT_KONFHUB_TIERS);
+
+  // Fetch live ticket details from KonfHub REST API on mount
+  useEffect(() => {
+    let isMounted = true;
+    fetchKonfhubTickets().then((result) => {
+      if (isMounted && result && result.tickets) {
+        setTiers(result.tickets);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleBookTicket = (tier) => {
+    if (onOpenCheckout) {
+      onOpenCheckout(tier?.id);
+    } else if (onOpenRegister) {
+      onOpenRegister();
+    } else {
+      window.open(KONFHUB_EVENT_URL, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <section className="section" id="tickets" style={{ scrollMarginTop: '80px' }}>
       <div className="wrap">
         <div className="sechead sechead--center">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>
-            Delegate Passes · Register Interest
+            Official Delegate Passes · Jan 2–3, 2027
           </p>
           <h2 className="h-sec">
             Delegate Passes &amp;<br />
             Registration.
           </h2>
           <p className="lede" style={{ marginInline: 'auto' }}>
-            Official conference passes, student early-bird pricing, and group packages will be released soon. Register your interest below to receive priority access and early-bird notifications!
+            Select your pass below to attend Central India&apos;s largest Microsoft developer summit at PRPCEM Amravati.
           </p>
         </div>
 
-        {/* Fares Grid */}
-        <div className="fares" id="fares">
-          {fares.map((f) => (
-            <div
-              key={f.name}
-              className="fcard"
-              style={{ '--tc': f.color }}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="fcard__badge" style={{ color: f.color, borderColor: f.color }}>
-                  {f.type}
-                </span>
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B6380]">
-                  {f.tier}
-                </span>
+        {/* 3 Passes Grid: Early Bird, Regular, VIP */}
+        <div className="fares dnc-passes-grid" id="fares">
+          {tiers.map((f) => {
+            const isFeatured = f.isPopular;
+
+            return (
+              <div
+                key={f.id || f.name}
+                className={`fcard ${isFeatured ? 'is-featured relative border-[3px] border-[#512BD4] shadow-[8px_8px_0px_#512BD4]' : ''}`}
+                style={{
+                  '--tc': f.color,
+                  background: isFeatured ? '#FAF8FF' : '#FFFFFF',
+                  zIndex: isFeatured ? 2 : 1,
+                }}
+              >
+                {/* Popular Badge Flag */}
+                {isFeatured && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#512BD4] text-white px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider shadow-[2px_2px_0px_#120838] flex items-center gap-1.5 whitespace-nowrap">
+                    <Sparkles className="w-3.5 h-3.5 text-[#FFD13B]" />
+                    <span>Most Popular</span>
+                  </div>
+                )}
+
+                {/* Card Header */}
+                <div className="flex items-center justify-between mb-2 pt-1">
+                  <span
+                    className="fcard__badge text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border"
+                    style={{ color: f.color, borderColor: f.color, background: 'rgba(255,255,255,0.85)' }}
+                  >
+                    {f.badge}
+                  </span>
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B6380]">
+                    {f.tier}
+                  </span>
+                </div>
+
+                {/* Price Display */}
+                <div className="my-2 pb-3 border-b-2 border-stone-200/80">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl sm:text-4xl font-mono font-black text-[#120838]">
+                      {f.currencySymbol}{f.price}
+                    </span>
+                    <span className="text-xs font-mono text-stone-500 uppercase">
+                      / Full 2-Day Pass
+                    </span>
+                  </div>
+                  <h3 className="fcard__title mt-1.5">
+                    <span className="text-lg sm:text-xl font-bold">{f.name}</span>
+                  </h3>
+
+                  <div className="mt-1.5 flex flex-col gap-1">
+                    <span className="text-[10.5px] font-mono text-stone-600 bg-stone-100 px-2 py-0.5 rounded border border-stone-200/80 w-fit">
+                      {f.availableTill || 'Available Till: 30th Dec 2026, 06:00 PM'}
+                    </span>
+                    {f.urgencyText && (
+                      <span className="text-xs font-mono font-bold text-rose-600">
+                        {f.urgencyText}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* What's Included Ticket Description (from KonfHub) */}
+                <div className="ticket-desc my-3.5 flex-1 text-xs text-stone-700">
+                  {f.description ? (
+                    <div dangerouslySetInnerHTML={{ __html: f.description }} />
+                  ) : (
+                    <div className="space-y-2">
+                      {(f.perks || []).map((perk, idx) => (
+                        <div key={idx} className="flex items-start gap-2 text-stone-700">
+                          <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span className="leading-snug">{perk}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* CTAs */}
+                <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
+                  <button
+                    type="button"
+                    className="btn btn--primary btn--md w-full justify-center cursor-pointer"
+                    onClick={() => handleBookTicket(f)}
+                  >
+                    <Ticket className="w-4 h-4 shrink-0" />
+                    <span>Book {f.name}</span>
+                    <svg className="btn__arrow shrink-0" width="14" height="14" aria-hidden="true">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </button>
+                </div>
               </div>
-
-              <h3 className="fcard__title">
-                <span>{f.name}</span>
-                <span className="block text-xs font-mono font-medium text-[#4B465C] mt-0.5">
-                  {f.tagline}
-                </span>
-              </h3>
-
-              <div className="fcard__status-box">
-                <span className="fcard__status-pill">
-                  <span className="fcard__status-dot"></span>
-                  Dropping Soon
-                </span>
-              </div>
-
-              <p className="fcard__desc">{f.blurb}</p>
-
-              <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-                <button
-                  type="button"
-                  className="btn btn--primary btn--sm w-full"
-                  onClick={onOpenRegister || (() => {})}
-                >
-                  <span>Register Interest</span>
-                  <svg className="btn__arrow" width="14" height="14" aria-hidden="true">
-                    <use href="#i-arrow" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Offer Bar */}
@@ -122,7 +153,7 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister }) => {
               <span>Group Delegation</span>
             </span>
             <p>
-              Bringing 10 or more student developers? Contact us directly for bulk institutional discount passes and bus transit support.
+              Bringing 10 or more student developers from your college or team? Contact us directly for bulk institutional discount passes and bus transit support.
             </p>
           </div>
           <a

@@ -2117,15 +2117,21 @@ svg.warli {
 /* ---------- 14. TICKETS & FULL THALI ----------------------- */
 .fares {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(0.85rem, 1.2vw, 1.25rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 1.5vw, 1.5rem);
   margin-bottom: var(--s-6);
 }
 
-@media (max-width: 1280px) and (min-width: 1025px) {
+@media (min-width: 1025px) {
+  .fcard.is-featured {
+    transform: scale(1.025);
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 641px) {
   .fares {
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
   }
 }
 
@@ -2162,6 +2168,51 @@ svg.warli {
 .fcard.is-live {
   border-color: var(--gold);
   box-shadow: 5px 5px 0 var(--gold);
+}
+
+/* Ticket Description list rendered from KonfHub ticket */
+.ticket-desc {
+  font-family: var(--f-sans, sans-serif);
+}
+
+.ticket-desc ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ticket-desc li {
+  position: relative;
+  padding-left: 1.35rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #332B47;
+  font-family: inherit !important;
+}
+
+.ticket-desc li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  color: #059669;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.ticket-desc li p {
+  margin: 0;
+  display: inline;
+  font-family: inherit !important;
+}
+
+.ticket-desc a {
+  color: #512BD4;
+  text-decoration: underline;
+  font-weight: 700;
 }
 
 .fcard__badge {
@@ -3892,6 +3943,38 @@ svg.warli {
 
 /* Mobile Adjustments (<= 640px) */
 @media (max-width: 640px) {
+  /* Tickets Section Phone Optimization */
+  .fares,
+  .dnc-passes-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  .fcard {
+    padding: 1.25rem 1rem !important;
+    border-radius: 14px !important;
+    transform: none !important;
+    box-shadow: 4px 4px 0px #120838 !important;
+  }
+
+  .fcard.is-featured {
+    transform: none !important;
+    box-shadow: 5px 5px 0px #512BD4 !important;
+  }
+
+  .fcard .btn {
+    min-height: 48px !important;
+    font-size: 0.95rem !important;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    touch-action: manipulation;
+  }
+
+  .fcard .fcard__title {
+    font-size: 1.15rem !important;
+  }
+
   .sponsorship-hero-ctas .btn {
     width: 100%;
     min-height: 46px;
@@ -3918,6 +4001,15 @@ svg.warli {
 
 /* Extra small mobile (<= 400px) */
 @media (max-width: 400px) {
+  .fcard {
+    padding: 1.1rem 0.85rem !important;
+  }
+
+  .fcard .btn {
+    font-size: 0.88rem !important;
+    min-height: 44px !important;
+  }
+
   .sponsorship-topbar .sponsorship-btn-back span,
   .sponsorship-topbar .sponsorship-btn-inquire span {
     font-size: 0.78rem;

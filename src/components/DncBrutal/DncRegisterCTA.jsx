@@ -22,9 +22,9 @@ export const DncRegisterCTA = ({ onOpenRegister }) => {
         <p className="eyebrow" style={{ justifyContent: 'center', color: 'var(--gold, #FFE89E)' }}>
           Saturday &amp; Sunday | 2–3 January 2027 | Swami Vivekanand Auditorium, PRPCEM, Amravati
         </p>
-        <h2>Register interest for .NET Conf 2026.</h2>
+        <h2>Book Your Seat for .NET Conf 2026.</h2>
         <p className="lede" style={{ color: '#FFFFFF', marginTop: '1rem', textAlign: 'center', maxWidth: '52ch' }}>
-          Generative AI &amp; Agents, GitHub Copilot, Azure Cloud Architecture, and Modern .NET. Register below for early-bird priority access and announcements.
+          Generative AI &amp; Agents, GitHub Copilot, Azure Cloud Architecture, and Modern .NET. Passes are live on KonfHub — choose Early Bird, Regular, or VIP All-Access.
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
@@ -36,7 +36,7 @@ export const DncRegisterCTA = ({ onOpenRegister }) => {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             })}
           >
-            <span>Register Interest</span>
+            <span>Book Tickets on KonfHub</span>
             <svg className="btn__arrow" width="18" height="18" aria-hidden="true">
               <use href="#i-arrow" />
             </svg>
