@@ -6,10 +6,41 @@ export const KONFHUB_WIDGET_URL = 'https://konfhub.com/widget/dnc26';
 export const KONFHUB_TICKETS_API = 'https://api.konfhub.com/event/url/dnc26/tickets';
 
 /**
+ * Format UTC timestamp string from KonfHub (e.g. "2026-12-30 12:30:00")
+ * into user-friendly localized date (e.g. "Available Till: 30th Dec 2026, 06:00 PM")
+ */
+export const formatAvailabilityDate = (timestampStr) => {
+  if (!timestampStr) return null;
+  try {
+    const utcDate = new Date(timestampStr.replace(' ', 'T') + 'Z');
+    if (isNaN(utcDate.getTime())) return null;
+
+    const day = utcDate.getDate();
+    const nth = (d) => {
+      if (d > 3 && d < 21) return 'th';
+      switch (d % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+    const month = utcDate.toLocaleString('en-US', { month: 'short' });
+    const year = utcDate.getFullYear();
+    const time = utcDate.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+    return `Available Till: ${day}${nth(day)} ${month} ${year}, ${time}`;
+  } catch {
+    return null;
+  }
+};
+
+/**
  * 3 Official Passes kept for .NET Conf 2026:
  * - Early Bird Pass (₹200)
  * - Regular Ticket (₹250)
  * - VIP Pass / Premium (₹500)
+ * Note: Scarcity counts (e.g. "Only X tickets left") are populated dynamically from the KonfHub API.
  */
 export const DEFAULT_KONFHUB_TIERS = [
   {
@@ -21,7 +52,7 @@ export const DEFAULT_KONFHUB_TIERS = [
     price: 200,
     currency: 'INR',
     currencySymbol: '₹',
-    urgencyText: 'Only 20 tickets left',
+    urgencyText: null,
     availableTill: 'Available Till: 30th Dec 2026, 06:00 PM',
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
@@ -85,7 +116,7 @@ export const DEFAULT_KONFHUB_TIERS = [
     price: 500,
     currency: 'INR',
     currencySymbol: '₹',
-    urgencyText: 'Limited VIP Seats',
+    urgencyText: null,
     availableTill: 'Available Till: 30th Dec 2026, 06:00 PM',
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
@@ -152,11 +183,28 @@ export const fetchKonfhubTickets = async () => {
 
       if (!live) return tier;
 
+      // Dynamic availability & scarcity messaging directly from live KonfHub API
+      let dynamicUrgency = null;
+      if (live.sold_out) {
+        dynamicUrgency = 'Sold Out';
+      } else if (live.low_availability_message) {
+        dynamicUrgency = live.low_availability_message;
+      } else if (live.remaining_count !== undefined && live.remaining_count !== null && live.remaining_count > 0 && live.remaining_count <= 25) {
+        dynamicUrgency = `Only ${live.remaining_count} tickets left`;
+      }
+
+      const dynamicAvailableTill = live.end_timestamp
+        ? formatAvailabilityDate(live.end_timestamp)
+        : tier.availableTill;
+
       return {
         ...tier,
         price: live.ticket_price !== undefined ? live.ticket_price : tier.price,
         isSoldOut: Boolean(live.sold_out),
         status: live.sold_out ? 'Sold Out' : 'Available',
+        urgencyText: dynamicUrgency,
+        remainingCount: live.remaining_count,
+        availableTill: dynamicAvailableTill,
         description: live.description || tier.description,
         liveRaw: live,
       };
