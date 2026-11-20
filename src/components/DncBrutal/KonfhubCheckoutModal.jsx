@@ -8,10 +8,15 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
 
   if (!isOpen) return null;
 
-  // If a specific ticket ID is selected, we can pass query params if supported
-  const widgetSrc = selectedTicketId
-    ? `${KONFHUB_WIDGET_URL}?ticketId=${selectedTicketId}`
-    : KONFHUB_WIDGET_URL;
+  // If a specific ticket ID is selected, route to targeted KonfHub pass checkout
+  let widgetSrc = KONFHUB_WIDGET_URL;
+  if (selectedTicketId === 127439 || selectedTicketId === '127439' || selectedTicketId === 'regular') {
+    widgetSrc = 'https://konfhub.com/widget/dnc26?desc=true&tickets=127439,127442';
+  } else if (selectedTicketId === 127441 || selectedTicketId === '127441' || selectedTicketId === 'premium') {
+    widgetSrc = 'https://konfhub.com/widget/dnc26?desc=true&tickets=127441';
+  } else if (selectedTicketId) {
+    widgetSrc = `${KONFHUB_WIDGET_URL}?ticketId=${selectedTicketId}`;
+  }
 
   return (
     <div
@@ -38,7 +43,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
               </h3>
               <p className="font-mono text-[10.5px] sm:text-xs text-stone-700 flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 inline" />
-                <span>Instant Registration &amp; UPI / Card Payment via KonfHub</span>
+                <span>Instant Registration &amp; Secure Payment</span>
               </p>
             </div>
           </div>
@@ -51,7 +56,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold bg-white hover:bg-stone-100 text-[#120838] border-2 border-black rounded-lg shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all"
               title="Open direct checkout in new tab"
             >
-              <span>Open on KonfHub</span>
+              <span>Open in New Tab</span>
               <ExternalLink className="w-3 h-3" />
             </a>
 
@@ -70,7 +75,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
         <div className="bg-[#FAF5FF] border-b-2 border-black/15 px-3.5 py-2 sm:px-5 flex flex-wrap items-center justify-between text-[11px] sm:text-xs font-mono text-[#512BD4] shrink-0 gap-2">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Regular &amp; VIP passes live on KonfHub · Early Bird Sold Out</span>
+            <span>Regular &amp; VIP passes live · Early Bird Sold Out</span>
           </span>
           <a
             href={KONFHUB_EVENT_URL}
@@ -78,7 +83,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
             rel="noopener noreferrer"
             className="font-bold underline text-[#512BD4] hover:text-[#120838] flex items-center gap-1 ml-auto"
           >
-            <span>Pay on official KonfHub tab ↗</span>
+            <span>Open in new tab ↗</span>
           </a>
         </div>
 
@@ -88,10 +93,10 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#FAF8F5]/90 gap-3">
               <RefreshCw className="w-7 h-7 text-[#512BD4] animate-spin" />
               <p className="font-mono text-xs sm:text-sm font-bold text-[#120838]">
-                Loading KonfHub Checkout...
+                Loading Checkout...
               </p>
               <p className="font-sans text-[11px] sm:text-xs text-stone-500 text-center max-w-xs">
-                Connecting securely to KonfHub ticketing servers for live pass inventory.
+                Connecting securely for live pass inventory.
               </p>
             </div>
           )}
@@ -102,7 +107,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
                 Browser security prevented loading checkout inside the page.
               </p>
               <p className="text-xs text-stone-600 max-w-md">
-                No problem! You can complete your registration directly on our official KonfHub event page in a new secure tab.
+                No problem! You can complete your registration directly in a new secure tab.
               </p>
               <a
                 href={KONFHUB_EVENT_URL}
@@ -110,14 +115,14 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
                 rel="noopener noreferrer"
                 className="btn btn--primary btn--md inline-flex items-center gap-2"
               >
-                <span>Continue on KonfHub.com</span>
+                <span>Get Tickets</span>
                 <ExternalLink className="w-4 h-4" />
               </a>
             </div>
           ) : (
             <iframe
               src={widgetSrc}
-              title="KonfHub .NET Conf 2026 Ticket Checkout"
+              title=".NET Conf 2026 Ticket Checkout"
               className="w-full h-full min-h-[520px] sm:min-h-[580px] border-0"
               onLoad={() => setIsLoading(false)}
               onError={() => {
@@ -133,14 +138,14 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
 
         {/* Modal Bottom Bar */}
         <div className="px-4 py-2.5 sm:px-6 bg-[#FAF8F5] border-t-2 border-black flex flex-wrap items-center justify-between text-[11px] font-mono text-stone-600 shrink-0">
-          <span>Tickets powered by KonfHub &bull; PRPCEM Amravati</span>
+          <span>Official Delegate Passes &bull; PRPCEM Amravati</span>
           <a
             href={KONFHUB_EVENT_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-[#512BD4] underline flex items-center gap-1 font-bold"
           >
-            <span>konfhub.com/dnc26</span>
+            <span>Get Tickets</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>

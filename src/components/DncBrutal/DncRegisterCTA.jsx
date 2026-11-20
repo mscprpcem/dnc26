@@ -24,7 +24,7 @@ export const DncRegisterCTA = ({ onOpenRegister }) => {
         </p>
         <h2>Book Your Seat for .NET Conf 2026.</h2>
         <p className="lede" style={{ color: '#FFFFFF', marginTop: '1rem', textAlign: 'center', maxWidth: '52ch' }}>
-          Generative AI &amp; Agents, GitHub Copilot, Azure Cloud Architecture, and Modern .NET. Passes are live on KonfHub — choose Early Bird, Regular, or VIP All-Access.
+          Generative AI &amp; Agents, GitHub Copilot, Azure Cloud Architecture, and Modern .NET. Passes are live — choose Early Bird, Regular, or VIP All-Access.
         </p>
 
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center', marginTop: '2rem' }}>
@@ -36,7 +36,7 @@ export const DncRegisterCTA = ({ onOpenRegister }) => {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             })}
           >
-            <span>Book Tickets on KonfHub</span>
+            <span>Get Tickets</span>
             <svg className="btn__arrow" width="18" height="18" aria-hidden="true">
               <use href="#i-arrow" />
             </svg>

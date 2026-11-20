@@ -40,11 +40,15 @@ export const DncNavbar = ({ onOpenRegister }) => {
       e.preventDefault();
     }
 
-    // 1. Immediately release mobile sheet scroll lock
+    // 1. Immediately release mobile sheet scroll lock and defer scroll past sheet close transition
     if (isSheetOpen) {
       setIsSheetOpen(false);
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
+      setTimeout(() => {
+        scrollToSection(href, true);
+      }, 60);
+      return;
     }
 
     // 2. If on a standalone sub-page, navigate back to main page at href

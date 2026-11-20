@@ -56,6 +56,7 @@ export const DEFAULT_KONFHUB_TIERS = [
     status: 'Sold Out',
     urgencyText: 'Sold Out',
     availableTill: null,
+    buttonId: null,
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
 <li>Complimentary <strong>high tea, snacks and food</strong></li>
@@ -88,6 +89,7 @@ export const DEFAULT_KONFHUB_TIERS = [
     currencySymbol: '₹',
     urgencyText: null,
     availableTill: 'Available Till: 30th Dec 2026, 06:00 PM',
+    buttonId: 'btn_43c35e9003f1',
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
 <li>Complimentary <strong>high tea, snacks and food</strong></li>
@@ -120,6 +122,7 @@ export const DEFAULT_KONFHUB_TIERS = [
     currencySymbol: '₹',
     urgencyText: null,
     availableTill: 'Available Till: 30th Dec 2026, 06:00 PM',
+    buttonId: 'btn_5ae12750b185',
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
 <li><strong>Front row accommodation &amp; keynote seating</strong></li>

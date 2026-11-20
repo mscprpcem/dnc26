@@ -902,9 +902,10 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
     );
   }
 
-  // Default: Embedded in main landing page flow at #attendee-badge
+  // Default: Embedded in main landing page flow at #badge and #attendee-badge
   return (
-    <section className="section band--purple" id="attendee-badge" style={{ scrollMarginTop: '80px' }}>
+    <section className="section band--purple relative" id="badge" data-section="badge" style={{ scrollMarginTop: '80px' }}>
+      <span id="attendee-badge" style={{ display: 'block', position: 'absolute', top: '-80px', visibility: 'hidden' }} aria-hidden="true" />
       <div className="wrap">
         <div className="sechead sechead--center">
           <p className="eyebrow" style={{ justifyContent: 'center' }}>

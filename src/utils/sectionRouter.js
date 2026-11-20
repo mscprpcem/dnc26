@@ -11,8 +11,8 @@ const PATH_TO_ID = {
   '/call-for-speakers': 'cfp',
   '/tickets': 'tickets',
   '/passes': 'tickets',
-  '/badge': 'attendee-badge',
-  '/attendee-badge': 'attendee-badge',
+  '/badge': 'badge',
+  '/attendee-badge': 'badge',
   '/badge-studio': 'badge-studio',
   '/badge-page': 'badge-studio',
   '/sponsors': 'sponsors',
@@ -165,7 +165,7 @@ export const scrollToSection = (target, updateHistory = true) => {
       candidateIds.push('community', 'stay-connected');
     }
     if (targetId === 'attendee-badge' || targetId === 'badge') {
-      candidateIds.push('attendee-badge', 'badge');
+      candidateIds.push('badge', 'attendee-badge');
     }
     if (targetId === 'overview' || targetId === 'about') {
       candidateIds.push('about', 'overview');
@@ -180,7 +180,19 @@ export const scrollToSection = (target, updateHistory = true) => {
       if (el) break;
     }
 
+    if (!el && (targetId === 'badge' || targetId === 'attendee-badge')) {
+      el = document.querySelector('#badge, #attendee-badge, [data-section="badge"]');
+    }
+
     if (el) {
+      // 1. Try native scrollIntoView respecting scroll-margin-top
+      try {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        // Fallback below
+      }
+
+      // 2. Also calculate offset position with exact 80px fixed navbar clearance
       const navOffset = 80;
       const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = Math.max(0, elementPosition - navOffset);

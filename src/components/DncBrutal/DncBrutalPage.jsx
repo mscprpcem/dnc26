@@ -51,10 +51,16 @@ export const DncBrutalPage = () => {
     // If arriving directly with a section URL (e.g. /about, /speakers, /tickets, /badge, /sponsors)
     const initialPath = normalizePath(window.location.pathname);
     if (initialPath !== '/' && initialPath !== '') {
-      const timer = setTimeout(() => {
+      const timer1 = setTimeout(() => {
         scrollToSection(initialPath, false);
-      }, 150);
-      return () => clearTimeout(timer);
+      }, 100);
+      const timer2 = setTimeout(() => {
+        scrollToSection(initialPath, false);
+      }, 450);
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
     }
   }, []);
 
@@ -146,12 +152,7 @@ export const DncBrutalPage = () => {
         {/* 7. Tickets & The Full Thali (Included in Every Pass) */}
         <DncTickets
           onOpenBadge={() => {
-            const el = document.getElementById('attendee-badge');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              window.location.href = '/badge';
-            }
+            scrollToSection('/badge', true);
           }}
           onOpenRegister={() => setActiveModal('checkout')}
           onOpenCheckout={(ticketId) => {

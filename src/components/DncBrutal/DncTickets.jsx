@@ -6,6 +6,7 @@ import {
   KONFHUB_EVENT_URL 
 } from '../../utils/konfhubApi.js';
 import { Check, Sparkles, Ticket } from 'lucide-react';
+import { KonfhubWidgetButton } from './KonfhubWidgetButton.jsx';
 
 export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
   const [tiers, setTiers] = useState(DEFAULT_KONFHUB_TIERS);
@@ -149,6 +150,12 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
                     >
                       <span>Passes Sold Out</span>
                     </button>
+                  ) : f.buttonId ? (
+                    <KonfhubWidgetButton
+                      buttonId={f.buttonId}
+                      ticketName={f.name}
+                      onClickFallback={() => handleBookTicket(f)}
+                    />
                   ) : (
                     <button
                       type="button"

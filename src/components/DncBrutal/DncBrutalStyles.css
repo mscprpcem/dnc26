@@ -2160,6 +2160,169 @@ svg.warli {
   box-shadow: 4.5px 4.5px 0 var(--magenta);
 }
 
+/* Official KonfHub Embedded Widget Button styling */
+.konfhub-btn-slot {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.konfhub-embed-host {
+  width: 100%;
+}
+
+.konfhub-btn-slot:has(.reg-button) .konfhub-fallback-btn {
+  display: none !important;
+}
+
+.konfhub-btn-slot .konfhub-widget-button-container {
+  width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.konfhub-btn-slot .reg-button {
+  width: 100% !important;
+  min-height: 38px !important;
+  padding: 0.5rem 1rem !important;
+  font-family: var(--f-display, system-ui, sans-serif) !important;
+  font-size: 0.84rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid #000000 !important;
+  border-radius: var(--r-sm, 8px) !important;
+  box-shadow: 3px 3px 0 var(--magenta, #FF2E93) !important;
+  cursor: pointer !important;
+  transition: transform var(--t-fast) var(--e-out), box-shadow var(--t-fast) var(--e-out) !important;
+  outline: none !important;
+}
+
+.konfhub-btn-slot .reg-button:hover {
+  transform: translate(-1.5px, -1.5px) !important;
+  box-shadow: 4.5px 4.5px 0 var(--magenta, #FF2E93) !important;
+}
+
+.konfhub-btn-slot .reg-button:active {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1.5px 1.5px 0 var(--magenta, #FF2E93) !important;
+}
+
+/* 1. Prevent background scrolling when KonfHub ticket modal is open */
+html:has(.modal-container-wrapper),
+body:has(.modal-container-wrapper) {
+  overflow: hidden !important;
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+}
+
+/* 2. Elevate section, grid, and the specific card containing the active modal above all other cards */
+.section:has(.modal-container-wrapper) {
+  z-index: 10000 !important;
+}
+
+.fares:has(.modal-container-wrapper) {
+  z-index: 10001 !important;
+}
+
+.fcard:has(.modal-container-wrapper) {
+  z-index: 10002 !important;
+  transform: none !important;
+}
+
+/* Ensure all other cards (including featured Regular ticket) stay below the active modal */
+.fcard:not(:has(.modal-container-wrapper)),
+.fcard.is-featured:not(:has(.modal-container-wrapper)) {
+  z-index: 1 !important;
+  transform: none !important;
+}
+
+.konfhub-btn-slot:has(.modal-container-wrapper) {
+  z-index: 10003 !important;
+}
+
+.konfhub-embed-host:has(.modal-container-wrapper) {
+  z-index: 10004 !important;
+}
+
+/* 3. KonfHub Ticket Modal Positioning: Placed just below the fixed navbar within viewport */
+.modal-container-wrapper {
+  position: fixed !important;
+  top: 76px !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 76px) !important;
+  height: calc(100dvh - 76px) !important;
+  max-height: calc(100dvh - 76px) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  padding: 0.75rem !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (max-width: 640px) {
+  .modal-container-wrapper {
+    top: 66px !important;
+    height: calc(100vh - 66px) !important;
+    height: calc(100dvh - 66px) !important;
+    max-height: calc(100dvh - 66px) !important;
+    padding: 0.5rem !important;
+  }
+}
+
+.iframe-konfhub-buttons {
+  position: relative !important;
+  max-width: min(520px, 94vw) !important;
+  max-height: 100% !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+.iframe-konfhub-buttons iframe {
+  max-height: calc(100dvh - 90px) !important;
+  border-radius: 12px !important;
+}
+
+/* KonfHub Cancel / Close Button: clearly visible and easy to tap */
+.iframe-konfhub-close-btn {
+  min-width: 40px !important;
+  min-height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background: #FF2E93 !important;
+  color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  border-radius: 6px !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  cursor: pointer !important;
+  z-index: 999999 !important;
+  touch-action: manipulation !important;
+}
+
+.iframe-konfhub-close-btn:hover,
+.iframe-konfhub-close-btn:active {
+  background: #E01377 !important;
+  transform: translate(1px, 1px) !important;
+}
+
+/* Hide only the floating scroll-to-top button while ticket modal is active */
+body:has(.modal-container-wrapper) button[aria-label="Scroll to top"] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
 .fcard:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 var(--magenta);
