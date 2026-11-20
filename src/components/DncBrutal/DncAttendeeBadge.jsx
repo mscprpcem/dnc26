@@ -8,17 +8,34 @@ import {
   Upload,
   Camera,
   X,
+  Calendar,
+  MapPin,
+  RotateCcw,
+  Globe,
 } from 'lucide-react';
 
 export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) => {
+  // Official defaults: bot head as default picture, blank input fields (no hardcoded attendee name)
+  const defaultBotHead = '/mascot/bot_head.png';
+
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
-  const [college, setCollege] = useState('');
+  const [company, setCompany] = useState('');
   const [customPhotoUrl, setCustomPhotoUrl] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
   const [isDragging, setIsDragging] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
 
   const fileInputRef = useRef(null);
+
+  const validateForm = () => {
+    const errors = {};
+    if (!name.trim()) errors.name = 'Full Name is mandatory';
+    if (!role.trim()) errors.role = 'Role / Designation is mandatory';
+    if (!company.trim()) errors.company = 'Organization is mandatory';
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleFileSelect = (file) => {
     if (!file) return;
@@ -62,6 +79,17 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
     }
   };
 
+  const handleClearInputs = () => {
+    setName('');
+    setRole('');
+    setCompany('');
+    setCustomPhotoUrl(null);
+    setFormErrors({});
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   // Safe helper to load image (never enforces crossOrigin on data URIs)
   const loadImage = (src) =>
     new Promise((resolve) => {
@@ -75,23 +103,29 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
       img.src = src;
     });
 
-  // ─── Theme Tokens (Official .NET Conf 2026 Amravati DncBrutal Palette) ───
-  const T = {
-    purple: '#512BD4',       // Primary .NET Brand Purple
-    purpleLight: '#7B5CE5',  // Gradient midtone
-    magenta: '#D600AA',      // Action / Accent Fuchsia
-    blue: '#0B6CFF',         // Vivid Azure Blue
-    teal: '#28C2D1',         // Copilot Teal
-    gold: '#F7B548',         // Warm Gold / Saffron
-    ink: '#120838',          // Deep Dark Violet text
-    textSecondary: '#332B4A',
-    textMuted: '#5C5577',
-    fontDisplay: '"Outfit", "Space Grotesk", system-ui, sans-serif',
-    fontBody: '"Inter", system-ui, sans-serif',
-    fontMono: '"JetBrains Mono", monospace',
+  // SVG Data URI helper for Canvas rendering
+  const loadSvg = (svgStr) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgStr)}`;
+    });
   };
 
-  // ─── Render 1080×1080 Canvas Badge (Official .NET Conf 2026 Neo-Brutalist Theme) ───
+  // ─── Theme Colors matching reference badge ───
+  const T = {
+    purple: '#512BD4',        // .NET brand purple
+    purpleDark: '#1F0E64',    // Frame stroke & header dark violet
+    ink: '#0E0329',           // Extra bold dark title
+    textSlate: '#334155',     // Organization text
+    textMuted: '#475569',     // Icons & captions
+    borderLine: '#CBD5E1',    // Dividers
+    fontDisplay: '"Outfit", "Space Grotesk", system-ui, sans-serif',
+    fontBody: '"Inter", system-ui, sans-serif',
+  };
+
+  // ─── Render 1080×1080 Canvas Badge (Exact Match with Motion Trails & Bot Head) ───
   const renderSquareCanvas = async () => {
     if (document.fonts) {
       await document.fonts.ready;
@@ -108,251 +142,340 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
     const cardY = 40;
     const cardW = S - 80; // 1000px
     const cardH = S - 80; // 1000px
-    const cardRadius = 36;
+    const cardRadius = 38;
 
     ctx.clearRect(0, 0, S, S);
 
-    // 1. Neo-Brutalist Offset Drop Shadow (Dark Violet / Ink offset)
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(cardX + 12, cardY + 12, cardW, cardH, cardRadius);
-    ctx.fillStyle = T.ink;
-    ctx.fill();
-    ctx.restore();
-
-    // 2. Main Card Background & Black Border
+    // 1. Soft Ambient Outer Glow
     ctx.save();
     ctx.beginPath();
     ctx.roundRect(cardX, cardY, cardW, cardH, cardRadius);
-    
-    // Subtle gradient background
-    const bgGrad = ctx.createLinearGradient(cardX, cardY, cardX, cardY + cardH);
+    ctx.shadowColor = 'rgba(31, 14, 100, 0.16)';
+    ctx.shadowBlur = 32;
+    ctx.shadowOffsetY = 16;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.restore();
+
+    // 2. Main Card Background & Rounded Clip
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(cardX, cardY, cardW, cardH, cardRadius);
+
+    // Smooth soft gradient (white to faint lavender on bottom/right)
+    const bgGrad = ctx.createLinearGradient(cardX, cardY, cardX + cardW, cardY + cardH);
     bgGrad.addColorStop(0, '#FFFFFF');
-    bgGrad.addColorStop(0.65, '#FAF8FF');
-    bgGrad.addColorStop(1, '#F5F0FF');
+    bgGrad.addColorStop(0.55, '#FFFFFF');
+    bgGrad.addColorStop(1, '#F3EEFC');
     ctx.fillStyle = bgGrad;
     ctx.fill();
 
-    // Crisp Neo-Brutalist Black Border
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#000000';
-    ctx.stroke();
-    ctx.clip(); // All subsequent elements clip inside the rounded card!
+    // Clip all subsequent drawing inside the rounded card!
+    ctx.clip();
 
-    // 3. Right-Side Angled Speed Capsules (Framing the Photo / Mascot)
-    // Capsule 1 (Upper-Right): .NET Purple -> Azure Blue (Peeks out above photo)
+    // 2.1 Ethereal decorative curves on right/top-right
     ctx.save();
-    ctx.translate(860, 300);
-    ctx.rotate((34 * Math.PI) / 180);
-    const grad1 = ctx.createLinearGradient(0, -280, 0, 280);
-    grad1.addColorStop(0, T.purple);
-    grad1.addColorStop(1, T.blue);
-    ctx.fillStyle = grad1;
-    ctx.beginPath();
-    ctx.roundRect(-65, -280, 130, 560, 65);
-    ctx.fill();
+    const curveGrad = ctx.createRadialGradient(cardX + cardW, cardY, 80, cardX + cardW, cardY, 600);
+    curveGrad.addColorStop(0, 'rgba(81, 43, 212, 0.12)');
+    curveGrad.addColorStop(0.5, 'rgba(81, 43, 212, 0.04)');
+    curveGrad.addColorStop(1, 'rgba(81, 43, 212, 0)');
+    ctx.fillStyle = curveGrad;
+    ctx.fillRect(cardX, cardY, cardW, cardH);
     ctx.restore();
 
-    // Capsule 2 (Lower-Right): Purple Light -> Fuchsia Magenta (Peeks out below photo, parallel)
-    ctx.save();
-    ctx.translate(680, 720);
-    ctx.rotate((34 * Math.PI) / 180);
-    const grad2 = ctx.createLinearGradient(0, -250, 0, 250);
-    grad2.addColorStop(0, T.purpleLight);
-    grad2.addColorStop(1, T.magenta);
-    ctx.fillStyle = grad2;
-    ctx.beginPath();
-    ctx.roundRect(-60, -250, 120, 500, 60);
-    ctx.fill();
-    ctx.restore();
+    // 3. Load External Assets (Rocket, Shield Logo, User Photo / Bot Head, SVG Icons)
+    const buildingSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>`;
+    const calendarSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#120838" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`;
+    const mapPinSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="#512BD4" stroke="#512BD4" stroke-width="1"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3" fill="#FFFFFF"/></svg>`;
+    const globeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#512BD4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>`;
 
-    // 4. Load User Portrait & .NET Bot Mascot
-    const [userImg, mascotImg] = await Promise.all([
-      loadImage(customPhotoUrl),
-      loadImage('/mascot/bot_frontal.png'),
+    const photoSrcToLoad = customPhotoUrl || defaultBotHead;
+
+    const [rocketImg, shieldLogoImg, portraitImg, iconBuilding, iconCalendar, iconMapPin, iconGlobe] = await Promise.all([
+      loadImage('/assets/dotnetconf-bots-rocket-angled.png'),
+      loadImage('/logos/mscprpcem-logo.png'),
+      loadImage(photoSrcToLoad),
+      loadSvg(buildingSvg),
+      loadSvg(calendarSvg),
+      loadSvg(mapPinSvg),
+      loadSvg(globeSvg),
     ]);
 
-    // 5. Draw Attendee Portrait / Mascot (Nestled Seamlessly Between the Capsules!)
-    if (userImg) {
-      const photoW = 500;
-      const photoH = 720;
-      const photoX = 500;
-      const photoY = 320;
+    const leftX = cardX + 64; // 104px inside card
 
-      // Offscreen canvas for soft bottom alpha gradient dissolve (NO box / NO rectangle!)
-      const photoCanvas = document.createElement('canvas');
-      photoCanvas.width = photoW;
-      photoCanvas.height = photoH;
-      const pCtx = photoCanvas.getContext('2d');
-
-      const scale = Math.max(photoW / userImg.width, photoH / userImg.height);
-      const dw = userImg.width * scale;
-      const dh = userImg.height * scale;
-      const dx = (photoW - dw) / 2;
-
-      pCtx.drawImage(userImg, dx, 0, dw, dh);
-
-      // Smooth alpha fade dissolve starting at 62% height
-      pCtx.globalCompositeOperation = 'destination-in';
-      const fadeGrad = pCtx.createLinearGradient(0, photoH * 0.62, 0, photoH);
-      fadeGrad.addColorStop(0, 'rgba(0, 0, 0, 1)');
-      fadeGrad.addColorStop(0.85, 'rgba(0, 0, 0, 0.25)');
-      fadeGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-      pCtx.fillStyle = fadeGrad;
-      pCtx.fillRect(0, 0, photoW, photoH);
-
-      ctx.drawImage(photoCanvas, photoX, photoY);
-    } else if (mascotImg) {
-      // Draw official front-facing .NET Bot proudly nestled between capsules
-      const mW = 420;
-      const mH = 420;
-      const mX = 540;
-      const mY = 510;
-      ctx.save();
-      ctx.shadowColor = 'rgba(18, 8, 56, 0.25)';
-      ctx.shadowBlur = 28;
-      ctx.shadowOffsetY = 14;
-      ctx.drawImage(mascotImg, mX, mY, mW, mH);
-      ctx.restore();
-    }
-
-    // 6. Left Column Content Layout
-    const leftX = cardX + 64;
-    const contentMaxW = 450;
-
-    // ── 6.1 Top Brand Lockup: Host Organization (No redundant icon, name is already there) ──
+    // 4. Top-Left Brand Header
+    // 4.1 "Microsoft Student Club"
     ctx.textAlign = 'left';
     ctx.textBaseline = 'alphabetic';
-    ctx.fillStyle = T.purple;
-    ctx.font = `800 24px ${T.fontDisplay}`;
-    ctx.fillText('Microsoft Student Club', leftX, cardY + 95);
+    ctx.fillStyle = T.purpleDark;
+    ctx.font = `700 25px ${T.fontDisplay}`;
+    ctx.fillText('Microsoft Student Club', leftX, cardY + 74);
 
-    // ── 6.2 Event Headline: .NET Conf 2026 Amravati ──
-    ctx.textBaseline = 'alphabetic';
+    // 4.2 ".NET Conf"
     ctx.fillStyle = T.ink;
-    ctx.font = `900 70px ${T.fontDisplay}`;
-    ctx.fillText('.NET Conf', leftX, cardY + 185);
+    ctx.font = `900 76px ${T.fontDisplay}`;
+    ctx.fillText('.NET Conf', leftX, cardY + 152);
 
-    // "2026" with gradient text
-    const yearText = '2026';
-    ctx.font = `900 64px ${T.fontDisplay}`;
-    const yearW = ctx.measureText(yearText).width;
-    const yearGrad = ctx.createLinearGradient(leftX, 0, leftX + yearW, 0);
-    yearGrad.addColorStop(0, T.purple);
-    yearGrad.addColorStop(0.5, T.magenta);
-    yearGrad.addColorStop(1, T.blue);
-    ctx.fillStyle = yearGrad;
-    ctx.fillText(yearText, leftX, cardY + 256);
-
-    // "Amravati" in .NET Purple
+    // 4.3 "2026 Amravati"
     ctx.fillStyle = T.purple;
-    ctx.font = `900 48px ${T.fontDisplay}`;
-    ctx.fillText('Amravati', leftX + yearW + 18, cardY + 256);
+    ctx.font = `900 66px ${T.fontDisplay}`;
+    ctx.fillText('2026 Amravati', leftX, cardY + 224);
 
-    // ── 6.3 Official 5-Color Ecosystem Accent Bar ──
-    const barY = cardY + 284;
-    const barColors = [T.purple, T.blue, T.teal, T.magenta, T.gold];
-    barColors.forEach((color, idx) => {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.roundRect(leftX + idx * 28, barY, 22, 6, 3);
-      ctx.fill();
-    });
+    // 4.4 Decorative Tech Circuit Line (under "2026 Amravati")
+    const circuitY = cardY + 258;
+    ctx.save();
+    ctx.strokeStyle = T.purple;
+    ctx.fillStyle = T.purple;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
 
-    // ── 6.4 "I'M ATTENDING" Badge Pill (Theme .NET Purple with Magenta Offset) ──
-    const pillY = cardY + 375;
-    const pillText = "I'M ATTENDING";
-    ctx.font = `900 22px ${T.fontDisplay}`;
-    const pillTextW = ctx.measureText(pillText).width;
-    const pillW = pillTextW + 46;
-    const pillH = 48;
-
-    // Magenta offset shadow
-    ctx.fillStyle = T.magenta;
+    // Left dot
     ctx.beginPath();
-    ctx.roundRect(leftX + 3, pillY + 3, pillW, pillH, pillH / 2);
+    ctx.arc(leftX + 4, circuitY, 4.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Pill body
-    ctx.fillStyle = T.purple;
+    // Circuit path with step up
     ctx.beginPath();
-    ctx.roundRect(leftX, pillY, pillW, pillH, pillH / 2);
-    ctx.fill();
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = '#000000';
+    ctx.moveTo(leftX + 6, circuitY);
+    ctx.lineTo(leftX + 140, circuitY);
+    ctx.lineTo(leftX + 155, circuitY - 10);
+    ctx.lineTo(leftX + 255, circuitY - 10);
     ctx.stroke();
 
+    // Right dot
+    ctx.beginPath();
+    ctx.arc(leftX + 259, circuitY - 10, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    // 5. Top-Right MSC PRPCEM Shield Logo
+    if (shieldLogoImg) {
+      const sW = 142;
+      const sH = (shieldLogoImg.height / shieldLogoImg.width) * sW;
+      const sX = cardX + cardW - sW - 52;
+      const sY = cardY + 44;
+      ctx.drawImage(shieldLogoImg, sX, sY, sW, sH);
+    }
+
+    // 6. "I'M ATTENDING" Capsule Pill
+    const pillY = cardY + 294;
+    const pillW = 252;
+    const pillH = 58;
+    const pillR = 29;
+
+    ctx.save();
+    ctx.shadowColor = 'rgba(81, 43, 212, 0.42)';
+    ctx.shadowBlur = 18;
+    ctx.shadowOffsetY = 8;
+
+    const pillGrad = ctx.createLinearGradient(leftX, 0, leftX + pillW, 0);
+    pillGrad.addColorStop(0, '#6318E8');
+    pillGrad.addColorStop(0.5, '#4F1CE4');
+    pillGrad.addColorStop(1, '#3B15D6');
+    ctx.fillStyle = pillGrad;
+    ctx.beginPath();
+    ctx.roundRect(leftX, pillY, pillW, pillH, pillR);
+    ctx.fill();
+    ctx.restore();
+
+    ctx.save();
     ctx.fillStyle = '#FFFFFF';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(pillText, leftX + pillW / 2, pillY + pillH / 2);
+    ctx.font = `900 22px ${T.fontDisplay}`;
+    ctx.fillText("I'M ATTENDING", leftX + pillW / 2, pillY + pillH / 2);
+    ctx.restore();
 
-    // ── 6.5 Attendee Name ──
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'alphabetic';
+    // 7. Middle Row: Attendee Photo & Details (Harmonious proportions)
+    const midY = 428;
+    const photoW = 246;
+    const photoH = 256;
+    const photoR = 26;
+
+    // 7.1 Photo Outer Border (Purple with subtle gap)
+    ctx.save();
+    ctx.strokeStyle = T.purple;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(leftX, midY, photoW, photoH, photoR);
+    ctx.stroke();
+    ctx.restore();
+
+    // 7.2 Draw Attendee Photo or Default Bot Head
+    if (portraitImg) {
+      ctx.save();
+      const inX = leftX + 4;
+      const inY = midY + 4;
+      const inW = photoW - 8;
+      const inH = photoH - 8;
+      const inR = photoR - 4;
+
+      ctx.beginPath();
+      ctx.roundRect(inX, inY, inW, inH, inR);
+      ctx.clip();
+
+      if (customPhotoUrl) {
+        // User uploaded photo: scale to fill (cover)
+        const scale = Math.max(inW / portraitImg.width, inH / portraitImg.height);
+        const dw = portraitImg.width * scale;
+        const dh = portraitImg.height * scale;
+        const dx = inX + (inW - dw) / 2;
+        const dy = inY + (inH - dh) / 2;
+        ctx.drawImage(portraitImg, dx, dy, dw, dh);
+      } else {
+        // Default Bot Head: soft background fill and centered contain
+        ctx.fillStyle = '#F3EEFC';
+        ctx.fillRect(inX, inY, inW, inH);
+
+        const pad = 22;
+        const dw = inW - pad * 2;
+        const dh = inH - pad * 2;
+        const scale = Math.min(dw / portraitImg.width, dh / portraitImg.height);
+        const nw = portraitImg.width * scale;
+        const nh = portraitImg.height * scale;
+        const dx = inX + (inW - nw) / 2;
+        const dy = inY + (inH - nh) / 2;
+        ctx.drawImage(portraitImg, dx, dy, nw, nh);
+      }
+      ctx.restore();
+    }
+
+    // 7.3 Vertical Divider Line between photo and text
+    const dividerX = leftX + photoW + 28;
+    ctx.save();
+    ctx.strokeStyle = T.borderLine;
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(dividerX, midY + 12);
+    ctx.lineTo(dividerX, midY + photoH - 12);
+    ctx.stroke();
+    ctx.restore();
+
+    // 8. Bottom-Right 3D Rocket with .NET Bots (Official DNC illustration)
+    // Anchors the bottom-right corner solidly with proper bottom margin
+    if (rocketImg) {
+      const rW = 520;
+      const rH = (rocketImg.height / rocketImg.width) * rW;
+      const rX = cardX + cardW - rW - 12;
+      const rY = cardY + cardH - rH - 24;
+      ctx.drawImage(rocketImg, rX, rY, rW, rH);
+    }
+
+    // 9. Attendee Information Details (Drawn in front of all background art)
+    const textX = dividerX + 32;
+    const maxTextWidth = cardX + cardW - textX - 36;
+
+    if (name.trim()) {
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = T.ink;
+      let nameFontSize = 44;
+      ctx.font = `900 ${nameFontSize}px ${T.fontDisplay}`;
+      while (ctx.measureText(name.trim()).width > maxTextWidth && nameFontSize > 22) {
+        nameFontSize -= 2;
+        ctx.font = `900 ${nameFontSize}px ${T.fontDisplay}`;
+      }
+      ctx.fillText(name.trim(), textX, midY + 72, maxTextWidth);
+    }
+
+    if (role.trim()) {
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = T.purple;
+      let roleFontSize = 28;
+      ctx.font = `700 ${roleFontSize}px ${T.fontDisplay}`;
+      while (ctx.measureText(role.trim()).width > maxTextWidth && roleFontSize > 16) {
+        roleFontSize -= 2;
+        ctx.font = `700 ${roleFontSize}px ${T.fontDisplay}`;
+      }
+      ctx.fillText(role.trim(), textX, midY + (name.trim() ? 136 : 72), maxTextWidth);
+    }
+
+    if (company.trim()) {
+      const rowCompanyY = midY + (name.trim() && role.trim() ? 202 : (name.trim() || role.trim() ? 136 : 72));
+      if (iconBuilding) {
+        ctx.drawImage(iconBuilding, textX, rowCompanyY - 22, 28, 28);
+      }
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = T.textSlate;
+      let compFontSize = 24;
+      ctx.font = `600 ${compFontSize}px ${T.fontBody}`;
+      const compMaxWidth = maxTextWidth - 40;
+      while (ctx.measureText(company.trim()).width > compMaxWidth && compFontSize > 15) {
+        compFontSize -= 2;
+        ctx.font = `600 ${compFontSize}px ${T.fontBody}`;
+      }
+      ctx.fillText(company.trim(), textX + 38, rowCompanyY, compMaxWidth);
+    }
+
+    // 10. Horizontal Divider Line (below attendee section)
+    const hLineY = midY + photoH + 32;
+    ctx.save();
+    ctx.strokeStyle = T.borderLine;
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    ctx.moveTo(leftX, hLineY);
+    ctx.lineTo(leftX + 470, hLineY);
+    ctx.stroke();
+    ctx.restore();
+
+    // 11. Bottom-Left Section: Date, Venue & Event Portal Link (Cohesive vertical rhythm)
+    const botY = 782;
+
+    // Date
+    if (iconCalendar) {
+      ctx.drawImage(iconCalendar, leftX, botY - 28, 34, 34);
+    }
     ctx.fillStyle = T.ink;
-    const attendeeName = name.trim() || 'Attendee Name';
-    let safeName = attendeeName;
-    ctx.font = `900 52px ${T.fontDisplay}`;
-    if (ctx.measureText(safeName).width > contentMaxW) {
-      ctx.font = `900 42px ${T.fontDisplay}`;
-    }
-    if (ctx.measureText(safeName).width > contentMaxW) {
-      safeName = safeName.slice(0, 18) + '...';
-    }
-    ctx.fillText(safeName, leftX, pillY + 120);
+    ctx.font = `800 32px ${T.fontDisplay}`;
+    ctx.fillText('January 2–3, 2027', leftX + 48, botY);
 
-    // ── 6.6 Role / Designation (.NET Purple Accent) ──
+    // Venue
+    const venueY = 848;
+    if (iconMapPin) {
+      ctx.drawImage(iconMapPin, leftX + 1, venueY - 28, 32, 36);
+    }
+    ctx.fillStyle = T.ink;
+    ctx.font = `700 25px ${T.fontDisplay}`;
+    ctx.fillText('Swami Vivekanand', leftX + 48, venueY - 4);
+    ctx.fillText('Auditorium, PRPCEM', leftX + 48, venueY + 30);
+
+    // Event Portal URL Link (dnc.mscprpcem.tech)
+    const webY = 948;
+    if (iconGlobe) {
+      ctx.drawImage(iconGlobe, leftX + 1, webY - 26, 32, 32);
+    }
     ctx.fillStyle = T.purple;
     ctx.font = `800 26px ${T.fontDisplay}`;
-    const attendeeRole = role.trim() || 'Software Engineer / Student Delegate';
-    let safeRole = attendeeRole;
-    if (ctx.measureText(safeRole).width > contentMaxW) {
-      safeRole = safeRole.slice(0, 32) + '...';
-    }
-    ctx.fillText(safeRole, leftX, pillY + 164);
+    ctx.fillText('dnc.mscprpcem.tech', leftX + 48, webY);
 
-    // ── 6.7 College / Organization ──
-    ctx.fillStyle = T.textMuted;
-    ctx.font = `600 22px ${T.fontBody}`;
-    const attendeeCollege = college.trim() || 'PRPCEM Campus, Amravati';
-    let safeCollege = attendeeCollege;
-    if (ctx.measureText(safeCollege).width > contentMaxW) {
-      safeCollege = safeCollege.slice(0, 34) + '...';
-    }
-    ctx.fillText(safeCollege, leftX, pillY + 204);
+    // 12. Crisp Outer Card Border (Deep Violet / Indigo)
+    ctx.restore(); // restore clip
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(cardX, cardY, cardW, cardH, cardRadius);
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = T.purpleDark;
+    ctx.stroke();
+    ctx.restore();
 
-    // ── 6.8 Date & Venue (Bottom-Left) ──
-    const dateY = cardY + cardH - 105;
-    ctx.fillStyle = T.ink;
-    ctx.font = `900 32px ${T.fontDisplay}`;
-    ctx.fillText('January 2–3, 2027', leftX, dateY);
-
-    ctx.fillStyle = T.textMuted;
-    ctx.font = `700 23px ${T.fontDisplay}`;
-    ctx.fillText('Swami Vivekanand Auditorium, PRPCEM', leftX, dateY + 40);
-
-    // ── 6.9 Bottom Multi-Color Accent Bar ──
-    const lineY = cardY + cardH - 14;
-    const lineGrad = ctx.createLinearGradient(cardX, 0, cardX + cardW, 0);
-    lineGrad.addColorStop(0, T.purple);
-    lineGrad.addColorStop(0.3, T.magenta);
-    lineGrad.addColorStop(0.6, T.blue);
-    lineGrad.addColorStop(1, T.teal);
-    ctx.fillStyle = lineGrad;
-    ctx.fillRect(cardX, lineY, cardW, 6);
-
-    ctx.restore(); // end card clip
     return canvas;
   };
 
   const handleDownloadBadge = async () => {
+    // Enforce mandatory fields before download
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       setIsDownloading(true);
       const canvas = await renderSquareCanvas();
 
       const link = document.createElement('a');
-      link.download = `dnc26-attendee-badge-${(name || 'delegate').toLowerCase().replace(/\s+/g, '-')}.png`;
+      link.download = `dnc26-badge-${name.trim().toLowerCase().replace(/\s+/g, '-')}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (err) {
@@ -366,14 +489,27 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
   const renderStudioContent = () => (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
 
-      {/* Left Column: Form Controls (Styled with theme tokens) */}
-      <div className="lg:col-span-6 bg-white border-2 border-[rgba(81,43,212,0.2)] rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#512BD4] space-y-5 text-left">
+      {/* Left Column: Form Controls */}
+      <div className="lg:col-span-5 bg-white border-2 border-[rgba(81,43,212,0.2)] rounded-2xl p-5 sm:p-7 shadow-[4px_4px_0px_0px_#512BD4] space-y-4 text-left">
 
-        <div className="flex items-center gap-2 pb-2 border-b border-[rgba(81,43,212,0.12)]">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
-          <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
-            Delegate Details
-          </h4>
+        <div className="flex items-center justify-between pb-2 border-b border-[rgba(81,43,212,0.12)]">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
+            <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
+              Delegate Details
+            </h4>
+          </div>
+          {(name || role || company || customPhotoUrl) && (
+            <button
+              type="button"
+              onClick={handleClearInputs}
+              className="text-[11px] font-mono font-bold text-[#F65163] hover:text-red-800 flex items-center gap-1 cursor-pointer transition-colors"
+              title="Clear all fields"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Clear</span>
+            </button>
+          )}
         </div>
 
         {/* Direct Photo Upload Area */}
@@ -390,7 +526,7 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
                 className="text-[11px] text-[#F65163] hover:text-red-800 font-bold flex items-center gap-1 cursor-pointer"
               >
                 <X className="w-3 h-3" />
-                <span>Remove Photo</span>
+                <span>Reset to Bot Head</span>
               </button>
             )}
           </label>
@@ -400,15 +536,15 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
               <img
                 src={customPhotoUrl}
                 alt="Uploaded preview"
-                className="w-14 h-14 rounded-xl object-cover border-2 border-[rgba(81,43,212,0.3)] flex-shrink-0"
+                className="w-14 h-14 rounded-xl object-cover border-2 border-[#512BD4] flex-shrink-0"
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1 text-emerald-700 font-mono font-bold text-xs">
                   <Check className="w-3.5 h-3.5" />
-                  <span>Photo Uploaded</span>
+                  <span>Custom Photo Added</span>
                 </div>
                 <p className="text-[11px] text-[#5C5577] truncate mt-0.5">
-                  Blended seamlessly between speed capsules.
+                  Replaces the default .NET Bot Head.
                 </p>
               </div>
               <button
@@ -425,19 +561,19 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`border-2 border-dashed rounded-xl p-5 text-center cursor-pointer transition-all ${isDragging
+              className={`border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${isDragging
                   ? 'border-[#512BD4] bg-[#EEE7FB]'
                   : 'border-[rgba(81,43,212,0.3)] bg-[#FAF8FF] hover:border-[#512BD4] hover:bg-[#F6F3FC]'
                 }`}
             >
-              <div className="w-11 h-11 rounded-xl bg-[#EEE7FB] border border-[rgba(81,43,212,0.2)] flex items-center justify-center mx-auto mb-2.5 text-[#512BD4] shadow-[2px_2px_0px_0px_#512BD4]">
-                <Upload className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-[#EEE7FB] border border-[rgba(81,43,212,0.2)] flex items-center justify-center mx-auto mb-2 text-[#512BD4] shadow-[2px_2px_0px_0px_#512BD4]">
+                <Upload className="w-4 h-4" />
               </div>
               <p className="text-xs font-mono font-bold text-[#120838] uppercase">
                 Upload Your Portrait Picture
               </p>
-              <p className="text-[11px] text-[#5C5577] mt-1">
-                Click to browse or drag & drop (JPG, PNG, WebP)
+              <p className="text-[11px] text-[#5C5577] mt-0.5">
+                Default: .NET Bot Head &bull; Click to upload JPG, PNG, WebP
               </p>
             </div>
           )}
@@ -451,175 +587,273 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
           />
         </div>
 
-        {/* Attendee Name */}
-        <div className="space-y-1.5">
-          <label htmlFor="badge-name" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
-            <User className="w-3.5 h-3.5 text-[#512BD4]" />
-            <span>Full Name</span>
+        {/* Full Name */}
+        <div className="space-y-1">
+          <label htmlFor="badge-name" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-[#512BD4]" />
+              <span>Full Name</span>
+              <span className="text-rose-500 font-bold">*</span>
+            </span>
           </label>
           <input
             id="badge-name"
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              if (formErrors.name) setFormErrors((p) => ({ ...p, name: null }));
+            }}
+            placeholder="Full Name"
             maxLength={26}
-            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#512BD4] focus:shadow-[3px_3px_0px_0px_#512BD4] transition-all"
+            className={`w-full px-3.5 py-2 rounded-xl border-2 text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none transition-all ${
+              formErrors.name
+                ? 'border-rose-500 focus:border-rose-600 focus:shadow-[3px_3px_0px_0px_#E11D48]'
+                : 'border-[rgba(81,43,212,0.2)] focus:border-[#512BD4] focus:shadow-[3px_3px_0px_0px_#512BD4]'
+            }`}
           />
+          {formErrors.name && (
+            <p className="text-[11px] font-mono font-bold text-rose-600 mt-0.5">
+              {formErrors.name}
+            </p>
+          )}
         </div>
 
         {/* Role / Designation */}
-        <div className="space-y-1.5">
-          <label htmlFor="badge-role" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
-            <Briefcase className="w-3.5 h-3.5 text-[#D600AA]" />
-            <span>Role / Designation</span>
+        <div className="space-y-1">
+          <label htmlFor="badge-role" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              <Briefcase className="w-3.5 h-3.5 text-[#512BD4]" />
+              <span>Role / Designation</span>
+              <span className="text-rose-500 font-bold">*</span>
+            </span>
           </label>
           <input
             id="badge-role"
             type="text"
             value={role}
-            onChange={(e) => setRole(e.target.value)}
-            maxLength={30}
-            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#D600AA] focus:shadow-[3px_3px_0px_0px_#D600AA] transition-all"
+            onChange={(e) => {
+              setRole(e.target.value);
+              if (formErrors.role) setFormErrors((p) => ({ ...p, role: null }));
+            }}
+            placeholder="Role / Designation"
+            maxLength={32}
+            className={`w-full px-3.5 py-2 rounded-xl border-2 text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none transition-all ${
+              formErrors.role
+                ? 'border-rose-500 focus:border-rose-600 focus:shadow-[3px_3px_0px_0px_#E11D48]'
+                : 'border-[rgba(81,43,212,0.2)] focus:border-[#512BD4] focus:shadow-[3px_3px_0px_0px_#512BD4]'
+            }`}
           />
+          {formErrors.role && (
+            <p className="text-[11px] font-mono font-bold text-rose-600 mt-0.5">
+              {formErrors.role}
+            </p>
+          )}
         </div>
 
-        {/* College / Organization */}
-        <div className="space-y-1.5">
-          <label htmlFor="badge-college" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center gap-1.5">
-            <Building2 className="w-3.5 h-3.5 text-[#0B6CFF]" />
-            <span>College / Organization</span>
+        {/* Organization */}
+        <div className="space-y-1">
+          <label htmlFor="badge-company" className="text-xs font-mono font-bold text-[#120838] uppercase flex items-center justify-between">
+            <span className="flex items-center gap-1.5">
+              <Building2 className="w-3.5 h-3.5 text-[#475569]" />
+              <span>Organization</span>
+              <span className="text-rose-500 font-bold">*</span>
+            </span>
           </label>
           <input
-            id="badge-college"
+            id="badge-company"
             type="text"
-            value={college}
-            onChange={(e) => setCollege(e.target.value)}
-            maxLength={35}
-            className="w-full px-3.5 py-2.5 rounded-xl border-2 border-[rgba(81,43,212,0.2)] text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none focus:border-[#0B6CFF] focus:shadow-[3px_3px_0px_0px_#0B6CFF] transition-all"
+            value={company}
+            onChange={(e) => {
+              setCompany(e.target.value);
+              if (formErrors.company) setFormErrors((p) => ({ ...p, company: null }));
+            }}
+            placeholder="Organization"
+            maxLength={40}
+            className={`w-full px-3.5 py-2 rounded-xl border-2 text-sm font-[Inter,sans-serif] font-bold text-[#120838] bg-white focus:outline-none transition-all ${
+              formErrors.company
+                ? 'border-rose-500 focus:border-rose-600 focus:shadow-[3px_3px_0px_0px_#E11D48]'
+                : 'border-[rgba(81,43,212,0.2)] focus:border-[#512BD4] focus:shadow-[3px_3px_0px_0px_#512BD4]'
+            }`}
           />
+          {formErrors.company && (
+            <p className="text-[11px] font-mono font-bold text-rose-600 mt-0.5">
+              {formErrors.company}
+            </p>
+          )}
         </div>
 
       </div>
 
       {/* Right Column: Square Badge Preview & Action Button */}
-      <div className="lg:col-span-6 flex flex-col items-center">
+      <div className="lg:col-span-7 flex flex-col items-center">
 
-        <div className="w-full flex items-center gap-2 pb-2 mb-4 border-b border-[rgba(81,43,212,0.12)]">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#0B6CFF]"></span>
-          <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
-            Badge Preview
-          </h4>
+        <div className="w-full flex items-center justify-between pb-2 mb-4 border-b border-[rgba(81,43,212,0.12)]">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#512BD4]"></span>
+            <h4 className="font-[Outfit,sans-serif] font-black text-sm sm:text-base text-[#120838] uppercase tracking-wider">
+              Live Badge Preview
+            </h4>
+          </div>
+          <span className="text-[11px] font-mono text-stone-500 font-bold">1:1 HD Square</span>
         </div>
 
-        {/* Square Social Badge Preview (1:1 Aspect Ratio) */}
+        {/* Square Social Badge Preview (Exact Match to Reference Card) */}
         <div className="relative select-none flex justify-center w-full">
 
-          {/* Outer 1:1 Square Card (Signature Neo-Brutalist Frame) */}
-          <div className={isModal
-            ? "w-[300px] xs:w-[330px] sm:w-[370px] aspect-square rounded-3xl border-[3px] border-black bg-gradient-to-b from-white via-[#FAF8FF] to-[#F5F0FF] shadow-[6px_6px_0px_0px_#120838] relative overflow-hidden flex flex-col justify-between p-4 sm:p-5 text-left"
-            : "w-[320px] xs:w-[360px] sm:w-[410px] aspect-square rounded-3xl border-[3px] border-black bg-gradient-to-b from-white via-[#FAF8FF] to-[#F5F0FF] shadow-[6px_6px_0px_0px_#120838] relative overflow-hidden flex flex-col justify-between p-5 sm:p-7 text-left"
-          }>
+          {/* Outer Card with Rounded Deep Violet Border (Exact Match to Reference Card) */}
+          <div className="w-full max-w-[480px] aspect-square rounded-[22px] xs:rounded-[28px] sm:rounded-[36px] border-[3px] sm:border-[3.5px] border-[#1F0E64] bg-white relative overflow-hidden flex flex-col justify-between p-4 xs:p-5 sm:p-6 md:p-7 text-left shadow-[0_16px_36px_-12px_rgba(31,14,100,0.22)] select-none">
 
-            {/* Right-Side Angled Speed Capsules (Framing the Photo / Mascot) */}
-            {/* Upper Capsule: peeks out above right shoulder */}
-            <div className="absolute right-3 sm:right-6 top-3 sm:top-5 w-12 sm:w-16 h-48 sm:h-60 rounded-full bg-gradient-to-b from-[#512BD4] to-[#0B6CFF] rotate-[34deg] pointer-events-none select-none opacity-95"></div>
-            {/* Lower Capsule: peeks out below left side, parallel */}
-            <div className="absolute right-14 sm:right-20 bottom-3 sm:bottom-5 w-11 sm:w-15 h-44 sm:h-54 rounded-full bg-gradient-to-b from-[#7B5CE5] to-[#D600AA] rotate-[34deg] pointer-events-none select-none opacity-95"></div>
+            {/* Ambient subtle gradient & soft curved background accents */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#F2EDFD] pointer-events-none"></div>
+            <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-gradient-to-br from-purple-200/40 to-indigo-100/20 blur-2xl pointer-events-none"></div>
+            <div className="absolute right-0 bottom-0 w-80 h-80 rounded-full bg-gradient-to-tl from-purple-200/30 via-violet-100/20 to-transparent blur-3xl pointer-events-none"></div>
 
-            {/* Top Row: Brand Lockup (Host Club Name — No redundant icon) */}
-            <div className="relative z-10 w-full mb-1 sm:mb-1.5 flex items-center">
-              <span className="font-sans font-extrabold text-xs sm:text-sm text-[#512BD4] tracking-wide whitespace-nowrap overflow-visible">
-                Microsoft Student Club
-              </span>
-            </div>
+            {/* Group 1: Top Brand Header + "I'M ATTENDING" Capsule Pill */}
+            <div className="relative z-10 w-full">
+              <div className="flex items-start justify-between w-full">
+                {/* Left Brand Header */}
+                <div>
+                  <p className="font-sans font-bold text-[10.5px] xs:text-xs sm:text-sm text-[#1F0E64] leading-tight">
+                    Microsoft Student Club
+                  </p>
+                  <h2 className="font-sans font-black text-xl xs:text-2xl sm:text-3xl md:text-4xl text-[#0E0329] leading-tight mt-0.5 sm:mt-1">
+                    .NET Conf
+                  </h2>
+                  <div className="font-sans font-black text-lg xs:text-xl sm:text-2xl md:text-3xl text-[#512BD4] leading-tight">
+                    2026 Amravati
+                  </div>
 
-            {/* Event Title: .NET Conf 2026 Amravati */}
-            <div className="relative z-10 max-w-[54%]">
-              <h3 className="font-sans font-black text-lg sm:text-2xl md:text-3xl text-[#120838] leading-tight">
-                .NET Conf
-              </h3>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-sans font-black text-base sm:text-xl md:text-2xl leading-tight bg-gradient-to-r from-[#512BD4] via-[#D600AA] to-[#0B6CFF] bg-clip-text text-transparent">
-                  2026
-                </span>
-                <span className="font-sans font-black text-sm sm:text-lg md:text-xl text-[#512BD4] leading-tight">
-                  Amravati
-                </span>
-              </div>
+                  {/* Decorative Tech Circuit Line */}
+                  <div className="mt-1 xs:mt-1.5 sm:mt-2">
+                    <svg className="w-36 xs:w-44 sm:w-56 h-2.5 sm:h-3.5" viewBox="0 0 240 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="11" r="3.5" fill="#512BD4" />
+                      <path d="M7 11H120L132 5H233" stroke="#512BD4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="236" cy="5" r="3.5" fill="#512BD4" />
+                    </svg>
+                  </div>
+                </div>
 
-              {/* Official 5-Color .NET Ecosystem Accent Bar */}
-              <div className="flex items-center gap-1 my-1 sm:my-1.5">
-                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#512BD4]"></span>
-                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#0B6CFF]"></span>
-                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#28C2D1]"></span>
-                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#D600AA]"></span>
-                <span className="w-2.5 sm:w-3.5 h-1 rounded-full bg-[#F7B548]"></span>
-              </div>
-            </div>
-
-            {/* Middle Row: "I'M ATTENDING" Pill & Attendee Info */}
-            <div className="relative z-10 my-auto max-w-[54%] pr-1">
-              <div className="inline-block bg-[#512BD4] text-white font-sans font-black text-[9px] sm:text-xs px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-[1.5px_1.5px_0px_0px_#D600AA] border border-black mb-1 sm:mb-1.5 select-none tracking-wide">
-                I'M ATTENDING
-              </div>
-
-              <h2 className="font-sans font-black text-sm sm:text-lg md:text-xl text-[#120838] leading-tight tracking-tight break-words">
-                {name.trim() || 'Attendee Name'}
-              </h2>
-
-              <p className="font-sans text-[10.5px] sm:text-xs font-bold text-[#512BD4] leading-snug mt-0.5 break-words">
-                {role.trim() || 'Software Engineer / Student Delegate'}
-              </p>
-
-              <p className="font-sans text-[9.5px] sm:text-[11px] text-[#5C5577] leading-snug break-words">
-                {college.trim() || 'PRPCEM Amravati'}
-              </p>
-            </div>
-
-            {/* Right-Side Attendee Portrait (NESTLED PROUDLY IN BETWEEN THE TWO CAPSULES) */}
-            <div className="absolute right-0 sm:right-2 bottom-0 w-36 xs:w-42 sm:w-48 h-48 sm:h-56 z-20 flex items-end justify-center select-none pointer-events-none">
-              {customPhotoUrl ? (
-                <div className="relative w-full h-full flex items-end justify-center">
+                {/* Right: Official MSC PRPCEM Shield Logo */}
+                <div className="w-12 xs:w-14 sm:w-20 md:w-24 shrink-0 -mt-1 sm:mt-0">
                   <img
-                    src={customPhotoUrl}
-                    alt={name || 'Attendee'}
-                    className="w-full h-full object-cover object-top"
-                    style={{
-                      maskImage: 'linear-gradient(to bottom, black 0%, black 65%, transparent 100%)',
-                      WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 65%, transparent 100%)',
-                    }}
+                    src="/logos/mscprpcem-logo.png"
+                    alt="MSC-PRPCEM Shield"
+                    className="w-full h-auto object-contain filter drop-shadow-sm"
                   />
                 </div>
-              ) : (
-                <div className="relative w-full h-full flex flex-col items-center justify-end pb-1">
-                  <img
-                    src="/mascot/bot_frontal.png"
-                    alt=".NET Bot Mascot"
-                    className="w-28 xs:w-32 sm:w-40 h-28 xs:h-32 sm:h-40 object-contain filter drop-shadow-[0_12px_16px_rgba(18,8,56,0.3)]"
-                  />
+              </div>
+
+              {/* "I'M ATTENDING" Badge Capsule */}
+              <div className="mt-1.5 xs:mt-2 sm:mt-2.5">
+                <div className="inline-flex items-center justify-center px-3.5 xs:px-4 sm:px-6 py-1 xs:py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#6318E8] via-[#4F1CE4] to-[#3B15D6] text-white font-sans font-black text-[9px] xs:text-[10px] sm:text-xs md:text-sm tracking-wider shadow-[0_8px_16px_rgba(81,43,212,0.35)] select-none">
+                  I'M ATTENDING
                 </div>
-              )}
+              </div>
             </div>
 
-            {/* Bottom Row: Date & Venue */}
-            <div className="relative z-10 pt-1">
-              <p className="font-sans font-black text-xs sm:text-sm md:text-base text-[#120838] leading-tight">
-                January 2–3, 2027
-              </p>
-              <p className="font-sans font-semibold text-[10px] sm:text-[11px] md:text-xs text-[#5C5577] leading-tight mt-0.5">
-                Swami Vivekanand Auditorium, PRPCEM
-              </p>
+            {/* Group 2: Middle Row (Attendee Photo & Details) + Anchored Horizontal Divider */}
+            <div className="relative z-20 w-full my-auto py-0.5">
+              <div className="flex items-center gap-2.5 xs:gap-3 sm:gap-4.5">
+                {/* Photo Container with Double Border */}
+                <div className="p-1 sm:p-1.5 rounded-[14px] xs:rounded-[18px] sm:rounded-[22px] border-2 border-[#512BD4] bg-white shadow-sm shrink-0">
+                  <div className="w-14 h-14 xs:w-18 xs:h-18 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-[11px] xs:rounded-[14px] sm:rounded-[18px] overflow-hidden bg-[#F3EEFC] flex items-center justify-center">
+                    {customPhotoUrl ? (
+                      <img
+                        src={customPhotoUrl}
+                        alt={name || 'Attendee'}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    ) : (
+                      <img
+                        src={defaultBotHead}
+                        alt=".NET Bot Head"
+                        className="w-full h-full object-contain p-1.5 sm:p-2 filter drop-shadow-sm"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                {/* Vertical Divider */}
+                <div className="w-[1.5px] h-14 xs:h-18 sm:h-24 md:h-28 bg-[#CBD5E1] shrink-0"></div>
+
+                {/* Attendee Details: Embedded dynamically as user fills in, guaranteed on top of all art */}
+                <div className="flex flex-col justify-center min-w-0 flex-1 pr-1 z-20">
+                  {name.trim() && (
+                    <h3 className="font-sans font-black text-xs xs:text-sm sm:text-lg md:text-xl text-[#0E0329] leading-tight truncate">
+                      {name.trim()}
+                    </h3>
+                  )}
+                  {role.trim() && (
+                    <p className="font-sans font-bold text-[10px] xs:text-xs sm:text-sm md:text-base text-[#512BD4] leading-snug mt-0.5 truncate">
+                      {role.trim()}
+                    </p>
+                  )}
+                  {company.trim() && (
+                    <div className="flex items-center gap-1 sm:gap-1.5 text-[9px] xs:text-[10px] sm:text-xs md:text-sm text-[#334155] font-medium mt-0.5 sm:mt-1 truncate">
+                      <Building2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#475569] shrink-0" />
+                      <span className="truncate">{company.trim()}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Horizontal Divider Line: directly anchored below photo and text */}
+              <div className="w-[55%] h-[1.5px] bg-[#CBD5E1] mt-2 xs:mt-2.5 sm:mt-3"></div>
             </div>
 
-            {/* Bottom Multi-Color Accent Hairline */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#512BD4] via-[#D600AA] to-[#0B6CFF]"></div>
+            {/* Group 3: Bottom Row (Date, Venue & Event Link + Bottom-Right 3D Rocket) */}
+            <div className="relative z-10 flex items-end justify-between w-full">
+              {/* Left: Date & Venue & Event Link */}
+              <div className="space-y-1 xs:space-y-1.5 sm:space-y-2 max-w-[58%] pl-0.5">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <Calendar className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-[#120838] shrink-0" />
+                  <span className="font-sans font-black text-[10.5px] xs:text-xs sm:text-sm md:text-base text-[#0E0329] leading-tight">
+                    January 2–3, 2027
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-1.5 sm:gap-2">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-[#512BD4] fill-[#512BD4] shrink-0 mt-0.5" />
+                  <p className="font-sans font-bold text-[9.5px] xs:text-[10.5px] sm:text-xs md:text-sm text-[#0E0329] leading-tight">
+                    Swami Vivekanand<br />Auditorium, PRPCEM
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-1.5 sm:gap-2 pt-0.5">
+                  <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-[#512BD4] shrink-0" />
+                  <a
+                    href="https://dnc.mscprpcem.tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans font-black text-[9.5px] xs:text-[10.5px] sm:text-xs md:text-sm text-[#512BD4] hover:underline leading-tight tracking-tight cursor-pointer"
+                  >
+                    dnc.mscprpcem.tech
+                  </a>
+                </div>
+              </div>
+
+              {/* Right: 3D Rocket with .NET Bots (Official DNC Illustration) */}
+              <div className="absolute right-0 bottom-0 w-28 xs:w-36 sm:w-44 md:w-54 h-20 xs:h-26 sm:h-32 md:h-40 pointer-events-none select-none flex items-end justify-end z-10">
+                <img
+                  src="/assets/dotnetconf-bots-rocket-angled.png"
+                  alt=".NET Conf Rocket"
+                  className="w-full h-full object-contain object-bottom-right"
+                />
+              </div>
+            </div>
 
           </div>
 
         </div>
 
         {/* Action Button: Download Attendee Badge */}
-        <div className="w-full max-w-[320px] sm:max-w-[410px] mt-6">
+        <div className="w-full max-w-[480px] mt-6">
+          {Object.keys(formErrors).length > 0 && (
+            <p className="text-xs font-mono font-bold text-rose-600 text-center mb-2.5 bg-rose-50 border border-rose-200 py-1.5 px-3 rounded-lg">
+              Please fill in all mandatory fields (*) before downloading.
+            </p>
+          )}
           <button
             type="button"
             onClick={handleDownloadBadge}
@@ -628,9 +862,21 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
           >
             <Download className="w-5 h-5" />
             <span>
-              {isDownloading ? 'DOWNLOADING...' : 'DOWNLOAD'}
+              {isDownloading ? 'GENERATING 1080×1080 HD BADGE...' : 'DOWNLOAD BADGE (HD)'}
             </span>
           </button>
+
+          <div className="mt-3 text-center">
+            <a
+              href="https://dnc.mscprpcem.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#512BD4] hover:text-[#3B15D6] hover:underline transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>Official Portal: dnc.mscprpcem.tech</span>
+            </a>
+          </div>
         </div>
 
       </div>
@@ -656,7 +902,7 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
     );
   }
 
-  // Default: Embedded in main landing page flow at #attendee-badge (matching Tracks, Speakers, CFP, Tickets)
+  // Default: Embedded in main landing page flow at #attendee-badge
   return (
     <section className="section band--purple" id="attendee-badge" style={{ scrollMarginTop: '80px' }}>
       <div className="wrap">

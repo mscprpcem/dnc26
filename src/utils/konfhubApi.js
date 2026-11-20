@@ -47,13 +47,15 @@ export const DEFAULT_KONFHUB_TIERS = [
     id: 127440,
     slug: 'early-bird',
     name: 'Early Bird Pass',
-    badge: 'Phase 01',
+    badge: 'Phase 01 · Sold Out',
     tier: 'Early Bird',
     price: 200,
     currency: 'INR',
     currencySymbol: '₹',
-    urgencyText: null,
-    availableTill: 'Available Till: 30th Dec 2026, 06:00 PM',
+    isSoldOut: true,
+    status: 'Sold Out',
+    urgencyText: 'Sold Out',
+    availableTill: null,
     description: `<ul>
 <li><strong>Welcome Kit</strong> and event merchandise</li>
 <li>Complimentary <strong>high tea, snacks and food</strong></li>
@@ -184,8 +186,9 @@ export const fetchKonfhubTickets = async () => {
       if (!live) return tier;
 
       // Dynamic availability & scarcity messaging directly from live KonfHub API
+      const isSold = Boolean(live.sold_out) || (live.remaining_count !== undefined && live.remaining_count !== null && live.remaining_count <= 0);
       let dynamicUrgency = null;
-      if (live.sold_out) {
+      if (isSold) {
         dynamicUrgency = 'Sold Out';
       } else if (live.low_availability_message) {
         dynamicUrgency = live.low_availability_message;
@@ -193,15 +196,16 @@ export const fetchKonfhubTickets = async () => {
         dynamicUrgency = `Only ${live.remaining_count} tickets left`;
       }
 
-      const dynamicAvailableTill = live.end_timestamp
-        ? formatAvailabilityDate(live.end_timestamp)
-        : tier.availableTill;
+      const dynamicAvailableTill = isSold
+        ? null
+        : (live.end_timestamp ? formatAvailabilityDate(live.end_timestamp) : tier.availableTill);
 
       return {
         ...tier,
+        badge: isSold ? `${tier.tier} · Sold Out` : tier.badge,
         price: live.ticket_price !== undefined ? live.ticket_price : tier.price,
-        isSoldOut: Boolean(live.sold_out),
-        status: live.sold_out ? 'Sold Out' : 'Available',
+        isSoldOut: isSold,
+        status: isSold ? 'Sold Out' : 'Available',
         urgencyText: dynamicUrgency,
         remainingCount: live.remaining_count,
         availableTill: dynamicAvailableTill,

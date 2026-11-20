@@ -70,7 +70,7 @@ export const KonfhubCheckoutModal = ({ isOpen, onClose, selectedTicketId = null 
         <div className="bg-[#FAF5FF] border-b-2 border-black/15 px-3.5 py-2 sm:px-5 flex flex-wrap items-center justify-between text-[11px] sm:text-xs font-mono text-[#512BD4] shrink-0 gap-2">
           <span className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Early Bird, Regular &amp; VIP passes live on KonfHub (PRPCEM Amravati)</span>
+            <span>Regular &amp; VIP passes live on KonfHub · Early Bird Sold Out</span>
           </span>
           <a
             href={KONFHUB_EVENT_URL}

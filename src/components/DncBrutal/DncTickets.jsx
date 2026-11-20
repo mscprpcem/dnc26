@@ -53,14 +53,15 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
         <div className="fares dnc-passes-grid" id="fares">
           {tiers.map((f) => {
             const isFeatured = f.isPopular;
+            const isSoldOut = Boolean(f.isSoldOut || f.status === 'Sold Out' || f.urgencyText?.toLowerCase() === 'sold out');
 
             return (
               <div
                 key={f.id || f.name}
-                className={`fcard ${isFeatured ? 'is-featured relative border-[3px] border-[#512BD4] shadow-[8px_8px_0px_#512BD4]' : ''}`}
+                className={`fcard ${isFeatured ? 'is-featured relative border-[3px] border-[#512BD4] shadow-[8px_8px_0px_#512BD4]' : ''} ${isSoldOut ? 'border-2 border-stone-300 bg-stone-50/50' : ''}`}
                 style={{
                   '--tc': f.color,
-                  background: isFeatured ? '#FAF8FF' : '#FFFFFF',
+                  background: isSoldOut ? '#FCFAFA' : (isFeatured ? '#FAF8FF' : '#FFFFFF'),
                   zIndex: isFeatured ? 2 : 1,
                 }}
               >
@@ -75,10 +76,12 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
                 {/* Card Header */}
                 <div className="flex items-center justify-between mb-2 pt-1">
                   <span
-                    className="fcard__badge text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border"
-                    style={{ color: f.color, borderColor: f.color, background: 'rgba(255,255,255,0.85)' }}
+                    className={`fcard__badge text-[11px] font-mono font-bold px-2.5 py-1 rounded-md border ${
+                      isSoldOut ? 'bg-rose-50 text-rose-700 border-rose-300' : ''
+                    }`}
+                    style={!isSoldOut ? { color: f.color, borderColor: f.color, background: 'rgba(255,255,255,0.85)' } : {}}
                   >
-                    {f.badge}
+                    {isSoldOut ? `${f.tier} · Sold Out` : f.badge}
                   </span>
                   <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#6B6380]">
                     {f.tier}
@@ -87,28 +90,37 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
 
                 {/* Price Display */}
                 <div className="my-2 pb-3 border-b-2 border-stone-200/80">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl sm:text-4xl font-mono font-black text-[#120838]">
-                      {f.currencySymbol}{f.price}
-                    </span>
-                    <span className="text-xs font-mono text-stone-500 uppercase">
-                      / Full 2-Day Pass
-                    </span>
+                  <div className="flex items-baseline justify-between">
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-3xl sm:text-4xl font-mono font-black ${isSoldOut ? 'text-stone-400 line-through' : 'text-[#120838]'}`}>
+                        {f.currencySymbol}{f.price}
+                      </span>
+                      <span className="text-xs font-mono text-stone-500 uppercase">
+                        / Full 2-Day Pass
+                      </span>
+                    </div>
+                    {isSoldOut && (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-mono font-black text-[10px] uppercase tracking-wider shadow-[1px_1px_0px_#120838]">
+                        Sold Out
+                      </span>
+                    )}
                   </div>
                   <h3 className="fcard__title mt-1.5">
                     <span className="text-lg sm:text-xl font-bold">{f.name}</span>
                   </h3>
 
-                  <div className="mt-1.5 flex flex-col gap-1">
-                    <span className="text-[10.5px] font-mono text-stone-600 bg-stone-100 px-2 py-0.5 rounded border border-stone-200/80 w-fit">
-                      {f.availableTill || 'Available Till: 30th Dec 2026, 06:00 PM'}
-                    </span>
-                    {f.urgencyText && (
-                      <span className="text-xs font-mono font-bold text-rose-600">
-                        {f.urgencyText}
+                  {!isSoldOut && (
+                    <div className="mt-1.5 flex flex-col gap-1">
+                      <span className="text-[10.5px] font-mono text-stone-600 bg-stone-100 px-2 py-0.5 rounded border border-stone-200/80 w-fit">
+                        {f.availableTill || 'Available Till: 30th Dec 2026, 06:00 PM'}
                       </span>
-                    )}
-                  </div>
+                      {f.urgencyText && (
+                        <span className="text-xs font-mono font-bold text-rose-600">
+                          {f.urgencyText}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* What's Included Ticket Description (from KonfHub) */}
@@ -129,17 +141,27 @@ export const DncTickets = ({ onOpenBadge, onOpenRegister, onOpenCheckout }) => {
 
                 {/* CTAs */}
                 <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column' }}>
-                  <button
-                    type="button"
-                    className="btn btn--primary btn--md w-full justify-center cursor-pointer"
-                    onClick={() => handleBookTicket(f)}
-                  >
-                    <Ticket className="w-4 h-4 shrink-0" />
-                    <span>Book {f.name}</span>
-                    <svg className="btn__arrow shrink-0" width="14" height="14" aria-hidden="true">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </button>
+                  {isSoldOut ? (
+                    <button
+                      type="button"
+                      disabled
+                      className="w-full justify-center flex items-center gap-2 py-3 px-4 rounded-xl font-mono font-bold text-xs sm:text-sm uppercase tracking-wider bg-stone-200 text-stone-500 border-2 border-stone-300 cursor-not-allowed select-none shadow-none"
+                    >
+                      <span>Passes Sold Out</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn--primary btn--md w-full justify-center cursor-pointer"
+                      onClick={() => handleBookTicket(f)}
+                    >
+                      <Ticket className="w-4 h-4 shrink-0" />
+                      <span>Book {f.name}</span>
+                      <svg className="btn__arrow shrink-0" width="14" height="14" aria-hidden="true">
+                        <use href="#i-arrow" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
             );
