@@ -7,20 +7,12 @@ import {
   YouTubeIcon,
   GitHubIcon,
 } from '../ui/SocialIcons.jsx';
+import { scrollToSection } from '../../utils/sectionRouter.js';
 
 export const DncFooter = () => {
-  const handleScrollTo = (e, id) => {
+  const handleScrollTo = (e, target) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      const navOffset = 80;
-      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(0, elementPosition - navOffset);
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    scrollToSection(target, true);
   };
 
   return (
@@ -76,14 +68,14 @@ export const DncFooter = () => {
           <div className="foot__col">
             <h4>Quick Navigation</h4>
             <div className="foot__nav">
-              <a href="#about" onClick={(e) => handleScrollTo(e, 'about')}>About the Summit</a>
-              <a href="#themes" onClick={(e) => handleScrollTo(e, 'themes')}>Summit Themes</a>
-              <a href="#speakers" onClick={(e) => handleScrollTo(e, 'speakers')}>Call for Speakers</a>
-              <a href="#zones" onClick={(e) => handleScrollTo(e, 'zones')}>Booths &amp; Experience Zones</a>
-              <a href="#tickets" onClick={(e) => handleScrollTo(e, 'tickets')}>Delegate Passes (KonfHub)</a>
-              <a href="/badge">Attendee Badge Studio</a>
-              <a href="#schedule" onClick={(e) => handleScrollTo(e, 'schedule')}>Schedule</a>
-              <a href="#faq" onClick={(e) => handleScrollTo(e, 'faq')}>FAQ</a>
+              <a href="/about" onClick={(e) => handleScrollTo(e, '/about')}>About the Summit</a>
+              <a href="/themes" onClick={(e) => handleScrollTo(e, '/themes')}>Summit Themes</a>
+              <a href="/speakers" onClick={(e) => handleScrollTo(e, '/speakers')}>Call for Speakers</a>
+              <a href="/zones" onClick={(e) => handleScrollTo(e, '/zones')}>Booths &amp; Experience Zones</a>
+              <a href="/tickets" onClick={(e) => handleScrollTo(e, '/tickets')}>Delegate Passes (KonfHub)</a>
+              <a href="/badge" onClick={(e) => handleScrollTo(e, '/badge')}>Attendee Badge Studio</a>
+              <a href="/schedule" onClick={(e) => handleScrollTo(e, '/schedule')}>Schedule</a>
+              <a href="/faq" onClick={(e) => handleScrollTo(e, '/faq')}>FAQ</a>
             </div>
           </div>
 

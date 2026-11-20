@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { scrollToSection } from '../../utils/sectionRouter.js';
 
 export const DncNavbar = ({ onOpenRegister }) => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -27,15 +28,17 @@ export const DncNavbar = ({ onOpenRegister }) => {
   }, [isSheetOpen]);
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Speakers', href: '#speakers' },
-    { label: 'Tickets', href: '#tickets' },
-    { label: 'Badge', href: '#attendee-badge' },
-    { label: 'Sponsors', href: '#sponsors' },
+    { label: 'About', href: '/about' },
+    { label: 'Speakers', href: '/speakers' },
+    { label: 'Tickets', href: '/tickets' },
+    { label: 'Badge', href: '/badge' },
+    { label: 'Sponsors', href: '/sponsors' },
   ];
 
   const handleLinkClick = (e, href) => {
-    e.preventDefault();
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
 
     // 1. Immediately release mobile sheet scroll lock
     if (isSheetOpen) {
@@ -44,25 +47,21 @@ export const DncNavbar = ({ onOpenRegister }) => {
       document.documentElement.style.overflow = '';
     }
 
-    // 2. Scroll to top / home
-    if (href === '#top' || href === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 2. If on a standalone sub-page, navigate back to main page at href
+    const path = window.location.pathname.toLowerCase();
+    const isStandaloneSubpage = path.includes('code-of-conduct') ||
+                                path.includes('privacy') ||
+                                path.includes('sponsorship') ||
+                                path.includes('schedule-page') ||
+                                path.includes('badge-studio');
+
+    if (isStandaloneSubpage) {
+      window.location.href = href;
       return;
     }
 
-    // 3. In-page smooth scroll on the same page with exact 80px fixed navbar clearance
-    const target = href.replace('#', '');
-    const el = document.getElementById(target);
-    if (el) {
-      const navOffset = 80;
-      const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-      const offsetPosition = Math.max(0, elementPosition - navOffset);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    // 3. In-page smooth scroll + update URL history to /about, /speakers, /tickets, /badge, /sponsors
+    scrollToSection(href, true);
   };
 
   return (
@@ -72,8 +71,8 @@ export const DncNavbar = ({ onOpenRegister }) => {
           {/* Brand Lockup */}
           <a
             className="nav__brand shrink-0"
-            href="#top"
-            onClick={(e) => handleLinkClick(e, '#top')}
+            href="/"
+            onClick={(e) => handleLinkClick(e, '/')}
             aria-label=".NET Conf 2026 Amravati — home"
           >
             <div className="flex flex-col text-left">
@@ -106,12 +105,11 @@ export const DncNavbar = ({ onOpenRegister }) => {
             <button
               type="button"
               className="btn btn--primary btn--sm nav__cta hidden sm:inline-flex shrink-0 cursor-pointer"
-              onClick={() => {
+              onClick={(e) => {
                 if (onOpenRegister) {
                   onOpenRegister();
                 } else {
-                  const el = document.getElementById('tickets');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  handleLinkClick(e, '/tickets');
                 }
               }}
             >

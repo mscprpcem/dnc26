@@ -32,7 +32,7 @@ export const App = () => {
       if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
         return 'sponsorship';
       }
-      if (search.includes('view=badge') || path === '/badge' || path === '/attendee-badge') {
+      if (search.includes('view=badge') || path === '/badge-studio' || path === '/badge-page') {
         return 'badge';
       }
       return 'dnc-brutal';
@@ -59,7 +59,7 @@ export const App = () => {
         setCurrentView('schedule');
       } else if (search.includes('view=sponsorship') || search.includes('view=sponshirp') || hash.includes('sponsorship') || hash.includes('sponshirp') || path === '/sponsorship' || path === '/sponshirp' || path === '/sponsorships') {
         setCurrentView('sponsorship');
-      } else if (search.includes('view=badge') || path === '/badge' || path === '/attendee-badge') {
+      } else if (search.includes('view=badge') || path === '/badge-studio' || path === '/badge-page') {
         setCurrentView('badge');
       } else {
         setCurrentView('dnc-brutal');

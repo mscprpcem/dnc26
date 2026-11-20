@@ -22,6 +22,7 @@ import DncAttendeeBadge from './DncAttendeeBadge.jsx';
 import DncInterestForm from './DncInterestForm.jsx';
 import KonfhubCheckoutModal from './KonfhubCheckoutModal.jsx';
 import { ArrowUp, X } from 'lucide-react';
+import { scrollToSection, normalizePath } from '../../utils/sectionRouter.js';
 
 export const DncBrutalPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -44,6 +45,27 @@ export const DncBrutalPage = () => {
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // If arriving directly with a section URL (e.g. /about, /speakers, /tickets, /badge, /sponsors)
+    const initialPath = normalizePath(window.location.pathname);
+    if (initialPath !== '/' && initialPath !== '') {
+      const timer = setTimeout(() => {
+        scrollToSection(initialPath, false);
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const currentPath = normalizePath(window.location.pathname);
+      scrollToSection(currentPath, false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   useEffect(() => {
