@@ -28,7 +28,7 @@ export const DncAgenda = () => {
         barWidth: '82%',
       },
       {
-        time: '13:00',
+        time: '13:00 – 14:00',
         title: 'Delegate Buffet Lunch & Networking',
         desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
         isConfirmed: true,
@@ -73,9 +73,15 @@ export const DncAgenda = () => {
         barWidth: '80%',
       },
       {
-        time: '13:00',
+        time: '13:00 – 14:00',
         title: 'Delegate Buffet Lunch & Networking',
         desc: 'Catered auditorium lunch and networking discussions at the campus lounge.',
+        isConfirmed: true,
+      },
+      {
+        time: '14:00 – 14:20',
+        title: 'Sponsored Talk · Packt Team',
+        desc: 'Special presentation with the Packt team on developer learning pathways, technical publishing, and activating your 1-year complimentary subscription.',
         isConfirmed: true,
       },
       {
@@ -113,7 +119,7 @@ export const DncAgenda = () => {
             </h2>
           </div>
           <p className="lede">
-            Curated across Generative AI, GitHub Copilot, Azure Cloud, and Modern .NET on the main stage. Check-in, Lunch, and Closing Ceremony confirmed &mdash; keynote &amp; technical sessions releasing soon.
+            Curated across Generative AI, GitHub Copilot, Azure Cloud, and Modern .NET on the main stage. Check-in, Lunch, Sponsored Talk, and Closing Ceremonies confirmed &mdash; technical sessions releasing soon.
           </p>
         </div>
 
