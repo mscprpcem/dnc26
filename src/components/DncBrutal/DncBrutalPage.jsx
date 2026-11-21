@@ -19,9 +19,8 @@ import DncFAQ from './DncFAQ.jsx';
 import DncRegisterCTA from './DncRegisterCTA.jsx';
 import DncFooter from './DncFooter.jsx';
 import DncAttendeeBadge from './DncAttendeeBadge.jsx';
-import DncInterestForm from './DncInterestForm.jsx';
 import KonfhubCheckoutModal from './KonfhubCheckoutModal.jsx';
-import { ArrowUp, X } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { scrollToSection, normalizePath } from '../../utils/sectionRouter.js';
 
 export const DncBrutalPage = () => {
@@ -214,46 +213,6 @@ export const DncBrutalPage = () => {
         }}
         selectedTicketId={selectedCheckoutTicket}
       />
-
-      {/* Interactive Modal: Priority Interest Registration Form */}
-      {activeModal === 'register' && (
-        <div 
-          className="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-6 overflow-hidden overscroll-contain modal-overlay"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setActiveModal(null);
-          }}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div 
-            className="relative w-full max-w-lg bg-[#FAF8F5] border-[3px] border-black rounded-2xl sm:rounded-3xl p-4 sm:p-5.5 shadow-[8px_8px_0px_#120838] my-auto max-h-[92vh] overflow-y-auto overscroll-contain custom-modal-scrollbar no-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            <button
-              onClick={() => setActiveModal(null)}
-              className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 w-9 h-9 rounded-xl border-2 border-black bg-white hover:bg-[#FFD13B] text-black shadow-[2px_2px_0px_#000] hover:translate-x-[1px] hover:translate-y-[1px] transition-all flex items-center justify-center cursor-pointer z-30"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5 stroke-[2.5]" />
-            </button>
-            <div id="interest-form">
-              <DncInterestForm 
-                isModal={true} 
-                onClose={() => setActiveModal(null)} 
-                onOpenBadge={() => {
-                  setActiveModal(null);
-                  const el = document.getElementById('attendee-badge');
-                  if (el) {
-                    el.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    window.location.href = '/badge';
-                  }
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
