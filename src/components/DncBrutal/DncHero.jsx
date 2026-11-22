@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { scrollToSection } from '../../utils/sectionRouter.js';
 
 export const DncHero = ({ onOpenRegister }) => {
   // Target conference date: January 2-3, 2027 09:00:00 IST
@@ -101,16 +102,19 @@ export const DncHero = ({ onOpenRegister }) => {
 
         {/* Dual Primary CTA Buttons (Interchanged above Rocket) */}
         <div className="hero__cta">
-          <button
-            type="button"
+          <a
             className="btn btn--primary btn--lg cursor-pointer"
-            onClick={onOpenRegister || ((e) => handleSmoothScroll(e, 'tickets'))}
+            href="/tickets"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('/tickets', true);
+            }}
           >
             <span>Get Tickets</span>
             <svg className="btn__arrow" width="18" height="18" aria-hidden="true">
               <use href="#i-arrow" />
             </svg>
-          </button>
+          </a>
           <a
             className="btn btn--gold btn--lg"
             href="https://sessionize.com/dnc26/"
