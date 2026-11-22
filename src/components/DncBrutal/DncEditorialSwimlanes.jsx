@@ -17,13 +17,13 @@ export const DncEditorialSwimlanes = () => {
           <p className="eyebrow">About .NET Conf 2026</p>
           <h2 className="h-sec">
             Not Just .NET.<br />
-            AI, GitHub, Cloud &amp; Tools.
+            AI, GitHub, Cloud, IBM &amp; Tools.
           </h2>
 
           <div className="prose">
             <p>Welcome to <strong>.NET Conf 2026 Amravati</strong> &mdash; Central India&apos;s premier developer summit uniting the entire Microsoft engineering ecosystem, hosted by Microsoft Student Club PRPCEM.</p>
             <p>
-              Going far beyond a single runtime, we bring together the complete modern stack: <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps Pipelines</strong>, <strong>Microsoft Azure Cloud</strong>, and <strong>High-Performance .NET 11</strong>.
+              Going far beyond a single runtime, we bring together the complete modern stack: <strong>Generative AI &amp; Autonomous Agents</strong>, <strong>GitHub Copilot &amp; DevOps Pipelines</strong>, <strong>Microsoft Azure Cloud</strong>, <strong>High-Performance .NET 11</strong>, and <strong>Enterprise Cloud &amp; AI with dedicated IBM sessions</strong>.
             </p>
           </div>
 
@@ -44,11 +44,15 @@ export const DncEditorialSwimlanes = () => {
               <span className="needs__n">04</span>
               <span className="needs__t">Engineer ultra-fast backends with <strong>.NET 11 Runtime &amp; Native AOT.</strong></span>
             </li>
+            <li>
+              <span className="needs__n">05</span>
+              <span className="needs__t">Enterprise AI, hybrid cloud &amp; watsonx with <strong>dedicated IBM sessions.</strong></span>
+            </li>
           </ul>
 
           <div className="prose">
             <p>
-              From student coders to enterprise architects &mdash; learn directly from Microsoft MVPs, dive into hands-on code labs, and connect with peers building tomorrow&apos;s software. <span className="u-mark">Be a force for good.</span>
+              From student coders to enterprise architects &mdash; learn directly from Microsoft MVPs and IBM leaders, dive into hands-on code labs (including dedicated IBM sessions), and connect with peers building tomorrow&apos;s software. <span className="u-mark">Be a force for good.</span>
             </p>
           </div>
 
@@ -99,7 +103,7 @@ export const DncEditorialSwimlanes = () => {
               </span>
               <span>
                 <span className="arc__t">02 · Deep-Dive Technical Sessions</span>
-                <span className="arc__d">Engaging stage sessions covering Autonomous AI Agents, GitHub DevOps, Azure Cloud-Native, and Modern .NET.</span>
+                <span className="arc__d">Engaging stage sessions covering Autonomous AI Agents, GitHub DevOps, Azure Cloud-Native, Modern .NET, and dedicated IBM sessions.</span>
               </span>
             </div>
 
@@ -112,7 +116,7 @@ export const DncEditorialSwimlanes = () => {
               </span>
               <span>
                 <span className="arc__t">03 · Hands-On Labs &amp; MVP Mentorship</span>
-                <span className="arc__d">Code alongside Microsoft MVPs: orchestrate LLMs with Semantic Kernel, automate CI/CD, and deploy to Azure.</span>
+                <span className="arc__d">Code alongside Microsoft MVPs: orchestrate LLMs with Semantic Kernel, automate CI/CD, deploy to Azure, and explore IBM tracks.</span>
               </span>
             </div>
 

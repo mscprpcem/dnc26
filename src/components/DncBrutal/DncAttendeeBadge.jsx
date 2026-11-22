@@ -865,18 +865,6 @@ export const DncAttendeeBadge = ({ isModal = false, isStandalonePage = false }) 
               {isDownloading ? 'GENERATING 1080×1080 HD BADGE...' : 'DOWNLOAD BADGE (HD)'}
             </span>
           </button>
-
-          <div className="mt-3 text-center">
-            <a
-              href="https://dnc.mscprpcem.tech"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#512BD4] hover:text-[#3B15D6] hover:underline transition-colors"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              <span>Official Portal: dnc.mscprpcem.tech</span>
-            </a>
-          </div>
         </div>
 
       </div>
