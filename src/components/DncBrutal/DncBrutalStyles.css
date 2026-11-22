@@ -4010,6 +4010,82 @@ body:has(.modal-container-wrapper) button[aria-label="Scroll to top"] {
 }
 
 /* ============================================================
+   SPEAKER BIO MODAL RESPONSIVE MEDIA QUERIES
+   ============================================================ */
+.section:has(.speaker-modal-overlay),
+#speakers:has(.speaker-modal-overlay) {
+  z-index: 10001 !important;
+}
+
+.speaker-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5rem 1.25rem 2rem 1.25rem;
+  overflow-y: auto;
+}
+
+.speaker-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 0px #120838;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - 7rem);
+  margin: auto;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .speaker-modal-overlay {
+    padding: 5.25rem 1.25rem 1.75rem 1.25rem;
+  }
+
+  .speaker-modal-card {
+    max-height: calc(100dvh - 6.5rem);
+    padding: 1.5rem 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .speaker-modal-overlay {
+    padding: 4.75rem 1rem 1.5rem 1rem;
+  }
+
+  .speaker-modal-card {
+    padding: 1.25rem 1.25rem;
+    border-radius: 1.25rem;
+    box-shadow: 6px 6px 0px #120838;
+    max-height: calc(100dvh - 5.5rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .speaker-modal-overlay {
+    padding: 4.25rem 0.65rem 1rem 0.65rem;
+  }
+
+  .speaker-modal-card {
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+    border-width: 2.5px;
+    box-shadow: 4px 4px 0px #120838;
+    max-height: calc(100dvh - 4.75rem);
+  }
+}
+
+/* ============================================================
    SPONSORSHIP PROSPECTUS ENHANCEMENTS & MEDIA QUERIES
    ============================================================ */
 .sponsorship-page .btn {
