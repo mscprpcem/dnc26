@@ -89,7 +89,7 @@ export const DncFooter = () => {
               <a href="https://www.mscprpcem.tech" target="_blank" rel="noopener noreferrer">About MSC PRPCEM</a>
               <a href="https://dotnet.microsoft.com" target="_blank" rel="noopener noreferrer">Official .NET Portal</a>
               <a href="https://dotnetfoundation.org" target="_blank" rel="noopener noreferrer">.NET Foundation</a>
-              <a href="/funding.json" target="_blank" rel="noopener noreferrer">Funding Manifest</a>
+              <a href="/press-kit.pdf" target="_blank" rel="noopener noreferrer">Official Press Kit</a>
             </div>
           </div>
         </div>

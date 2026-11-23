@@ -152,9 +152,17 @@ export const DncHero = ({ onOpenRegister }) => {
                   <path d="M6 12h.01M18 12h.01"></path>
                 </svg>
               </span>
-              <b>Tickets coming soon</b>
-              <span>Super Early Bird passes releasing soon. Limited delegate seats.</span>
-              <a href="#tickets" onClick={(e) => handleSmoothScroll(e, 'tickets')}>Coming soon →</a>
+              <b>Tickets are live</b>
+              <span>Early Bird, Regular &amp; VIP passes available now. Limited delegate seats.</span>
+              <a
+                href="/tickets"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('/tickets', true);
+                }}
+              >
+                Get tickets →
+              </a>
             </li>
             <li className="road__stop is-next">
               <span className="road__node" aria-hidden="true">
