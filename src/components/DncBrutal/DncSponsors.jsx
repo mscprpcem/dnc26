@@ -668,9 +668,6 @@ export const DncSponsors = () => {
               <h3 className="font-sans text-xl sm:text-2xl font-black text-[#120838] tracking-tight">
                 Partner with .NET Conf 2026
               </h3>
-              <p className="text-xs sm:text-sm text-stone-600 mt-0.5">
-                Direct inquiry to the .NET Conf 2026 Sponsorship Committee.
-              </p>
             </div>
 
             {formStatus === 'success' ? (
@@ -682,11 +679,8 @@ export const DncSponsors = () => {
                   Inquiry Submitted Successfully!
                 </h4>
                 <p className="text-sm text-stone-700 leading-relaxed max-w-md mx-auto">
-                  Thank you, <strong>{lastSubmittedData?.contactName || contactName}</strong>! Your inquiry on behalf of <strong>{lastSubmittedData?.companyName || companyName}</strong> for <strong>{lastSubmittedData?.tier || selectedTier}</strong> has been logged.
+                  Thank you, <strong>{lastSubmittedData?.contactName || contactName}</strong>! Your inquiry on behalf of <strong>{lastSubmittedData?.companyName || companyName}</strong> has been received. Our team will review your details and get in touch shortly.
                 </p>
-                <div className="p-2.5 bg-white rounded-lg border border-black/20 text-xs font-mono text-stone-600">
-                  A confirmation has been queued for <strong>{lastSubmittedData?.email || workEmail}</strong>.
-                </div>
                 <div className="pt-2 flex justify-center gap-3">
                   <button
                     type="button"

@@ -7,7 +7,7 @@
 export const SPONSORSHIP_API_ENDPOINT = 
   import.meta.env.VITE_SPONSORSHIP_SCRIPT_URL || 
   import.meta.env.VITE_WEBHOOK_URL || 
-  '';
+  'https://script.google.com/macros/s/AKfycbyeSjQRptZEx8bartfYPmpp3yCmX3UoGihuceA7PhHVsqmoPkq7vl73W2y3ZYoXMPsq/exec';
 
 export const SPONSORSHIP_TIER_OPTIONS = [
   {
