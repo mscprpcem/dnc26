@@ -3030,6 +3030,9 @@ body:has(.modal-container-wrapper) button[aria-label="Scroll to top"] {
   align-items: center;
   gap: 0.85rem;
   min-height: 76px;
+  width: auto;
+  max-width: fit-content;
+  flex: 0 1 auto;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
@@ -3724,11 +3727,16 @@ body:has(.modal-container-wrapper) button[aria-label="Scroll to top"] {
     padding: 0.5rem 0.75rem;
   }
 
-  .sponsor-tile--wide,
-  .slot-card {
+  .sponsor-tile--wide {
     grid-column: 1 / -1;
     width: 100%;
     min-width: 0;
+  }
+
+  .slot-card {
+    width: auto;
+    max-width: 100%;
+    flex: 0 1 auto;
   }
 
   .sponsor-tile-img {

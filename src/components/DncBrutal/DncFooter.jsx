@@ -15,6 +15,13 @@ export const DncFooter = () => {
     scrollToSection(target, true);
   };
 
+  const handlePageNavigation = (e, path) => {
+    e.preventDefault();
+    window.history.pushState({}, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="foot" id="footer">
       {/* Top Skyline Divider */}
@@ -64,32 +71,29 @@ export const DncFooter = () => {
             </div>
           </div>
 
-          {/* Quick Links Column */}
+          {/* Conference Links Column */}
           <div className="foot__col">
-            <h4>Quick Navigation</h4>
+            <h4>Conference</h4>
             <div className="foot__nav">
               <a href="/about" onClick={(e) => handleScrollTo(e, '/about')}>About the Summit</a>
-              <a href="/themes" onClick={(e) => handleScrollTo(e, '/themes')}>Summit Themes</a>
-              <a href="/speakers" onClick={(e) => handleScrollTo(e, '/speakers')}>Call for Speakers</a>
-              <a href="/zones" onClick={(e) => handleScrollTo(e, '/zones')}>Booths &amp; Experience Zones</a>
-              <a href="/tickets" onClick={(e) => handleScrollTo(e, '/tickets')}>Delegate Passes</a>
               <a href="/badge" onClick={(e) => handleScrollTo(e, '/badge')}>Attendee Badge Studio</a>
-              <a href="/schedule" onClick={(e) => handleScrollTo(e, '/schedule')}>Schedule</a>
-              <a href="/faq" onClick={(e) => handleScrollTo(e, '/faq')}>FAQ</a>
+              <a href="/sponsors" onClick={(e) => handleScrollTo(e, '/sponsors')}>Sponsors &amp; Partners</a>
+              <a href="/sponsorship" onClick={(e) => handlePageNavigation(e, '/sponsorship')}>Sponsorship Prospectus</a>
+              <a href="/press-kit.pdf" target="_blank" rel="noopener noreferrer">Official Press Kit (PDF)</a>
+              <a href="https://sessionize.com/dnc26/" target="_blank" rel="noopener noreferrer">Call for Speakers (Sessionize)</a>
             </div>
           </div>
 
-          {/* Guidelines & Community Column */}
+          {/* Community & Safety Column */}
           <div className="foot__col">
             <h4>Community &amp; Safety</h4>
             <div className="foot__nav">
-              <a href="/code-of-conduct">Code of Conduct</a>
-              <a href="/privacy-policy">Privacy Policy</a>
-              <a href="/sponsorship">Sponsorship &amp; Tiers</a>
+              <a href="/code-of-conduct" onClick={(e) => handlePageNavigation(e, '/code-of-conduct')}>Code of Conduct</a>
+              <a href="/privacy-policy" onClick={(e) => handlePageNavigation(e, '/privacy-policy')}>Privacy Policy</a>
+              <a href="https://prpotepatilengg.ac.in/" target="_blank" rel="noopener noreferrer">Host: PRPCEM Amravati</a>
               <a href="https://www.mscprpcem.tech" target="_blank" rel="noopener noreferrer">About MSC PRPCEM</a>
-              <a href="https://dotnet.microsoft.com" target="_blank" rel="noopener noreferrer">Official .NET Portal</a>
+              <a href="https://dotnet.microsoft.com" target="_blank" rel="noopener noreferrer">Official Microsoft .NET</a>
               <a href="https://dotnetfoundation.org" target="_blank" rel="noopener noreferrer">.NET Foundation</a>
-              <a href="/press-kit.pdf" target="_blank" rel="noopener noreferrer">Official Press Kit</a>
             </div>
           </div>
         </div>
@@ -102,7 +106,7 @@ export const DncFooter = () => {
           <div className="flex items-center gap-4">
             <span className="font-mono font-bold text-[#512BD4]">Be a force for good.</span>
             <span className="dot" aria-hidden="true"></span>
-            <span>PRPCEM Campus, Amravati</span>
+            <span>MSC PRPCEM</span>
           </div>
         </div>
       </div>

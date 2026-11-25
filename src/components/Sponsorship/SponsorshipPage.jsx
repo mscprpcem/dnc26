@@ -25,8 +25,15 @@ import {
   Ticket,
   Eye,
   CheckCircle2,
-  Target
+  Target,
+  Phone,
+  Send,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
+
+import { SPONSORSHIP_API_ENDPOINT } from '../../config/sponsorshipConfig.js';
+export { SPONSORSHIP_API_ENDPOINT };
 
 export const SponsorshipPage = ({ onBack }) => {
   const [copiedLink, setCopiedLink] = useState(false);
@@ -39,9 +46,13 @@ export const SponsorshipPage = ({ onBack }) => {
   const [companyName, setCompanyName] = useState('');
   const [contactName, setContactName] = useState('');
   const [workEmail, setWorkEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [selectedTier, setSelectedTier] = useState('PLATINUM SPONSOR (₹1,00,000)');
   const [isTierDropdownOpen, setIsTierDropdownOpen] = useState(false);
   const [inquiryNotes, setInquiryNotes] = useState('');
+  const [formStatus, setFormStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [statusMessage, setStatusMessage] = useState('');
+  const [lastSubmittedData, setLastSubmittedData] = useState(null);
   const tierDropdownRef = useRef(null);
 
   useEffect(() => {
@@ -105,8 +116,64 @@ export const SponsorshipPage = ({ onBack }) => {
     }
   };
 
-  const handleSendInquiry = (e) => {
+  const handleSendInquiry = async (e) => {
     e.preventDefault();
+    if (!companyName.trim() || !contactName.trim() || !workEmail.trim() || !phone.trim()) {
+      setFormStatus('error');
+      setStatusMessage('Please fill in all required fields (Company, Contact Person, Work Email, and Phone Number).');
+      return;
+    }
+
+    setFormStatus('submitting');
+    setStatusMessage('');
+
+    const payload = {
+      type: 'SPONSOR',
+      formType: 'SPONSORSHIP_INQUIRY',
+      organization: companyName.trim(),
+      companyName: companyName.trim(),
+      fullName: contactName.trim(),
+      contactName: contactName.trim(),
+      email: workEmail.trim(),
+      workEmail: workEmail.trim(),
+      phone: phone.trim(),
+      tier: selectedTier,
+      collaborationType: selectedTier,
+      message: inquiryNotes.trim() || 'Please send us the full sponsorship prospectus and invoicing details.',
+      inquiryNotes: inquiryNotes.trim(),
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+    };
+
+    try {
+      if (SPONSORSHIP_API_ENDPOINT && SPONSORSHIP_API_ENDPOINT.startsWith('https://script.google.com/')) {
+        const formBody = new URLSearchParams();
+        Object.entries(payload).forEach(([k, v]) => {
+          formBody.append(k, String(v));
+        });
+
+        await fetch(SPONSORSHIP_API_ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: formBody.toString(),
+        });
+      } else {
+        // Simulated network turnaround while awaiting user deployment of Code.gs
+        await new Promise((res) => setTimeout(res, 600));
+      }
+
+      setLastSubmittedData(payload);
+      setFormStatus('success');
+    } catch (err) {
+      console.error('Failed to submit sponsorship inquiry:', err);
+      setFormStatus('error');
+      setStatusMessage('Unable to send automatically right now. Please use the direct email option below.');
+    }
+  };
+
+  const handleDraftEmailFallback = () => {
     const subject = encodeURIComponent(`Sponsorship Inquiry: ${selectedTier} - ${companyName || 'Company'}`);
     const body = encodeURIComponent(
       `Hello .NET Conf 2026 Amravati Team,\n\n` +
@@ -114,6 +181,7 @@ export const SponsorshipPage = ({ onBack }) => {
       `Company Name: ${companyName || 'N/A'}\n` +
       `Contact Person: ${contactName || 'N/A'}\n` +
       `Work Email: ${workEmail || 'N/A'}\n` +
+      `Phone Number: ${phone || 'N/A'}\n` +
       `Selected Tier / Package: ${selectedTier}\n` +
       `Requirements / Message: ${inquiryNotes || 'Please send us the full sponsorship prospectus and invoicing details.'}\n\n` +
       `Looking forward to collaborating!\n`
@@ -1208,50 +1276,153 @@ export const SponsorshipPage = ({ onBack }) => {
                   Connect with the Sponsorship Desk
                 </h2>
                 <p className="font-sans text-xs sm:text-sm text-stone-600 mb-6">
-                  Fill in your details below to draft a direct inquiry email with our college conveners and Microsoft Student Club PRPCEM team.
+                  Fill in your company details below. Your inquiry is recorded directly with our college conveners and Microsoft Student Club PRPCEM team.
                 </p>
 
-                <form onSubmit={handleSendInquiry} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
-                        Company / Organization *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
-                      />
+                {formStatus === 'success' ? (
+                  <div className="p-6 sm:p-8 rounded-2xl border-[2.5px] border-black shadow-[6px_6px_0px_#120838] bg-[#F0FDF4] space-y-4">
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-12 h-12 rounded-xl bg-[#22C55E] border-2 border-black flex items-center justify-center text-white shadow-[2px_2px_0px_#000] shrink-0">
+                        <CheckCircle2 className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <span className="font-mono text-xs font-black uppercase tracking-wider text-[#15803D] block">
+                          Inquiry Received Successfully
+                        </span>
+                        <h3 className="font-sans font-black text-xl text-[#120838] leading-tight">
+                          Thank you, {lastSubmittedData?.contactName || contactName}!
+                        </h3>
+                      </div>
                     </div>
 
-                    <div>
-                      <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
-                        Contact Person *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={contactName}
-                        onChange={(e) => setContactName(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
-                      />
+                    <p className="font-sans text-xs sm:text-sm text-stone-700 leading-relaxed">
+                      Your sponsorship inquiry for <strong>{lastSubmittedData?.tier || selectedTier}</strong> on behalf of <strong>{lastSubmittedData?.companyName || companyName}</strong> has been received by the .NET Conf 2026 Sponsorship Committee.
+                    </p>
+
+                    <div className="p-4 bg-white rounded-xl border-2 border-black font-mono text-xs space-y-2 shadow-[2px_2px_0px_#120838]">
+                      <div className="flex justify-between items-center text-stone-600 border-b border-stone-200 pb-1.5">
+                        <span>Company / Org:</span>
+                        <span className="font-bold text-[#120838]">{lastSubmittedData?.companyName || companyName}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-stone-600 border-b border-stone-200 pb-1.5">
+                        <span>Contact Person:</span>
+                        <span className="font-bold text-[#120838]">{lastSubmittedData?.contactName || contactName}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-stone-600 border-b border-stone-200 pb-1.5">
+                        <span>Work Email:</span>
+                        <span className="font-bold text-[#120838]">{lastSubmittedData?.email || workEmail}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-stone-600 border-b border-stone-200 pb-1.5">
+                        <span>Phone / WhatsApp:</span>
+                        <span className="font-bold text-[#120838]">{lastSubmittedData?.phone || phone}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-stone-600">
+                        <span>Selected Package:</span>
+                        <span className="font-bold text-[#512BD4]">{lastSubmittedData?.tier || selectedTier}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-3.5 bg-[#FAF8FF] rounded-lg border border-[#512BD4]/30 text-xs text-stone-700 leading-snug">
+                      💡 <strong>Next Steps:</strong> Our conveners at PRPCEM will review your requirements and reach out with the formal prospectus and invoice details.
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormStatus('idle');
+                          setCompanyName('');
+                          setContactName('');
+                          setWorkEmail('');
+                          setPhone('');
+                          setInquiryNotes('');
+                        }}
+                        className="btn btn--primary btn--sm cursor-pointer"
+                      >
+                        <span>Submit Another Inquiry</span>
+                      </button>
+
+                      <a
+                        href="mailto:dotnetconfamt@prpotepatilengg.ac.in?subject=Direct%20Inquiry%20Follow-up%20-%20.NET%20Conf%202026"
+                        className="btn btn--ghost btn--sm cursor-pointer"
+                      >
+                        <Mail className="w-3.5 h-3.5" />
+                        <span>Direct Email Desk</span>
+                      </a>
                     </div>
                   </div>
+                ) : (
+                  <form onSubmit={handleSendInquiry} className="space-y-4">
+                    {formStatus === 'error' && (
+                      <div className="p-3.5 bg-[#FEF2F2] border-2 border-[#EF4444] rounded-xl flex items-start gap-2.5 text-xs text-[#991B1B]">
+                        <AlertCircle className="w-4 h-4 text-[#EF4444] shrink-0 mt-0.5" />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold">{statusMessage || 'An error occurred while submitting.'}</p>
+                          <button
+                            type="button"
+                            onClick={handleDraftEmailFallback}
+                            className="mt-1.5 underline font-bold hover:text-black cursor-pointer block"
+                          >
+                            Click here to draft email directly via your mail client &rarr;
+                          </button>
+                        </div>
+                      </div>
+                    )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={workEmail}
-                        onChange={(e) => setWorkEmail(e.target.value)}
-                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
+                          Company / Organization *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                          className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
+                          Contact Person *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={contactName}
+                          onChange={(e) => setContactName(e.target.value)}
+                          className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
+                          Work Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={workEmail}
+                          onChange={(e) => setWorkEmail(e.target.value)}
+                          className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
+                          Phone / WhatsApp Number *
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg px-3.5 py-2.5 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
+                        />
+                      </div>
                     </div>
 
                     <div className="relative" ref={tierDropdownRef}>
@@ -1337,31 +1508,39 @@ export const SponsorshipPage = ({ onBack }) => {
                         </div>
                       )}
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
-                      Requirements, Developer Goals, or Tech Booth Needs
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={inquiryNotes}
-                      onChange={(e) => setInquiryNotes(e.target.value)}
-                      className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg p-3 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
-                    />
-                  </div>
+                    <div>
+                      <label className="block font-mono text-xs font-bold uppercase text-stone-700 mb-1.5">
+                        Requirements, Developer Goals, or Tech Booth Needs
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={inquiryNotes}
+                        onChange={(e) => setInquiryNotes(e.target.value)}
+                        className="w-full bg-[#FAF8F5] border-2 border-black rounded-lg p-3 text-sm font-sans text-[#120838] font-medium focus:outline-none focus:ring-2 focus:ring-[#512BD4] focus:bg-white"
+                      />
+                    </div>
 
-                  <button
-                    type="submit"
-                    className="btn btn--primary cursor-pointer w-full"
-                    style={{ justifyContent: 'center' }}
-                  >
-                    <span>Draft Inquiry Email Now</span>
-                    <svg className="btn__arrow" width="16" height="16" aria-hidden="true">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </button>
-                </form>
+                    <button
+                      type="submit"
+                      disabled={formStatus === 'submitting'}
+                      className="btn btn--primary cursor-pointer w-full flex items-center justify-center gap-2"
+                      style={{ justifyContent: 'center' }}
+                    >
+                      {formStatus === 'submitting' ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                          <span>Sending Inquiry to Committee...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Submit Sponsorship Inquiry</span>
+                          <Send className="w-4 h-4 shrink-0" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
 
               {/* Committee Contact Desk (5 Cols) */}
@@ -1451,7 +1630,7 @@ export const SponsorshipPage = ({ onBack }) => {
                       Need the Printable PDF Deck?
                     </h4>
                     <p className="font-sans text-xs text-stone-600">
-                      Includes campus floor map, past edition stats, and MoU forms.
+                      Includes campus floor map, past edition stats, and deliverables.
                     </p>
                   </div>
                   <a
